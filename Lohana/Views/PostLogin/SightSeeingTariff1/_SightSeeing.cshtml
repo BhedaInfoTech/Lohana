@@ -1,0 +1,116 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/SightSeeingTariff/sightseeing-details-events.js"></script>
+<script src="~/Scripts/Master/SightSeeingTariff/sightseeing-details-methods.js"></script>
+<form id="SightSeeingTariffSightSeeing">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="drpSightSeeing" style="color: #333" class="">Sight Seeing</label>
+                <div class="input-group">
+                    <select class="form-control input-sm" id="drpSightSeeing" name="SightSeeingTariff.SightSeeing">
+                        <option value="0">Select Sight Seeing</option>
+                        @foreach (var item in Model.SightSeeings)
+                        {
+                            if (Model.SightSeeingTariff.SightSeeingId == item.SightSeeingId)
+                            {
+                                <option value="@item.SightSeeingId" selected="selected">@item.SightSeeingName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.SightSeeingId">@item.SightSeeingName</option>
+                            }
+                        }
+
+                    </select>
+                    <span class="input-group-addon">
+                        <i class="fa fa-globe"></i>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control input-sm" name="SightSeeingTariff.SightSeeing.Description" id="txtDescription" placeholder="" maxlength="250" readonly></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <h6>Operational Time</h6>
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" placeholder="" name="SightSeeingTariff.SightSeeing.TimeFrom" id="txtFromTime" value="" readonly>
+                <span class="input-group-addon">
+                    <i class="ti ti-time"></i>
+                </span>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <label for="">Best Time To Visit</label>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="" name="SightSeeingTariff.SightSeeing.VisitTime" id="txtVisitTime" value="" readonly>
+                <span class="input-group-addon">
+                    <i class="ti ti-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <label><b>Operational Days:</b></label>
+            <label id="lblOperationalDays"></label>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="button" id="btnAdd" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageDetails">
+                    <thead class="thead-inverse">
+                        <tr>
+
+                            <th>Sight Seeing Name</th>
+                            <th>Operational Time</th>
+                            <th>Operational Days</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td>24 Hours</td>
+                            <td>Double Bed</td>
+                            <td>Double + Extra Child</td>
+
+
+                        </tr>
+                        <tr>
+
+                            <td>12 Hours</td>
+                            <td>King Size Room</td>
+                            <td>Single</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>

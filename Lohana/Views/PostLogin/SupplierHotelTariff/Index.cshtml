@@ -1,0 +1,412 @@
+﻿@model Lohana.Models.Tariff.SupplierHotelTariff.SupplierHotelTariffViewModel
+
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/dist/css/wizard.min.css">
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.css">
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/dist/jquery-wizard.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/bootstrap.min.js"></script>
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<link href="~/Content/plugin/pignose-calendar/css/pignose.calendar.css" rel="stylesheet" />
+<script src="~/Content/plugin/pignose-calendar/js/pignose.calendar.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-customer-category-event.js"></script>
+
+
+
+<style>
+    /* Jquery Steps */
+    .wizard-steps {
+        display: table;
+        width: 100%;
+    }
+
+        .wizard-steps > li {
+            display: table-cell;
+            padding: 20px 20px;
+            background: #f5f5f5;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-right: none;
+        }
+
+            .wizard-steps > li > i {
+                float: right;
+                font-size: 1.25rem;
+            }
+
+            .wizard-steps > li:last-child {
+                border: 1px solid rgba(0, 0, 0, 0.125);
+            }
+
+            .wizard-steps > li.current,
+            .wizard-steps > li.done {
+                background: #3e70c9;
+                color: #fff !important;
+            }
+
+            .wizard-steps > li.done {
+                background: #43b968;
+            }
+
+            .wizard-steps > li.error {
+                background: #f44236;
+            }
+
+    .wizard-content {
+        padding: 2rem;
+        border-color: rgba(0, 0, 0, 0.125);
+        border-top: none;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<script>
+    $(function () {
+        $("#dvcalendar").pignoseCalendar({
+            scheduleOptions: {
+                colors: {
+                    offer: '#2fabb7',
+                    ad: '#5c6270'
+                }
+            },
+            schedules: [{
+                name: 'offer',
+                date: '2017-04-27'
+            }, {
+                name: 'ad',
+                date: '2017-02-08'
+            }, {
+                name: 'offer',
+                date: '2017-02-05',
+            }],
+            select: function (date, context) {
+                for (var idx in context.storage.schedules) {
+                    var schedule = context.storage.schedules[idx];
+
+                    alert(schedule.name);
+                }
+
+                //alert(date);
+                //alert(context.storage.schedules.name);
+                //alert('events for this date', context.storage.schedules.name);
+            }
+        });
+    });
+</script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Supplier Hotel Tariff</h4>
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Supplier Package Tariff</a></li>
+            <li class="breadcrumb-item"><a href="#">Search</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">Basic</h5>
+                    <div id="exampleBasic" class="wizard">
+                        <ul class="wizard-steps" role="tablist">
+                            <li class="active" role="tab">
+                                Basic Details <i class="ti-star"></i>
+                            </li>
+                            <li role="tab">
+                                Itinerary <i class="ti-home"></i>
+                            </li>
+                            @*<li role="tab">
+                                Hotel Details <i class="ti-home"></i>
+                            </li>*@
+
+                            <li role="tab">
+                                Occupancy Details <i class="ti-check-box"></i>
+                            </li>
+
+                            <li role="tab">
+                                Price Details <i class="ti-money"></i>
+                            </li>
+                        </ul>
+
+                        <div class="wizard-content">
+
+                            <div id="dvBasicDetail" class="wizard-pane active" role="tabpanel">
+                                @{Html.RenderPartial("_BasicDetails");}
+                            </div>
+
+                            <div id="dvItinerary" class="wizard-pane not-validate" role="tabpanel">
+                                @{Html.RenderPartial("_Itinerary");}
+                            </div>
+
+                            @*<div id="dvHotelDetail" class="wizard-pane not-validate" role="tabpanel">
+                                @{Html.RenderPartial("_HotelDetails");}
+                            </div>*@
+
+                            <div id="dvHotelDetail" class="wizard-pane not-validate" role="tabpanel">
+                                @{Html.RenderPartial("_OccupancyDetails");}
+                            </div>
+
+                            <div id="dvPriceDetail" class="wizard-pane" role="tabpanel">
+                                @{Html.RenderPartial("_PriceDetails");}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">View</h5>
+
+                    <div class="row" id="divBasicDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-star"></i></span>&nbsp; Basic Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <label><b>Supplier : </b></label>
+                                            <label id="lblSupplier"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Package Name : </b></label>
+                                            <label id="lblPackageName"></label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" id="divRoomDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-home"></i></span>&nbsp; Hotel Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0" id="dvHotelDetails">
+
+                                    @*<div class="row">
+                                            <div class="col-md-12">
+                                                <label><b>Room Type : </b></label>
+                                                <label id="lblRoomRateType"></label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label><b>City : </b></label>
+                                                <label id="lblCity"></label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label><b>Hotel Name : </b></label>
+                                                <label id="lblHotelName"></label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label><b>No. of night : </b></label>
+                                                <label id="lblNoofnight"></label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label><b>Meal Inclusions : </b></label>
+                                                <label id="lblInclusion"></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label><b>Occupancy : </b></label>
+                                                <label id="lblOccupancy"></label>
+                                            </div>
+
+                                        </div>*@
+
+                                    @*<div class="row">
+                                            <div class="col-md-12">
+                                                <label><b>Age From:</b></label>
+                                                <label id="lblAgeFrom"></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label><b>Age To:</b></label>
+                                                <label id="lblAgeTo"></label>
+                                            </div>
+                                        </div>*@
+
+                                    @*<div class="row">
+                                            <div class="col-md-12">
+                                                <label><b>Meal Plan:</b></label>
+                                                <label id="lblMealName"></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label><b>Meal Inclusions:</b></label>
+                                                <label id="lblMealInclusion"></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label><b>Room Inclusion:</b></label>
+                                                <label id="lblRoomInclusion"></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label><b>Room Exclusion:</b></label>
+                                                <label id="lblRoomExclusion"></label>
+                                            </div>
+                                        </div>*@
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="divPackageDetails">
+                        <div class="col-md-12">
+                            <div id="dvcalendar">
+
+
+                            </div>
+
+                            <input type="hidden" id="hdnSupplierPriceId" name="SupplierHotelTariffDurations.SupplierHotelPriceId" />
+
+                            <input type="hidden" id="hdnTariffDate" name="SupplierHotelTariffDurations.TariffDate" />
+
+                            <input type="hidden" id="hdnFlag" value="False">
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" id="divCustomerCategory">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-briefcase"></i></span>&nbsp; Customer Category Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" id="btnCustomerCategories" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-briefcase"></i></span>CustomerCategories</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="card-block p-t-0 p-b-0">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label><b>Customer Category: </b></label>
+                                                <label id="lblcategory"></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label><b>Margin: </b></label>
+                                                <label id="lblmargin"></label>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="dvSummary">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#exampleBasic').wizard({
+            templates: {
+                buttons: function () {
+                    var options = this.options;
+                    return '<div class="clearfix">' +
+                        '<button class="btn btn-secondary" data-target="#' + this.id + '" data-wizard="back">' + options.buttonLabels.back + '</button>' +
+                        '<button class="btn btn-primary pull-right" data-target="#' + this.id + '" data-wizard="next" class="nextpan" onclick="">' + options.buttonLabels.next + '</button>' +
+                        //'<button class="btn btn-primary pull-right" data-target="#' + this.id + '" data-wizard="finish">' + options.buttonLabels.finish + '</button>' +
+                    '</div>';
+                }
+            },
+
+            onInit: function () {
+
+            },
+            validator: function () {
+
+                if (!$(".wizard-pane.active").hasClass("not-validate")) {
+
+                    if ($(".wizard-pane.active").find("[name='c1']").not(":checked")) {
+
+                        $(".wizard-pane.active").find("#lblMessage").text("Please select a radio button");
+
+                        $(".wizard-pane.active").find("#lblMessage").css({ 'color': 'red' });
+
+                    }
+
+                    if ($(".wizard-pane.active").find("[name='c1']").is(":checked")) {
+
+                        $(".wizard-pane.active").find("#lblMessage").text("");
+
+                    }
+
+
+                   
+
+                    return $(".wizard-pane.active").find("[name='c1']").is(":checked");
+                }
+                else {
+                    
+                   // alert($(".wizard-pane not-validate active").find("#lblId").text("gfdhffrtrt"));
+
+                   // alert($(".wizard-pane not-validate active").find($("[name='SupplierHotelTariffDayInfo.ValueFlag']").val()));
+
+                    //if (($(".wizard-pane not-validate active").find($('.flagValue').val()) {
+                    //    alert();
+                    //}
+
+
+
+
+                    return true;
+                }
+
+            },
+            onFinish: function () {
+
+            }
+        });
+
+
+    });
+
+</script>

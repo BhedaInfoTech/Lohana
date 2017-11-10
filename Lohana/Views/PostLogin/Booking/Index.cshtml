@@ -1,0 +1,835 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Booking/booking-events.js"></script>
+<script src="~/Scripts/Booking/booking-method.js"></script>
+<script src="~/Scripts/Booking/booking-validation.js"></script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Booking</h4>
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Booking</a></li>
+            <li class="breadcrumb-item"><a href="#">Index</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+
+
+        <div class="box box-block bg-white">
+
+            <ul class="nav nav-tabs nav-tabs-2" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" role="tab" href="#basicdetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="typcn typcn-group-outline"></i></span> &nbsp; Traveller Details</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkgitDetails" data-toggle="tab" role="tab" href="#gitDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-github"></i></span> &nbsp;Git Details</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkfitDetails" data-toggle="tab" role="tab" href="#fitDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-android"></i></span> &nbsp;Fit Details</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkflightDetails" data-toggle="tab" role="tab" href="#flightDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="fa fa-plane"></i></span> &nbsp;Flight Details</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linktarinDetails" data-toggle="tab" role="tab" href="#tarinDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="fa fa-train"></i></span> &nbsp;Train Details</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkhotelDetails" data-toggle="tab" role="tab" href="#hotelDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="fa fa-hotel"></i></span> &nbsp;Hotel Details</h5></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="linkVehicleDetails" data-toggle="tab" role="tab" href="#VehicleDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-gallery"></i></span> &nbsp;Vehicle Details</h5></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="linksightSeeingDetails" data-toggle="tab" role="tab" href="#sightSeeingDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-gallery"></i></span> &nbsp;SightSeeing Details</h5></a>
+                </li>
+                @*<li class="nav-item">
+                        <a class="nav-link" id="linkpriceDetails" data-toggle="tab" role="tab" href="#priceDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-receipt"></i></span> &nbsp;Price Details</h5></a>
+                    </li>*@
+
+                <li class="nav-item">
+                    <a class="nav-link" id="linkpaymentDetails" data-toggle="tab" role="tab" href="#paymentDetails"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-credit-card"></i></span> &nbsp;Payment Details</h5></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active p-a-0-75" id="basicdetails" role="tabpanel">
+                    <form id="frmBasicDetails" role="form">
+                        <input type="hidden" id="cookiesdata" name="cookiesdata" value="@Model.cookiesdata" />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="drpcustomerName" style="color: #333">Customer</label>
+                                    <div class="input-group">
+                                        <select class="form-control input-sm" id="drpcustomerName" name="BookingCartDetailsInfo.CustomerId" value="@Model.BookingCartDetailsInfo.CustomerId">
+                                            <option value="">Select customer</option>
+                                            @foreach (var item in Model.Customers)
+                                            {
+                                                if (Model.BookingCartDetailsInfo.CustomerId == item.CustomerId)
+                                                {
+                                                    <option value="@item.CustomerId" selected="selected">@item.FirstName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.CustomerId">@item.FirstName</option>
+                                                }
+                                            }
+                                        </select>
+                                        <span class="input-group-addon">
+                                            <a href="/Customer/Index" target="_blank"> <i class="fa fa-user"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <br />
+                        <h5><u>Traveller Details</u></h5>
+                        <br />
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <label>Name</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Traveller Name" maxlength="50" name="BookingCartDetailsInfo.TravellerName" class="form-control input-sm" type="text" value="@Model.BookingCartDetailsInfo.TravellerName">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Age</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Age" class="form-control input-sm" maxlength="3" type="text" name="BookingCartDetailsInfo.Age" value="@Model.BookingCartDetailsInfo.Age">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Mobile No</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Mobile No" maxlength="10" class="form-control input-sm" type="text" name="BookingCartDetailsInfo.MobileNo" value="@Model.BookingCartDetailsInfo.MobileNo">
+                                </div>
+                            </div>
+                        
+                            @*<div class="col-md-3">
+                              
+
+                                <label>Set Active</label>
+                                <div class="form-group">
+                                    <input class="js-switch" data-color="#1bc044" checked="" data-switchery="true" value="true" name="BookingCartDetailsInfo.IsActive" type="checkbox" id="Flag">
+                                    </div>
+
+                                </div>*@
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <button type="button" id="btnSaveContactDetails" onclick="javascript: CallSaveTraveller();" class="btn btn-success btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                    <button type="button" id="btnEditContactDetails" disabled class="btn btn-success btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-envelope"></i></span>Edit</button>
+                                    <button type="button" id="btnViewContactDetails" disabled class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light btnViewContactDetails"><span class="btn-label"><i class="ti-info"></i></span>Document Upload</button>
+                                    <button type="button" id="btnDeleteContactDetails" onclick="javascript: DeleteContactDetails();" disabled class="btn btn-danger btn-rounded label-left m-b-0-25 waves-effect waves-light btnDeleteContactDetails"><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                                    <button type="reset" id="btnResetCountry" class="btn btn-warning btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card">
+
+                            <h5 class="card-header">
+                                <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Travellers Listing
+                            </h5>
+
+                            <div class="row">
+                                <input type="hidden" id="hdnTravellerId" value="@Model.BookingCartDetailsInfo.TravellerId" name="BookingCartDetailsInfo.TravellerId">
+                                <input type="hidden" id="hdnBookingId" value="@Model.BookingCartDetailsInfo.BookingId" name="BookingCartDetailsInfo.BookingId">
+
+                                <div class="card-block p-t-0 p-b-0">
+                                    <div class="overflow-x-auto">
+                                        <table class="table m-b-0" id="tblTravellersDetails" data-current-page="1">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Travellers Name</th>
+                                                    <th>Age</th>
+                                                    <th>MobileNo</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <h5><u>Document Details</u></h5>
+                        <br />
+
+                        <div class="card">
+
+                            <h5 class="card-header">
+                                <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Document Listing
+                            </h5>
+
+                            <div class="row">
+                                <input type="hidden" id="" value="" name="">
+                                <div class="card-block p-t-0 p-b-0">
+                                    <div class="overflow-x-auto">
+                                        <table class="table m-b-0" id="tblDocumentDetails" data-current-page="1">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th>Traveller Name</th>
+                                                    <th>Document Type</th>
+                                                    <th>Document No</th>
+                                                    <th>File Name</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbDocumentDetails">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="gitDetails" role="tabpanel">
+
+                    @{Html.RenderPartial("_GitDetails",Model);}
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="fitDetails" role="tabpanel">
+                    @{Html.RenderPartial("_FitDetails", Model);}
+
+
+                    @*<div class="row">
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <div class="overflow-x-auto">
+                                <table class="table m-b-0" id="tblGitDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Category</th>
+                                            <th>Packagetype</th>
+                                            <th>Destination</th>
+                                            <th>Duration</th>
+                                            <th>Hotel Type</th>
+                                            <th>Star Category</th>
+                                            <th>Price</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Domestic</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Honeymoon</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Ooty-Manali</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>5D/6N</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Heritage Hotels</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>5 Star</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>6000</label>
+                                                </div>
+                                            </td>
+
+
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="flightDetails" role="tabpanel">
+
+                    @{Html.RenderPartial("_FlightDetails", Model);}
+
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="tarinDetails" role="tabpanel">
+                    @{Html.RenderPartial("_TrainDetails", Model);}
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="hotelDetails" role="tabpanel">
+                    <div class="row">
+
+                        <div class="pl-item">
+
+                            <div class="media">
+
+                                <div class="col-md-3">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-thumbnail" src="/Images/neptune/1.jpg">
+                                                <div class="tag tag-warning">Lifestyle</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="media-body">
+
+                                        <div class="pli-content">
+
+                                            <h3><a class="text-black" href="#">Taj Hotel</a></h3>
+                                            <h5><small class="text-muted">Mumbai, Maharashtra</small></h5>
+                                            <h5><small class="text-info">5 Star</small></h5>
+
+
+                                            @*<h5>
+                                                    <a+ class="text-facebook" data-toggle="collapse" data-parent="#accordion" href="#collapse-4" aria-expanded="true" aria-controls="collapse-4">
+                                                        <i class="fa fa-hotel"> <u> Room Details </u> <b>(Fri, july 07 2017 - Mon, july 10 2017) </b>  </i>
+                                                    </a>
+                                                </h5>*@
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    @*<a class="text-facebook" data-toggle="collapse" data-parent="#accordion" href="#collapse-4" aria-expanded="true" aria-controls="collapse-4">
+                                            <i class="fa fa-hotel"> <u> Room Details </u> <b>(Fri, july 07 2017 - Mon, july 10 2017) </b>  </i>
+                                            </a>
+                                        <br />*@
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <h5>Room Type: Deluxe </h5>
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b>Occupancy : Double </b></label>
+                                            <label id="lblHotel"></label>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>Rate Per Night:15000 </h5>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>Meal Type: Continental Plan</h5>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>
+                                                Check In: 17 july,2017 9:00 AM
+                                            </h5>
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>
+                                                Check Out: 20 july,2017 9:00 PM
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>
+                                                Total Amount : Rs.25000
+                                            </h5>
+                                        </div>
+                                        <br>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="row">
+                            <div id="collapse-4" class="panel-collapse m-t-1 collapse in" role="tabpanel" aria-labelledby="heading-3" aria-expanded="true" style="">
+
+                                <div class="col-md-12">
+
+                                    <table class="table m-md-b-0">
+                                        <thead>
+                                            <tr class="table-danger">
+                                                <th>Vendor Name</th>
+                                                <th>Room Type</th>
+                                                <th>Meal Type</th>
+                                                <th>Occupancy</th>
+                                                <th>Room Rate Type</th>
+                                                <th>No of Night</th>
+                                                <th>Rate Per Night</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-success">
+                                                <td><a class="text-black">Rafael Nadal</a></td>
+                                                <td><a class="text-black">Deluxe</a></td>
+                                                <td><a class="text-black">Continental Plan</a></td>
+                                                <td><a class="text-black">Double</a></td>
+                                                <td><a class="text-black">24Hrs</a></td>
+                                                <td><a class="text-black">4D/3N</a></td>
+                                                <td><a class="text-black">15000</a></td>
+
+                                            </tr>
+
+                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>*@
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="sightSeeingDetails" role="tabpanel">
+                    <div class="row">
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <div class="overflow-x-auto">
+                                <table class="table m-b-0" id="">
+                                    <thead class="thead-inverse">
+                                        <tr>
+
+                                            <th>SightSeeing Name</th>
+                                            <th>Location</th>
+                                            <th>Vendor Name</th>
+                                            <th>Occupancy</th>
+                                            <th>Meal Plan</th>
+                                            <th>Duration</th>
+                                            <th>Inclusion</th>
+                                            <th>Exclusion</th>
+                                            <th>Price</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Visit Chang-La & Pangong Lake</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Lagad</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>India Bull</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Single</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>American Plan</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>4 Hr 30 M</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label></label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>6000</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="VehicleDetails" role="tabpanel">
+                    <div class="row">
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <div class="overflow-x-auto">
+                                <table class="table m-md-b-0" id="tblGitDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Package Name</th>
+                                            <th>Vehicle Name</th>
+                                            <th>Vehicle Type</th>
+                                            <th>Seating Capacity</th>
+                                            <th>FreeKm-Amt-ExtraKm</th>
+                                            <th>Duration-Hour-ExtraHour</th>
+                                            <th>Src-Dest-PkgAmt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Audi Car Show</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Cruze</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Coupe</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>4</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>40 - 4000.00 - 40.00</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>12 - 5000.00 - 50.00</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Mumbai-Delhi-60000</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp;Traveller Details
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Traveller Name</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Traveller Name" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Age</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Age" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Seat No</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Seat No" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Price</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Price" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="button" id="btnSaveContactDetails" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                    @*<button type="button" id="btnResetContactDetails" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>*@
+                                    @*<a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <input type="hidden" id="hdnSearchHotelTariffId" value="" name="Filter.HotelTariffId">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblHotelTariff" data-current-page="1">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Traveller Name</th>
+                                                <th>Age</th>
+                                                <th>Seat No</th>
+                                                <th>Price</th>
+
+                                                @*<th>Document Name</th>
+                                                    <th>Document Type</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Arun
+                                                </td>
+                                                <td>30</td>
+                                                <td>112</td>
+                                                <td>1250</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Shamli
+                                                </td>
+                                                <td>29</td>
+                                                <td>113</td>
+                                                <td>1250</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tarun
+                                                </td>
+                                                <td>15</td>
+                                                <td>150</td>
+                                                <td>750</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Shivani
+                                                </td>
+                                                <td>10</td>
+                                                <td>156</td>
+                                                <td>750</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade help_infos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp;Traveller Details
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Traveller Name</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Traveller Name" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Age</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Age" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+
+                            @*<div class="col-md-3">
+                                    <label>Visitor pass</label>
+                                    <div class="form-group">
+                                        <input placeholder="Enter Visit" class="form-control input-sm" type="text" value="">
+                                    </div>
+                                </div>*@
+                            <div class="col-md-3">
+                                <label>Price</label>
+                                <div class="form-group">
+                                    <input placeholder="Enter Price" class="form-control input-sm" type="text" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <button type="button" id="btnSaveContactDetails" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                    @*<button type="button" id="btnResetContactDetails" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>*@
+                                    @*<a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <input type="hidden" id="hdnSearchHotelTariffId" value="" name="Filter.HotelTariffId">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblHotelTariff" data-current-page="1">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Traveller Name</th>
+                                                <th>Age</th>
+                                                @*<th>Visitor Pass</th>*@
+                                                <th>Price</th>
+
+                                                @*<th>Document Name</th>
+                                                    <th>Document Type</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Arun
+                                                </td>
+                                                <td>30</td>
+                                                @*<td></td>*@
+                                                <td>1250</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    Shamli
+                                                </td>
+                                                <td>29</td>
+                                                @*<td></td>*@
+                                                <td>1250</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tarun
+                                                </td>
+                                                <td>15</td>
+                                                @*<td></td>*@
+                                                <td>750</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Shivani
+                                                </td>
+                                                <td>10</td>
+                                                @*<td></td>*@
+                                                <td>750</td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+

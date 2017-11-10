@@ -1,0 +1,529 @@
+﻿<div class="row">
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Starting City</label><input type="text" id="txtstartingCity" class="form-control input-sm" name="Package.startingCity" placeholder="Starting city">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Starting Date</label>
+            <input type="text" id="datepicker-autoclose" class="form-control input-sm" name="Package.tourStartDate" placeholder="Starting date">
+        </div>
+    </div>
+
+	 <div class="col-md-4">
+        <div class="form-group">
+            <br />
+            <button type="button" class="btn btn-purple" value="2"> + City</button>
+
+            @*<button type="button" class="btn btn-purple" value="2"> - City</button>*@
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="management m-b-1">
+			<div class="m-item">
+
+
+				<div class="">
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>City to travel</label><input type="text" id="txtcityToTravel" class="form-control input-sm" name="Package.cityToTravel" placeholder="Add city you wish to travel">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>No of nights</label>
+								<select id="drppackageType" class="form-control input-sm" name="Package.packageType">
+									<option value="">5 Night</option>
+									<option value="">1</option>
+									<option value="">2</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+									<option value="">8</option>
+									<option value="">9</option>
+									<option value="">10</option>
+									<option value="">11</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Checkin Date</label><input type="text" id="txtcheckinDate" class="form-control input-sm" name="Package.checkinDate" placeholder="10 May" readonly>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Checkout Date</label><input type="text" id="txtcheckoutDate" class="form-control input-sm" name="Package.checkoutDate" placeholder="15th May" readonly>
+							</div>
+						</div>
+
+						@*<div class="col-md-4">
+
+        <div class="form-group">
+            <br />
+            <button type="button" class="btn btn-purple" value="2"> + City </button>
+
+            <button type="button" class="btn btn-purple" value="2"> - City </button>
+          
+        </div>
+    </div>*@
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="drpTravel">Travel using :</label>
+								<select id="drpTravel" class="form-control" name="Travel">
+									<option value="">-Select Travel using-</option>
+									<option value="1">Flight</option>
+									<option value="2">Train</option>
+									<option value="3">Vehicle</option>
+								</select>
+							</div>
+
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="drpTicketType">Ticket Type :</label>
+								<select id="drpTicketType" class="form-control" name="TicketType">
+									<option value="">-Select Ticket Type-</option>
+									<option value="1">Economy</option>
+									<option value="2">First Class</option>
+									<option value="3">Business</option>
+								</select>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Include Transfer</label>
+								<div class="input-group" id="">
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Transfer note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter transfer note" maxlength="250"></textarea>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Include Sightseeing</label>
+								<div class="input-group" id="">
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Sightseeing note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter sightseeing note" maxlength="250"></textarea>
+							</div>
+						</div>
+
+					</div>
+
+
+
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="drpdrpRoomCount">Room Count :</label>
+								<select id="drpdrpRoomCount" class="form-control" name="RoomCount">
+									<option value="">-Select Room Count-</option>
+									<option value="1">1</option>
+									<option value="2" selected>2</option>
+									<option value="3">3</option>
+								</select>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<br />
+								<h5>Room 1</h5>
+
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+							</div>
+						</div>
+
+						@*<div class="col-md-2">
+        <div class="form-group">
+            <label>CXB</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>CNB</label><input type="text" id="txtCNB" class="form-control adult-children" name="Package.CNB" value="3">
+        </div>
+    </div>*@
+
+						@*<div class="col-md-4">
+        <div class="form-group">
+            <br />
+            <button type="button" class="btn btn-purple" value="2"> + Room</button>
+
+            <button type="button" class="btn btn-purple" value="2"> - Room</button>
+
+        </div>
+    </div>*@
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<br />
+								<h5>Room 2</h5>
+
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix">
+					<div class="pull-md-left">
+						<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="management m-b-1">
+			<div class="m-item">
+
+
+				<div class="">
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>City to travel</label><input type="text" id="txtcityToTravel" class="form-control input-sm" name="Package.cityToTravel" placeholder="Add city you wish to travel">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>No of nights</label>
+								<select id="drppackageType" class="form-control input-sm" name="Package.packageType">
+									<option value="">3 Night</option>
+									<option value="">1</option>
+									<option value="">2</option>
+									<option value="">3</option>
+									<option value="">4</option>
+									<option value="">5</option>
+									<option value="">6</option>
+									<option value="">7</option>
+									<option value="">8</option>
+									<option value="">9</option>
+									<option value="">10</option>
+									<option value="">11</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Checkin Date</label><input type="text" id="txtcheckinDate" class="form-control input-sm" name="Package.checkinDate" placeholder="15 May" readonly>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Checkout Date</label><input type="text" id="txtcheckoutDate" class="form-control input-sm" name="Package.checkoutDate" placeholder="18th May" readonly>
+							</div>
+						</div>
+
+
+						@* <div class="col-md-4">
+        <div class="form-group">
+            <br />
+            <button type="button" class="btn btn-purple" value="2"> + City</button>
+
+            <button type="button" class="btn btn-purple" value="2"> - City</button>
+
+        </div>
+    </div>*@
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="drpTravel">Travel using :</label>
+								<select id="drpTravel" class="form-control" name="Travel">
+									<option value="">-Select Travel using-</option>
+									<option value="1">Flight</option>
+									<option value="2">Train</option>
+									<option value="3">Vehicle</option>
+								</select>
+							</div>
+
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="drpTicketType">Ticket Type :</label>
+								<select id="drpTicketType" class="form-control" name="TicketType">
+									<option value="">-Select Ticket Type-</option>
+									<option value="1">Economy</option>
+									<option value="2">First Class</option>
+									<option value="3">Business</option>
+								</select>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Include Transfer</label>
+								<div class="input-group" id="">
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Transfer note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter transfer note" maxlength="250"></textarea>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Include Sightseeing</label>
+								<div class="input-group" id="">
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Sightseeing note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter sightseeing note" maxlength="250"></textarea>
+							</div>
+						</div>
+
+					</div>
+
+
+
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="drpdrpRoomCount">Room Count :</label>
+								<select id="drpdrpRoomCount" class="form-control" name="RoomCount">
+									<option value="">-Select Room Count-</option>
+									<option value="1">1</option>
+									<option value="2" selected>2</option>
+									<option value="3">3</option>
+								</select>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<br />
+								<h5>Room 1</h5>
+
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+							</div>
+						</div>
+
+						@*<div class="col-md-2">
+        <div class="form-group">
+            <label>CXB</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>CNB</label><input type="text" id="txtCNB" class="form-control adult-children" name="Package.CNB" value="3">
+        </div>
+    </div>*@
+
+						@*<div class="col-md-4">
+        <div class="form-group">
+            <br />
+            <button type="button" class="btn btn-purple" value="2"> + Room</button>
+
+            <button type="button" class="btn btn-purple" value="2"> - Room</button>
+
+        </div>
+    </div>*@
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<br />
+								<h5>Room 2</h5>
+
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix">
+					<div class="pull-md-left">
+						<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+

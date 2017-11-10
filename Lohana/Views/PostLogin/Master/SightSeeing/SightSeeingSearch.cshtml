@@ -1,0 +1,193 @@
+﻿@model Lohana.Models.Master.SightSeeingViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+@{
+    ViewBag.Title = "SearchSightSeeing";
+}
+
+
+<script src="~/Scripts/Master/SightSeeing/SearchSightSeeingevent.js"></script>
+<script src="~/Scripts/Master/SightSeeing/SearchSightSeeingMethod.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Search Sight Seeing</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Search Sight Seeing</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <form role="form" id="frmSearchSightSeeingList">
+
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Sight Seeing Search
+                </h5>
+                <div class="card-block p-t-0 p-b-0">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="drpCountry" style="color: #333" class="">Country</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpCountry" name="SightSeeing.CountryId">
+                                    <option value="0">Select Country</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>From Date</label>
+                            <div class="form-group">
+                                <div class="input-daterange input-group from-to-date">
+                                    <input type="text" id="txtFromDate" class="form-control input-sm" placeholder="Enter check in date" name="SightSeeing.FromDate" readonly="readonly">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>                      
+
+                        <div class="col-md-3">
+                            <label>Adult</label>
+                            <div class="form-group">
+                                <input type="text" id="txtAdultCount" class="form-control count" placeholder="Enter no of adults" name="SightSeeing.AdultCount" value="1" maxlength="2">
+                                <span style="color:red;">( Aged 18+ )</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="drpState" style="color: #333" class="">State</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpState" name="SightSeeing.StateId">
+                                    <option value="0">Select State</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                            </div>
+                        </div>                     
+
+                        <div class="col-md-3">
+                            <label>To Date</label>
+                            <div class="form-group">
+                                <div class="input-daterange input-group from-to-date">
+                                    <input type="text" id="txtToDate" class="form-control input-sm" placeholder="Enter check in date" name="SightSeeing.ToDate" readonly="readonly">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>                       
+
+                        <div class="col-md-3">
+                            <label>Children</label>
+                            <div class="form-group">
+                                <input type="text" id="txtChildCount" class="form-control count" placeholder="Enter no of children" name="SightSeeing.ChildCount" value="1" maxlength="2">
+                                <span style="color:red;">( Aged between 0 to 17 )</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="drpCity" style="color: #333" class="">City</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpCity" name="SightSeeing.CityId">
+                                    <option value="0">Select City</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />                   
+                        @*<div class="form-group">
+                                <select class="form-control input-sm" id="drpAdultCount" name="SightSeeing.AdultCount">
+                                    <option selected="selected">1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                                <span style="color:red;">( Aged 18+ )</span>
+                            </div>*@
+
+
+
+                        @* <div class="form-group">
+                              <select class="form-control input-sm" id="drpChildCount" name="SightSeeing.ChildCount">
+                                <option selected="selected">0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                            <input type="text" id="txtChildCount" class="form-control count" placeholder="Enter no of children" name="SightSeeing.ChildCount" value="1" maxlength="2">
+                               <span style="color:red;">( Aged between 0 to 17 )</span>
+                            </div>*@
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" id="btnSearchSightSeeing" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                <button type="reset" id="btnResetSightSeeing" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; Sight Seeing Details
+                </h5>
+                @{Html.RenderPartial("_SearchSightSeeingDetails", Model);}
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(".count").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+</script>

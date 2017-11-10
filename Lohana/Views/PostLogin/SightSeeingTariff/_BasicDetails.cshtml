@@ -1,0 +1,68 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Content/js/forms-pickers.js"></script>
+<script type="text/javascript" src="~/Scripts/Common/generic.common.events.js"></script>
+<script type="text/javascript" src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-events.js"></script>
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-methods.js"></script>
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-validations.js"></script>
+
+
+
+    <form id="frmSightSeeingTariffBasic">
+
+        <input type="hidden" id="hdnSightSeeingTariffId" value="" name="SightSeeingTariff.SightSeeingTariffId" />
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="drpVendor" style="color: #333" class="">Vendor Name</label>
+                    <div class="input-group">
+                        <select class="form-control input-sm" id="drpVendor" name="SightSeeingTariff.VendorId"></select>
+                        <span class="input-group-addon">
+                            <a href="/Vendor/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="drpSightSeeing" style="color: #333" class="">Sight Seeing Name</label>
+                    <div class="input-group">
+                        <select class="form-control input-sm" id="drpSightSeeing" name="SightSeeingTariff.SightSeeingId"></select>
+                        <span class="input-group-addon">
+                            <a href="/SightSeeing/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <div class="form-group">
+            <button type="button" id="btnAddSightSeeingTariffBasic" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+            <button type="button" id="btnResetSightSeeingTariffBasic" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+            <button type="button" id="btnSearchSightSeeingTariffBasic" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+        </div>
+
+
+        <div class="card">
+
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Basic Details Listing
+            </h5>
+
+            <input type="hidden" id="hdnSearchSightSeeingTariffId" value="" name="Filter.SightSeeingTariffId" />
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblSightSeeingTariffBasic" data-current-page=""></table>
+                </div>
+            </div>
+
+        </div>
+
+
+</form>

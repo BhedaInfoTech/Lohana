@@ -1,0 +1,245 @@
+﻿
+@model Lohana.Models.Master.ChargesViewModel
+@using LohanaBusinessEntities.Common;
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Master/Charges/charges-events.js"></script>
+<script src="~/Scripts/Master/Charges/charges-methods.js"></script>
+<script src="~/Scripts/Master/Charges/charges-validations.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<div class="content-area p-y-1">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Charges</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Charge</a></li>
+                        <li class="breadcrumb-item"><a href="#">Search</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+
+
+                <div class="card">
+
+                    <h5 class="card-header">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Charges Create
+                    </h5>
+
+                    <form role="form" id="frmCharges">
+
+                        <div class="card-block p-t-0 p-b-0">
+
+                            <div class="row">
+                           
+
+
+                                <div class="col-md-3">
+                                    <label for="">Charges Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Enter charges name" name="Charges.ChargesName" id="txtChargesName" maxlength="25">
+                                        <input type="hidden" name="Charges.ChargesName" id="hdnChargesName" value="">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-money"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                   
+                                <div class="col-md-3">
+                                    <label for="">Charges Abbreviation</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Enter charges abbreviations" name="Charges.Abbreviations" id="txtChargesAbbr" maxlength="10">
+                                        <input type="hidden" name="Charges.Abbreviations" id="hdnAbbreviations" value="">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-sort-alpha-asc"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                                         
+                                @*<div class="col-md-3">
+                                                                           
+                                    <label for="drpChargesBehaviour" style="color: #333">Charges Behaviour</label>
+
+                                    <div class="input-group">
+
+                                        <select class="form-control" name="Charges.ChargesBehaviour" id="drpChargesBehaviour">
+
+                                            <option value="0">Select Behaviour</option>
+
+                                            @foreach (var item in LookupInfo.GetChargesBehaviour())
+                                            {
+                                                if (Model.Charges.ChargesBehaviour == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-plus"></i>
+                                           
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-minus"></i>
+                                        </span>
+
+                                       
+                                       </div>
+                                    </div>*@
+
+                                <div class="col-md-3">
+                                        <label for="">Set Active</label>
+                                        <div class="input-group">
+                                           
+                                            <input class="js-switch" data-color="#1bc044" checked="" style="display: none;" data-switchery="true" value="true" name="Charges.IsActive" type="checkbox" id="Flag">
+                                           
+                                            </div>
+                                    </div>
+                                </div>
+                            <br />
+                            <br />
+                        </div>
+
+                        <div class="row" style="text-align: center;">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="button" id="btnSearchCharges" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                    <button type="button" id="btnSaveCharges" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                    <button type="Reset" id="btnResetCharges" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="submit-progress hidden">
+                        <i class="fa fa-2x fa-spinner fa-spin"></i>
+                        <label>Please wait while Saving Data...</label>
+                    </div>
+
+
+                    @*<div class="submit-network-progress hidden">
+                            <i class="fa fa-2x fa-spinner fa-spin"></i>
+                            <label>Network Is Slow...</label>
+                        </div>*@
+
+
+                </div>
+
+                <div class="card">
+
+                    <h5 class="card-header">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Charges Listing
+                    </h5>
+
+                    <form role="form" id="frmSearchCharges">
+
+                        <input type="hidden" id="hdnSearchChargesId" value="" name="Filter.ChargesId" />
+
+                        <div class="card-block p-t-0 p-b-0">
+
+                            <div class="overflow-x-auto">
+                                <table class="table m-b-0" id="tblCharges">
+                                   
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp; Help / Info
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-unstyled" style="padding-left: 5px;">
+                            <li><i class="fa fa-circle-o text-info mr-0-5"></i> Charge create page is used to Create a Charge or Update Charge.</li>
+                            <li>
+                                <i class="fa fa-circle-o text-info mr-0-5"></i> Charge create page contains following functionality.
+                                <ul class="list-unstyled mb-1" style="padding-left: 15px;">
+                                    <li> <button type="button" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button> - On click of Save button, It Saves the Charge Data if all the required fields inputted.</li>
+                                    <li> <a class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</a> - On click of Reset button, It resets the data to its Original values.</li>
+                                    <li> <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a> - On click of Cancel button,  It Redirects to the Charge Listing Page.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .submit-progress-bg {
+        background-color: lightgray;
+        opacity: .5;
+    }
+
+    .submit-progress {
+        padding-top: 2em;
+        width: 23em;
+        margin-left: 15.5em;
+    }
+
+    .submit-network-progress {
+        padding-top: 2em;
+        width: 23em;
+        margin-left: 15.5em;
+    }
+
+        .submit-network-progress i {
+            margin-right: 0.5em;
+        }
+
+    .submit-progress i {
+        margin-right: 0.5em;
+    }
+</style>

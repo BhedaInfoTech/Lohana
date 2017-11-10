@@ -1,0 +1,80 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+@{
+    ViewBag.Title = "SearchPackage";
+}
+
+@*<h2>SearchPackage</h2>*@
+<script src="~/Scripts/Master/Package/search-package-method.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Master/Package/search-package-event.js"></script>
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Search Package</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Search Package</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <form role="form" id="frmSearchPackageList">
+
+            @*  <input type="hidden" id="hdnSearchPackageId" value="@Model.Package.PackageId" name="PackageFilter.PackageId" />*@
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Package Search
+                </h5>
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Package Name</label>
+                            <div class="input-group">
+                                <input type="text" id="txtpackageName" class="form-control input-sm" name="Package.packageName" placeholder="Enter package name" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-paypal"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" id="btnSearchPackage" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                <button type="reset" id="btnResetPackage" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; Package Details
+                </h5>
+                @{Html.RenderPartial("_SearchPackageDetails", Model);}
+            </div>
+        </form>
+    </div>
+</div>

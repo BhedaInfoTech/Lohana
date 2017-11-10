@@ -1,0 +1,759 @@
+﻿@model Lohana.Models.Dashboard.DashboardViewModel
+           @using LohanaBusinessEntities.Common;
+
+<script src="../Content/plugin/chartjs/Chart.bundle.min.js"></script>
+<script src="../Content/js/charts-chartjs.js"></script>
+<script src="~/Scripts/Dashboard/dashboard-task-method.js"></script>
+@*<script src="/Scripts/Modules/Dashboard/request_methods.js?version=@DateTime.Now"></script>
+
+    <script src="/Scripts/Modules/Dashboard/request_events.js?version=@DateTime.Now"></script>*@
+
+<form id="frmDashboard">
+
+    <input type="hidden" name="IsApproval" value="@Model.IsApproval.ToString()" />
+    <div class="content-area p-y-1">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box bg-white">
+                        <table class="table table-grey-head m-md-b-0">
+                            <thead>
+                                <tr>
+                                    @*<th>#</th>*@
+                                    <th>Task No.</th>
+                                    <th>Customer Name</th>
+                                    <th>Status</th>
+                                    <th>Last Update</th>
+                                    <th>Follow Up</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                @foreach (var item in Model.Task_Grid)
+                                {
+                                    <tr>
+                                        @*<th scope="row">1</th>*@
+                                        <td>
+                                            <a class="text-primary" href="/Enquiry/Index">@item.TaskNo</a>
+                                        </td>
+                                        <td>
+                                            <a class="text-primary" data-toggle="modal" data-target=".view_details">@item.CustomerName</a>
+                                        </td>
+                                        <td>
+                                            <span class="text-primary">@item.Status</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">@(item.LastUpdatedDate == DateTime.MinValue ? "" : Convert.ToString(item.LastUpdatedDate))</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">@(item.FollowUpDate == DateTime.MinValue ? "" : Convert.ToString(item.FollowUpDate))</span>
+                                        </td>
+                                        @*<td>
+                                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                                            </td>*@
+                                        <td>
+                                            <a class="text-primary" href="#" onclick="javascript: GetQuotaionDetail(@item.EnquiryId,@item.RefId);">Quotation</a> /
+                                            <a class="text-primary" href="/Timeline/Index">Timeline</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <input type="hidden" name="QuotationId"/>
+                <input type="hidden" name="QuotationStatus" />
+                <input type="hidden" name="Quotation.QuotationId" />
+                <input type="hidden" name="Enquiry.EnquiryId" />
+                <input type="hidden" name="TaskId" />
+                <div class="col-md-8">
+                    <div class="box-tools" style="position:initial;">
+                        <div class="btn-group" data-toggle="btn-toggle">
+                            <button type="button" class="btn btn-outline-purple active module" id="btnQuotation" value="Quotation">Quotation</button>
+                            <button type="button" class="btn btn-purple module" id="btnBooking" value="Booking">Booking</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-md-4">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-info" id="btnwaitingforapproval">Waiting for Approval</button>
+                            <button type="button" class="btn btn-info" id="btnapproval">Approval</button>
+                        </div>
+                    </div>*@
+
+            </div>
+            @{
+                int TaskId = 0;
+            }
+
+            <div class="row" id="divQuotation">
+                <div class="col-md-12">
+                    <table class="table table-grey-head m-md-b-0" id="tblAllRequests">
+                        <tr id="subhead">
+                            @*<th>#</th>*@
+                            <th>Quotation No</th>
+                            <th>Customer Name</th>
+                            @*<th>Assigne Name</th>*@
+                            <th>Quotation Status</th>
+                            <th>Last Updated Date</th>
+                            <th>Follow Up</th>
+                            <th>View</th>
+                        </tr>
+                        @foreach (var item in Model.QuotationGrid)
+                        {
+                            if (item.TaskNo != TaskId)
+	                        {
+		                        <tr>
+                                @*<th scope="row">1</th>*@
+                                <td>
+                                    <a class="text-primary" @*href="/Enquiry/Index"*@>@item.TaskNo</a>
+                                </td>
+                                <td>
+                                    <a class="text-primary" data-toggle="modal" data-target=".view_details">@item.CustomerName</a>
+                                </td>
+                                <td>
+                                    @*<span class="text-primary">@item.Status</span>*@
+                                    <span class="text-primary">@LookupInfo.GetQuotationStatus()[item.StatusId].ToString()</span>
+                                </td>
+                                <td>
+                                    @*<span class="text-muted">@(item.LastUpdatedDate == DateTime.MinValue ? "" : Convert.ToString(item.LastUpdatedDate))</span>*@
+                                    <span class="text-muted">@(item.LastUpdatedDate == DateTime.MinValue ? "" : item.LastUpdatedDate.ToString("dd/MM/yyyy"))</span>
+                                </td>
+                                <td>
+                                    @*<span class="text-muted">@(item.FollowUpDate == DateTime.MinValue ? "" : Convert.ToString(item.FollowUpDate))</span>*@
+                                    <span class="text-muted">@(item.FollowUpDate == DateTime.MinValue ? "" : item.FollowUpDate.ToString("dd/MM/yyyy"))</span>
+                                </td>
+                                <td>
+                                    @if (item.StatusId == Convert.ToInt32(LohanaBusinessEntities.QuotationStatus.Send_for_Approval))
+                                    {
+                                        @*<a class="text-primary" href="#" onclick="javascript: UpdateQuotaionStatus(@item.TaskNo,@item.RefId, @Convert.ToInt32(LohanaBusinessEntities.QuotationStatus.Approved));">Approve</a> <span>/</span>
+                                        <a class="text-primary" href="#" onclick="javascript: UpdateQuotaionStatus(@item.TaskNo,@item.RefId, @Convert.ToInt32(LohanaBusinessEntities.QuotationStatus.Rejected));">Reject</a>*@
+                                        <a class="text-primary" href="#" onclick="javascript: GetQuotaionDetail(@item.EnquiryId,@item.RefId);">Quotation</a> <span>/</span>
+                                        <a class="text-primary" href="#" onclick="javascript: GetQuotaionDetail(@item.EnquiryId,@item.RefId);">Reject</a>
+                                    }
+                                    else
+                                    {
+                                        @*<a class="text-primary" href="/Quotation/ApproveQuotation">Quotation</a> <span>/</span>
+                                        <a class="text-primary" href="/Timeline/Index">Timeline</a>*@
+                                        <a class="text-primary" href="#" onclick="javascript: GetQuotaionDetail(@item.EnquiryId,@item.RefId);">Quotation</a> <span>/</span>
+                                        <a class="text-primary" href="#" onclick="javascript: GetQuotaionDetail(@item.EnquiryId,@item.RefId);">Reject</a>
+                                    }
+                                    
+                                </td>
+                            </tr> 
+                                TaskId = item.TaskNo;
+	                        }
+                        }
+                        @*<tr>
+                            <td>1</td>
+                            <td>
+                                <a class="text-primary">4562</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Sushant Maragaje</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Shakti Pawar</span>
+                            </td>
+                            <td>
+                                <span class="text-primary">Pending Quotation</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">26/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Quotation/ApproveQuotation">View Quotation</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <a class="text-primary">9534</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Kewal Sawant</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Kaustubh Chaudhary</span>
+                            </td>
+                            <td>
+                                <span class="text-warning">Waiting for Information</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">16/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-close text-danger" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Quotation/ApproveQuotation">View Quotation</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <a class="text-primary">3525</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Rakesh Jadhav</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Omkar Kulkarni</span>
+                            </td>
+                            <td>
+                                <span class="text-success">Pending for booking</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">12/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Quotation/ApproveQuotation">View Quotation</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <a class="text-primary">9867</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Smitesh Sarmalkar</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Sanjay Dalvi</span>
+                            </td>
+                            <td>
+                                <span class="text-info">Pending for documentation</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">23/12/2017</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Quotation/ApproveQuotation">View Quotation</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <a class="text-primary">2452</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Rohit Sharma</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Sudhakar Patil</span>
+                            </td>
+                            <td>
+                                <span class="text-danger">Closed</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">26/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-close text-danger" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Quotation/ApproveQuotation">View Quotation</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <a class="text-primary">7835</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Virat Kohli</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Roshin George</span>
+                            </td>
+                            <td>
+                                <span class="text-facebook">Approved</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">16/08/2017</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Quotation/ApproveQuotation">View Quotation</a>
+                            </td>
+
+                        </tr>*@
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" id="divBooking">
+                <div class="col-md-12">
+                    <table class="table table-grey-head m-md-b-0" id="tblAllRequests">
+                        <tr id="subhead">
+                            <th>#</th>
+                            <th>Booking No</th>
+                            <th>Customer Name</th>
+                            <th>Assigne Name</th>
+                            <th>Quotation Status</th>
+                            <th>Followup Date</th>
+                            <th>Follow Up</th>
+                            <th>View</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <a class="text-primary">1111</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Udit Chourasia</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Shakti Pawar</span>
+                            </td>
+                            <td>
+                                <span class="text-primary">Pending Quotation</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">26/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Booking/ApproveBooking">View Booking</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <a class="text-primary">2222</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Aditya Jadhav</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Kaustubh Chaudhary</span>
+                            </td>
+                            <td>
+                                <span class="text-warning">Waiting for Information</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">16/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-close text-danger" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Booking/ApproveBooking">View Booking</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <a class="text-primary">3333</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Kunal Shinde</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Omkar Kulkarni</span>
+                            </td>
+                            <td>
+                                <span class="text-success">Pending for booking</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">12/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Booking/ApproveBooking">View Booking</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <a class="text-primary">4444</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Arun Gupta</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Sanjay Dalvi</span>
+                            </td>
+                            <td>
+                                <span class="text-info">Pending for documentation</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">23/12/2017</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Booking/ApproveBooking">View Booking</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <a class="text-primary">5555</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Sanket Mayekar</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Sudhakar Patil</span>
+                            </td>
+                            <td>
+                                <span class="text-danger">Closed</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">26/08/2015</span>
+                            </td>
+                            <td>
+                                <span class="ti-close text-danger" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Booking/ApproveBooking">View Booking</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <a class="text-primary">10</a>
+                            </td>
+                            <td>
+                                <a class="text-primary">Sachin Tendulkar</a>
+                            </td>
+                            <td>
+                                <span class="text-primary">Roshin George</span>
+                            </td>
+                            <td>
+                                <span class="text-facebook">Approved</span>
+                            </td>
+                            <td>
+                                <span class="text-muted">24/04/2017</span>
+                            </td>
+                            <td>
+                                <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;"></span>
+                            </td>
+                            <td>
+                                <a class="text-primary" href="/Booking/ApproveBooking">View Booking</a>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade view_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; View Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>First Name</b> : </label>
+                                Sushant
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Middle Name</b> : </label>
+                                Harish
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Last Name</b> : </label>
+                                Maragaje
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Gender</b> : </label>
+                                Male
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Date Of Birth</b> : </label>
+                                10-07-1991
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Email Address</b> : </label>
+                                sushant.maragaje4@gmail
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Phone Number</b> : </label>
+                                02234454545
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Mobile Number</b> : </label>
+                                9167529506
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Address</b> : </label>
+                                Om Apt, Vakola Bridge, Santacruz(East), Mumbai 400055
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+
+        //$("#divQuotation").hide();
+
+        $("#divBooking").hide();
+
+
+        $("#btnQuotation").click(function () {
+
+            $("#divQuotation").show();
+            $("#divBooking").hide();
+
+        });
+
+        $("#btnBooking").click(function () {
+
+            $("#divBooking").show();
+            $("#divQuotation").hide();
+
+        });
+
+        /* Sparkline Chart */
+        $('#sparkline1').sparkline([0, 16, 30, 70, 30, 40, 67, 23, 44], {
+            type: 'line',
+            width: '60',
+            height: '20',
+            chartRangeMax: 50,
+            lineColor: '#999',
+            spotRadius: 2,
+            fillColor: 'transparent',
+            highlightLineColor: 'rgba(0,0,0,0.1)',
+            highlightSpotColor: 'rgba(0,0,0,0.1)'
+        });
+
+        /* Main Chart */
+        var data1 = [[1, 10], [2, 20], [3, 12], [4, 28], [5, 15], [6, 30], [7, 20], [8, 35], [9, 25], [10, 35]];
+        var data2 = [[1, 8], [2, 15], [3, 10], [4, 18], [5, 8], [6, 25], [7, 15], [8, 28], [9, 17], [10, 30]];
+        var data3 = [[1, 3], [2, 8], [3, 4], [4, 9], [5, 5], [6, 10], [7, 7], [8, 16], [9, 9], [10, 20]];
+
+        var labels = ["Visits", "Page views", "Sales"];
+        var colors = [
+            '#20b9ae',
+            tinycolor('#20b9ae').darken(4).toString(),
+            tinycolor('#20b9ae').darken(8).toString()
+        ];
+
+        $.plot($("#main-chart"), [{
+            data: data1,
+            label: labels[0],
+            color: colors[0]
+        }, {
+            data: data2,
+            label: labels[1],
+            color: colors[1]
+        }, {
+            data: data3,
+            label: labels[2],
+            color: colors[2]
+        }], {
+            series: {
+                lines: {
+                    show: true,
+                    fill: true,
+                    lineWidth: 3,
+                    fillColor: {
+                        colors: [{
+                            opacity: 1
+                        }, {
+                            opacity: 1
+                        }]
+                    }
+                },
+                points: {
+                    show: true,
+                    radius: 0
+                },
+                shadowSize: 0,
+                curvedLines: {
+                    apply: true,
+                    active: true,
+                    monotonicFit: true
+                }
+            },
+            grid: {
+                labelMargin: 10,
+                color: "#aaa",
+                hoverable: true,
+                borderWidth: 0,
+                backgroundColor: "#fff",
+            },
+            legend: {
+                position: "ne",
+                margin: [0, -40],
+                noColumns: 0,
+                labelBoxBorderColor: null,
+                labelFormatter: function (label, series) {
+                    // adding space to labes
+                    return '' + label + '&nbsp;&nbsp;';
+                }
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: '%s: %y',
+                shifts: {
+                    x: -60,
+                    y: 25
+                },
+                defaultTheme: false
+            }
+        });
+
+        /* Morris Chart */
+        Morris.Donut({
+            element: 'donut',
+            data: [{
+                label: "Development",
+                value: 34,
+
+            }, {
+                label: "SEO",
+                value: 67
+            }, {
+                label: "Mobile apps",
+                value: 45
+            }],
+            resize: true,
+            colors: ['#43b968', '#f59345', '#f44236']
+        });
+
+        /* Vector Map */
+        $('#world').vectorMap({
+            zoomOnScroll: false,
+            map: 'world_mill',
+            markers: [
+                { latLng: [15.3, -61.38], name: 'Dominica' },
+                { latLng: [48.8567, 2.3508], name: 'Paris' },
+                { latLng: [47.14, 9.52], name: 'Liechtenstein' },
+                { latLng: [35.6833, 139.6833], name: 'Tokyo' },
+                { latLng: [40.7127, -74.0059], name: 'New York City' },
+                { latLng: [35.88, 14.5], name: 'Malta' },
+                { latLng: [22.2783, 114.1747], name: 'Hong Kong' },
+                { latLng: [43.73, 7.41], name: 'Monaco' },
+                { latLng: [-4.61, 55.45], name: 'Seychelles' },
+                { latLng: [39.9167, 116.3833], name: 'Beijing' },
+                { latLng: [1.3, 103.8], name: 'Singapore' },
+                { latLng: [43.93, 12.46], name: 'San Marino' },
+            ],
+            normalizeFunction: 'polynomial',
+            backgroundColor: 'transparent',
+            regionsSelectable: true,
+            markersSelectable: true,
+            regionStyle: {
+                initial: {
+                    fill: 'rgba(0,0,0,0.15)'
+                },
+                hover: {
+                    fill: 'rgba(0,0,0,0.15)',
+                    stroke: '#fff'
+                },
+            },
+            markerStyle: {
+                initial: {
+                    fill: '#43b968',
+                    stroke: '#fff'
+                },
+                hover: {
+                    fill: '#3e70c9',
+                    stroke: '#fff'
+                }
+            },
+            series: {
+                markers: [{
+                    attribute: 'fill',
+                    scale: ['#43b968', '#a567e2', '#f44236'],
+                    values: [200, 300, 600, 1000, 150, 250, 450, 500, 800, 900, 750, 650]
+                }, {
+                    attribute: 'r',
+                    scale: [5, 15],
+                    values: [200, 300, 600, 1000, 150, 250, 450, 500, 800, 900, 750, 650]
+                }]
+            }
+        });
+
+
+
+
+    });
+
+
+
+
+</script>

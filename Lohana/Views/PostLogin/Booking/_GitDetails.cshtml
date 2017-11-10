@@ -1,0 +1,45 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Booking/booking-events.js"></script>
+<script src="~/Scripts/Booking/booking-method.js"></script>
+<script src="~/Scripts/Booking/booking-validation.js"></script>
+
+<div class="row">
+
+    <div class="card-block p-t-0 p-b-0">
+        <div class="overflow-x-auto">
+            <table class="table m-b-0" id="tblGitDetails" data-current-page="1">
+                <thead class="thead-inverse">
+
+                    <tr>
+
+                        <th>Category</th>
+                        <th>Packagetype</th>
+                        <th>Package Name</th>
+                        <th>Destination</th>
+                        <th>Duration</th>
+                        <th>Members</th>
+                        <th>Price</th>
+
+                        @*<th>Action</th>*@
+                    </tr>
+                </thead>
+                <tbody id="tbGitDetails">
+                    
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <button type="button" id="btnSaveGitDetails" onclick="SaveGitDetails()" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Confirm Git Package</button>
+            @*<button type="button" id="btnResetCustomer" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>*@
+        </div>
+    </div>
+</div>

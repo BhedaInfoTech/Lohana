@@ -1,0 +1,85 @@
+﻿@model Lohana.Models.Master.HotelViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Hotel/hotel-facility-methods.js"></script>
+
+<script src="~/Scripts/Master/Hotel/hotel-facility-events.js"></script>
+
+<div class="row" id="divhotelFacilites">
+
+	<form id="frmHotelFacilityDetails">
+
+		<input type="hidden" id="hdnFacilityId" name="Facility.HotelId" value="@Model.Hotel.HotelId" />
+
+		<input type="hidden" id="hdnHotelFacilityId" value="@Model.Hotel.FacilityId" name="Hotel.FacilityId" />
+
+		@if(Model.HotelFacilityDetails.Count > 0)
+  {
+	  var i = 1;
+      foreach (var item in Model.HotelFacilityDetails.Select(a => a.FacilityTypeName).Distinct())
+	  {
+
+		  if((i+2) % 3 == 0 )
+				{
+					@:<div class="card-block"><div class="row">
+				}
+
+                <div class="col-md-4">
+           
+                <h5 class="card-header" id="facilityTypeName">
+                    @item
+                </h5>
+
+                @foreach (var itm in Model.HotelFacilityDetails.Where(a => a.FacilityTypeName == item))
+                {
+                     
+                    <div class="form-group">
+                        <label class="custom-control custom-checkbox">
+                            @if (itm.FacilityStatus == true)
+												{
+                            <input type="checkbox" id="chkHotelFacilityStatus_@i" class="custom-control-input facility-status" name="Hotel.HotelFacilityStatus" value="@itm.FacilityStatus.ToString()" checked>
+												}
+												else
+												{
+                            <input type="checkbox" id="chkHotelFacilityStatus_@i" class="custom-control-input facility-status" name="Hotel.HotelFacilityStatus" value="@itm.FacilityStatus.ToString()">
+												}
+                            <input type="hidden" id="hdnfacilityId_@i" class="facility-id" value="@itm.FacilityId" />
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">@itm.FacilityName</span>
+                        </label>
+                    </div>
+
+                }
+
+            </div>
+            
+          if (i % 3 == 0)
+                {
+                   @:</div></div>
+		        }
+			
+		  i++;
+      }
+
+      if ((i-1) % 3 != 0)
+                {
+                   @:</div></div>
+		        }
+	  @*if(i % 2 == 0 )
+		{
+		@:</div></div>
+		}*@
+
+  }
+	</form>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<button type="button" id="btnSaveHotelFacilityDetails" class="btn btn-success btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+			@*<button type="button" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>*@
+            <a href="Search" class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+		</div>
+	</div>
+</div>

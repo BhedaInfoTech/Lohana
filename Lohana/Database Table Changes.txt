@@ -1,0 +1,93 @@
+﻿create table HotelTariff
+(
+HotelTariffId int identity(1,1) Primary key,
+VendorId int,
+HotelId int,
+CreatedDate datetime,
+CreatedBy int,
+UpdatedDate datetime,
+UpdatedBy int
+)
+
+create table HotelTariffDurationDetails
+(
+HotelTariffDurationDetailsId int identity(1,1) primary key,
+HotelTariffId int,
+NoOfNight int,
+FromDate datetime,
+ToDate datetime,
+OperationalDays NVARCHAR(50),
+CreatedDate datetime,
+CreatedBy int,
+UpdatedDate datetime,
+UpdatedBy int
+)
+
+create table HotelTariffDateDetails
+(
+HotelTariffDurationDetailsId int,
+HotelTariffId int,
+NoOfNight int,
+TariffDate datetime,
+NetRate decimal(12,2)
+primary key(HotelTariffDurationDetailsId,HotelTariffId,NoOfNight,TariffDate)
+)
+
+create table HotelTariffRoomDetails
+(
+HotelTariffRoomDetailsId int identity(1,1) primary key,
+HotelTariffDurationDetailsId int,
+HotelTariffId int,
+RoomRateTypeId int,
+CheckInTime time,
+CheckOutTime time,
+RoomTypeId int,
+OccupancyId int,
+AgeFrom decimal(3,1),
+AgeTo decimal(3,1),
+MealId int,
+MealInclusion NVARCHAR(1000),
+RoomInclusion NVARCHAR(2000),
+RoomExclusion NVARCHAR(2000),
+CreatedDate datetime,
+CreatedBy int,
+UpdatedDate datetime,
+UpdatedBy int
+)
+
+create table HotelTariffPriceDetails
+(
+HotelTariffPriceDetailsId int identity(1,1) primary key,
+HotelTariffRoomDetailsId int,
+HotelTariffDurationDetailsId int,
+HotelTariffId int,
+PublishPrice decimal(12,2),
+SpecialPrice decimal(12,2),
+CommissionPrice decimal(12,2),
+FormulaId int,
+TotalTaxPrice  decimal(12,2),
+NetRate decimal(12,2),
+NetRatePerNight  decimal(12,2),
+CreatedDate datetime,
+CreatedBy int,
+UpdatedDate datetime,
+UpdatedBy int
+)
+
+------------------------Changes done by Siddarth 30/06/2017
+ALTER TABLE VehicleTariffPriceDetails
+ALTER column Source INT;
+ALTER TABLE VehicleTariffPriceDetails
+ALTER column Destination INT;
+
+ALTER TABLE VehicleTariffPriceDetails
+ADD TransferType INT;
+ALTER TABLE VehicleTariffPriceDetails
+ADD TransferSource INT;
+ALTER TABLE VehicleTariffPriceDetails
+ADD TransferDestination INT;
+ALTER TABLE VehicleTariffPriceDetails
+ADD TransferPackageAmount DECIMAL (12, 2);
+
+alter table LohanaPackageTariffHotel
+add RefId INT

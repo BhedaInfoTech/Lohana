@@ -1,0 +1,15 @@
+DEBUG     2017-10-31 03:25:47 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-31 03:25:48 – Authentication Controller SetUserSession
+DEBUG     2017-10-31 03:25:58 – Sushant Accessed 21 on 10/31/2017 3:25:58 PM
+DEBUG     2017-10-31 03:26:00 – Sushant Accessed 21 on 10/31/2017 3:26:00 PM
+DEBUG     2017-10-31 03:26:00 – HotelTariff Controller GetHotelTariff
+DEBUG     2017-10-31 03:26:10 – Sushant Accessed 18 on 10/31/2017 3:26:10 PM
+DEBUG     2017-10-31 03:26:13 – Sushant Accessed 18 on 10/31/2017 3:26:13 PM
+DEBUG     2017-10-31 03:26:13 – Vendor Controller GetVendor
+DEBUG     2017-10-31 03:26:16 – Sushant Accessed 18 on 10/31/2017 3:26:16 PM
+DEBUG     2017-10-31 03:26:16 – Vendor Controller VendorId:1
+DEBUG     2017-10-31 03:26:16 – Vendor Controller GetVendorById
+DEBUG     2017-10-31 03:26:16 – Sushant Accessed 18 on 10/31/2017 3:26:16 PM
+DEBUG     2017-10-31 03:26:16 – Vendor Controller GetContactPerson
+DEBUG     2017-10-31 03:26:17 – Sushant Accessed 18 on 10/31/2017 3:26:17 PM
+DEBUG     2017-10-31 03:26:17 – Vendor Controller GetVendorBank

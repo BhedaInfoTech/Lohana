@@ -1,0 +1,5 @@
+DEBUG     2017-10-18 02:52:15 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-18 02:52:16 – Authentication Controller SetUserSession
+DEBUG     2017-10-18 02:52:38 – Sushant Accessed 18 on 10/18/2017 14:52:38
+DEBUG     2017-10-18 02:52:40 – Sushant Accessed 18 on 10/18/2017 14:52:40
+DEBUG     2017-10-18 02:52:40 – Vendor Controller GetVendor

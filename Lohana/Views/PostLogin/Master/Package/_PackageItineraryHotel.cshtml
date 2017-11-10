@@ -1,0 +1,126 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Package/package-itinerary-hotel-validations.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-hotel-methods.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-hotel-events.js?V=@DateTime.Now"></script>
+
+
+
+<div id="dvItineraryHotel">
+    <div class="row">
+
+        <form id="frmPackageItineraryHotels">
+
+            <input type="hidden" id="hdnPackageHotelItineraryId" name="PackageItinerary.PackageItineraryHotel.PackageItineraryId" value="@Model.PackageItinerary.PackageItineraryHotel.PackageItineraryId" />
+
+            <div class="card-block p-t-0 p-b-0">
+                <div class="row" id="divHotel">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="drpItineraryLocation" style="color: #333" class="">Location</label>
+
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpItineraryLocation" name="PackageItinerary.PackageItineraryHotel.LocationId"></select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                   
+
+                    <div class="col-md-4">
+                        <div class="form-group"> 
+                            <label for="drpItineraryHotel" style="color: #333" class="">Hotel</label>
+
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpItineraryHotel" name="PackageItinerary.PackageItineraryHotel.HotelId">
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-hotel"></i>
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div> 
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="drpItineraryLocation" style="color: #333" class="">Supplier</label>
+
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpItinerarySupplier" name="PackageItinerary.PackageItineraryHotel.SupplierId"></select>
+                                <span class="input-group-addon">
+                                   
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-4">
+                        <div class="form-group">
+                            <label for="drpItineraryLocation" style="color: #333" class="">Cost</label>
+
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpItineraryHotelCost" name="PackageItinerary.PackageItineraryHotel.HotelCost"></select>
+                                <span class="input-group-addon">
+                                   
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-4">
+                        <label>Cost</label>
+                        <div class="input-group">
+                            <input type="text" id="drpItineraryHotelCost" class="form-control input-sm" name="PackageItinerary.PackageItineraryHotel.HotelCost"  placeholder="Enter Hotel Cost" maxlength="50">
+                            @*<input type="hidden" id="hdnpackageCode" name="Package.PackageCode" value="@Model.Package.PackageCode">*@
+                            <span class="input-group-addon">
+                                </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="btnAddPackageItineraryHotels" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="reset" id="btnDeletePackageItineraryHotels" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="card" id="divPackageItineraryHotelList">
+
+    <h5 class="card-header">
+        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Package Itinerary Hotel Listing
+    </h5>
+    <form role="form" id="frmSearchPackageItineraryHotel">
+
+        <input type="hidden" id="hdnSearchPackageItineraryHotelId" value="@Model.PackageItinerary.PackageItineraryHotel.PackageItineraryHotelId" name="PackageItinerary.PackageItineraryHotel.PackageItineraryHotelId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageItineraryHotels"></table>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

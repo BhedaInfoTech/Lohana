@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7F467D4-15E6-4D92-82C7-92E89B507A2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LohanaBusinessEntities</RootNamespace>
+    <AssemblyName>LohanaBusinessEntities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Libraries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accessories\AccessoriesInfo.cs" />
+    <Compile Include="Business\BusinessInfo.cs" />
+    <Compile Include="Charges\ChargesInfo.cs" />
+    <Compile Include="City\CityInfo.cs" />
+    <Compile Include="Common\AutoCompleteInfo.cs" />
+    <Compile Include="Common\EnumCollection.cs" />
+    <Compile Include="Common\FriendlyMessage.cs" />
+    <Compile Include="Common\KeyValueInfo.cs" />
+    <Compile Include="Common\LookupInfo.cs" />
+    <Compile Include="Common\PaginationInfo.cs" />
+    <Compile Include="Common\SessionInfo.cs" />
+    <Compile Include="Common\Storeprocedures.cs" />
+    <Compile Include="Country\CountryInfo.cs" />
+    <Compile Include="CustomerCategory\CustomerCategoryInfo.cs" />
+    <Compile Include="Customer\CustomerInfo.cs" />
+    <Compile Include="Dashboard\TaskInfo.cs" />
+    <Compile Include="Designation\DesignationInfo.cs" />
+    <Compile Include="Enquiry\EnquiryInfo.cs" />
+    <Compile Include="Enum_Collection.cs" />
+    <Compile Include="FacilityType\FacilityTypeInfo.cs" />
+    <Compile Include="Facility\FacilityInfo.cs" />
+    <Compile Include="HotelSearch\HotelSearchInfo.cs" />
+    <Compile Include="HotelTariffTaxUpdation\HotelTariffTaxUpdationInfo.cs" />
+    <Compile Include="HotelTariff\HotelTariffInfo.cs" />
+    <Compile Include="HotelType\HotelTypeInfo.cs" />
+    <Compile Include="Hotel\HotelInfo.cs" />
+    <Compile Include="LohanaPackageTariffSearchInfo.cs" />
+    <Compile Include="LohanaPackageTariff\LohanaPackageTariffInfo.cs" />
+    <Compile Include="Meal\MealInfo.cs" />
+    <Compile Include="Module\ModuleInfo.cs" />
+    <Compile Include="Occupancy\OccupancyInfo.cs" />
+    <Compile Include="PackageType\PackageTypeInfo.cs" />
+    <Compile Include="Package\PackageInfo.cs" />
+    <Compile Include="Payable\PayableInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quotation\QuotationInfo.cs" />
+    <Compile Include="Role\RoleInfo.cs" />
+    <Compile Include="RoomType\RoomTypeInfo.cs" />
+    <Compile Include="SightSeeingTariff\SightSeeingTariffInfo.cs" />
+    <Compile Include="SightSeeing\SightSeeingInfo.cs" />
+    <Compile Include="State\StateInfo.cs" />
+    <Compile Include="SupplierHotelTariff\SupplierHotelTariffInfo.cs" />
+    <Compile Include="SupplierSearch\SupplierSearchInfo.cs" />
+    <Compile Include="TaxFormula\TaxFormulaInfo.cs" />
+    <Compile Include="Tax\TaxInfo.cs" />
+    <Compile Include="Transaction\TransactionInfo.cs" />
+    <Compile Include="User\UserInfo.cs" />
+    <Compile Include="VehicleBrand\VehicleBrandInfo.cs" />
+    <Compile Include="Tariff\VehicleTariff\VehicleTariffInfo.cs" />
+    <Compile Include="VehicleType\VehicleTypeInfo.cs" />
+    <Compile Include="Vehicle\VehicleInfo.cs" />
+    <Compile Include="Vendor\VendorInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

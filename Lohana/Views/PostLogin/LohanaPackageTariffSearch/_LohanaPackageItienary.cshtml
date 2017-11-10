@@ -1,0 +1,106 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariffSearchViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<div class="posts-list posts-list-1">
+
+    <form id="frmLohnaTariffItienaryDetails">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="row">
+
+
+                </div>
+
+
+
+                @if (Model.LohanaPackageItienaryList.Count > 0)
+                {
+                    int count = 1;
+
+                    foreach (var i in Model.LohanaPackageItienaryList.Select(a => new { a.LohanaPackageTariffRootId, a.Title }).Distinct())
+                    {
+                        <div class="row">
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label class="custom-control custom-radio">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">&nbsp;Day:@count</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">Title:@i.Title</div>
+
+                            @foreach (var itm in Model.LohanaPackageItienaryList.Where(a => a.LohanaPackageTariffRootId == i.LohanaPackageTariffRootId))
+                            {
+
+
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-9">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <div class="box bg-white">
+
+                                            @if (itm.HotelName != null)
+                                            {
+                                            <ul class="nav nav-4">
+                                                <li class="nav-item nav-link">
+                                                    <i class="fa fa-hotel"></i>@itm.HotelName
+                                                </li>
+                                            </ul>
+                                            }
+                                            @if (itm.SightSeeingName != null)
+                                            {
+                                            <ul class="nav nav-4">
+                                                <li class="nav-item nav-link">
+                                                    <i class="fa fa-tree"></i>@itm.SightSeeingName
+                                                </li>
+                                            </ul>
+                                            }
+                                            @if (itm.VehicleName != null)
+                                            {
+                                            <ul class="nav nav-4">
+                                                <li class="nav-item nav-link">
+                                                    <i class="fa fa-car"></i>@itm.VehicleName
+                                                </li>
+                                            </ul>
+                                            }
+                                            @if (itm.MealName != null)
+                                            {
+                                            <ul class="nav nav-4">
+                                                <li class="nav-item nav-link">
+                                                    <i class="fa fa-cutlery"></i>@itm.MealName
+                                                </li>
+                                            </ul>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                            
+                    count++;
+                    
+                    }
+                }
+
+
+                <hr />
+
+            </div>
+        </div>
+
+
+    </form>
+
+
+</div>

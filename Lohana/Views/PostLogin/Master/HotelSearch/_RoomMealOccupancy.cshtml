@@ -1,0 +1,188 @@
+﻿@model Lohana.Models.Master.HotelSearchViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script src="~/Scripts/Quotation/hotel-quotation-validations.js"></script>
+<script src="~/Scripts/Quotation/hotel-quotation-methods.js"></script>
+<script src="~/Scripts/Quotation/hotel-quotation-events.js"></script> 
+
+@*<input type="hidden" id="hdnhotelEnquiryItemId" value="@Model.Enquiry.EnquiryItemId"/>*@
+
+<div class="posts-list posts-list-1">
+
+    <form id="frmRoomMealOccupancyDetails">
+
+        <input type="hidden" id="hdnAdultCount" value="@Model.HotelSearch.AdultCount" />
+
+        <input type="hidden" id="hdnChildCount" value="@Model.HotelSearch.ChildCount" />
+
+        <input type="hidden" id="hdnCheckinDate" value="@Model.HotelSearch.CheckinDate" />
+
+        <input type="hidden" id="hdnCheckOutDate" value="@Model.HotelSearch.CheckOutDate" />
+
+        <input type="hidden" id="hdnHotelEnquiryItemId" value="@Model.HotelSearch.EnquiryItemId" />
+
+        <input type="hidden" id="hdnQuotationType" name="Quotation.Enquirytype" value="@((int)EnquiryType.Hotel)" />
+
+        <div class="pl-item">
+
+            <div class="media">
+
+                <div class="col-md-12">
+                    <div class="media-body">
+
+                        @if (Model.HotelSearchRoomList.Count > 0)
+                        {
+
+                            var i = 0;
+
+                            foreach (var item in Model.HotelSearchRoomList)
+                            {
+
+                                <div class="m-item" id="divMItem">
+                                    <div class="mi-text" id="">
+
+                                        <div class="row HotelList">
+                                            <input type="hidden" class="room-data" data-producttype="1" data-hotelid="@item.HotelId" data-hotelname="@item.HotelName"
+                                                   @*data-hoteltype="@item.HotelType" data-starcat="@item.StarCategoryStr"*@ data-cityid="@item.CityId" data-city="@item.CityName" data-roomtype="@item.RoomTypeName"
+                                                   data-capacity="@item.OccupancyCapacity" data-meal="@item.MealName" data-hoteldesc="@item.HotelDescription"
+                                                   data-roomprice="@item.HotelRoomPrice" data-noofnight="@item.NoOfNight" data-vendorid="@item.VendorId"
+                                                   data-netratepernight="@item.NetRatePerNight" data-netrate="@item.NetRate" data-noofrooms="@item.NoOfRooms" 
+                                                   data-checkintime="@item.CheckInTime.ToShortTimeString()" data-checkouttime="@item.CheckOutTime.ToShortTimeString()"
+                                                   data-occupancy="@item.OccupancyName" />
+
+                                            <div class="col-md-12">
+
+                                                <div class="col-md-2">
+                                                    <ul class="list-unstyled m-b-1">
+                                                        <li><i class="fa fa-hotel"></i>@item.HotelName</li>
+
+                                                        <li><i class="fa fa-star"></i>@item.StarCategoryStr</li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <ul class="list-unstyled m-b-1">
+                                                        <li><i class="fa fa-map-marker"></i>@item.CityName</li>
+
+                                                        <li><i class="fa fa-home"></i>@item.RoomTypeName</li>
+                                                        <li><i class="fa fa-home"></i><b>Room Capacity</b> @item.OccupancyCapacity</li>
+                                                        <li><i class="fa fa-home"></i><b>@item.OccupancyName</b></li>
+                                                        @if (!string.IsNullOrEmpty(item.MealName))
+                                                        {
+                                                            <li><i class="fa fa-cutlery"></i>@item.MealName</li>
+                                                        }
+                                                    </ul>
+                                                </div>
+
+                                                @if (!string.IsNullOrEmpty(item.HotelDescription))
+                                                {
+                                                    <div class="col-md-2">
+                                                        <ul class="list-unstyled m-b-1">  
+                                                            <li><i class="fa fa-sort-desc"></i>@item.HotelDescription</li> 
+                                                        </ul>
+                                                    </div>
+                                                } 
+
+                                                <div class="col-md-1">
+                                                    <ul class="list-unstyled">
+                                                        <li><i class="fa fa-money"></i>@item.HotelRoomPrice</li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                    <ul class="list-unstyled">
+                                                        <li><input type="text" style="margin-right:50%;width:100%" class="room-occupancy" id="txtRoomOccupancy_@i" name="OccupancyValue_@i" value="" /></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                    <ul class="list-unstyled">
+                                                        <li><input type="text" style="margin-right:50%;width:100%" readonly="readonly" class="room-price" id="txtFinalPrice_@i" name="FinalPrice_@i" value="" /></li>
+                                                    </ul>
+                                                </div>
+
+                                                @if (item.IsQuotationHotel)
+                                                {
+
+                                                    <div class="col-md-2">
+                                                        <ul class="list-unstyled">
+                                                            @*<li><button type="button" id="btnAddQuotation" onclick="javascript:AddQuotation('@item.PackageName','@item.PackageCategoryId',@FinalCost,'@item.PackageDuration');" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light add-to-quotation"><span class="btn-label"></span>Add To Quotation</button></li>*@
+                                                            <li><button type="button" id="btnAddQuotation" @*onclick="javascript:AddQuotation('@item');"*@ class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light add-to-quotation"><span class="btn-label"></span>Add To Quotation</button></li>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-md-2">
+                                                        <ul class="list-unstyled">
+                                                            <li><button type="button" id="btnAddToCart" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light add-to-cart"><span class="btn-label"></span>Add To Cart</button></li>
+                                                        </ul>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                                i++;
+                            }
+
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model Lohana.Models.Master.HotelSearchViewModel
+    @using LohanaBusinessEntities.Common;
+
+
+    <div class="posts-list posts-list-1">
+
+        <form id="frmRoomMealOccupancyDetails">
+            @if (Model.HotelSearchList.Count > 0)
+            {
+
+                 foreach(var item in Model.HotelSearchList)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    <h5>HotelName : @item.HotelName</h5>
+                                    <h5>HotelType : @item.HotelType</h5>
+                                    <h5>StarCategorySt : @item.StarCategoryStr</h5>
+                                    <h5>CityName : @item.CityName</h5>
+                                    <h5>CityId : @item.CityId</h5>
+                                    <h5>HotelDescription : @item.HotelDescription</h5>
+                                    <h5>Hotel Price : @item.HotelRoomPrice</h5>
+
+                                    <p>
+                                        </div>
+                                    </div>
+
+                                        }
+                                        }
+                                        </form>
+                </div>*@

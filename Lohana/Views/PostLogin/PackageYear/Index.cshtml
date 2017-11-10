@@ -1,0 +1,229 @@
+﻿@*@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>*@
+
+@*<div class="row" id="divPackageDetails">
+    <div class="col-md-12">
+        <div id="dvcalendar">
+
+
+        </div>
+        <input type="hidden" id="hdnHotelTariffRoomOccupancyId" name="HotelTariffDates.HotelTariffRoomOccupancyId" />
+
+        <input type="hidden" id="hdnTariffDate" name="HotelTariffDates.TariffDate" />
+    </div>
+</div>*@
+
+
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/dist/css/wizard.min.css">
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.css">
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/dist/jquery-wizard.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/bootstrap.min.js"></script>
+<link href="~/Content/plugin/pignose-calendar/css/pignose.calendar.css" rel="stylesheet" />
+<script src="~/Content/plugin/pignose-calendar/js/pignose.calendar.js"></script>
+<link href="~/Content/plugin/bootstrap-year-calender/bootstrap-year-calender.min.css" rel="stylesheet" />
+<script src="~/Content/plugin/bootstrap-year-calender/bootstrap-year-calender.min.js"></script>
+<script src="~/Scripts/PackageYear/Event-Methods.js"></script>
+@*<script src="~/Scripts/jquery-1.8.2.js"></script>*@
+<script>
+    /*$(function () {
+        $("#dvcalendar").pignoseCalendar({
+            scheduleOptions: {
+                colors: {
+                    offer: '#2fabb7',
+                    ad: '#5c6270'
+                }
+            },
+            //schedules: [{
+            //    name: 'offer',
+            //    date: '2017-04-27'
+            //}, {
+            //    name: 'ad',
+            //    date: '2017-02-08'
+            //}, {
+            //    name: 'offer',
+            //    date: '2017-02-05',
+            //}],
+            select: function (date, context) {
+                for (var idx in context.storage.schedules) {
+                    var schedule = context.storage.schedules[idx];
+
+                    alert(schedule.name);
+                }
+            }
+        });
+        //$('.calendar').calendar();
+    });*/
+</script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Hotel Tariff</h4>
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Hotel Tariff</a></li>
+            <li class="breadcrumb-item"><a href="#">Search</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-md-2">
+
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">Basic</h5>
+                    <div id="exampleBasic" class="wizard">
+                        <ul class="wizard-steps" role="tablist">
+                            <li class="active" role="tab">
+                                Basic Details <i class="ti-star"></i>
+                            </li>
+                            @*<li role="tab">
+                                Room Details <i class="ti-home"></i>
+                            </li>
+                            <li role="tab">
+                                Occupancy Details<i class="ti-check-box"></i>
+                            </li>
+                            <li role="tab">
+                                Price Details <i class="ti-money"></i>
+                            </li>*@
+
+
+
+                        </ul>
+
+                        <div class="wizard-content">
+
+                            @*<div class="wizard-pane active" role="tabpanel">
+
+                                @{Html.RenderPartial("_BasicDetails", Model);}
+
+                            </div>
+
+                            <div class="wizard-pane" role="tabpanel">
+
+                                @{Html.RenderPartial("_RoomDetails", Model);}
+                            </div>
+
+                            <div class="wizard-pane" role="tabpanel">
+
+                                @{Html.RenderPartial("_OccupancyDetails", Model);}
+
+                            </div>
+
+                            <div class="wizard-pane not-validate" role="tabpanel">
+
+                                @{Html.RenderPartial("_PriceDetails", Model);}
+
+                            </div>*@
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-10">
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">View</h5>
+
+                    @*<div class="row" id="divPackageDetails">
+                        <div class="col-md-12">
+                            <div id="dvcalendar">
+
+
+                            </div>
+                            <input type="hidden" id="hdnHotelTariffRoomOccupancyId" name="HotelTariffDates.HotelTariffRoomOccupancyId" />
+
+                        </div>
+                    </div>*@
+
+                    <div class="row" id="divPackageDetails">
+                        <div class="col-md-12">
+                            <div id="calendar" class="calendar">
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal modal-fade" id="event-modal" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">
+                                        Event
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="event-index" value="">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form-horizontal">
+                                                @*<div class="form-group">
+                                                    <label for="min-date" class="col-sm-4 control-label">Name</label>
+                                                    <div class="col-sm-7">
+                                                        <input name="event-name" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="min-date" class="col-sm-4 control-label">Location</label>
+                                                    <div class="col-sm-7">
+                                                        <input name="event-location" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="min-date" class="col-sm-4 control-label">Dates</label>
+                                                    <div class="col-sm-7">
+                                                        <div class="input-group input-daterange" data-provide="datepicker">
+                                                            <input name="event-start-date" type="text" class="form-control" value="2012-04-05">
+                                                            <span class="input-group-addon">to</span>
+                                                            <input name="event-end-date" type="text" class="form-control" value="2012-04-19">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                                <div class="form-group">
+                                                    <label for="min-date" class="col-sm-4 control-label">Name</label>
+                                                    <div class="col-sm-7">
+                                                        <input name="event-name" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="min-date" class="col-sm-4 control-label">Location</label>
+                                                    <div class="col-sm-7">
+                                                        <input name="event-location" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="min-date" class="col-sm-4 control-label">Dates</label>
+                                                    <div class="col-sm-7">
+                                                        <div class="input-group input-daterange" data-provide="datepicker">
+                                                            <input name="event-start-date" type="text" class="form-control" value="2012-04-05">
+                                                            <span class="input-group-addon">to</span>
+                                                            <input name="event-end-date" type="text" class="form-control" value="2012-04-19">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="save-event">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

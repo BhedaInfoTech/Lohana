@@ -1,0 +1,30 @@
+﻿@model Lohana.Models.Master.HotelSearchViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<div class="posts-list posts-list-1">
+
+    <form id="frmRoomMealOccupancyDetails">
+        @if (Model.HotelSearchList.Count > 0)
+        {
+                        foreach(var item in Model.HotelSearchList)
+                        {
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                @*<input type="hidden" class="clsHotelId" value="@item.HotelId" />*@
+                                <h5>HotelName : @item.HotelName</h5>
+                                <h5>HotelType : @item.HotelType</h5>
+                                <h5>StarCategorySt : @item.StarCategoryStr</h5>
+                                <h5>CityName : @item.CityName</h5>
+                                <h5>CityId : @item.CityId</h5>
+                                <h5>HotelDescription : @item.HotelDescription</h5>
+                                <h5>Hotel Price : @item.HotelRoomPrice</h5>
+
+                                <p>
+                                    </div>
+                                </div>
+                                    }
+                                    }                                                                                                                    
+                                    </form>
+            </div>

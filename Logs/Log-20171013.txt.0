@@ -1,0 +1,169 @@
+DEBUG     2017-10-13 01:42:04 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-13 01:42:05 – Authentication Controller SetUserSession
+DEBUG     2017-10-13 01:42:14 – Sushant Accessed 1 on 10/13/2017 13:42:14
+DEBUG     2017-10-13 01:42:15 – Sushant Accessed 1 on 10/13/2017 13:42:15
+DEBUG     2017-10-13 01:42:15 – Country Controller GetCountries
+DEBUG     2017-10-13 01:42:18 – Sushant Accessed 3 on 10/13/2017 13:42:18
+DEBUG     2017-10-13 01:42:19 – Sushant Accessed 3 on 10/13/2017 13:42:19
+DEBUG     2017-10-13 01:42:19 – State Controller GetStates
+DEBUG     2017-10-13 01:42:21 – Sushant Accessed 2 on 10/13/2017 13:42:21
+DEBUG     2017-10-13 01:42:22 – Sushant Accessed 2 on 10/13/2017 13:42:22
+DEBUG     2017-10-13 01:42:22 – City Controller GetCities
+DEBUG     2017-10-13 01:42:23 – Sushant Accessed 5 on 10/13/2017 13:42:23
+DEBUG     2017-10-13 01:42:24 – Sushant Accessed 5 on 10/13/2017 13:42:24
+DEBUG     2017-10-13 01:42:24 – RoomType Controller GetRoomTypes
+DEBUG     2017-10-13 01:42:25 – Sushant Accessed 6 on 10/13/2017 13:42:25
+DEBUG     2017-10-13 01:42:26 – Sushant Accessed 6 on 10/13/2017 13:42:26
+DEBUG     2017-10-13 01:42:26 – Meal Controller GetMeals
+DEBUG     2017-10-13 01:42:29 – Sushant Accessed 7 on 10/13/2017 13:42:29
+DEBUG     2017-10-13 01:42:29 – Sushant Accessed 7 on 10/13/2017 13:42:29
+DEBUG     2017-10-13 01:42:29 – FacilityType Controller GetFacilityTypes
+DEBUG     2017-10-13 01:42:31 – Sushant Accessed 8 on 10/13/2017 13:42:31
+DEBUG     2017-10-13 01:42:31 – Sushant Accessed 8 on 10/13/2017 13:42:31
+DEBUG     2017-10-13 01:42:31 – Facility Controller GetFacilities
+DEBUG     2017-10-13 01:42:33 – Sushant Accessed 10 on 10/13/2017 13:42:33
+DEBUG     2017-10-13 01:42:34 – Sushant Accessed 10 on 10/13/2017 13:42:34
+DEBUG     2017-10-13 01:42:34 – Occupancy Controller GetOccupancies
+DEBUG     2017-10-13 01:42:36 – Sushant Accessed 26 on 10/13/2017 13:42:36
+DEBUG     2017-10-13 01:42:36 – HotelType Controller GetHotelType
+DEBUG     2017-10-13 01:42:37 – Sushant Accessed 9 on 10/13/2017 13:42:37
+DEBUG     2017-10-13 01:42:40 – Sushant Accessed 9 on 10/13/2017 13:42:40
+DEBUG     2017-10-13 01:42:40 – Hotel Controller GetHotel BasicDetail
+DEBUG     2017-10-13 01:42:42 – Sushant Accessed 9 on 10/13/2017 13:42:42
+DEBUG     2017-10-13 01:42:42 – Hotel Controller HotelId:1
+DEBUG     2017-10-13 01:42:42 – Hotel Controller GetHotelById
+DEBUG     2017-10-13 01:42:42 – Sushant Accessed 9 on 10/13/2017 13:42:42
+DEBUG     2017-10-13 01:42:42 – Hotel Controller GetHotelRoomType
+DEBUG     2017-10-13 01:42:43 – Sushant Accessed 9 on 10/13/2017 13:42:43
+DEBUG     2017-10-13 01:42:43 – Hotel Controller GetContactPerson
+DEBUG     2017-10-13 01:42:43 – Accessories Controller RefId:1
+DEBUG     2017-10-13 01:42:43 – Accessories Controller RefType:1
+DEBUG     2017-10-13 01:42:44 – Accessories Controller GetImagesByRefType
+DEBUG     2017-10-13 01:42:44 – Sushant Accessed 9 on 10/13/2017 13:42:44
+DEBUG     2017-10-13 01:42:44 – Hotel Controller GetHotelBank
+DEBUG     2017-10-13 01:42:51 – Sushant Accessed 13 on 10/13/2017 13:42:51
+DEBUG     2017-10-13 01:42:52 – Sushant Accessed 13 on 10/13/2017 13:42:52
+DEBUG     2017-10-13 01:42:52 – TaxFormula Controller GetTaxFormula
+DEBUG     2017-10-13 01:42:55 – Sushant Accessed 14 on 10/13/2017 13:42:55
+DEBUG     2017-10-13 01:42:58 – Sushant Accessed 14 on 10/13/2017 13:42:58
+DEBUG     2017-10-13 01:43:03 – Sushant Accessed 14 on 10/13/2017 13:43:03
+DEBUG     2017-10-13 01:43:03 – Sushant Accessed 14 on 10/13/2017 13:43:03
+DEBUG     2017-10-13 01:43:04 – Sushant Accessed 14 on 10/13/2017 13:43:04
+DEBUG     2017-10-13 01:43:04 – Accessories Controller RefId:1
+DEBUG     2017-10-13 01:43:04 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:04 – Accessories Controller GetImagesByRefType
+DEBUG     2017-10-13 01:43:05 – Sushant Accessed 21 on 10/13/2017 13:43:05
+DEBUG     2017-10-13 01:43:05 – HotelTariff Controller GetCustomerCategory
+DEBUG     2017-10-13 01:43:15 – LohanaPackageTariff Controller GetHotelListing
+DEBUG     2017-10-13 01:43:24 – Sushant Accessed 21 on 10/13/2017 13:43:24
+DEBUG     2017-10-13 01:43:27 – Sushant Accessed 21 on 10/13/2017 13:43:27
+DEBUG     2017-10-13 01:43:27 – HotelTariff Controller GetHotelTariff
+ERROR     2017-10-13 01:43:31 – HotelTariffTaxUpdation Controller - GetHotelTariffTaxSystem.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HotelTariffId'.
+Invalid column name 'HotelTariffDurationDetailsId'.
+Invalid column name 'HotelTariffRoomDetailsId'.
+Invalid column name 'MealId'.
+Invalid column name 'MealId'.
+Invalid column name 'MealId'.
+   at LohanaRepo.Utilities.SQLHelperRepo.ExecuteDataTable(List`1 sqlParams, String sqlQuery, CommandType cmdType) in d:\Project\Lohana Tour\LohanaRepo\Utilities\SQLHelperRepo.cs:line 98
+   at LohanaRepo.HotelTariffTaxUpdation.HotelTariffTaxUpdationRepo.GetHotelTariffTaxUpdation(HotelTariffTaxUpdationInfo hotelTax, PaginationInfo& pager) in d:\Project\Lohana Tour\LohanaRepo\HotelTariffTaxUpdation\HotelTariffTaxUpdationRepo.cs:line 75
+   at Lohana.Controllers.PostLogin.Tariff.HotelTariffTaxUpdationController.GetHotelTariffTaxUpdation(HotelTariffTaxUpdationViewModel htuViewModel) in d:\Project\Lohana Tour\Lohana\Controllers\PostLogin\Tariff\HotelTariffTaxUpdationController.cs:line 86
+ClientConnectionId:f3ca8488-863d-4c68-b3a6-597bc0db2125
+Error Number:207,State:1,Class:16
+DEBUG     2017-10-13 01:43:43 – LohanaPackageTariff Controller GetLohanaPackageTariff
+DEBUG     2017-10-13 01:43:44 – Sushant Accessed 24 on 10/13/2017 13:43:44
+DEBUG     2017-10-13 01:43:46 – Sushant Accessed 24 on 10/13/2017 13:43:46
+DEBUG     2017-10-13 01:43:46 – VehicleTariff Controller SearchVehicleTariffBasicDetails
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:1
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:1
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:1
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:1
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:3
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:3
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:4
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:4
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:4
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:4
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:5
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:5
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:6
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:7
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:8
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:9
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:10
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:11
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:12
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:13
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:14
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:15
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:16
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:17
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:18
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:19
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:19
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:19
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:19
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:20
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:20
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:21
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:21
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:22
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:22
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:23
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:24
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:25
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:26
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefId:26
+DEBUG     2017-10-13 01:43:51 – Accessories Controller RefType:2
+DEBUG     2017-10-13 01:47:25 – Payable Controller GetCustomer
+DEBUG     2017-10-13 03:53:46 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-13 03:53:47 – Authentication Controller SetUserSession
+DEBUG     2017-10-13 03:53:50 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-13 03:53:50 – Authentication Controller SetUserSession
+DEBUG     2017-10-13 04:07:12 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-13 04:07:13 – Authentication Controller SetUserSession
+DEBUG     2017-10-13 04:26:33 – Unauthorized user tried accessing 21 on 10/13/2017 16:26:33

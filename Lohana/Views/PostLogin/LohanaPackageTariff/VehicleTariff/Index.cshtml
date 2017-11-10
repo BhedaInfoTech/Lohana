@@ -1,0 +1,281 @@
+﻿@model Lohana.Models.Tariff.VehicleTariff.VehicleTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+
+
+@*<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-validations.js"></script>
+
+    <script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-methods.js"></script>
+
+    <script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-events.js"></script>*@
+
+
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/dist/css/wizard.min.css">
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.css">
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/dist/jquery-wizard.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/bootstrap.min.js"></script>
+
+<style>
+    /* Jquery Steps */
+    .wizard-steps {
+        display: table;
+        width: 100%;
+    }
+
+        .wizard-steps > li {
+            display: table-cell;
+            padding: 20px 20px;
+            background: #f5f5f5;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-right: none;
+        }
+
+            .wizard-steps > li > i {
+                float: right;
+                font-size: 1.25rem;
+            }
+
+            .wizard-steps > li:last-child {
+                border: 1px solid rgba(0, 0, 0, 0.125);
+            }
+
+            .wizard-steps > li.current,
+            .wizard-steps > li.done {
+                background: #3e70c9;
+                color: #fff !important;
+            }
+
+            .wizard-steps > li.done {
+                background: #43b968;
+            }
+
+            .wizard-steps > li.error {
+                background: #f44236;
+            }
+
+    .wizard-content {
+        padding: 2rem;
+        border-color: rgba(0, 0, 0, 0.125);
+        border-top: none;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Vehicle Tariff</h4>
+
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Vehicle Tariff</a></li>
+            <li class="breadcrumb-item"><a href="#">Search</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">Basic</h5>
+                    <div id="exampleBasic" class="wizard">
+                        <ul class="wizard-steps" role="tablist">
+                            <li class="active" role="tab">
+                                Basic Details <i class="ti-star"></i>
+                            </li>
+                            <li role="tab">
+                                Price Details <i class="ti-car"></i>
+                            </li>
+
+                            <li role="tab">
+                                Customer Category<i class="ti-user"></i>
+                            </li>
+                        </ul>
+
+                        <div class="wizard-content">
+
+                            <div class="wizard-pane active" role="tabpanel">
+
+                                @{Html.RenderPartial("_BasicDetails", Model);}
+
+                                <label id="lblMessage"></label>
+
+                            </div>
+
+                            <div class="wizard-pane" role="tabpanel">
+
+                                @{Html.RenderPartial("_PriceDetails", Model);}
+
+                            </div>
+
+                            <div class="wizard-pane" role="tabpanel">
+
+                                @{Html.RenderPartial("_CustomerCategoryPriceDetails", Model);}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">View</h5>
+
+                    <div class="row" id="divBasicDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-star"></i></span>&nbsp;Vehicle Basic Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b>Vendor : </b></label>
+                                            <label id="lblVendorName"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Package Name : </b></label>
+                                            <label id="lblPackageName"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Inclusions : </b></label>
+                                            <label id="lblInclusions"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Exclusions : </b></label>
+                                            <label id="lblExclusions"> </label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Cancelation Policy : </b></label>
+                                            <label id="lblCancellationPolicy"> </label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Status : </b></label>
+                                            <label id="lblStatus"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" id="divVehicleTariffDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-car"></i></span>&nbsp;Vehicle Tariff Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+                                    <br />
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <label><b>Vehicle Name : </b></label>
+                                            <label id="lblVehicleName"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Vehicle Type : </b></label>
+                                            <label id="lblVehicleType"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Seating Capacity : </b></label>
+                                            <label id="lblSeatingCapacity"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>FreeKms/Amount/RsPerExtraKm :</b></label>
+                                            <label id="lblfreeKmAmt"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Duration/Amount/RsPerExtraHour :</b></label>
+                                            <label id="lblDurationExtraHourAmt"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Source/Destination/PackageAmount :</b></label>
+                                            <label id="lblSourceDestinationPkgAmt"></label>
+                                        </div>
+
+
+                                    </div>
+                                </div>                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.from-to-date').datepicker({
+            toggleActive: true
+        });
+
+        $('#exampleBasic').wizard({
+            templates: {
+                buttons: function () {
+                    var options = this.options;
+                    return '<div class="clearfix">' +
+                        '<button class="btn btn-secondary" data-target="#' + this.id + '" data-wizard="back">' + options.buttonLabels.back + '</button>' +
+                        '<button class="btn btn-primary pull-right" data-target="#' + this.id + '" data-wizard="next">' + options.buttonLabels.next + '</button>' +
+                        //'<button class="btn btn-primary pull-right" data-target="#' + this.id + '" data-wizard="finish">' + options.buttonLabels.finish + '</button>' +
+                    '</div>';
+                }
+            },
+
+            onInit: function () {
+                
+            },
+            validator: function () {
+
+                if ($(".wizard-pane.active").find("[name='c1']").not(":checked"))
+                {
+
+                    $(".wizard-pane.active").find("#lblMessage").text("Please select a radio button");
+
+                    $(".wizard-pane.active").find("#lblMessage").css({ 'color': 'red' });
+
+                }
+               
+                if ($(".wizard-pane.active").find("[name='c1']").is(":checked")) {
+                  
+                    $(".wizard-pane.active").find("#lblMessage").text("");
+                
+                }
+
+                return $(".wizard-pane.active").find("[name='c1']").is(":checked");
+
+            },
+
+            onFinish: function () {
+                
+            }
+        });
+    });
+
+
+</script>

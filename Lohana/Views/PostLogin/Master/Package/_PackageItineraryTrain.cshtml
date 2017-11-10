@@ -1,0 +1,104 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Package/package-itinerary-train-validations.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-train-methods.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-train-events.js?V=@DateTime.Now"></script>
+
+<div id="dvItineraryTrain">
+    <div class="row">
+
+        <form id="frmPackageItineraryTrains">
+
+            <input type="hidden" id="hdnPackageTrainItineraryId" name="PackageItinerary.PackageItineraryTrain.PackageItineraryId" value="@Model.PackageItinerary.PackageItineraryTrain.PackageItineraryId" />
+
+            <div class="card-block p-t-0 p-b-0">
+
+                <div class="row" id="divTrain">
+
+                    @*<div class="col-md-3">
+                        <div class="form-group">
+                            <label>Train Name</label>
+                            <div class="input-group">
+                                <input type="text" id="txtTrain" class="form-control input-sm" name="PackageItinerary.PackageItineraryTrain.TrainName" placeholder="Enter train name" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-train"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Train From </label>
+                            <div class="input-group">
+                                <select id="drpTrainFrom" class="form-control input-sm" name="PackageItinerary.PackageItineraryTrain.TrainFrom"></select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-train"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Train To </label>
+                            <div class="input-group">
+                                <select id="drpTrainTo" class="form-control input-sm" name="PackageItinerary.PackageItineraryTrain.TrainTo"></select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-train"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-3">
+                        <div class="form-group">
+                            <label>Trian Time</label>
+                            <div class="input-group">
+                                <input type="time" id="txtTrainTime" class="form-control input-sm" name="PackageItinerary.PackageItineraryTrain.TrainTime" placeholder="Enter Train Time" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-train"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                </div>
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="btnAddPackageItineraryTrains" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="reset" id="btnDeletePackageItineraryTrains" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="card" id="divPackageItineraryTrainList">
+
+    <h5 class="card-header">
+        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Package Itinerary Train Listing
+    </h5>
+    <form role="form" id="frmSearchPackageItineraryTrain">
+
+        <input type="hidden" id="hdnSearchPackageItineraryTrainId" value="@Model.PackageItinerary.PackageItineraryTrain.PackageItineraryTrainId" name="PackageItinerary.PackageItineraryTrain.PackageItineraryTrainId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageItineraryTrains"></table>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

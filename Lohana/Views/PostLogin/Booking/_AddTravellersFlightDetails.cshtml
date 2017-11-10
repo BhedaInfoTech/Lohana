@@ -1,0 +1,132 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Booking/booking-events.js"></script>
+<script src="~/Scripts/Booking/booking-method.js"></script>
+<script src="~/Scripts/Booking/booking-validation.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        GetAutocompleteScript("Booking");
+        GetPassangerDetails($("#Train_FlightMainId").val());
+    });
+
+    function SavePassangerDetails() {
+        var bViewModel =
+                 {
+                     BookingCartDetailsInfo: {
+
+                         BookingId: $("[name='BookingCartDetailsInfo.BookingId']").val(),
+
+                         Train_FlightMainId: $("[name='BookingCartDetailsInfo.Train_FlightMainId']").val(),
+
+                         PassangerId: $("[name='BookingCartDetailsInfo.PassangerId']").val(),
+
+                         SeatNo: $("[name='BookingCartDetailsInfo.SeatNo']").val(),
+
+                         Price: $("[name='BookingCartDetailsInfo.Price']").val(),
+                     }
+                 }
+
+        PostAjaxWithProcessJson("/Booking/SaveFlightpassangerDetails", bViewModel, ShowMsg);
+
+    }
+
+   
+
+    function DeletePassangerDetails(id) {
+        var bViewModel =
+                 {
+                     BookingCartDetailsInfo: {
+
+                         Train_FlightdetailId: id,
+                         Train_FlightMainId: $("#Train_FlightMainId").val()
+                     }
+                 }
+        PostAjaxWithProcessJson("/Booking/DeletePassangerDetails", bViewModel, ShowMsg);
+    }
+
+    function ResetPassangerDetails() {
+
+    }
+
+</script>
+
+<div class="modal-body">
+    <form role="form" id="frmTravellerFlightDetails">
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>Traveller Name</label>
+                    <div class="form-group">
+                        <select class="form-control input-sm" id="PassangerId" name="BookingCartDetailsInfo.PassangerId"></select>
+                        <input type="hidden" id="TravellerName" name="BookingCartDetailsInfo.PassangerName" value="@Model.BookingCartDetailsInfo.PassangerName" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Seat No</label>
+                    <div class="form-group">
+                        <input type="text" id="SeatNo" name="BookingCartDetailsInfo.SeatNo" value="@Model.BookingCartDetailsInfo.SeatNo" />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Price</label>
+                    <div class="form-group">
+                        <input type="text" id="Price" name="BookingCartDetailsInfo.Price" value="@Model.BookingCartDetailsInfo.Price" />
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <button type="button" id="btnSavePassangerDetails()" onclick="SavePassangerDetails()" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="button" id="btnResetPassangerDetails" onclick="ResetPassangerDetails()" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="TblTravellerFlightDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>
+                                    Traveller Name
+                                </th>
+                                <th>
+                                    Age
+                                </th>
+                                <th>
+                                    Seat No
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbtravellerFlightDetails"></tbody>
+
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+﻿
+
+******* Query for Lookup insersion *********************
+
+INSERT INTO [dbo].[Autocomplete]
+           ([PageName]
+           ,[ControlName]
+           ,[TableName]
+           ,[TextFieldName]
+           ,[IdFieldName]
+           ,[DependentControlName]
+           ,[DependentFieldName]
+           ,[IsMultiselect]
+           ,[CreatedBy]
+           ,[CreatedDate]
+           ,[UpdatedBy]
+           ,[UpdatedDate])
+     VALUES
+           ('Bed'
+           ,'Bed.City'
+           ,'CountryStateCity'
+           ,'CityName'
+           ,'CityId'
+           ,''
+           ,''
+           ,1
+           ,1
+           ,getdate()
+           ,1
+           ,GETDATE())
+***************************************************************

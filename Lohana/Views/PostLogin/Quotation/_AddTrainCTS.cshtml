@@ -1,0 +1,357 @@
+﻿@model Lohana.Models.Quotation.QuotationViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script src="~/Scripts/Quotation/train-quotation-validations.js"></script>
+
+<script src="~/Scripts/Quotation/train-quotation-methods.js"></script>
+
+<script src="~/Scripts/Quotation/train-quotation-events.js"></script>
+
+
+<div class="tab-pane active p-a-0-75" id="traindetails" role="tabpanel">
+
+    <form id="frmquotationtraindetails">
+
+        @*<input type="hidden" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnTrainId" value="@Model.Quotation.QuotationItemId" name="Quotation.QuotationItemId" />
+
+        <input type="hidden" id="hdnEnquiryItemId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        @*<input type="hidden" id="hdnEnquiryItemId" value="@Model.Quotation.EnquiryItemId" name="Quotation.EnquiryItemId" />*@
+
+        <input type="hidden" id="hdnQuotationType" name="Quotation.Enquirytype" value="@((int)EnquiryType.Train)" />
+
+        <input type="hidden" id="hdnQuotationItemTypeDetailsId" value="@Model.Quotation.QuotationItemTypeDetail.QuotationItemTypeDetailsId" />
+
+        <input type="hidden" id="hdnQuotationItemPassDetailsId" value="@Model.Quotation.QuotationItemPassDetail.QuotationItemPassDetailsId" />
+
+
+        <div id="divtraindetails">
+
+            <div class="row">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Ticket Class</label><select id="drpticketClass" class="form-control input-sm" name="QuotationItemTypeDetails[0].TicketClass">
+                                <option>Select Ticket Class</option>
+                                @foreach (var item in LookupInfo.GetEnquiryTrainTicketClass())
+                                        {
+                                            if (Model.Quotation.QuotationItemTypeDetail.TicketClass == item.Key)
+                                            {
+                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                    <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drppickupfrom" name="QuotationItemTypeDetails[0].PickUpFrom">
+
+                                    <option value="0">Select pickup from</option>
+
+                                    @foreach (var item in Model.Cities)
+                                            {
+                                                if (Model.Quotation.QuotationItemTypeDetail.PickUpFrom == item.CityId)
+                                                {
+                                            <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                                }
+                                                else
+                                                {
+                                            <option value="@item.CityId">@item.CityName</option>
+                                                }
+                                            }
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="drpdropTo" style="color: #333">Drop To</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpdropTo" name="QuotationItemTypeDetails[0].DropTo">
+
+                                    <option value="0">Select drop to</option>
+
+                                    @foreach (var item in Model.Cities)
+                                            {
+                                                if (Model.Quotation.QuotationItemTypeDetail.DropTo == item.CityId)
+                                                {
+                                            <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                                }
+                                                else
+                                                {
+                                            <option value="@item.CityId">@item.CityName</option>
+                                                }
+                                            }
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Depart On</label>
+                            <input type="text" id="dtpdepartOn" class="form-control input-sm datepicker-autoclose" name="QuotationItemTypeDetails[0].DepartureDate" placeholder="Enter Departure" value="@Model.Quotation.QuotationItemTypeDetail.DepartureDate">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" id="divreturnOn">
+                        <div class="form-group">
+                            <label>Return On</label>
+                            <input type="text" id="dtpreturnOn" class="form-control input-sm datepicker-autoclose" name="QuotationItemTypeDetails[0].ReturnDate" placeholder="Enter Return" value="@Model.Quotation.QuotationItemTypeDetail.ReturnDate">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Quote Rate</label>
+                            <input type="text" id="txtquoteRate" class="form-control input-sm" name="QuotationItemTypeDetails[0].QuoteRate" placeholder="Enter Quote Rate" value="@Model.Quotation.QuotationItemTypeDetail.QuoteRate">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Region</label>
+                                    <select id="drpregion" class="form-control input-sm" name="QuotationItemPassDetails[0].Region">
+                                        <option value="">Select Region</option>
+                                        @foreach (var item in LookupInfo.GetEnquiryRailPassRegion())
+                                        {
+                                            if (Model.Quotation.QuotationItemPassDetail.Region == item.Key)
+                                            {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Passes Type</label>
+                                    <select id="drppassType" class="form-control input-sm" name="QuotationItemPassDetails[0].PassType">
+                                        <option value="">Select Rail Pass Type</option>
+                                        @foreach (var item in LookupInfo.GetEnquiryRailPassType())
+                                        {
+                                            if (Model.Quotation.QuotationItemPassDetail.PassType == item.Key)
+                                            {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Railpass</label>
+                                    <select id="drprailPass" class="form-control input-sm" name="QuotationItemPassDetails[0].RailPass">
+                                        <option value="">Select Railpass</option>
+                                        @foreach (var item in LookupInfo.GetEnquiryRailPass())
+                                        {
+                                            if (Model.Quotation.QuotationItemPassDetail.RailPass == item.Key)
+                                            {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+
+                                        <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Rail Class</label>
+                                    <select id="drprailClass" class="form-control input-sm" name="QuotationItemPassDetails[0].RailClass">
+                                        <option value="">Select Class</option>
+                                        @foreach (var item in LookupInfo.GetEnquiryRailPassClass())
+                                        {
+                                            if (Model.Quotation.QuotationItemPassDetail.RailClass == item.Key)
+                                            {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+
+                                        <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Number of Days</label><input type="text" id="txtNoOfDays" class="form-control adult-children" name="QuotationItemPassDetails[0].NoOfDays" value="@Model.Quotation.QuotationItemPassDetail.NoOfDays">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Quote Rate</label>
+                                    <input type="text" id="txtquotePassRate" class="form-control input-sm" name="QuotationItemPassDetails[0].QuoteRate" placeholder="Enter Quote Rate" value="@Model.Quotation.QuotationItemPassDetail.QuoteRate">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+            </div>
+
+            <div class="row">
+
+                @if (@Model.Quotation.QuotationId == 0)
+                {
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control input-sm" name="Quotation.adultCount" placeholder="Adult Count" readonly value="@Model.Enquiry.AdultCount">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Children Count</label><input type="text" id="txtChildrenCount" class="form-control input-sm" name="Quotation.childCount" placeholder="Child Count" readonly value="@Model.Enquiry.ChildCount">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Infant Count</label><input type="text" id="txtInfantCount" class="form-control input-sm" name="Quotation.infantCount" placeholder="Infant Count" readonly value="@Model.Enquiry.InfantCount">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Net Rate</label>
+                            <input type="text" id="txtnetRate" class="form-control input-sm" name="Quotation.netRate" placeholder="Enter Net Rate" value="@Model.Enquiry.Budget" readonly>
+                        </div>
+                    </div>
+
+                }
+
+                else
+                {
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control input-sm" name="Quotation.adultCount" placeholder="Adult Count" readonly value="@Model.Quotation.AdultCount">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Children Count</label><input type="text" id="txtChildrenCount" class="form-control input-sm" name="Quotation.childCount" placeholder="Child Count" readonly value="@Model.Quotation.ChildCount">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Infant Count</label><input type="text" id="txtInfantCount" class="form-control input-sm" name="Quotation.infantCount" placeholder="Infant Count" readonly value="@Model.Quotation.InfantCount">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Net Rate</label>
+                            <input type="text" id="txtnetRate" class="form-control input-sm" name="Quotation.netRate" placeholder="Enter Net Rate" value="@Model.Quotation.Budget" readonly>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveTrainDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetTrainDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<script>
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+
+</script>
+
+

@@ -1,0 +1,427 @@
+﻿
+<div class="row">
+    <div class="col-md-3">
+        <label>Location</label>
+        <div class="form-group">
+            <input type="text" id="txtLocation" class="form-control input-sm" name="Package.location" placeholder="Enter Location">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="txtCheckInDate">Check In :</label>
+            <input type="text" class="form-control " id="txtCheckInDate" value="" placeholder="Enter Check In" name="CheckInDate">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="txtCheckOutDate">Check Out :</label>
+            <input type="text" class="form-control " id="txtCheckOutDate" value="" placeholder="Enter Check Out" name="CheckOutDate">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="txtBudget">Budget :</label>
+            <input type="text" class="form-control " id="txtBudget" value="" placeholder="Enter Budget" name="Budget">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Hotel Type</label>
+            <select id="drpsubCategory" class="form-control" name="Package.subCategory">
+                <option value="">Select hoteltype</option>
+                <option value="">Apartments </option>
+                <option value="">Business Hotels </option>
+                <option value="">Heritage Hotels </option>
+                <option value="">Resort Hotels </option>
+                <option value="">Timeshare Hotels </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Star Category</label>
+            <select id="drphotelType" class="form-control input-sm" name="Package.hotelType">
+                <option value="">Select Starcategory</option>
+                <option value="">1 Start </option>
+                <option value="">2 Star </option>
+                <option value="">3 Star </option>
+                <option value="">4 Star </option>
+                <option value="">5 Star </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="txtHotel">Hotel Name :</label>
+            <input type="text" class="form-control " id="txtHotel" value="" placeholder="Enter Hotel Name" name="Hotel">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="drpdrpRoomCount">Room Count :</label>
+            <select id="drpdrpRoomCount" class="form-control" name="RoomCount">
+                <option value="">-Select Room Count-</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Room 1 :</label>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+        </div>
+    </div>
+
+    @*<div class="col-md-2">
+            <div class="form-group">
+                <label>CXB</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>CNB</label><input type="text" id="txtCNB" class="form-control adult-children" name="Package.CNB" value="3">
+            </div>
+        </div>*@
+
+    @*<div class="col-md-4">
+            <div class="form-group">
+                <br />
+                <button type="button" class="btn btn-purple" value="2"> + Room</button>
+
+                <button type="button" class="btn btn-purple" value="2"> - Room</button>
+            </div>
+        </div>*@
+
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Room 2 :</label>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+        </div>
+    </div>
+
+</div>
+
+<button type="submit" class="btn btn-warning btn-rounded">Search</button>
+<hr/>
+
+<div class="row">
+
+    <div class="pl-item">
+
+        <div class="media">
+
+            <div class="col-md-3">
+                <div class="media-left">
+                    <a href="#">
+                        <div class="pli-img">
+                            <img class="img-thumbnail"  src="/Images/neptune/1.jpg">
+                            <div class="tag tag-warning">Lifestyle</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                <div class="media-body">
+
+                    <div class="pli-content">
+
+                        <h3><a class="text-black" href="#">Taj Hotel</a></h3>
+                        <h5><small class="text-muted">Mumbai, Maharashtra</small></h5>
+                        <h5><small class="text-info">5 Star</small></h5>
+
+
+                        <h5>
+                            <a class="text-facebook" data-toggle="collapse" data-parent="#accordion" href="#collapse-4" aria-expanded="true" aria-controls="collapse-4">
+                                <i class="fa fa-hotel"> <u> Room Details </u> </i>
+                            </a>
+                        </h5>
+
+
+                        <div id="collapse-4" class="panel-collapse m-t-1 collapse in" role="tabpanel" aria-labelledby="heading-3" aria-expanded="true" style="">
+
+                            <div class="col-md-12">
+
+                                <table class="table m-md-b-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th>Room Type</th>
+                                            <th>Meal Type</th>
+                                            <th>Occupancy</th>
+                                            <th>Rate Per Night</th>
+                                           <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-success">
+                                            <td><a class="text-black">Deluxe</a></td>
+                                            <td><a class="text-black">Continental Plan</a></td>
+                                            <td><a class="text-black">Double</a></td>
+                                            <td><a class="text-black">15000</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-rounded">Select Room</button></td>
+                                        </tr>
+                                        <tr class="table-info">
+                                            <td><a class="text-black">King</a></td>
+                                            <td><a class="text-black">American Plan</a></td>
+                                            <td><a class="text-black">Twin</a></td>
+                                            <td><a class="text-black">10000</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-rounded">Select Room</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+</div>
+
+<br />
+
+<div class="row">
+
+    <div class="pl-item">
+
+        <div class="media">
+
+            <div class="col-md-3">
+                <div class="media-left">
+                    <a href="#">
+                        <div class="pli-img">
+                            <img class="img-thumbnail" src="/Images/neptune/2.jpg">
+                            <div class="tag tag-warning">Lifestyle</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                <div class="media-body">
+
+                    <div class="pli-content">
+
+                        <h3><a class="text-black" href="#">JW Mariott</a></h3>
+                        <h5><small class="text-muted">Mumbai, Maharashtra</small></h5>
+                        <h5><small class="text-info">5 Star</small></h5>
+
+
+                        <h5>
+                            <a class="text-facebook" data-toggle="collapse" data-parent="#accordion" href="#collapse-5" aria-expanded="true" aria-controls="collapse-5">
+                                <i class="fa fa-hotel"> <u> Room Details </u> </i>
+                            </a>
+                        </h5>
+
+
+                        <div id="collapse-5" class="panel-collapse m-t-1 collapse in" role="tabpanel" aria-labelledby="heading-3" aria-expanded="true" style="">
+
+                            <div class="col-md-12">
+
+                                <table class="table m-md-b-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th>Room Type</th>
+                                            <th>Meal Type</th>
+                                            <th>Occupancy</th>
+                                            <th>Rate Per Night</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-success">
+                                            <td><a class="text-black">King</a></td>
+                                            <td><a class="text-black">Modified American Plan</a></td>
+                                            <td><a class="text-black">Triple</a></td>
+                                            <td><a class="text-black">20000</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-rounded">Select Room</button></td>
+                                        </tr>
+                                        <tr class="table-info">
+                                            <td><a class="text-black">Suite</a></td>
+                                            <td><a class="text-black">European Plan</a></td>
+                                            <td><a class="text-black">Quadruple</a></td>
+                                            <td><a class="text-black">30000</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-rounded">Select Room</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br />
+
+<div class="row">
+
+    <div class="pl-item">
+
+
+        <div class="media">
+
+            <div class="col-md-3">
+                <div class="media-left">
+                    <a href="#">
+                        <div class="pli-img">
+                            <img class="img-thumbnail" src="/Images/neptune/3.jpg">
+                            <div class="tag tag-warning">Lifestyle</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                <div class="media-body">
+
+                    <div class="pli-content">
+
+                        <h3><a class="text-black" href="#">Sofitel</a></h3>
+                        <h5><small class="text-muted">Mumbai, Maharashtra</small></h5>
+                        <h5><small class="text-info">4 Star</small></h5>
+
+
+                        <h5>
+                            <a class="text-facebook" data-toggle="collapse" data-parent="#accordion" href="#collapse-6" aria-expanded="true" aria-controls="collapse-6">
+                                <i class="fa fa-hotel"> <u> Room Details </u> </i>
+                            </a>
+                        </h5>
+
+
+                        <div id="collapse-6" class="panel-collapse m-t-1 collapse in" role="tabpanel" aria-labelledby="heading-3" aria-expanded="true" style="">
+
+                            <div class="col-md-12">
+
+                                <table class="table m-md-b-0">
+                                    <thead>
+                                        <tr class="table-danger">
+                                            <th>Room Type</th>
+                                            <th>Meal Type</th>
+                                            <th>Occupancy</th>
+                                            <th>Rate Per Night</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-success">
+                                            <td><a class="text-black">Standard</a></td>
+                                            <td><a class="text-black"> American Plan</a></td>
+                                            <td><a class="text-black">Triple</a></td>
+                                            <td><a class="text-black">7000</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-rounded">Select Room</button></td>
+                                        </tr>
+                                        <tr class="table-info">
+                                            <td><a class="text-black">Couple</a></td>
+                                            <td><a class="text-black">Continental Plan</a></td>
+                                            <td><a class="text-black">Double</a></td>
+                                            <td><a class="text-black">90000</a></td>
+                                            <td><button type="submit" class="btn btn-primary btn-rounded">Select Room</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

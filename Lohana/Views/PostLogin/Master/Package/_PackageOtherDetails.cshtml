@@ -1,0 +1,160 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Master/Package/package-otherdetails-event.js"></script>
+
+<script src="~/Scripts/Master/Package/package-otherdetails-method.js"></script>
+
+<link href="~/Content/plugin/summernote/summernote.css" rel="stylesheet" />
+<script src="~/Content/plugin/summernote/summernote.min.js"></script>
+
+<form id="frmPackageOtherDetails">
+
+
+    <input type="hidden" id="hdnpackageOtherDetailsId" name="packageOtherDetailsId.PackageId" value="@Model.Package.PackageId" />
+
+    <div class="card">
+
+        <div class="card-header" role="tab" id="">
+            <h5 style="margin-bottom: 0;">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#inclusionsExclusions" aria-expanded="false" aria-controls="">
+                    Inclusions / Exclusions
+                </a>
+            </h5>
+        </div>
+
+        <div class="card-block p-a-0-75">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Inclusions</label><textarea class="form-control input-sm summernote" name="Package.inclusions" placeholder="Enter inclusions" >@Model.Package.Inclusions</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Exclusions</label><textarea class="form-control input-sm summernote" name="Package.exclusions" placeholder="Enter exclusions" >@Model.Package.Exclusions</textarea>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header" role="tab" id="">
+            <h5 style="margin-bottom: 0;">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#tourInfo" aria-expanded="false" aria-controls="">
+                    Tour Info
+                </a>
+            </h5>
+        </div>
+
+        <div class="card-block p-a-0-75">
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Payment Terms</label><textarea class="form-control input-sm summernote" name="Package.paymentModeDescription" placeholder="Enter payment mode description" >@Model.Package.PaymentTems</textarea>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tour Requirements</label><textarea class="form-control input-sm summernote" name="Package.tourRequirements" placeholder="Enter tour requirements" >@Model.Package.TourRequirements</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Things To Carry Along</label><textarea class="form-control input-sm summernote" name="Package.thingsToCarryAlong" placeholder="Enter things to carry along" >@Model.Package.ThingsToCarryAlong</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Weather</label><textarea class="form-control input-sm summernote" name="Package.weather" placeholder="Enter weather" >@Model.Package.Weather</textarea>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Shopping</label><textarea class="form-control input-sm summernote" name="Package.shopping" placeholder="Enter shopping" >@Model.Package.Shopping</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Do's and Dont's</label><textarea class="form-control input-sm summernote" name="Package.dosAndDonts" placeholder="Enter do's and dont's" >@Model.Package.DosAndDonts</textarea>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-header" role="tab" id="">
+            <h5 style="margin-bottom: 0;">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#additionalInfo" aria-expanded="false" aria-controls="">
+                    Additional Info
+                </a>
+            </h5>
+        </div>
+
+        <div class="card-block p-a-0-75">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Terms & Condition</label><textarea class="form-control input-sm summernote" name="Package.termsAndCondition" placeholder="Enter terms & condition" >@Model.Package.TermsCondition</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Cancellation Policy</label><textarea class="form-control input-sm summernote" name="Package.cancellation" placeholder="Enter cancellation" >@Model.Package.CancellationDetails</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Route Changes /Postponement / Delay</label><textarea class="form-control input-sm summernote" name="Package.routeChangesPostponementDelay" placeholder="Enter route changes /postponement / delay" >@Model.Package.RouteChanges</textarea>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <button type="button" id="btnSavePackageOtherDetails" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+            <button type="button" id="btnResetPackageOtherDetails" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+            <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+        </div>
+    </div>
+</div>

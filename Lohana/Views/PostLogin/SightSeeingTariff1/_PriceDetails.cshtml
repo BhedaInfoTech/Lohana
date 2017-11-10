@@ -1,0 +1,98 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<form id="SightSeeingTariffPrice">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Publish Price</label>
+                <input type="text" class="form-control" placeholder="Enter Publish Price" name="Hotel.publishprice">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Special Price</label>
+                <input type="text" id="txtspecialprice" class="form-control" name="Hotel.specialprice" placeholder="Enter Special Price">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Commission Price</label>
+                <input type="text" id="txtcommissionprice" class="form-control" name="Hotel.commissionprice" placeholder="Enter Commission Price">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblFormulaDetails">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th width="10%">Charge Type</th>
+                            <th width="10%">Cal On</th>
+                            <th width="10%">Percentage</th>
+                            <th width="10%">Calculated Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LT</td>
+                            <td>PP</td>
+                            <td><input type="text" id="txtpercentage" /></td>
+                            <td>Calc Price</td>
+                        </tr>
+                        <tr>
+                            <td>SC</td>
+                            <td>LT+PP</td>
+                            <td><input type="text" id="txtpercentage" /></td>
+                            <td>Calc Price</td>
+                        </tr>
+                        <tr>
+                            <td>ST</td>
+                            <td>SP</td>
+                            <td><input type="text" id="txtpercentage" /></td>
+                            <td>Calc Price</td>
+                        </tr>
+                        <tr>
+                            <td>TDS</td>
+                            <td>CP</td>
+                            <td><input type="text" id="txtpercentage" /></td>
+                            <td>Calc Price</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Total Tax Price:</td>
+                            <td>00000</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Net Rate (SP + TT)</label>
+                <input type="text" class="form-control" placeholder="Enter Net Rate" name="Hotel.netRate">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Net Rate (As per Night)</label>
+                <input type="text" id="txtnetRateAsPerNight" class="form-control" name="Hotel.netRateAsPerNight" placeholder="Enter Net Rate Per Night">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="button" id="btnSaveCountry" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+            </div>
+        </div>
+    </div>
+</form>

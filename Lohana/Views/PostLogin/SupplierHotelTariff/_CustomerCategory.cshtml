@@ -1,0 +1,74 @@
+﻿<form id="frmSupplierHotelCustomerCategory">
+	<div class="row">
+		<input type="hidden" id="hdnSupplierHotelDetailId" name="SupplierHotelCustomerCategory.SupplierHotelDetailId" />
+
+		<input type="hidden" id="hdnSupplierHotelDurationId" name="SupplierHotelCustomerCategory.SupplierHotelDurationId" />
+
+		<input type="hidden" id="hdnSupplierHotelCustomerCategoryId" name="SupplierHotelCustomerCategory.SupplierHotelCustomerCategoryId" />
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Customer Category</label>
+				<div class="input-group">
+					<select class="form-control" id="drpCustomerCategory" name="SupplierHotelCustomerCategory.CustomerCategoryId">
+						<option value="0">Select customer category</option>
+						@foreach(var item in Model.CustomerCategories)
+	  {
+		  if(Model.SupplierHotelCustomerCategory.CustomerCategoryId == item.CustomerCategoryId)
+		  {
+							<option value="@item.CustomerCategoryId" selected="selected">@item.CustomerCategoryName</option>
+															}
+															else
+															{
+							<option value="@item.CustomerCategoryId">@item.CustomerCategoryName</option>
+															}
+														}
+					</select>
+					<span class="input-group-addon">
+						<i class="fa fa-car"></i>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Margin (%) </label>
+				<input type="text" id="txtCustomerMargin" class="form-control input-sm" name="SupplierHotelCustomerCategory.Margin" placeholder="Enter margin" maxlength="10">
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+
+		<button type="button" id="btnAddSupplierHotelCustomer" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+		<button type="reset" id="btnResetHotelCustomer" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+		<button type="button" id="btnDeleteHotelCustomer" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+
+
+		@*<button type="button" id="btnAddSupplierHotelCustomer" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+                    <button type="reset" id="btnResetHotelCustomer" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    <button type="button" id="btnDeleteHotelCustomer" class="btn btn-danger label-left m-b-0-25 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-reload"></i></span>Delete</button>*@
+
+	</div>
+
+	<div class="card">
+
+		<h5 class="card-header">
+			<span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Supplier Customer Category Listing
+		</h5>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="overflow-x-auto">
+					<table class="table m-b-0" id="tblSupplierHotelCustomerCategory" data-current-page="0"></table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div>
+		<label id="lblMessage"></label>
+	</div>
+</form>

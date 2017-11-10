@@ -1,0 +1,120 @@
+﻿@model Lohana.Models.Master.HotelViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Hotel/hotel-contact-person-validations.js"></script>
+
+<script src="~/Scripts/Master/Hotel/hotel-contact-person-methods.js"></script>
+
+<script src="~/Scripts/Master/Hotel/hotel-contact-person-events.js"></script>
+
+
+
+<h5>Contact Person</h5>
+
+<br />
+
+<div class="row" id="divHotelContactPerson">
+
+	<form id="frmContactPerson">
+
+		<div class="card-block p-t-0 p-b-0">
+
+			<input type="hidden" id="hdnRefId" name="HotelContactPerson.HotelId" value="@Model.Hotel.HotelId" />
+			<input type="hidden" id="hdnRefType" name="Hotel.ContactPerson.RefType" />
+
+			
+					<div class="row">
+						<div class="col-md-4">
+							<label for="">Hotel's Contact Name</label>
+							<div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter hotel's contact name" name="Hotel.ContactPerson.ContactPersonName" maxlength="50" id="txtContactName" value="@Model.ContactPerson.ContactPersonName">
+								<span class="input-group-addon">
+									<i class="fa fa-sort-alpha-asc"></i>
+								</span>
+							</div>
+						</div>
+
+						<div class="col-md-4" id="dvDesignationDropDown">
+							@{Html.RenderPartial("_designationDropDown");}
+						</div>
+
+						<div class="col-md-4">
+							<label for="">Phone No</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter phone number" name="Hotel.ContactPerson.PhoneNo" maxlength="20" id="txtContactPhoneNo" value="@Model.ContactPerson.PhoneNo">
+								<span class="input-group-addon">
+									<i class="fa fa-phone"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-md-4">
+							<label for="">Mobile No</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter mobile number" name="Hotel.ContactPerson.MobileNo" maxlength="15" id="txtContactMobileNo" value="@Model.ContactPerson.MobileNo">
+								<span class="input-group-addon">
+									<i class="fa fa-mobile"></i>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label for="">Email ID</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter email id" name="Hotel.ContactPerson.EmailId" id="txtContactEmail" value="@Model.ContactPerson.EmailId" maxlength="100">
+								<span class="input-group-addon">
+									<i class="fa fa-envelope"></i>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label for="">Fax No</label>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Enter fax number" name="Hotel.ContactPerson.FaxNo" id="txtContactFaxNo" maxlength="25" value="@Model.ContactPerson.FaxNo">
+								<span class="input-group-addon">
+									<i class="fa fa-fax"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<br />
+
+                    <div class="row" style="text-align: center;">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="button" id="btnAddHotelContactPerson" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                <button type="reset" id="btnDeleteHotelContactPerson" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                                @*<button type="button" id="btnAddDesignation" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Designation</button>*@
+                            </div>
+                        </div>
+                    </div>
+
+				</div>
+
+				<br />
+			
+	</form>
+
+</div>
+
+<div class="card" id="divContactPersonList">
+
+	<h5 class="card-header">
+		<span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Contact Person Listing
+	</h5>
+
+	<form id="frmSearchContactPerson">
+
+		<input type="hidden" id="hdnSearchHotelContactPersonRefType" name="ContactPerson.RefType" value="@Model.ContactPerson.RefType" />
+
+		<input type="hidden" id="hdnSearchHotelContactPersonId" name="ContactPerson.ContactPersonId" value="" />
+
+		<input type="hidden" id="hdnCurrentPage" name="Pager.CurrentPage" value="" />
+
+		<div class="card-block p-t-0 p-b-0" id="dvContactPerson">
+
+			@{Html.RenderPartial("_contactPersonListing");}
+		</div>
+	</form>
+</div>

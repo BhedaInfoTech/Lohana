@@ -1,0 +1,87 @@
+﻿@*<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-event.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-itinerary-method.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-methods.js"></script>*@
+
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Master/Package/_package-Itinarary-model.js"></script>
+<script src="~/Scripts/Master/Package/_Package-Itinarary-model-method.js"></script>
+<div class="tab-pane active p-a-0-75" id="" role="tabpanel">
+
+    <form id="frmHotelRoomPackage">
+
+        <div class="row">
+            <input type="hidden" id="hdnHotelId">
+            <input type="hidden" id="hdnRoomTypeId">
+            <input type="hidden" id="hdnPackageDayId" name="packagedaytriff.PackageDayId" value="@Model.packagedaytriff.PackageDayId">
+            <div class="col-md-4">
+                <label for="drpCity" style="color: #333" class="">City</label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <select class="form-control" id="drpcity" name="packagedaytriff.CityId">
+                            <option value="0">Select City</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <label for="drpHotel" style="color: #333" class="">Hotel</label>
+                <div class="input-group">
+                    <select class="form-control" id="drpHotel" name="packagedaytriff.HotelId">
+                        <option value="0">Select hotel</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Hotel/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="drpRoom" style="color: #333" class="">Room Type</label>
+                    <div class="input-group">
+                        <select class="form-control input-sm" id="drpRoom" name="packagedaytriff.RoomTypeId">
+                            <option value="0">Select room type</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-building"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+            &nbsp;&nbsp;&nbsp;
+            <button type="button" id="btnSearchPackageHotel" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+            <button type="reset" id="btnResetPackageHotel" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="overflow-x-auto">
+                        <table class="table m-b-0" id="tblHotelPackageTariffRoomDetails"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group"> <input type="hidden" name="CheckSelectedHotel" /></div>
+        <div class="modal-footer">
+
+            <button type="button" id="btnSaveHotelPackage" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    GetHotelPackageListing();
+</script>

@@ -1,0 +1,106 @@
+﻿@using LohanaBusinessEntities
+
+
+<script>
+    $(document).ready(function () {
+        //debugger;
+        if (!$.trim($('#message').is(':empty'))) {
+
+            setTimeout(function ()
+            { $('#message').slideUp(500).html('').slideDown(100); }, 2000);
+        }
+        else {
+            if ($('#successFriendlyMessage').length > 0 || $('#errorFriendlyMessage').length > 0 || $('#infoFriendlyMessage').length > 0 || $('#warningFriendlyMessage').length > 0) {
+                setTimeout(function () {
+                    $('#message').slideUp(500).html('').slideDown(100);
+                    $('button.close').click();
+                }, 4000);
+
+            }
+
+        }
+    });
+
+</script>
+
+
+<div class="box-body hidden-print" id="message">
+
+    @if (Model != null && Model.FriendlyMessage != null && Model.FriendlyMessage.Count > 0)
+    {
+
+        foreach (var msg in Model.FriendlyMessage)
+        {
+            if (msg != null)
+            {
+                if (msg.Type == MessageType.Information && msg.TextLength < 2000)
+                {
+                    <input type="hidden" id="infoFriendlyMessage" value="1" />
+                    <div class="alert alert-info alert-dismissable fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-info"></i> Alert!</h4>
+                        @Html.Raw(msg.Text)
+                    </div>
+
+                }
+                if (msg.Type == MessageType.Error && msg.TextLength < 200)
+                {
+                    <input type="hidden" id="errorFriendlyMessage" value="1" />
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                        @Html.Raw(msg.Text)
+                    </div>
+
+                }
+
+                if (msg.Type == MessageType.Success && msg.TextLength < 200)
+                {
+
+                    <input type="hidden" id="successFriendlyMessage" value="1" />
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                        @Html.Raw(msg.Text)
+                    </div>
+
+                }
+                if (msg.Type == MessageType.Warning && msg.TextLength < 200)
+                {
+                    <input type="hidden" id="warningFriendlyMessage" value="1" />
+                    <div class="alert alert-warning alert-dismissable fade in">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                        @Html.Raw(msg.Text)
+                    </div>
+
+                }
+
+            }
+        }
+
+    }
+</div>
+
+
+
+
+
+
+
+
+
+@*<div class="row" style="display:none;">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+            </div>
+        </div>
+    </div>*@
+
+
+
+

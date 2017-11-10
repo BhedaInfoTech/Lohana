@@ -1,0 +1,385 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariffSearchViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script src="~/Scripts/Quotation/fit-quotation-methods.js"></script>
+
+<script src="~/Scripts/Tariff/LohanaPackageTariffSearch/lohana-package-tariff-search-methods.js"></script>
+
+<div class="posts-list posts-list-1">
+
+    @{
+        int count = 0;
+    }
+
+    <form id="frmLohanaPackageTariffSearchDetails">
+
+        <input type="hidden" id="hdnEnquiryType" value="@Model.Enquiry.EnquiryType" name="Enquiry.EnquiryType" />
+
+        <input type="hidden" id="hdnFitid" value="@Model.LohanaPackageTariffSearch.EnquiryitemId" name="LohanaPackageTariffSearch.EnquiryitemId" />
+        <input type="hidden" id="hdnCost" value="@Model.LohanaPackageTariffSearch.Cost" name="LohanaPackageTariffSearch.Cost" />
+        <input type="hidden" id="hdnCheckInDate" value="@Model.LohanaPackageTariffSearch.CheckInDate" name="LohanaPackageTariffSearch.CheckInDate" />
+        <input type="hidden" id="hdnCheckOutDate" value="@Model.LohanaPackageTariffSearch.CheckOutDate" name="LohanaPackageTariffSearch.CheckOutDate" />
+        <input type="hidden" id="hdnAdultCount" value="@Model.LohanaPackageTariffSearch.AdultCount" name="LohanaPackageTariffSearch.Adultcount" />
+        <input type="hidden" id="hdnChildCount" value="@Model.LohanaPackageTariffSearch.ChildCount" name="LohanaPackageTariffSearch.Adultcount" />
+        <input type="hidden" id="hdnCityId" value="@Model.LohanaPackageTariffSearch.CityId" />
+        <input type="hidden" id="hdnStateId" value="@Model.LohanaPackageTariffSearch.StateId" />
+        <input type="hidden" id="hdnCountryId" value="@Model.LohanaPackageTariffSearch.CountryId" />
+        <input type="hidden" id="hdnLPTDuration" value="@Model.LohanaPackageTariffSearch.LPTDuration" name="LohanaPackageTariffSearch.LPTDuration" />
+        <input type="hidden" id="hdnPackageTypeId" value="@Model.LohanaPackageTariffSearch.PackageTypeId" />
+        <input type="hidden" id="hdnRoomTypeId" value="@Model.LohanaPackageTariffSearch.RoomTypeId" name="LohanaPackageTariffSearch.RoomTypeId" />
+        <input type="hidden" id="hdnQuotationType" name="Quotation.Enquirytype" value="@((int)EnquiryType.Fit)" />
+
+        @if (Model.LohanaPackageTariffSearchRoomList.Count > 0)
+        {
+
+            foreach (var item1 in Model.LohanaPackageTariffSearchRoomList.Select(a => new { a.LohanaPackageTariffId, a.PackageTypeName, a.PackageName, a.LPTDuration }).Distinct())
+            {
+                <div class="media">
+
+                    <div class="col-md-4">
+
+                        <h3><a class="text-grey">@item1.PackageName</a></h3>
+
+                        <h3><a class="text-info">@item1.PackageTypeName</a></h3>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <h5><small class="text-muted">Duration: @item1.LPTDuration</small></h5>
+
+                    </div>
+
+                </div>
+
+                foreach (var item in Model.LohanaPackageTariffSearchRoomList.Where(a => a.LohanaPackageTariffId == item1.LohanaPackageTariffId))
+                {
+
+                    <div class="media">
+
+                        <input type="hidden" class="room-data" data-producttype="2" data-lohanapackagaetariffid="@item.LohanaPackageTariffId" data-occupancyid="@item.OccupancyId" data-packagename="@item.PackageName" data-packagetypeid="@item.PackageTypeId" data-packagetypename="@item.PackageTypeName" data-countryid="@item.CountryId" data-stateid="@item.StateId" data-cityid="@item.CityId" data-roomtypeid="@item.RoomTypeId" data-roomtypename="@item.RoomTypeName" data-lptpackagecost="@item.Cost" data-lptduration="@item.LPTDuration" />
+
+                        <input type="hidden" id="hdnLohanaPackageTariffId_@count" name="LohanaPackageTariffSearch.LohanaPackageTariffId" value="@item.LohanaPackageTariffId">
+
+                        <div class="col-md-4">
+
+                            <div class="media-body">
+
+                                <div class="pli-content">
+
+                                    <h4><small class="text-instagram">@item.OccupancyName</small></h4>
+                                    <h5><small class="text-black">@item.RoomTypeName</small></h5>
+
+
+                                    <div class="p-price">
+                                        <h5> <span class="text-danger">Rs.@item.Cost</span></h5>
+                                        <input type="hidden" id="hdnCost_@count" value="@item.Cost" />
+                                    </div>
+                                    <h5> <span class="text-big">@item.CountryName @item.StateName @item.CityName</span></h5>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="media-body">
+                                <div class="pli-content">
+                                    <label>No Of Rooms</label>
+                                    <input type="text" id="txtNoOfRooms_@count" value="" onblur="javascript:LPTFinalCostBasedOnNoOfRooms(@count);" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="media-body">
+                                <div class="pli-content">
+                                    <label id="lblLPTFinalCost_@count"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <button type="button" id="btnLohanaItienaryDetail" onclick="javascript: ViewLohanaPackageTariffItienarySearchDetails(@item.LohanaPackageTariffId)" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light">View Details</button>
+                            
+                            @if (!Model.IsPackage)
+                            {
+
+                                <button type="button" id="" onclick="" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light add-to-cart">Add To Cart</button>
+                            }
+                            else
+                            {
+                                <button type="button" onclick="javascript:AddFitQuotation('@item.PackageName',@item.Cost,'@item.LPTDuration','@item.CountryId','@item.StateId','@item.CityId','@item.PackageTypeId','@count');" id="btnAddQuotation" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light">Add Quotation</button>
+                            }
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                            ++@count;
+                }
+
+
+                <br />
+            }
+        }
+
+
+
+    </form>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+    function ViewLohanaPackageTariffItienarySearchDetails(id) {
+
+        LoadModal("/LohanaPackageTariffSearch/ViewLohanaPackageTariffItienarySearchDetails", { LohanaPackageTariffId: id }, null, "Lohana Package Tariff Details", null);
+
+    }
+
+    $(document).ready(function () {
+        $(".add-to-cart").click(function () {
+            AddLPTInCart($(this));
+
+        });
+    });
+
+    function AddLPTInCart(obj) {
+
+        var QuotationItemA = [];
+
+        var Quotation = {
+
+            //LohanaPackageTariffId: $(obj).parents(".media").find(".room-data").attr("data-lohanapackagaetariffid"),
+
+            PackageName: $(obj).parents(".media").find(".room-data").attr("data-packagename"),
+
+            PackagetTypeId: $(obj).parents(".media").find(".room-data").attr("data-packagetypeid"),
+
+            ProductType: $(obj).parents(".media").find(".room-data").attr("data-producttype"),
+
+            NetRate: $(obj).parents(".media").find(".room-data").attr("data-lptpackagecost"),
+
+            Duration: $(obj).parents(".media").find(".room-data").attr("data-lptduration"),
+
+            CountryId: $(obj).parents(".media").find(".room-data").attr("data-countryid"),
+
+            StateId: $(obj).parents(".media").find(".room-data").attr("data-stateid"),
+
+            CityId: $(obj).parents(".media").find(".room-data").attr("data-cityid"),
+
+            OccupancyId: $(obj).parents(".media").find(".room-data").attr("data-occupancyid"),
+
+            RoomType: $(obj).parents(".media").find(".room-data").attr("data-roomtypeid"),
+        }
+
+        QuotationItemA.push(Quotation);
+
+        alert(JSON.stringify(QuotationItemA));
+
+        var qViewModel =
+           {
+               Quotation: {
+
+                   QuatationItem: QuotationItemA
+
+               }
+           }
+
+        var url = "/LohanaPackageTariffSearch/LPTAddToCart";
+
+        alert(JSON.stringify(qViewModel));
+
+        $.ajax({
+
+            url: url,
+
+            data: JSON.stringify(qViewModel),
+
+            datatype: "json",
+
+            type: "POST",
+
+            contentType: 'application/json',
+
+            success: function (data) {
+                alert("Lohana Package Tariff added in your cart Succesfully.");
+            }
+
+        });
+
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<script>
+
+        function ViewSupplierHotelDetails(id) {
+
+            var monthname = $("#hdnMonthName").val();
+
+            LoadModal("/SupplierSearch/ViewSupplierHotelDetails", { SupplierHotelId: id, MonthName: monthname }, null, "Supplier Hotel Details", null);
+
+        }
+
+        $(document).ready(function () {
+            $(".add-to-cart").click(function () {
+                AddSupplierInCart($(this));
+
+            });
+        });
+
+        function AddSupplierInCart(obj) {
+
+            debugger;
+
+            var QuotationItemA = [];
+
+            var Quotation = {
+
+                SupplierHotelId: $(obj).parents(".m-item").find(".room-data").attr("data-supplierhotelid"),
+
+                SupplierName: $(obj).parents(".m-item").find(".room-data").attr("data-suppliername"),
+
+                PackageName: $(obj).parents(".m-item").find(".room-data").attr("data-packagename"),
+
+                PackageCost: $(obj).parents(".m-item").find(".room-data").attr("data-packagecost"),
+
+                ProductType: $(obj).parents("m-item").find(".room-data").attr("data-producttype")
+            }
+
+            QuotationItemA.push(Quotation);
+
+            alert(JSON.stringify(QuotationItemA));
+
+
+            var qViewModel =
+               {
+                   Quotation: {
+
+                       QuatationItem: QuotationItemA
+
+                   }
+               }
+
+            var url = "/SupplierSearch/SupplierAddToCart";
+
+            alert(JSON.stringify(qViewModel));
+
+            //$.cookie("Bookings", JSON.stringify(qViewModel));
+
+            //alert($.cookie("Bookings"));
+
+            //PostAjaxWithProcessJson(url, $.cookie("Bookings"), AfterTransferSave, $("body"));
+
+            $.ajax({
+
+                url: url,
+
+                data: JSON.stringify(qViewModel),
+
+                datatype: "json",
+
+                type: "POST",
+
+                contentType: 'application/json',
+
+                success: function (data) {
+                    alert("Success");
+                }
+
+            });
+
+        }
+    </script>*@

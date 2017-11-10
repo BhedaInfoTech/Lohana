@@ -1,0 +1,508 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+
+<script src="~/Content/js/forms-pickers.js"></script>
+<script type="text/javascript" src="~/Scripts/Common/generic.common.events.js"></script>
+<script type="text/javascript" src="~/Scripts/Common/generic.common.methods.js"></script>
+
+@*<script src="~/Scripts/Master/Package/package-validations.js"></script>
+    <script src="~/Scripts/Master/Package/package-events.js"></script>
+    <script src="~/Scripts/Master/Package/package-methods.js"></script>*@
+
+<script type="text/javascript" src="~/Content/plugin/owl.carousel/owl.carousel.min.js"></script>
+
+<link href="~/Content/plugin/owl.carousel/assets/owl.carousel.css" rel="stylesheet" />
+
+<link href="~/Content/plugin/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" />
+
+
+@*Image Uploads*@
+
+@*<link href="../Content/plugin/uploadify/uploadify.css" rel="stylesheet" />
+<script src="../Content/plugin/uploadify/jquery.uploadify.min.js"></script>*@
+
+@*Attachment*@
+
+@*<script src="~/Scripts/Master/Attachment/attachment-events.js"></script>
+<script src="~/Scripts/Master/Attachment/attachment-methods.js"></script>*@
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Package</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Package</a></li>
+                        <li class="breadcrumb-item"><a href="#">Search</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box-block bg-white">
+            <ul class="nav nav-tabs nav-tabs-4" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" role="tab" href="#packagedetails">
+                        <h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Package Details</h5>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="link1" data-toggle="tab" role="tab" href="#packagedates">
+                        <h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Package Dates</h5>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="link2" data-toggle="tab" role="tab" href="#itinerary">
+                        <h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Itinerary</h5>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="link3" data-toggle="tab" role="tab" href="#packagephotos">
+                        <h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Package Images</h5>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="link4" data-toggle="tab" role="tab" href="#otherdetails">
+                        <h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Other Details</h5>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="link6" data-toggle="tab" role="tab" href="#Duration">
+                        <h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Duration</h5>
+                    </a>
+                </li>
+            </ul>
+
+                <div class="tab-content">
+
+                <div class="tab-pane active" id="packagedetails" role="tabpanel">
+
+                    @{Html.RenderPartial("_PackageBasicDetails", Model);}
+
+                </div>
+
+                <div class="tab-pane p-a-0-75" id="packagedates" role="tabpanel">
+
+                    @{Html.RenderPartial("_PackageDatesViewDetails", Model);}
+
+                </div>
+
+                <div class="tab-pane" id="itinerary" role="tabpanel">
+
+                    @{Html.RenderPartial("_PackageItineraryDetails", Model);}
+                    @{Html.RenderPartial("_package_triff_Day", Model);}
+
+                </div>
+
+                    <div class="tab-pane" id="packagephotos" role="tabpanel">
+
+                        @{Html.RenderPartial("_PackagePhoto", Model);}
+
+                    </div>
+               
+                <div class="tab-pane" id="otherdetails" role="tabpanel">
+
+                    @{Html.RenderPartial("_PackageOtherDetails", Model);}
+
+                </div>
+
+                    <div class="tab-pane" id="Duration" role="tabpanel">
+
+                        @{Html.RenderPartial("_packahge_Duration", Model);}
+
+                    </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp; Help / Info
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-unstyled" style="padding-left: 5px;">
+                                <li><i class="fa fa-circle-o text-info mr-0-5"></i> Package create page is used to Create a Package or Update Package.</li>
+                                <li>
+                                    <i class="fa fa-circle-o text-info mr-0-5"></i> Package create page contains following functionality.
+                                    <ul class="list-unstyled mb-1" style="padding-left: 15px;">
+                                        <li> <button type="button" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button> - On click of Save button, It Saves the Package Data if all the required fields inputted.</li>
+                                        <li> <a class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</a> - On click of Reset button, It resets the data to its Original values.</li>
+                                        <li> <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a> - On click of Cancel button,  It Redirects to the Package Listing Page.</li>
+                                        <li> <a href="Search" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</a> - On click of Add button,  It Adds Itinerary of respective Package created or Updated..</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<div class="tab-pane" id="itinerary" role="tabpanel">
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Day</label>
+                <div class="input-group">
+                    <input type="text" id="txtday–Destination" class="form-control input-sm" name="Package.day–Destination">
+                    <span class="input-group-addon">
+                        <i class="fa fa-sort-numeric-asc"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-1">
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Package</span>
+                </label>
+
+            </div>
+            <div class="col-md-3">
+                <label>Hotel Name</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-hotel"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Flight</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>From</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-plane"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>To</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-plane"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Train</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>From</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-train"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>To</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-train"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Bus</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>From</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-bus"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>To</label>
+                <div class="input-group">
+                    <input type="text" id="txthotel" class="form-control input-sm" name="Package.hotelName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-bus"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Sight Seeing</label><textarea class="form-control input-sm" name="Package.description" placeholder="Enter Description" maxlength="250"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label>Type Of Meal </label>
+                <div class="input-group">
+                    <select id="drpmeansToTransport" class="form-control input-sm" name="Package.meansToTransport">
+                        <option>Select Meal</option>
+                        <option>Breakast</option>
+                        <option>Lunch</option>
+                        <option>Dinner</option>
+                        <option>Breakfast Lunch and Dinner</option>
+                        <option>Lunch and Dinner</option>
+                        <option>Breakfast and Dinner</option>
+                        <option>No Meals</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <i class="fa fa-cutlery"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <br>
+                    <button type="button" class="btn btn-success   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="table-responsive">
+
+                <table class="table" id="tblItneraryDetails">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>Day - Destination - Nights</th>
+                            <th>Package</th>
+                            <th>Sight Seeing</th>
+                            <th>Meal Type</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td>Day 1 - Delhi – Chandigarh - 1 Night</td>
+                            <td>Lalit</td>
+                            <td>Joining and Leaving Tour Guests’ will meet directly at H. Nizamuddin station.</td>
+                            <td>Dinner</td>
+                            <td>Edit/Delete</td>
+                        </tr>
+                        <tr>
+                            <td>Day 2 - Chandigarh – Shimla - 2 Nights</td>
+                            <td>Sofitel</td>
+                            <td>Today we visit Rose Garden, Sukhana Lake, Rock Garden, Pinjore Garden.</td>
+                            <td>Breakfast Lunch and Dinner</td>
+                            <td>Edit/Delete</td>
+                        </tr>
+                        <tr>
+                            <td>Day 3 - Shimla - 1 Night</td>
+                            <td>Westin</td>
+                            <td>We visit Kufri – Winter Sports Capital, Indira Bungalow and Himalayan Zoo.</td>
+                            <td>BreakFast</td>
+                            <td>Edit/Delete</td>
+                        </tr>
+
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+
+            </div>*@
+
+
+
+    @*<div class="box box-block bg-white">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="box box-block bg-info pa-0-5 text-xs-center mb-1" style="padding: 8px; border-radius: 5px;">
+                            <span class="arrow arrow-right arrow-info"></span>
+                            Day 1
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <h5 style="line-height: 36px;"><i class="fa fa-plane text-muted"></i>&nbsp; Mumbai - Delhi &nbsp; <i class="fa fa-angle-right text-muted"></i>&nbsp; <i class="fa fa-hotel text-muted"></i>   Package Sunlight (Mumbai)</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>‘I fly Tour Guests’ will meet at Chattrapati Shivaji Domestic airport Mumbai as per the schedule flight departure time and proceed to Port Blair. We visit Cellular Museum and Cellular Jail, which stood mute witness to the torture meted out to the freedom fighters. History awakens as we visit 'Veer Sawarkar' Smarak and see the light and sound show in the evening.</p>
+
+                        <label><b>Meals</b></label>
+                        &nbsp;&nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-coffee text-muted"></i>&nbsp; Breakfast</label>
+                        &nbsp; &nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-cutlery text-muted"></i>&nbsp; Lunch</label>
+                        &nbsp; &nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-glass text-muted"></i>&nbsp; Dinner</label>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <a class="btn btn-secondary btn-sm" href="#"><i class="ti-pencil m-r-0-5"></i>Edit</a>
+                        <a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-block bg-white">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="box box-block bg-info pa-0-5 text-xs-center mb-1" style="padding: 8px; border-radius: 5px;">
+                            <span class="arrow arrow-right arrow-info"></span>
+                            Day 2
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <h5 style="line-height: 36px;"><i class="fa fa-train text-muted"></i>&nbsp; Mumbai - Delhi &nbsp; <i class="fa fa-angle-right text-muted"></i>&nbsp; <i class="fa fa-car text-muted"></i>&nbsp; Mumbai - Delhi &nbsp; <i class="fa fa-angle-right text-muted"></i>&nbsp; <i class="fa fa-hotel text-muted"></i>   Package Sunlight (Mumbai)</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>‘I fly Tour Guests’ will meet at Chattrapati Shivaji Domestic airport Mumbai as per the schedule flight departure time and proceed to Port Blair. We visit Cellular Museum and Cellular Jail, which stood mute witness to the torture meted out to the freedom fighters. History awakens as we visit 'Veer Sawarkar' Smarak and see the light and sound show in the evening.</p>
+
+                        <label><b>Meals</b></label>
+                        &nbsp;&nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-coffee text-muted"></i>&nbsp; Breakfast</label>
+                        &nbsp; &nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-cutlery text-muted"></i>&nbsp; Lunch</label>
+                        &nbsp; &nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-glass text-muted"></i>&nbsp; Dinner</label>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <a class="btn btn-secondary btn-sm" href="#"><i class="ti-pencil m-r-0-5"></i>Edit</a>
+                        <a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-block bg-white">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="box box-block bg-info pa-0-5 text-xs-center mb-1" style="padding: 8px; border-radius: 5px;">
+                            <span class="arrow arrow-right arrow-info"></span>
+                            Day 3
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <h5 style="line-height: 36px;"><i class="fa fa-plane text-muted"></i>&nbsp; Mumbai - Delhi &nbsp; <i class="fa fa-angle-right text-muted"></i>&nbsp; <i class="fa fa-hotel"></i>   Package Sunlight (Mumbai)</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>‘I fly Tour Guests’ will meet at Chattrapati Shivaji Domestic airport Mumbai as per the schedule flight departure time and proceed to Port Blair. We visit Cellular Museum and Cellular Jail, which stood mute witness to the torture meted out to the freedom fighters. History awakens as we visit 'Veer Sawarkar' Smarak and see the light and sound show in the evening.</p>
+
+                        <label><b>Meals</b></label>
+                        &nbsp;&nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-coffee text-muted"></i>&nbsp; Breakfast</label>
+                        &nbsp; &nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-cutlery text-muted"></i>&nbsp; Lunch</label>
+                        &nbsp; &nbsp;
+                        <label style="padding: 3px 8px; background: #eee; border-radius: 16px;"><i class="fa fa-glass text-muted"></i>&nbsp; Dinner</label>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <a class="btn btn-secondary btn-sm" href="#"><i class="ti-pencil m-r-0-5"></i>Edit</a>
+                        <a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+                    </div>
+                </div>
+            </div>*
+        @*</div>*@

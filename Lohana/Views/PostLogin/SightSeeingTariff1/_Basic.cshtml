@@ -1,0 +1,114 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/SightSeeingTariff/sightseeing-tariff-events.js"></script>
+<script src="~/Scripts/Master/SightSeeingTariff/sightseeing-tariff-methods.js"></script>
+
+
+
+<form id="frmSightSeeingTariffBasic">
+
+    <input type="hidden" id="hdnSightSeeingTariffId" value="" name="SightSeeingTariff.SightSeeingTariffId" />
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="drpVendor" style="color: #333" class="">Vendor Name</label>
+                <div class="input-group">
+                    <select class="form-control input-sm" id="drpVendor" name="SightSeeingTariff.Vendor">
+                        <option value="0">Select Vendor</option>
+                        @foreach (var item in Model.Vendors)
+                        {
+                            if (Model.SightSeeingTariff.VendorId == item.VendorId)
+                            {
+                                <option value="@item.VendorId" selected="selected">@item.VendorName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.VendorId">@item.VendorName</option>
+                            }
+                        }
+
+                    </select>
+                    <span class="input-group-addon">
+                        <i class="fa fa-globe"></i>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Package Name</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter Package name" name="SightSeeingTariff.PackageName" id="txtPackageName" value="">
+                    <span class="input-group-addon">
+                        <i class="fa fa-globe"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Cancellation Policy</label>
+                <textarea id="txtCancellationPolicy" class="form-control input-sm" placeholder="Cancellation Policy" name="SightSeeingTariff.CancellationPolicy" maxlength="250"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Inclusions</label>
+                <textarea id="txtInclusions" class="form-control input-sm" name="SightSeeingTariff.Inclusions" placeholder="Inclusions"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Exclusions</label>
+                <textarea id="txtExclusions" class="form-control input-sm" name="SightSeeingTariff.Exclusions" placeholder="Exclusions"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Set Active</label>
+                <div class="input-group">
+                    <input class="js-switch" data-color="#1bc044" checked="" style="display: none;" data-switchery="true" value="true" name="SightSeeingTariff.IsActive" type="checkbox" id="Flag">
+                </div>
+            </div>
+            </div>
+    </div>
+        <div class="form-group">
+            <button type="button" id="btnAddBasicDetails" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+            <div class="btn-group" style="float: right; padding: 2px 6px;">
+                <button type="reset" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light" id=""><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Basic Details Listing
+            </h5>
+
+            <input type="hidden" id="hdnSearchSightSeeingTariffId" value="" name="Filter.SightSeeingTariffId" />
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblSightSeeingTariffBasicDetails" data-current-page=""></table>
+                </div>
+            </div>
+
+        </div>
+
+</form>

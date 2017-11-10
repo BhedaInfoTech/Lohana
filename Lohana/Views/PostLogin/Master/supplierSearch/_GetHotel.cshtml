@@ -1,0 +1,108 @@
+﻿@model Lohana.Models.Master.SupplierSearchViewModel
+@using LohanaBusinessEntities.Common;
+<script src="~/Scripts/SupplierHotelTariff/supplier-itinerary-method.js"></script>
+
+<div class="posts-list posts-list-1">
+
+    <form id="frmRoomMealOccupancyDetails">
+
+        <div class="row">
+
+           
+            <div class="col-md-12">
+
+                <div class="row">
+
+
+                </div>
+
+@if (Model.SupplierHotelList.Count > 0)
+{
+    int count = 1;
+
+    foreach (var i in Model.SupplierHotelList.Select(a => new { a.SupplierHotelDayId, a.Title }).Distinct())
+    {
+
+        <div class="row">
+
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="custom-control custom-radio">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">&nbsp;Day:@count</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+           
+                <div class="col-md-2">Title:@i.Title</div>
+            </div>
+          
+           <div class="row">
+             
+                    @foreach (var itm in Model.SupplierHotelList.Where(a => a.SupplierHotelDayId == i.SupplierHotelDayId))
+                    {
+                   <div class="col-md-1"></div>
+                   
+                        <div class="col-md-3">
+
+                            @if (itm.HotelName != null)
+                            {
+                                <ul class="list-unstyled m-b-1">
+                                    <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Name:<a class="text-black">@itm.HotelName</a></li>
+                                </ul>
+                            }
+                            @if (itm.SightSeeingName != null)
+                            {
+                                <ul class="list-unstyled m-b-1">
+                                    <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Sight Seeing:<a class="text-black">@itm.SightSeeingName</a></li>
+                                </ul>
+                            }
+                            @if (itm.VehicleName != null)
+                            {
+                                <ul class="list-unstyled m-b-1">
+                                    <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Vehicle:<a class="text-black">@itm.VehicleName</a></li>
+                                </ul>
+                            }
+                            @if (itm.MealName != null)
+                            {
+                                <ul class="list-unstyled m-b-1">
+                                    <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Meal:<a class="text-black">@itm.MealName</a></li>
+                                </ul>
+                            }
+
+
+                        </div>
+
+                                          
+         
+                    }
+            
+ 
+               </div>
+            <hr />
+          
+        </div>
+                    count++;
+
+    }
+
+
+}
+
+
+           
+
+            </div>
+        </div>
+
+
+    </form>
+
+
+
+
+</div>

@@ -1,0 +1,85 @@
+﻿<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-method.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-validations.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-event.js"></script>
+<form id="frmBasicDetail">
+
+	<input type="hidden" id="hdnSupplierHotelId" value="0" name ="SupplierHotelTariff.SupplierHotelId" />
+
+	<div class="row">
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label>Supplier</label>
+				<div class="input-group">
+				<select class="form-control" id="drpVendor" name="SupplierHotelTariff.SupplierId">
+				</select>
+					</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="">Package Name</label>
+				<input type="text" id="txtPackageName" name="SupplierHotelTariff.PackageName" class="form-control" placeholder="Enter package name" maxlength="100">
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<label for="">Set Active</label>
+			<div class="input-group">
+				<input class="js-switch" data-color="#1bc044" checked="" data-switchery="true" value="true" name="SupplierHotelTariff.IsActive" type="checkbox" id="Flag">
+			</div>
+		</div>
+	</div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Duration</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" disabled="disabled" maxlength="2" placeholder="Days" name="SupplierHotelTariff.DayDuration" class="form-control" id="txtDayduration">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" maxlength="2" placeholder="Nights" name="SupplierHotelTariff.NightDuration" class="form-control" id="txtNightduration" onchange="GetDayValue();">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="form-group">
+
+		<button type="button" id="btnAddSupplierHotelTariff" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+		<button type="button" id="btnResetSupplierHotelTariff" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+
+		@*<button type="button" id="btnAddSupplierHotelTariff" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+                                            <button type="reset" id="btnResetSupplierHotelTariff" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>*@
+	</div>
+
+	<div class="card">
+
+		<h5 class="card-header">
+			<span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Supplier Basic Listing
+		</h5>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="overflow-x-auto">
+					<table class="table m-b-0" id="tblSupplierHotelTariffDetails" data-current-page="1"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<label id="lblMessage"></label>
+	</div>
+</form>
+
+<script>
+    function GetDayValue() {
+        var nights= parseInt(document.getElementById("txtNightduration").value);
+     
+        $('#txtDayduration').val(nights+1);
+    }
+    </script>

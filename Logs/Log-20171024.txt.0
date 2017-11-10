@@ -1,0 +1,106 @@
+DEBUG     2017-10-24 01:02:39 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-24 01:02:40 – Authentication Controller SetUserSession
+DEBUG     2017-10-24 01:02:54 – Sushant Accessed 16 on 10/24/2017 13:02:54
+DEBUG     2017-10-24 01:02:58 – Sushant Accessed 16 on 10/24/2017 13:02:58
+DEBUG     2017-10-24 01:02:58 – Customer Controller GetCustomer
+DEBUG     2017-10-24 01:03:02 – Sushant Accessed 16 on 10/24/2017 13:03:02
+DEBUG     2017-10-24 01:03:02 – Customer Controller CustomerId:1
+DEBUG     2017-10-24 01:03:02 – Customer Controller GetCustomerById
+DEBUG     2017-10-24 01:04:25 – Sushant Accessed 16 on 10/24/2017 13:04:25
+DEBUG     2017-10-24 01:04:26 – Sushant Accessed 16 on 10/24/2017 13:04:26
+DEBUG     2017-10-24 01:04:26 – Customer Controller GetCustomer
+DEBUG     2017-10-24 01:04:29 – Sushant Accessed 16 on 10/24/2017 13:04:29
+DEBUG     2017-10-24 01:04:29 – Customer Controller CustomerId:5
+DEBUG     2017-10-24 01:04:29 – Customer Controller GetCustomerById
+DEBUG     2017-10-24 01:05:32 – Sushant Accessed 16 on 10/24/2017 13:05:32
+DEBUG     2017-10-24 01:05:32 – Sushant Accessed 16 on 10/24/2017 13:05:32
+DEBUG     2017-10-24 01:05:32 – Customer Controller GetCustomer
+DEBUG     2017-10-24 01:05:36 – Sushant Accessed 16 on 10/24/2017 13:05:36
+DEBUG     2017-10-24 01:05:36 – Customer Controller CustomerId:4
+DEBUG     2017-10-24 01:06:28 – Customer Controller GetCustomerById
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:1
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:1
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:1
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:1
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:3
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:3
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:4
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:4
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:4
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:4
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:5
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:5
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:6
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:7
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:8
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:9
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:10
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:11
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:12
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:13
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:14
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:15
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:16
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:17
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:18
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:19
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:19
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:19
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:19
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:20
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:20
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:21
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:21
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:22
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:22
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:23
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:24
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:25
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:26
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefId:26
+DEBUG     2017-10-24 03:00:58 – Accessories Controller RefType:2

@@ -1,0 +1,34 @@
+﻿@model Lohana.Models.TaxFormulaCalDemo.TaxFormulaCalDemoViewModel
+
+<table class="table m-b-0" id="tblFormulaDetails">
+    <thead class="thead-inverse">
+        <tr>
+            <th width="10%">Charge Type</th>
+            <th width="10%">Cal On</th>
+            <th width="10%">Percentage</th>
+            <th width="10%">Calculated Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.LstTaxFormulaCharges != null && Model.LstTaxFormulaCharges.Count > 0)
+        {
+            foreach (var item in Model.LstTaxFormulaCharges)
+            {
+                <tr data-chargeid="@item.ChargesId" data-taxformulaid="@item.TaxFormulaId">
+                    <td data-isstandard="false" data-chargeid="@item.ChargesId">@item.ChargesName</td>
+                    <td data-chargeformula="@item.ChargeFormula">@item.ChargeFormulaText</td>
+                    <td><input type="text" id="txtpercentage" class="percentage" name="demo2" /></td>
+                    <td><span class="calculatedprice"></span></td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Tax Price:</td>
+            <td><span class="totaltax"></span></td>
+        </tr>
+
+    </tbody>
+</table>

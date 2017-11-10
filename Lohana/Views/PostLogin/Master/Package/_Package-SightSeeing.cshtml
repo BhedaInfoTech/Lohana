@@ -1,0 +1,73 @@
+﻿
+
+@*<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-event.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-itinerary-method.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-methods.js"></script>*@
+
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Master/Package/_package-Itinarary-model.js"></script>
+<script src="~/Scripts/Master/Package/_Package-Itinarary-model-method.js"></script>
+
+
+<form id="frmSearchSightSeeing">
+    <input type="hidden" id="hdnPackageDayId" name="packagedaytriff.PackageDayId" value="@Model.packagedaytriff.PackageDayId">
+
+    <input type="hidden" id="hdnPackageSightSeeingId">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="drpSiteSeeing" style="color: #333" class="">Sight Seeing</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <select class="form-control" id="drpSiteSeeing" name="packagedaytriff.SightSeeingId"></select>
+                    <span class="input-group-addon">
+                        <i class="fa fa-globe"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="drpCity" style="color: #333" class="">City</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <select class="form-control" id="drpcity" name="packagedaytriff.CityId">
+                        <option value="0">Select city</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <i class="fa fa-globe"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        &nbsp;&nbsp;&nbsp;
+        <br />
+        <button type="button" id="btnSearchPackageSightSeeing" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+        <button type="reset" id="btnResetPAckageSightSeeing" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+    </div>
+
+    <div class="card">
+        <div class="row">
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblPackageSightSeeing"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="CheckpackageSelectedSightSeeing" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="btnPackageSaveSiteSeeing" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+
+    </div>
+</form>
+
+
+<script>
+    GetPackageSightSeeingListing();
+</script>

@@ -1,0 +1,38 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<table class="table m-b-0" id="tblFormulaDetails">
+    <thead class="thead-inverse">
+        <tr>
+            <th></th>
+            <th>Publish Price</th>
+            <th>Special Price</th>
+            <th>Commission Price</th>
+            <th>Total Tax</th>
+            <th>Net Rate</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.SightSeeingTariffPrices.Count > 0)
+        {
+            foreach (var item in Model.SightSeeingTariffPrices)
+            {
+                <tr>
+                    <td>
+                        <input type="radio" name="rdSightSeeingTariffPrice" data-sightseeingtariffpriceid="@item.SightSeeingTariffPriceId">
+                    </td>
+                    <td>@item.PublishPrice</td>
+                    <td>@item.SpecialPrice</td>
+                    <td>@item.CommissionPrice</td>
+                    <td>@item.TotalTaxPrice</td>
+                    <td>@item.NetRate</td>
+
+                    <td style="background-color:@(item.Color)"></td>
+                    <td></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,51 @@
+﻿@model Lohana.Models.Tariff.HotelTariff.HotelTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+
+<table class="table m-b-0" id="tblFormulaDetails">
+    <thead class="thead-inverse">
+        <tr>
+            <th width="10%">Charge Type</th>
+            <th width="10%">Cal On</th>
+            <th width="10%">Percentage</th>
+            <th width="10%">Calculated Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.LstTaxFormulaCharges != null && Model.LstTaxFormulaCharges.Count > 0)
+        {
+            
+            foreach (var item in Model.LstTaxFormulaCharges)
+            {
+                <tr>
+
+                    <td data-isstandard="false" data-chargeid="@item.ChargesId">
+                        @item.ChargesName
+                    <input type="hidden" id="hdnHotelTariffChargesDetailsId" name="" class="hoteltariffchargesdetailsid" value="@item.HotelTariffCharge.HotelTariffChargesDetailsId" />
+
+                </td>
+                    <td data-chargeformula="@item.ChargeFormula">@item.ChargeFormulaText</td>
+                    <td><input type="text" id="txtpercentage" class="percentage" name="HotelTariffCharge.Percentage" value="@(@item.HotelTariffCharge.Percentage == 0 ? "" : @item.HotelTariffCharge.Percentage.ToString())" />
+                    </td>
+                    <td>
+						@*<span class="calculatedprice">@(item.HotelTariffCharge.CalculatedPrice == 0 ? "" : item.HotelTariffCharge.CalculatedPrice.ToString())</span>*@
+						<input type="text" id="txtcalculatedprice" class="calculatedprice" name="HotelTariffCharge.CalculatedPrice" value="@(item.HotelTariffCharge.CalculatedPrice == 0 ? "" : item.HotelTariffCharge.CalculatedPrice.ToString())">
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Tax Price:</td>
+            <td>
+				<span class="totaltax">@Model.HotelTariffPrice.TotalTaxPrice</span>
+
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>

@@ -1,0 +1,158 @@
+﻿@model Lohana.Models.Master.TaxViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Content/js/forms-pickers.js"></script>
+<script src="~/Scripts/Master/Tax/tax-validation.js"></script>
+<script src="~/Scripts/Master/Tax/tax-event.js"></script>
+<script src="~/Scripts/Master/Tax/tax-method.js"></script>
+
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Tax</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Tax</a></li>
+                        <li class="breadcrumb-item"><a href="#">Search</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box box-block bg-white">
+            <form id="frmTax" role="form">
+                <input type="hidden" id="hdnTaxId" value="@Model.Tax.TaxId" name="Tax.TaxId">
+
+                <div class="card">
+                    <h5 class="card-header">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Tax Create
+                    </h5>
+
+                    <div class="card-block p-t-0 p-b-0">
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="">Tax Code</label>
+                                <div class="input-group">
+                                    <input type="text" name="Tax.TaxCode" id="txtTaxCode" value="@Model.Tax.TaxCode" class="form-control" placeholder="Enter Tax Code">
+                                    <input type="hidden" name="Tax.TaxCode" id="hdnTaxCode" value="@Model.Tax.TaxCode">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="">Tax Name</label>
+                                <div class="input-group">
+                                    <input type="text" name="Tax.TaxName" id="txtTaxName" value="@Model.Tax.TaxName" class="form-control" placeholder="Enter Tax Name">
+                                    <input type="hidden" name="Tax.TaxName" id="hdnTaxName" value="@Model.Tax.TaxName">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-text-width"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <label for="">Tax Rate</label>
+                                <div class="input-group">
+                                    <input type="text" name="Tax.TaxRate" id="txtTaxRate" value="@Model.Tax.TaxRate" class="form-control" placeholder="Enter Tax Rate">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-numeric-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="">Set Active</label>
+                                <div class="input-group">
+                                    @if (Model.Tax.IsActive == true)
+{
+    <input class="js-switch" name="Tax.IsActive" data-color="#f44236" checked="checked" data-switchery="true" value="@Model.Tax.IsActive" type="checkbox" id="activeFlg">
+}
+                                    else
+                                    {
+                                        <input class="js-switch" name="Tax.IsActive" data-color="#f44236" data-switchery="true" value="@Model.Tax.IsActive" type="checkbox" id="activeFlg">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="button" id="btnSaveTax" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                    <button type="reset" id="btnResetTax" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                                    <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp; Help / Info
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-unstyled" style="padding-left: 5px;">
+                            <li><i class="fa fa-circle-o text-info mr-0-5"></i> Tax create page is used to Create a Tax or Update Tax.</li>
+                            <li>
+                                <i class="fa fa-circle-o text-info mr-0-5"></i> Tax create page contains following functionality.
+                                <ul class="list-unstyled mb-1" style="padding-left: 15px;">
+                                    <li> <button type="button" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button> - On click of Save button, It Saves the Tax Data if all the required fields inputted.</li>
+                                    <li> <a class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</a> - On click of Reset button, It resets the data to its Original values.</li>
+                                    <li> <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a> - On click of Cancel button,  It Redirects to the Tax Listing Page.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

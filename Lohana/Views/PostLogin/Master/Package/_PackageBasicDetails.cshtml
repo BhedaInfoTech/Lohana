@@ -1,0 +1,251 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+
+<script src="~/Scripts/Master/Package/package-validations.js"></script>
+<script src="~/Scripts/Master/Package/package-methods.js"></script>
+<script src="~/Scripts/Master/Package/package-events.js"></script>
+
+
+<form id="frmPackageBasicDetails">
+    <input type="hidden" id="hdnPackageId" value="@Model.Package.PackageId" name="Package.PackageId"  />
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Package Code</label>
+                <div class="input-group">
+                    <input type="text" id="txtpackageCode" class="form-control input-sm" name="Package.PackageCode" value="@Model.Package.PackageCode" placeholder="Enter package code" maxlength="50">
+                    <input type="hidden" id="hdnpackageCode" name="Package.PackageCode" value="@Model.Package.PackageCode">
+                    <span class="input-group-addon">
+                        <i class="fa fa-sort-alpha-asc"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="drppkgcategory" class="form-control input-sm" name="Package.Category">
+                        <option value="0">Select package category</option>
+                        @foreach (var item in LookupInfo.GetPackageCategories())
+                        {
+
+                            if (Model.Package.PackageCategoryId == item.Key)
+                            {
+                                <option value="@item.Key" selected="selected">@item.Value</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Key">@item.Value</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+
+                    <label>Package Type</label>
+                    <select id="drppackageType" multiple="multiple" class="form-control input-sm PackageType" name="Package.PackageType" onchange="Set_PackageType();">
+                       
+                        @if (Model.Package.PackageTypeMappings.Count > 0)
+                        {
+                            int i = (Model.Package.PackageTypeMappings.Count) - 1;
+
+                            foreach (var item in Model.PackageTypes)
+                            {
+                                if (i >= 0)
+                                {
+                                    if (Model.Package.PackageTypeMappings[i].PackageTypeId == item.PackageTypeId)
+                                    {
+                                        <option value="@item.PackageTypeId" selected="selected">@item.PackageTypeName</option>
+                                        i--;
+                                    }
+
+                                    else
+                                    {
+                                        <option value="@item.PackageTypeId">@item.PackageTypeName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="@item.PackageTypeId">@item.PackageTypeName</option>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in Model.PackageTypes)
+                            {
+                                <option value="@item.PackageTypeId">@item.PackageTypeName</option>
+                            }
+                        }
+                    </select>
+                    <input type="hidden" id="hdnPackageType" name="Package.PackageType" value="@Model.Package.PackageType" />
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Lohana Group Departure Package</label>
+                <div class="input-group">
+                    <input type="text" id="txtpackageName" class="form-control input-sm" name="Package.PackageName" value="@Model.Package.PackageName" placeholder="Enter package name" maxlength="50">
+                    <input type="hidden" id="hdnpackageName" name="Package.PackageName" value="@Model.Package.PackageName">
+                    <span class="input-group-addon">
+                        <i class="fa fa-paypal"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                @*<label>Package Duration</label>
+                <div class="input-group">
+                    <input type="text" id="txtpackageDuration" class="form-control input-sm" name="Package.PackageDuration" value="@Model.Package.PackageDuration" placeholder="Enter package duration" maxlength="50">
+                    <span class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>*@
+                <div class="form-group">
+                    <label>Package  Duration</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" id="txtDayduration" class="form-control" name="Package.DayDuration" value="@Model.Package.DayDuration" placeholder="Days" maxlength="2" disabled="disabled">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="txtNightduration" class="form-control" name="Package.NightDuration" value="@Model.Package.NightDuration" placeholder="Nights" maxlength="2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label>Departure City </label>
+                <div class="input-group">
+                    <select id="drpdepartureCity" class="form-control input-sm" name="Package.DepartureCity">
+                        <option value="0">Select departure city</option>
+                        @foreach (var item in Model.Cities)
+                        {
+                            if (Model.Package.DepartureCityId == item.CityId)
+                            {
+                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CityId">@item.CityName</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Tour Reporting Point</label>
+                <div class="input-group">
+                    <input type="text" id="txttourReportingPoint" class="form-control input-sm" name="Package.TourReportingPoint" value="@Model.Package.TourReportingPoint" placeholder="Enter tour reporting point" maxlength="50">
+                    <span class="input-group-addon">
+                        <i class="fa fa-hourglass-start"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Tour Dropping Point </label>
+                <div class="input-group">
+                    <input type="text" id="txttourDropping" class="form-control input-sm" name="Package.TourDroppingPoint" value="@Model.Package.TourDroppingPoint" placeholder="Enter tour dropping" maxlength="50">
+                    <span class="input-group-addon">
+                        <i class="fa fa-hourglass-end"></i>
+                    </span>
+                </div>
+            </div>
+            @*<div class="col-md-4">
+                <label>Package Cost</label>
+                <div class="input-group">
+                    <input type="text" id="txtpackageCost" placeholder="Enter package cost" class="form-control input-sm" name="Package.PackageCost" value="@(Model.Package.PackageCost==0 ?"" : Model.Package.PackageCost.ToString())" maxlength="50">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>*@
+
+            @*<div class="col-md-4">
+                <label>Select Color</label>
+                <div class="input-group" id="dvColorPicker">
+                    <input type="text" value="@Model.Package.Color" class="form-control" name="Package.Color">
+                    <span class="input-group-addon"><i></i></span>
+                </div>
+            </div>*@
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Adventure</label>
+                    <textarea class="form-control input-sm summernote" name="Package.Adventure" placeholder="Enter adventure" >@Model.Package.Adventure</textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Highlights</label><textarea class="form-control input-sm summernote" name="Package.Specialty" placeholder="Enter specialty">@Model.Package.Speciality</textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Place To Visit </label>
+                    <textarea class="form-control input-sm summernote"  name="Package.PlaceToVisit" placeholder="Enter place to visit">@Model.Package.PlaceToVisit</textarea>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    @*<input class="js-switch" data-color="#1bc044" data-switchery="true" name="Package.status" type="checkbox" id="Flag" checked="checked">*@
+                    @if (Model.Package.Status == false)
+                    {
+                        <input class="js-switch" data-color="#1bc044" data-switchery="true" value="false" name="Package.Status" type="checkbox" id="Flag">
+                    }
+                    else
+                    {
+                        <input class="js-switch" data-color="#1bc044" data-switchery="true" value="true" name="Package.Status" type="checkbox" id="Flag" checked="checked">
+                    }
+                </div>
+            </div>
+
+        </div>
+        <br />
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+
+            <button type="button" id="btnSavePackageDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+            <button type="button" id="btnResetPackageDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+            <a href="Search" class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+
+            @*<button type="button" id="btnSavePackageDetails" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+            <button type="button" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+            <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>*@
+        
+        </div>
+    </div>
+</div>
+<script>
+    $("#txtNightduration").on('change', function () {
+
+        var days = parseInt($("#txtNightduration").val()) + 1;
+
+        $("#txtDayduration").val(days);
+    });
+
+    $('#dvColorPicker').colorpicker(
+       {
+           format: 'hex'
+       }
+       );
+
+</script>

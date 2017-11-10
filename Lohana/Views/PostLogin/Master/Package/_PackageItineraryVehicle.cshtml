@@ -1,0 +1,164 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Package/package-itinerary-Vehicle-validations.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-Vehicle-methods.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-Vehicle-events.js?V=@DateTime.Now"></script>
+
+<div id="dvItineraryVehicle">
+    <div class="row">
+
+        <form id="frmPackageItineraryVehicles">
+
+            <input type="hidden" id="hdnPackageVehicleItineraryId" name="PackageItinerary.PackageItineraryVehicle.PackageItineraryId" value="@Model.PackageItinerary.PackageItineraryVehicle.PackageItineraryId" />
+
+            <div class="card-block p-t-0 p-b-0">
+
+                <div class="row" id="divVehicle">
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Vehicle Name</label>
+                            <div class="input-group">
+                                <input type="text" id="txtVehicle" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.VehicleName" placeholder="Enter Vehicle name" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-Vehicle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Vehicle From </label>
+                            <div class="input-group">
+                                <select id="drpVehicleFrom" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.VehicleFrom"></select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-Vehicle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Vehicle To </label>
+                            <div class="input-group">
+                                <select id="drpVehicleTo" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.VehicleTo"></select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-Vehicle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Pickup</label><select id="drpPickUp" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.PickUp">
+                                <option value="0">Select Pickup</option>
+                                @foreach (var item in LookupInfo.GetPickUpAndDropOff())
+                                {
+                                    if (Model.PackageItinerary.PackageItineraryVehicle.PickUp == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Drop Off</label><select id="drpDropOff" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.DropOff">
+                                <option value="0">Select Drop Off</option>
+                                @foreach (var item in LookupInfo.GetPickUpAndDropOff())
+                                {
+                                    if (Model.PackageItinerary.PackageItineraryVehicle.DropOff == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Vehicle Time</label>
+                            <div class="input-group">
+                                <input type="time" id="txtVehicleTime" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.VehicleTime" placeholder="Enter Vehicle Time" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-Vehicle"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="drpItineraryLocation" style="color: #333" class="">Supplier</label>
+
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpItinerarySupplier" name="PackageItinerary.PackageItineraryVehicle.SupplierId"></select>
+                                
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Cost</label>
+                        <div class="input-group">
+                            <input type="text" id="drpItineraryVehicleCost" class="form-control input-sm" name="PackageItinerary.PackageItineraryVehicle.VehicleCost" placeholder="Enter Vehicle Cost" maxlength="50">
+                            @*<input type="hidden" id="hdnpackageCode" name="Package.PackageCode" value="@Model.Package.PackageCode">*@
+                            <span class="input-group-addon">
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="btnAddPackageItineraryVehicles" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="reset" id="btnDeletePackageItineraryVehicles" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="card" id="divPackageItineraryVehicleList">
+
+    <h5 class="card-header">
+        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Package Itinerary Vehicle Listing
+    </h5>
+    <form role="form" id="frmSearchPackageItineraryVehicle">
+
+        <input type="hidden" id="hdnSearchPackageItineraryVehicleId" value="@Model.PackageItinerary.PackageItineraryVehicle.PackageItineraryVehicleId" name="PackageItinerary.PackageItineraryVehicle.PackageItineraryVehicleId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageItineraryVehicles"></table>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,228 @@
+﻿@model Lohana.Models.Master.TaxFormulaViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Master/TaxFormula/taxformula-validations.js"></script>
+<script src="~/Scripts/Master/TaxFormula/taxformula-methods.js"></script>
+<script src="~/Scripts/Master/TaxFormula/taxformula-events.js"></script>
+
+<link href="~/Content/plugin/select2/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- Content -->
+
+@{
+    string standardValue = string.Empty;
+    
+    int count = 0;
+  }
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Tax Formula</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Tax Formula</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+
+                    <h5 class="card-header">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp;
+                        @if (@Model.TaxFormula.TaxFormulaId > 0)
+                        {
+                            <text> Tax Formula Edit </text>
+                        }
+                        else
+                        {
+                            <text> Tax Formula Create </text>
+                        }
+
+                    </h5>
+
+                    <form role="form" id="frmTaxFormula">
+
+                        <input type="hidden" name="TaxFormula.TaxFormulaId" id="hdnTaxFormulaId" value="@Model.TaxFormula.TaxFormulaId" />
+
+                        <input type="hidden" name="TaxFormula.TaxFormulaChargesId" id="hdnTaxFormulaChargeId" />
+
+                        <input type="hidden" name="TaxFormula.ChargesId" id="hdnChargesId" value="0" />
+
+                        <input type="hidden" value="@standardValue" id="hdnChargesInUse">
+
+                        <div class="card-block p-t-0 p-b-0">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <label for="">Tax Formula Name</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Enter tax formula" value="@Model.TaxFormula.TaxFormulaName" name="TaxFormula.TaxFormulaName" id="txtTaxFormula" maxlength="50">
+                                        <input type="hidden" id="hdnTaxFormulaName" value="@Model.TaxFormula.TaxFormulaName">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-sort-alpha-asc"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="">Set Active</label>
+                                    <div class="input-group">
+                                        <input class="js-switch" data-color="#1bc044" checked="" data-switchery="true" value="true" data-isactive="@Model.TaxFormula.IsActive" name="TaxFormula.Status" type="checkbox" id="Flag">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Charges</label>
+                                    <div class="input-group">
+                                        <select class="form-control" id="drpCharges" name="TaxFormulaCharges.ChargesId">
+                                            <option value="0" selected>Select charges</option>
+                                            @foreach (var item in Model.Charges.FindAll(x => !x.IsStandardPrice))
+                                            {
+                                                <option value="@item.ChargesId">@item.ChargesName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Build Formula</label>
+                                    <div class="input-group">
+                                        <select class="form-control" id="drpFormulaCharges">
+                                            <option value="0">Select charges</option>
+                                            <optgroup label="Charges">
+                                                @foreach (var item in Model.Charges.FindAll(x => !x.IsStandardPrice))
+                                                {
+                                                    <option value="@item.ChargesId">@item.ChargesName</option>
+                                                }
+                                            </optgroup>
+                                            <optgroup label="Standard Price">
+                                                @foreach (var item in Model.Charges.FindAll(x => x.IsStandardPrice))
+                                                {
+                                                    <option value="@item.ChargesId">@item.ChargesName</option>
+                                                    
+                                                    if (count == 0)
+                                                    {
+                                                        standardValue = @item.ChargesId.ToString();
+                                                    }
+                                                    else
+                                                    {
+                                                        standardValue = standardValue + "," + @item.ChargesId.ToString();
+                                                    }
+
+                                                    count++;
+                                                }
+                                            </optgroup>
+                                        </select>                                        
+                                    </div>
+                                    <input type="hidden" value="@standardValue" id="hdnStandardValue">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="">&nbsp;</label>
+                                    <div class="input-group">
+                                        <div class="form-group">
+                                            <button type="button" id="btnAddOperator" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                                            <button type="button" id="btnSubstractOperator" class="btn btn-warning"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Cal. On</label>
+                                    <div class="input-group">
+                                        <select id="drpTaxFormula" class="form-control js-example-basic-multiple" multiple="multiple" name="Taxformulacharges.ChargeFormula"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                        <button type="button" id="btnSaveTaxFormula" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                        <button type="button" id="btnResetTaxFormula" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                                        <a href="Search" class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+
+                                        @*<button type="button" id="btnSaveTaxFormula" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                                        <button type="button" id="btnResetTaxFormula" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                                        <a href="Search" class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>*@
+                                   
+                                     </div>
+                                </div>
+                            </div>
+
+                            <br />
+                        </div>
+                    </form>
+
+                    <div class="card" id="divTaxFormulaSearch">
+
+                        <h5 class="card-header">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Tax Formula Charge Listing
+                        </h5>
+
+                        <form id="frmSearchTaxFormulaChargeBehaviour">
+
+                            <input type="hidden" id="hdnSearchChargeBehaviourId" value="" name="TaxFormula.TaxFormulaChargesId" />
+
+                            <input type="hidden" id="hdnCurrentPage" name="Pager.CurrentPage" value="" />
+
+                            <div class="card-block p-t-0 p-b-0">
+
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblTaxFormulaChargeBehaviour" data-current-page="1">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                @*<th></th>*@
+                                                <th>Charges Type</th>
+                                                <th>Calculated On</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

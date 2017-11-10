@@ -1,0 +1,71 @@
+﻿@model LohanaBusinessEntities.Common.PaginationInfo
+
+  
+    @if (Model.EndPage > 1)
+    {
+    	<nav class="nav">
+   
+
+    <ul class="pagination-sm m-a-0">
+       
+
+        @if (Model.CurrentPage > 1)
+        {
+
+        var currentPage = Model.CurrentPage - 1;
+
+        
+        <li class="page-item">
+            
+            <a class="page-link" href="#" onclick="Pagination()">First</a>
+            
+        </li>
+        
+        <li class="page-item">
+            
+             <a class="page-link" href="#" onclick="Pagination(@currentPage)">Pre</a>
+            
+        </li>
+            
+        }
+
+        @for (var page = Model.StartPage; page <= Model.EndPage; page++)
+        {
+
+        
+        <li class="page-item @(page == Model.CurrentPage ? " active" : "")">
+            
+            <a class="page-link" href="#" onclick="Pagination(@page)"> @page </a>
+            
+        </li>
+        }
+
+        @if (Model.CurrentPage < Model.TotalPages)
+        {
+
+        var currentPage = Model.CurrentPage + 1;
+
+        
+        <li class="page-item">
+            
+            <a class="page-link" href="#" onclick="Pagination(@currentPage)">Nxt</a>
+            
+        </li>
+        
+        <li class="page-item">
+            
+            <a class="page-link" href="#" onclick="Pagination(@Model.TotalPages)">Lst</a>
+            
+        </li>
+        }
+
+        
+    </ul>
+
+    
+</nav>
+
+    	
+    	
+    }
+

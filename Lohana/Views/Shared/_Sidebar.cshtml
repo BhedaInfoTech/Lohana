@@ -1,0 +1,294 @@
+﻿@{
+    LohanaBusinessEntities.Common.SessionInfo sessionInfo = (LohanaBusinessEntities.Common.SessionInfo)HttpContext.Current.Session["SessionInfo"];
+}
+<!-- Sidebar -->
+
+<div class="site-overlay"></div>
+
+<div class="site-sidebar">
+
+    <div class="custom-scroll custom-scroll-light">
+
+        @*@if (sessionInfo != null && sessionInfo.LstModule != null && sessionInfo.LstModule.Count > 0)
+            {*@
+
+        <ul class="sidebar-menu">
+
+            @*Dashboard Region Start*@
+
+            <li>
+                <a href="/Dashboard/Index" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-dashboard"></i></span>
+                    <span class="s-text">Dashboard</span>
+                </a>
+            </li>
+
+            @*<li>
+                <a href="/Home/Dashboard" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-dashboard"></i></span>
+                    <span class="s-text">Dashboard 1</span>
+                </a>
+            </li>*@
+
+            @*Dashboard Region End*@
+
+            @*Master Region Start*@
+
+            <li class="with-sub">
+                <a href="#" class="waves-effect  waves-light">
+                    <span class="s-caret"><i class="fa fa-angle-down"></i></span>
+                    @*<span class="tag tag-purple">3</span>*@
+                    <span class="s-icon"><i class="ti-anchor"></i></span>
+                    <span class="s-text">Master</span>
+                </a>
+                <ul>
+                    @*@if (sessionInfo.LstModule.Exists(c => c.ModuleId == Convert.ToInt32(LohanaBusinessEntities.RoleModule.Country) && c.HasAccess == true))
+                        {*@
+
+                    @*<li><a href="/Payable/Addpayable">Payable</a></li>*@
+                  
+                    <li><a href="/Country/Index">Country</a></li>
+                    @*}*@
+                    <li><a href="/State/Index">State</a></li>
+                    <li><a href="/City/Index">City</a></li>
+                    @*<li><a href="/Currency/Search">Currency</a></li>*@
+                    <li><a href="/RoomType/Index">RoomType</a></li>
+                    <li><a href="/Meal/Index">Meal</a></li>
+                    <li><a href="/FacilityType/Index">FacilityType</a></li>
+                    <li><a href="/Facility/Index">Facility</a></li>
+                    <li><a href="/Occupancy/Index">Occupancy</a></li>
+                    <li><a href="/HotelType/Index">HotelType</a></li>
+                    <li><a href="/Hotel/Search">Hotel</a></li>
+                  
+                    @*<li><a href="/Bed/Search">Bed</a></li>*@
+                    <li><a href="/Charges/Index">Charges</a></li>
+                    @*<li><a href="/Business/Index">Service</a></li>*@
+                    @*<li><a href="/Tax/Search">Tax</a></li>*@
+
+                    @*@if (sessionInfo.LstModule.Exists(c => c.ModuleId == Convert.ToInt32(LohanaBusinessEntities.RoleModule.TaxFormula) && c.HasAccess == true))
+                        {*@
+                    <li><a href="/TaxFormula/Search">Tax Formula</a></li>
+                    @*}*@
+                    <li><a href="/Package/Search">Package</a></li>
+                   
+                    <li><a href="/Designation/Index">Designation</a></li>
+                    @*<li><a href="/Offer/Search">Offer</a></li>*@
+
+                    <li><a href="/CustomerCategory/Index">Customer Category</a></li>
+                    <li><a href="/Customer/Search">Customer</a></li>
+                   
+                    <li><a href="/Vendor/Search">Vendor</a></li>
+                    
+                    <li><a href="/VehicleBrand/Index">Vehicle Brand</a></li>
+                    <li><a href="/VehicleType/Index">Vehicle Type</a></li>
+                    <li><a href="/Vehicle/Search">Vehicle</a></li>
+
+                    <li><a href="/SightSeeing/Search">Sight Seeing</a></li>
+
+
+                    @*<li><a href="SightSeeing/SearchSightSeeing"> Search sightSeeing</a></li>*@
+
+
+                </ul>
+            </li>
+
+            @*Master Region End*@
+
+            @*User Management Region Start*@
+
+            <li class="with-sub">
+                <a href="#" class="waves-effect  waves-light">
+                    <span class="s-caret"><i class="fa fa-angle-down"></i></span>
+                    @*<span class="tag tag-purple">3</span>*@
+                    <span class="s-icon"><i class="fa fa-user"></i></span>
+                    <span class="s-text">User Management</span>
+                </a>
+                <ul>
+                    <li><a href="/User/Search">User</a></li>
+                    @*<li><a href="/Group/Search">Group</a></li>*@
+                    <li><a href="/Role/Search">Role</a></li>
+                </ul>
+            </li>
+
+            @*User Management Region End*@
+
+            @*Tariff Region Start*@
+
+            <li class="with-sub">
+                <a href="#" class="waves-effect  waves-light">
+                    <span class="s-caret"><i class="fa fa-angle-down"></i></span>
+                    @*<span class="tag tag-purple">3</span>*@
+                    <span class="s-icon"><i class="typcn typcn-tags"></i></span>
+                    <span class="s-text">Tariff</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/HotelTariff/Index" class="waves-effect  waves-light">
+                            @*<span class="s-icon"><i class="typcn typcn-tags"></i></span>*@
+                            <span class="s-text">Hotel Tariff</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/HotelTariffTaxUpdation/Index" class="waves-effect  waves-light">
+                            @*<span class="s-icon"><i class="typcn typcn-tags"></i></span>*@
+                            <span class="s-text">Hotel Tariff Tax Updation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/SupplierHotelTariff/Index" class="waves-effect  waves-light">
+                            @*<span class="s-icon"><i class="typcn typcn-tags"></i></span>*@
+                            <span class="s-text">Supplier Hotel Tariff</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/SightSeeingTariff/Index" class="waves-effect  waves-light">
+                            @*<span class="s-icon"><i class="typcn typcn-tags"></i></span>*@
+                            <span class="s-text">Sight Seeing Tariff</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/LohanaPackageTariff/Index" class="waves-effect  waves-light">
+                            @*<span class="s-icon"><i class="typcn typcn-tags"></i></span>*@
+                            <span class="s-text">Lohana Package Tariff</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/VehicleTariff/Index" class="waves-effect  waves-light">
+                            @*<span class="s-icon"><i class="fa fa-car"></i></span>*@
+                            <span class="s-text">Vehicle Tariff</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            @*Tariff Region End*@
+
+            @*Product Search Start*@
+
+            <li class="with-sub">
+                <a href="#" class="waves-effect  waves-light">
+                    <span class="s-caret"><i class="fa fa-angle-down"></i></span>
+                    @*<span class="tag tag-purple">3</span>*@
+                    <span class="s-icon"><i class="typcn typcn-tags"></i></span>
+                    <span class="s-text">Product Search</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="/Package/SearchPackage" class="waves-effect  waves-light">
+                            <span class="s-text">Package Search</span>
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="/LohanaPackageTariffSearch/LohanaPackageTariffSearch" class="waves-effect  waves-light">
+                            <span class="s-text">Lohana Package Search</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/HotelSearch/Search" class="waves-effect  waves-light">
+                            <span class="s-text">Hotel Search</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/SupplierSearch/Index" class="waves-effect  waves-light">
+                            <span class="s-text">Supplier Search</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/SightSeeing/SearchSightSeeing" class="waves-effect  waves-light">
+                            <span class="s-text">SightSeeing Search</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            @*Product Search End*@
+
+            <li>
+                <a href="/Enquiry/Search" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text">Enquiry</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Quotation/Search" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-group"></i></span>
+                    <span class="s-text">Quotation</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Booking/Index" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text">Booking</span>
+                </a>
+            </li>
+
+            @*<li>
+                <a href="/Bookings/Index" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text">Booking 2</span>
+                </a>
+            </li>*@
+
+            <li>
+                <a href="/Payable/Search" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text"> Payable Payment </span>
+                </a>
+            </li>
+
+            @*<li>
+                <a href="/Booking/CreateBooking" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text"> Create Booking </span>
+                </a>
+            </li>*@
+
+            @*<li>
+                <a href="/Booking/GenerateInvoice" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text"> Genrate Invoice </span>
+                </a>
+            </li>*@
+
+            <li>
+                <a href="/Booking/SearchReceivablePayment" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text"> Receivable Payment </span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="/TaskManagement/Index" class="waves-effect  waves-light">
+                    <span class="s-icon"><i class="fa fa-info-circle"></i></span>
+                    <span class="s-text">Task Management</span>
+                </a>
+            </li>
+
+
+        </ul>
+
+
+    </div>
+</div>
+
+<!-- Sidebar second -->
+<!-- Template options -->
+@*<li>
+        <a href="/Accessories/Index" class="waves-effect  waves-light">
+            <span class="s-icon"><i class="fa fa-group"></i></span>
+            <span class="s-text">Accessories</span>
+        </a>
+    </li>*@
+
+
+@*<li><a href="/TaxFormulaCalDemo/Index">Tax Formula Calculation Demo</a></li>*@

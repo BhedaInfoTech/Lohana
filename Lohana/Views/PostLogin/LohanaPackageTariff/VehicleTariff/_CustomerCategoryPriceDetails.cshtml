@@ -1,0 +1,98 @@
+﻿@model Lohana.Models.Tariff.VehicleTariff.VehicleTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-customer-category-validations.js"></script>
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-customer-category-methods.js"></script>
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-customer-category-events.js"></script>
+
+
+    <form id="frmVehicleTariffCustomerCategoryDetails">
+
+        <input type="hidden" id="hdnVehicleTariffPriceDetailsId" name="VehicleTariff.VehicleTariffBasicDetailsId" />
+
+        <input type="hidden" id="hdnKmAmount" name="VehicleTariff.KmAmount" />
+
+        <input type="hidden" id="hdnRupeesPerExtraKm" name="VehicleTariff.RupeesPerExtraKm" />
+
+        <input type="hidden" id="hdnHoursAmount" name="VehicleTariff.HoursAmount" />
+
+        <input type="hidden" id="hdnRupeesPerExtraHours" name="VehicleTariff.RupeesPerExtraHours" />
+
+        <input type="hidden" id="hdnPackageAmount" name="VehicleTariff.PackageAmount" />
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Customer Category</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpCustomerCategory" name="VehicleTariff.CustomerCategoryId">
+                            <option value="0">Select customer category</option>
+                            @foreach (var item in Model.CustomerCategories)
+                            {
+                                if (Model.VehicleTariffCustomerCategory.CustomerCategoryId == item.CustomerCategoryId)
+                                {
+                                    <option value="@item.CustomerCategoryId" selected="selected">@item.CustomerCategoryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CustomerCategoryId">@item.CustomerCategoryName</option>
+                                }
+                            }
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-car"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Margin (%) </label>
+                    <input type="text" id="txtCustomerMargin" class="form-control input-sm" name="VehicleTariff.CustomerMargin" placeholder="Enter margin" maxlength="10" >
+                </div>
+            </div>
+        </div>
+
+        @*<div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Total Amount</label>
+                    <input type="text" id="txtCalcualtedTotalAmount" class="form-control input-sm" name="VehicleTariff.CalculatedTotalAmount" placeholder="Enter Amount" maxlength="12" readonly>
+                </div>
+            </div>
+
+        </div>*@
+
+        <div class="row" style="text-align: center;">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="button" id="btnAddVehicleTariffCustomerCategory" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                    <button type="button" id="btnDeleteVehicleTariffCustomerCategory" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <input type="hidden" id="hdnSearchVehicleTariffCustomerCategoryId" value="" name="VehicleTariffCustomerCategoryFilter.VehicleTariffCustomerCategoryDetailsId" />
+            <div class="col-md-12">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblVehicleTariffCustomerCategoryDetails">
+                        <thead class="thead-inverse">                         
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </form>
+

@@ -1,0 +1,213 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Package/package-itinerary-validations.js"></script> 
+<script src="~/Scripts/Master/Package/package-itinerary-methods.js"></script> 
+<script src="~/Scripts/Master/Package/package-itinerary-events.js"></script>
+<link href="~/Content/plugin/summernote/summernote.css" rel="stylesheet" />
+<script src="~/Scripts/Master/Package/_Itinarary-Package-.js"></script>
+@*<div class="row">
+
+    <form id="frmPackageItineraryDetails">
+
+
+        <input type="hidden" id="hdnPackageId" name="PackageItinerary.PackageId" value="@Model.Package.PackageId" />
+        <input type="hidden" id="hdnPackageItineraryId" value="@Model.PackageItinerary.PackageItineraryId" name="PackageItinerary.PackageItineraryId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <div id="divPlanServices1" class="btn-group" style="align-content:center;display:none">*@
+
+                            @*<button type="button" id="btnHotel" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-hotel" style="font-size: 30px;"><i class="fa fa-hotel"></i></button>
+                        <button type="button" id="btnPlane" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-plane" style="font-size: 30px;"><i class="fa fa-plane"></i></button>
+                        <button type="button" id="btnTrain" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-train" style="font-size: 30px;"><i class="fa fa-train"></i></button>
+                        <button type="button" id="btnBus" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-bus" style="font-size: 30px;"><i class="fa fa-bus"></i></button>
+                        <button type="button" id="btnVehicle" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car" style="font-size: 30px;"><i class="fa fa-car"></i></button>*@
+
+
+                            @*<span class="button-checkbox">
+                                <button type="button" id="btnHotel" class="btn btn-outline btn-rounded w-min-sm m-b-0-50 waves-effect waves-light btn-model-hotel active" data-color="primary"><i class="fa fa-hotel glyphicon glyphicon-check"></i>&nbsp;Hotel</button>
+                                <input type="checkbox" class="hidden">
+                            </span>
+                            <span class="button-checkbox">
+                                <button type="button" id="btnPlane" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-plane active" data-color="primary"><i class="fa fa-plane glyphicon glyphicon-check"></i>&nbsp;Plane</button>
+                                <input type="checkbox" class="hidden">
+                            </span>
+                            <span class="button-checkbox">
+                                <button type="button" id="btnTrain" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-train active" data-color="primary"><i class="fa fa-train glyphicon glyphicon-check"></i>&nbsp;Train</button>
+                                <input type="checkbox" class="hidden">
+                            </span>
+                            <span class="button-checkbox">
+                                <button type="button" id="btnBus" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-bus active" data-color="primary"><i class="fa fa-bus glyphicon glyphicon-check"></i>&nbsp;Bus</button>
+                                <input type="checkbox" class="hidden">
+                            </span>
+                            <span class="button-checkbox">
+                                <button type="button" id="btnVehicle" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car active" data-color="primary"><i class="fa fa-car glyphicon glyphicon-check"></i>&nbsp;Car</button>
+                                <input type="checkbox" class="hidden">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="divDay">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Day</label>
+                        <div class="input-group">
+                            <input type="text" id="txtday–Destination" class="form-control input-sm" name="Package.PackageDay" placeholder="Enter days">
+                            <span class="input-group-addon">
+                                <i class="fa fa-sort-numeric-asc"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Day Title</label>
+                        <div class="input-group">
+                            <input type="text" id="txtday–Title" class="form-control input-sm" name="Package.PackageDayTitle" placeholder="Enter day title">
+                            <span class="input-group-addon">
+                                <i class="fa fa-sort-numeric-asc"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+          
+            <div class="row" id="MealSighSeeing">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+
+                        <label for="drpMeal" style="color: #333" class="">Meal</label>
+
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpMeal" name="Package.MealId">
+                                <option value="0">Select meal</option>
+                                @foreach (var item in Model.Meals)
+                                {
+                                if (Model.Package.MealId == item.MealId)
+                                {
+                                <option value="@item.MealId" selected="selected">@item.MealName</option>
+                                }
+                                else
+                                {
+                                <option value="@item.MealId">@item.MealName</option>
+                                }
+                                }
+
+                            </select>
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+
+                        </div>
+                        </div>
+
+                    </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Sight Seeing</label><textarea id="txtSightSeeing" class="form-control input-sm summernote" name="Package.Sightseeing" placeholder="Enter description" maxlength="250"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" id="btnAddPackageItinerary" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="reset" id="btnDeletePackageItinerary" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>*@
+
+
+@*<div class="card" id="divPackageItineraryList">
+
+    <h5 class="card-header">
+        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Package Itinerary Listing
+    </h5>
+    <form role="form" id="frmSearchPackageItinerary">
+
+        <input type="hidden" id="hdnSearchPackageItineraryId" value="@Model.PackageItinerary.PackageItineraryId" name="PackageItineraryFilter.PackageItineraryId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageItinerary"></table>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>*@
+
+
+<form id="frmGITPackageItinerary">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="divIteneraryPackageButtons" class="form-group" style="float: right;">
+                <button type="button" id="btnAddTitle" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" value="1"><span class="btn-label"><i class="ti-save"></i></span>Title</button>
+                <button type="button" id="btnAddHotel" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" value="2"><span class="btn-label"><i class="ti-save"></i></span>Add Hotel</button>
+                <button type="button" id="btnAddSiteSeeing" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" value="3"><span class="btn-label"><i class="ti-save"></i></span>SiteSeeing</button>
+                <button type="button" id="btnAddVehicle" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" value="4"><span class="btn-label"><i class="ti-save"></i></span>Vehicle</button>
+                <button type="button" id="btnAddMeal" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" value="5"><span class="btn-label"><i class="ti-save"></i></span>Meal</button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Root Details Listing
+        </h5>
+     
+        <div id="divDays">
+
+        </div>
+    </div>
+
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+
+    </form>
+    @*<div id="popupItineraryHotel" class="pop-up" style="display: none;">
+
+            @Html.Partial("_PackageItineraryHotel")
+        </div>
+
+        <div id="popupItineraryFlight" class="pop-up" style="display: none;">
+
+            @Html.Partial("_PackageItineraryFlight")
+        </div>
+
+        <div id="popupItineraryTrain" class="pop-up" style="display: none;">
+
+            @Html.Partial("_PackageItineraryTrain")
+        </div>
+
+        <div id="popupItineraryBus" class="pop-up" style="display: none;">
+
+            @Html.Partial("_PackageItineraryBus")
+        </div>
+
+        <div id="popupItineraryVehicle" class="pop-up" style="display: none;">
+
+            @Html.Partial("_PackageItineraryVehicle")
+        </div>*@

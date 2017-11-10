@@ -1,0 +1,449 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<link href="../Content/plugin/clockpicker/dist/bootstrap-clockpicker.min.css" rel="stylesheet" />
+<script src="../Content/plugin/clockpicker/dist/jquery-clockpicker.min.js"></script>
+<script src="~/Content/js/forms-pickers.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Booking/booking-events.js"></script>
+<script src="~/Scripts/Booking/booking-method.js"></script>
+<script src="~/Scripts/Booking/booking-validation.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        GetAutocompleteScript("Booking");
+
+        $("#frmTrainDetails").validate({
+
+            rules: {
+
+                "BookingCartDetailsInfo.TrainName":
+                {
+                    required: true,
+
+                },
+                "BookingCartDetailsInfo.TrainJourneyDate":
+                {
+                    required: true,
+
+                },
+                "BookingCartDetailsInfo.TrainJourneyTime":
+                {
+                    required: true,
+
+                },
+                "BookingCartDetailsInfo.TrainSource":
+                {
+                    required: true,
+
+                },
+                "BookingCartDetailsInfo.TrainDestination":
+                {
+                    required: true,
+
+                },
+                "BookingCartDetailsInfo.TrainDuration":
+                {
+                    required: true,
+
+                },
+                "BookingCartDetailsInfo.TicketClassId":
+                {
+                    required: true,
+
+                },
+            },
+            messages: {
+
+                "BookingCartDetailsInfo.TrainName":
+                {
+                    required: "Train Name is required."
+                },
+                "BookingCartDetailsInfo.TrainJourneyDate":
+               {
+                   required: "Journey Date is required."
+
+               },
+                "BookingCartDetailsInfo.TrainJourneyTime":
+                {
+                    required: "Journey Time is required."
+
+                },
+                "BookingCartDetailsInfo.TrainSource":
+                {
+                    required: "Source Name is required."
+
+                },
+                "BookingCartDetailsInfo.TrainDestination":
+                {
+                    required: "Destination Name is required."
+
+                },
+                "BookingCartDetailsInfo.TrainDuration":
+                {
+                    required: "Duration is required."
+
+                },
+                "BookingCartDetailsInfo.TicketClassId":
+                {
+                    required: "Ticket Type is required."
+
+                },
+            }
+        });
+    });
+
+    function SaveTraindetails() {
+
+        if ($("#frmTrainDetails").valid()) {
+
+            var MainId = $("#hdnTrain_FlightMainId").val();
+
+            var bViewModel =
+                      {
+                          BookingCartDetailsInfo: {
+
+                              Train_FlightMainId: MainId,
+
+                              BookingId: $("[name='BookingCartDetailsInfo.BookingId']").val(),
+
+                              TrainName: $("#txtTrainName").val(),
+
+                              TicketClassId: $("[name='BookingCartDetailsInfo.TicketClassId']").val(),
+
+                              TrainJourneyDate: $("[name='BookingCartDetailsInfo.TrainJourneyDate']").val(),
+
+                              TrainJourneyTime: $("[name='BookingCartDetailsInfo.TrainJourneyTime']").val(),
+
+                              TrainSource: $("[name='BookingCartDetailsInfo.TrainSource']").val(),
+
+                              TrainDestination: $("[name='BookingCartDetailsInfo.TrainDestination']").val(),
+
+                              TrainDuration: $("[name='BookingCartDetailsInfo.TrainDuration']").val(),
+
+                              TrainVendorId: $("[name='BookingCartDetailsInfo.TrainVendorId']").val(),
+                          }
+                      }
+
+
+            PostAjaxWithProcessJson("/Booking/SaveTrainDetails", bViewModel, SaveMsg);
+
+        }
+    }
+
+
+    function SaveMsg(data) {
+        FriendlyMessage(data);
+
+        BindTrainDetails(data);
+
+        ResetTraindetails();
+    }
+
+
+    function BindTrainDetails(data) {
+        $("#tbTrainDetails").html(" ");
+        var htmlstring = "";
+
+        for (var i = 0; i < data.BookingCartDetailsInfo.TrainDetails.length; i++) {
+            var dd1 = new Date(parseInt(data.BookingCartDetailsInfo.TrainDetails[i].TrainJourneyDate.replace('/Date(', '')));
+
+            htmlstring += "<tr>";
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].TrainName;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainName' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TrainName + "'>";
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].TicketClassName;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TicketClassId' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TicketClassId + "'>";
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString();
+            
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainJourneyDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>";
+
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainJourneyDate' value='" + (dd1.getMonth() + 1).toString() + '-' + dd1.getDate().toString() + '-' + dd1.getFullYear().toString() + "'>";
+
+
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].TrainJourneyTime;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainJourneyTime' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TrainJourneyTime + "'>";
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].TrainSource;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainSource' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TrainSource + "'>";
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].TrainDestination;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainDestination' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TrainDestination + "'>";
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].TrainDuration;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainDuration' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TrainDuration + "'>";
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            htmlstring += data.BookingCartDetailsInfo.TrainDetails[i].VendorName;
+            //htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.GitDetailsList[" + i + "].FromDate' value='" + dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString() + "'>"
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].TrainVendorId' value='" + data.BookingCartDetailsInfo.TrainDetails[i].TrainVendorId + "'>";
+            htmlstring += "<input type='hidden' name='BookingCartDetailsInfo.TrainDetails[" + i + "].VendorName' value='" + data.BookingCartDetailsInfo.TrainDetails[i].VendorName + "'>";
+
+            htmlstring += "</td>";
+
+            htmlstring += "<td>";
+            //htmlstring += "<a class='btn' style='color: red;font-weight: 800;' href='#' onclick='DeleteDoc(" + data.BookingCartDetailsInfo.TrainFlightDetails[i].Train_FlightMainId + ")'><i class='ti-close'></i></a>";
+            htmlstring += "<button type='button' id='' onclick='javascript: ViewPopupOfPassangerDetails(" + data.BookingCartDetailsInfo.TrainDetails[i].Train_FlightMainId + ");' class='btn btn-success btn-rounded label-left m-b-0-25 waves-effect waves-light'><span class='btn-label'><i class='ti-save'></i></span>Traveller Details</button>";
+            htmlstring += " <button type='button' id='' onclick='EditTrainDetails(" + data.BookingCartDetailsInfo.TrainDetails[i].Train_FlightMainId + "," + i + ")'  class='btn btn-success btn-rounded label-left m-b-0-25 waves-effect waves-light'><span class='btn-label'><i class='ti-envelope'></i></span>Edit</button>";
+            htmlstring += " <button type='button' id='' onclick='DeleteTrainDetails(" + data.BookingCartDetailsInfo.TrainDetails[i].Train_FlightMainId + ")'  class='btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light btnViewContactDetails'><span class='btn-label'><i class='ti-close'></i></span>Delete</button>";
+            htmlstring += "</td>";
+
+            htmlstring += "</tr>";
+        }
+        $("#tbTrainDetails").append(htmlstring);
+    }
+
+
+    function EditTrainDetails(par, index) {
+
+        GetAutocompleteScript("Booking");
+        GetAutocompleteById("BookingCartDetailsInfo.TrainVendorId");
+
+        var vendor = $("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainVendorId']").val();
+        $("#TrainVendorId").attr("data-value", vendor);
+
+        $("#hdnTrain_FlightMainId").val(par);
+
+        $("#txtTrainName").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainName']").val());
+        $("#TicketClassId").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TicketClassId']").val());
+
+        //($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainJourneyDate']").val())
+       // var dd1 = new Date();
+
+       // dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString();
+       // var dd1 = $("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainJourneyDate']").val();
+
+        $("#TrainJourneyDate").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainJourneyDate']").val());
+            //$("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainJourneyDate']").val());
+        $("#TrainJourneyTime").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainJourneyTime']").val());
+        $("#TrainSource").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainSource']").val());
+        $("#TrainDestination").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainDestination']").val());
+        $("#TrainDuration").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainDuration']").val());
+        // $("#TrainVendorId").val($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].TrainVendorId']").val());
+        // $("#TrainVendorId").text($("[name='BookingCartDetailsInfo.TrainDetails[" + index + "].VendorName']").val());
+
+    }
+
+    function DeleteTrainDetails(par) {
+        $("#hdnTrain_FlightMainId").val(par);
+        var bViewModel =
+                {
+                    BookingCartDetailsInfo: {
+
+                        Train_FlightMainId: par,
+
+                        BookingId: $("[name='BookingCartDetailsInfo.BookingId']").val()
+                    }
+                }
+
+        PostAjaxWithProcessJson("/Booking/DeleteTrainDetails", bViewModel, SaveMsg);
+    }
+
+    function ResetTraindetails() {
+        $("#hdnTrain_FlightMainId").val("");
+        $("#txtTrainName").val("");
+        $("#TicketClassId").val("");
+        $("#TrainJourneyDate").val("");
+        $("#TrainJourneyTime").val("");
+        $("#TrainSource").val("");
+        $("#TrainDestination").val("");
+        $("#TrainDuration").val("");
+        $("#TrainVendorId").val("");
+        $("#TrainVendorId").text("");
+
+    }
+
+
+</script>
+
+<div class="box box-block bg-white">
+    <form id="frmTrainDetails" role="form">
+        <input type="hidden" id="hdnTrain_FlightMainId" value="@Model.BookingCartDetailsInfo.Train_FlightMainId" name="BookingCartDetailsInfo.Train_FlightMainId" />
+        <div class="card">
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Train Details
+            </h5>
+
+            <div class="row">
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="col-md-3">
+                        <label>Train Name</label>
+                        <div class="input-group">
+                            <input type="text" id="txtTrainName" class="form-control input-sm" name="BookingCartDetailsInfo.TrainName" placeholder="Enter Train Name" value="@Model.BookingCartDetailsInfo.TrainName" maxlength="50">
+                            <span class="input-group-addon">
+                                <i class="fa fa-sort-alpha-asc"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Ticket Class</label>
+                        <div class="input-group">
+                            <select class="form-control" id="TicketClassId" name="BookingCartDetailsInfo.TicketClassId" value="@Model.BookingCartDetailsInfo.TicketClassId">
+
+                                <option value="">Ticket Type</option>
+                                @foreach (var item in LookupInfo.GetEnquiryTrainTicketClass())
+                                {
+                                    if (@Model.BookingCartDetailsInfo.TicketClassId == @item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Journey Date</label>
+                        <div class="input-group">
+                            <input type="text" id="TrainJourneyDate" class="form-control input-sm datepicker-autoclose" name="BookingCartDetailsInfo.TrainJourneyDate" placeholder="Enter Journey Date" value="@Model.BookingCartDetailsInfo.TrainJourneyDate" maxlength="50">
+                            <span class="input-group-addon">
+                                <i class="ti ti-time"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Journey Time</label>
+                        <div class="input-group clockpicker">
+                            <input type="text" id="TrainJourneyTime" class="form-control input-sm" name="BookingCartDetailsInfo.TrainJourneyTime" placeholder="Enter Journey Time" value="@Model.BookingCartDetailsInfo.TrainJourneyTime" maxlength="50">
+                            <span class="input-group-addon">
+                                <i class="ti ti-time"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="col-md-3">
+                        <label>From</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="TrainSource" name="BookingCartDetailsInfo.TrainSource" placeholder="Enter Source" value="@Model.BookingCartDetailsInfo.TrainSource" maxlength="40">
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>To</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" id="TrainDestination" name="BookingCartDetailsInfo.TrainDestination" placeholder="Enter Destination" value="@Model.BookingCartDetailsInfo.TrainDestination" maxlength="40">
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Duration</label>
+                        <div class="input-group">
+                            <input type="text" id="TrainDuration" class="form-control input-sm" name="BookingCartDetailsInfo.TrainDuration" placeholder="Enter Duration" value="@Model.BookingCartDetailsInfo.TrainDuration" maxlength="40">
+                            <span class="input-group-addon">
+                                <i class="ti ti-time"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Vendor Name</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="TrainVendorId" name="BookingCartDetailsInfo.TrainVendorId"></select>
+
+                            <span class="input-group-addon">
+                                <a href="/Vendor/Index" target="_blank"> <i class="fa fa-user"></i></a>
+                                <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br />
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+
+                    <button type="button" id="btnSaveTrain" onclick="SaveTraindetails()" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                    <button type="button" id="btnResetTrain" onclick="ResetTraindetails()" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblTrainDetails" data-current-page="1">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Train Name</th>
+                                <th>Ticket Class</th>
+                                <th>Journey Date</th>
+                                <th>Journey Time</th>
+                                <th>Source</th>
+                                <th>Destination</th>
+                                <th>Duration</th>
+                                <th>Vendor Name</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbTrainDetails"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    //$('#txtCheckInDate').datepicker('setDate', new Date());
+
+
+    function ViewPopupOfPassangerDetails(par) {
+
+        $("#Train_FlightMainId").val(par);
+        LoadModal("/Booking/ViewTravellerDetails", { BookingId: $("[name='BookingCartDetailsInfo.BookingId']").val(), Train_FlightMainId: par }, null, "Add Traveller Flight Details", null);
+        GetPassangerDetails(par);
+        GetAutocompleteScript("Booking");
+
+    }
+</script>

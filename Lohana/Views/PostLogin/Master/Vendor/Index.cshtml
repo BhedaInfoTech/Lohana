@@ -1,0 +1,120 @@
+﻿@model Lohana.Models.Master.VendorViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+
+
+
+
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Vendor</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Vendor</a></li>
+                        <li class="breadcrumb-item"><a href="#">Search</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box box-block bg-white">
+
+            <ul class="nav nav-tabs nav-tabs-2" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" role="tab" href="#vendorcreate"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Vendor Create</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="link1" data-toggle="tab" role="tab" href="#vendorcontactcreate" style="display:none"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Vendor's Contact Create</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="link2" data-toggle="tab" role="tab" href="#vendorbankcreate" style="display:none"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Vendor's Bank Create</h5></a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="vendorcreate" role="tabpanel">
+
+                    @{Html.RenderPartial("_VendorBasicDetails", Model);}
+                    
+                </div>
+
+
+                <div class="tab-pane" id="vendorcontactcreate" role="tabpanel">
+
+
+                    @{Html.RenderPartial("_ContactPerson", Model);}
+
+                </div>
+
+
+                <div class="tab-pane" id="vendorbankcreate" role="tabpanel">
+
+                    @{Html.RenderPartial("_VendorBankDetails", Model);}
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp; Help / Info
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-unstyled" style="padding-left: 5px;">
+                            <li><i class="fa fa-circle-o text-info mr-0-5"></i> Vendor create page is used to Create a Vendor or Update Vendor.</li>
+                            <li>
+                                <i class="fa fa-circle-o text-info mr-0-5"></i> Vendor create page contains following functionality.
+                                <ul class="list-unstyled mb-1" style="padding-left: 15px;">
+                                    <li> <button type="button" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button> - On click of Save button, It Saves the Vendor Data if all the required fields inputted.</li>
+                                    <li> <a class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</a> - On click of Reset button, It resets the data to its Original values.</li>
+                                    <li> <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a> - On click of Cancel button,  It Redirects to the Vendor Listing Page.</li>
+                                    <li> <a href="Search" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</a> - On click of Add button,  It Adds Vendor Contact Data for that respective Vendor.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

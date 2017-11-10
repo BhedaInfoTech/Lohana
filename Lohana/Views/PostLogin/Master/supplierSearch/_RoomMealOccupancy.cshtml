@@ -1,0 +1,169 @@
+﻿@model Lohana.Models.Master.SupplierSearchViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<div class="posts-list posts-list-1">
+    @{
+    int count=0;
+    }
+    <form id="frmRoomMealOccupancyDetails">
+        <script src="~/Scripts/Quotation/spt-quotation-methods.js"></script>
+        @if (Model.SupplierSearchList.Count > 0)
+        { 
+             
+         foreach (var item in Model.SupplierSearchList)
+            {
+         
+                 <div class="media">
+                     <input type="hidden" class="room-data" data-producttype="6" data-supplierhotelid="@item.SupplierHotelId" data-packagename="@item.PackageName" data-suppliername="@item.SupplierName" data-packagecost="@item.PackageCost" data-packageduration="@item.NoOfDays,@item.NoOfNights" />
+
+                     <input type="hidden" id="hdnSupplierHotelId_@count" name="SupplierSearch.SupplierHotelId" value="@item.SupplierHotelId">
+                     <input type="hidden" id="hdnSptQuotationType" value="@((int)EnquiryType.Spt)" />
+                     <input type="hidden" id="hdnSptid" value="@Model.SupplierSearch.EnquiryitemId" />
+                     <input type="hidden" id="hdnSptCost" value="@Model.SupplierSearch.Cost" />
+                     <input type="hidden" id="hdnSptCheckInDate" value="@Model.SupplierSearch.CheckInDate"  />
+                     <input type="hidden" id="hdnSptCheckOutDate" value="@Model.SupplierSearch.CheckOutDate" />
+                     <input type="hidden" id="hdnSptAdultCount" value="@Model.SupplierSearch.AdultCount" />
+                     <input type="hidden" id="hdnSptChildCount" value="@Model.SupplierSearch.ChildCount" />
+                     <input type="hidden" id="hdnSptCityId" value="@Model.SupplierSearch.CityId" />
+                     <input type="hidden" id="hdnSptStateId" value="@Model.SupplierSearch.StateId" />
+                     <input type="hidden" id="hdnSptCountryId" value="@Model.SupplierSearch.CountryId" />
+                     <input type="hidden" id="hdnSptNoOfNights" value="@Model.SupplierSearch.NoOfNights" />
+                     <input type="hidden" id="hdnSptPackageTypeId" @*value="@Model.SupplierSearch.PackageTypeId"*@ />
+                     <input type="hidden" id="hdnSptRoomTypeId" @*value="@Model.SupplierSearch.RoomTypeId"*@ />
+                  
+
+              
+                         <div class="col-md-3">
+                             <div class="media-body">
+                                 <div class="pli-content">
+                                     <h3><a class="text-black">@item.PackageName</a></h3>
+                                     <h4><small class="text-info">Supplier:@item.SupplierName</small></h4>
+                                     <div class="p-price">
+                                         <h5> <span class="text-danger">Rs.@item.PackageCost</span></h5>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+
+                     <div class="col-md-3">
+                         <div class="media-body">
+                             <div class="pli-content">
+
+                                 <h5><small class="text-muted">Duration:@item.Duration</small></h5>                             
+                             </div>
+                         </div>
+                     </div>                                 
+                     <div class="col-md-6">
+                                            
+                          @*<button type="button" id="btnSupplierHotel" onclick="javascript: ViewSupplierHotelDetails(@item.SupplierHotelId)" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light">View Details</button>*@                        
+                         @if (!Model.IsAddToQuotation)
+                         {
+                          <button type="button" id="btnSupplierHotel" onclick="javascript: ViewSupplierHotelDetails(@item.SupplierHotelId)" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light">Itinenary Details</button>                        
+                          <button type="button" id="" onclick="" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light add-to-cart">Add To Cart</button>
+                         }
+                         else
+	                    {
+                             <button type="button" id="" onclick="javascript:AddSptQuotation('@item.PackageName',@item.PackageCost,'@item.Duration');" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light add-to-cart">Add To Quotation</button>
+	                    }
+                          
+
+                     </div>
+
+                 </div>
+            
+            <hr/>
+
+            
+      
+                ++@count;
+                  }
+        }
+    </form>
+</div>
+
+<script>
+   
+    function ViewSupplierHotelDetails(id) {
+
+       
+          
+        LoadModal("/SupplierSearch/ViewSupplierHotelDetails", { SupplierHotelId:id}, null, "Supplier Hotel Details", null);
+
+    }
+
+    $(document).ready(function () {
+        $(".add-to-cart").click(function () {
+            AddSupplierInCart($(this));
+
+        });
+    });
+
+    function AddSupplierInCart(obj) {
+
+      
+        var QuotationItemA = [];
+
+        var Quotation = {
+
+            SupplierHotelId: $(obj).parents(".media").find(".room-data").attr("data-supplierhotelid"),
+
+            SupplierName: $(obj).parents(".media").find(".room-data").attr("data-suppliername"),
+
+            PackageName: $(obj).parents(".media").find(".room-data").attr("data-packagename"),
+
+            NetRate: $(obj).parents(".media").find(".room-data").attr("data-packagecost"),
+
+            ProductType: $(obj).parents("media").find(".room-data").attr("data-producttype"),
+
+            CityId:$("#drpCity").val(),
+             
+            StateId:$("#drpState").val(),
+
+            CountryId:$("#drpCountry").val(),
+
+            PackageDuration:$(obj).parents("media").find(".room-data").attr("data-packageduration"),
+
+            AdultCount:$("#txtAdultCount").val(),
+
+            ChildCount:$("#txtChildCount").val(),
+
+            CheckInDate:$("#txtCheckInDate").val(),
+
+
+        }
+
+        QuotationItemA.push(Quotation);
+
+        var qViewModel =
+           {
+               Quotation: {
+
+                   QuatationItem: QuotationItemA
+
+               }
+           }
+
+        var url = "/SupplierSearch/SupplierAddToCart";
+
+
+        $.ajax({
+
+            url: url,
+
+            data: JSON.stringify(qViewModel),
+
+            datatype: "json",
+
+            type: "POST",
+
+            contentType: 'application/json',
+
+            success: function (data) {
+                alert("Success");
+            }
+
+        });
+
+    }
+</script>

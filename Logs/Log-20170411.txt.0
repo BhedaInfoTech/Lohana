@@ -1,0 +1,24 @@
+DEBUG     2017-04-11 11:35:49 – Authentication Controller AuthenticateUser
+DEBUG     2017-04-11 11:35:51 – Authentication Controller SetUserSession
+DEBUG     2017-04-11 03:08:38 – Authentication Controller AuthenticateUser
+DEBUG     2017-04-11 03:08:39 – Authentication Controller SetUserSession
+DEBUG     2017-04-11 06:25:25 – Authentication Controller AuthenticateUser
+DEBUG     2017-04-11 06:25:27 – Authentication Controller SetUserSession
+DEBUG     2017-04-11 07:10:35 – Unauthorized user tried accessing 18 on 04/11/2017 7:10:35 PM
+DEBUG     2017-04-11 07:10:45 – Authentication Controller AuthenticateUser
+DEBUG     2017-04-11 07:10:45 – Authentication Controller SetUserSession
+DEBUG     2017-04-11 07:17:50 – Sushant Accessed 18 on 04/11/2017 7:17:50 PM
+DEBUG     2017-04-11 07:17:55 – Sushant Accessed 18 on 04/11/2017 7:17:55 PM
+DEBUG     2017-04-11 07:18:07 – Vendor Controller GetVendor
+DEBUG     2017-04-11 07:18:11 – Sushant Accessed 18 on 04/11/2017 7:18:11 PM
+DEBUG     2017-04-11 07:18:15 – Sushant Accessed 18 on 04/11/2017 7:18:15 PM
+DEBUG     2017-04-11 07:18:15 – Vendor Controller GetContactPerson
+DEBUG     2017-04-11 07:18:15 – Sushant Accessed 18 on 04/11/2017 7:18:15 PM
+DEBUG     2017-04-11 07:18:15 – Vendor Controller GetVendorBank
+DEBUG     2017-04-11 07:30:29 – Sushant Accessed 18 on 04/11/2017 7:30:29 PM
+DEBUG     2017-04-11 07:30:48 – Sushant Accessed 18 on 04/11/2017 7:30:48 PM
+DEBUG     2017-04-11 07:30:48 – Vendor Controller GetVendorBank
+DEBUG     2017-04-11 07:30:49 – Sushant Accessed 18 on 04/11/2017 7:30:49 PM
+DEBUG     2017-04-11 07:30:49 – Vendor Controller GetContactPerson
+DEBUG     2017-04-11 08:07:29 – Authentication Controller AuthenticateUser
+DEBUG     2017-04-11 08:07:30 – Authentication Controller SetUserSession

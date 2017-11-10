@@ -1,0 +1,1443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02C9B993-830E-4B6E-8D9A-C658C2EF8C5D}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lohana</RootNamespace>
+    <AssemblyName>Lohana</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\Libraries\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>..\Libraries\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\Libraries\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.0\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\CustomRazorViewEngine.cs" />
+    <Compile Include="Common\MessageStore.cs" />
+    <Compile Include="Common\SessionExpiredAttribute.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PostLogin\AccessoriesController.cs" />
+    <Compile Include="Controllers\PostLogin\AutoCompleteController.cs" />
+    <Compile Include="Controllers\PostLogin\AutocompleteLookupController.cs" />
+    <Compile Include="Controllers\PostLogin\BookingController.cs" />
+    <Compile Include="Controllers\PostLogin\BookingsController.cs" />
+    <Compile Include="Controllers\PostLogin\CommonController.cs" />
+    <Compile Include="Controllers\PostLogin\EnquiryController.cs" />
+    <Compile Include="Controllers\PostLogin\Error\ErrorController.cs" />
+    <Compile Include="Controllers\PostLogin\HistoryController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\HotelSearchController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\HotelTypeController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\SightSeeingSearchController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\SupplierSearchController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\PayableController.cs" />
+    <Compile Include="Controllers\PostLogin\PackageYearController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\HotelTariffController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\HotelTariffTaxUpdationController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\LohanaPackageTariffController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\BedController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\BusinessController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ChargesController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\CityController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\CountryController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\CurrencyController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\CustomerCategoryController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\CustomerController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\DesignationController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\FacilityController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\FacilityTypeController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\GroupController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\HotelController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\MealController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\OccupancyController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\OfferController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\PackageController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\RoomTypeController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\SightSeeingController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\StateController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\TaxController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\TaxFormulaController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\UserController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\VehicleBrandController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PostLogin\Master\VehicleController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\VehicleTypeController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\VendorController.cs" />
+    <Compile Include="Controllers\PostLogin\QuotationController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\LohanaPackageTariffSearchController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\SightSeeingTariffController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\SupplierHotelTariffController.cs" />
+    <Compile Include="Controllers\PostLogin\Tariff\VehicleTariffController.cs" />
+    <Compile Include="Controllers\PostLogin\TaskManagementController.cs" />
+    <Compile Include="Controllers\PostLogin\TaxFormulaCalDemo\TaxFormulaCalDemoController.cs" />
+    <Compile Include="Controllers\PostLogin\TimelineController.cs" />
+    <Compile Include="Controllers\PreLogin\AuthenticationController.cs" />
+    <Compile Include="Controllers\PostLogin\Dashboard\DashboardController.cs" />
+    <Compile Include="Controllers\PreLogin\LoginController.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Accessories\AccessoriesViewModel.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AutoCompleteLookup\LookupViewModel.cs" />
+    <Compile Include="Models\Booking\BookingViewModel.cs" />
+    <Compile Include="Models\CommonViewModel.cs" />
+    <Compile Include="Models\Common\AuthorisationViewModel.cs" />
+    <Compile Include="Models\Dashboard\DashboardViewModel.cs" />
+    <Compile Include="Models\Enquiry\EnquiryViewModel.cs" />
+    <Compile Include="Models\Master\AuthenticationViewModel.cs" />
+    <Compile Include="Models\Master\BusinessViewModel.cs" />
+    <Compile Include="Models\Master\ChargesViewModel.cs" />
+    <Compile Include="Models\Master\CityViewModel.cs" />
+    <Compile Include="Models\Master\CountryViewModel.cs" />
+    <Compile Include="Models\Master\CustomerCategoryViewModel.cs" />
+    <Compile Include="Models\Master\CustomerViewModel.cs" />
+    <Compile Include="Models\Master\DesignationViewModel.cs" />
+    <Compile Include="Models\Master\FacilityTypeViewModel.cs" />
+    <Compile Include="Models\Master\FacilityViewModel.cs" />
+    <Compile Include="Models\Master\HotelSearchViewModel.cs" />
+    <Compile Include="Models\Master\HotelTypeViewModel.cs" />
+    <Compile Include="Models\Master\HotelViewModel.cs" />
+    <Compile Include="Models\Master\MealViewModel.cs" />
+    <Compile Include="Models\Master\OccupancyViewModel.cs" />
+    <Compile Include="Models\Master\PackageTypeViewModel.cs" />
+    <Compile Include="Models\Master\PackageViewModel.cs" />
+    <Compile Include="Models\Master\PayableViewModel.cs" />
+    <Compile Include="Models\Master\RoleViewModel.cs" />
+    <Compile Include="Models\Master\RoomTypeViewModel.cs" />
+    <Compile Include="Models\Master\SightSeeingViewModel.cs" />
+    <Compile Include="Models\Master\StateViewModel.cs" />
+    <Compile Include="Models\Master\SupplierSearchViewModel.cs" />
+    <Compile Include="Models\Master\TaxFilter.cs" />
+    <Compile Include="Models\Master\TaxViewModel.cs" />
+    <Compile Include="Models\Master\UserViewModel.cs" />
+    <Compile Include="Models\Master\TaxFormula\TaxFormulaChargesCalOnModel.cs" />
+    <Compile Include="Models\Master\TaxFormula\TaxFormulaChargesModel.cs" />
+    <Compile Include="Models\Master\TaxFormula\TaxFormulaViewModel.cs" />
+    <Compile Include="Models\Master\VehicleBrandViewModel.cs" />
+    <Compile Include="Models\Master\VehicleTypeFilter.cs" />
+    <Compile Include="Models\Master\VehicleTypeViewModel.cs" />
+    <Compile Include="Models\Master\VehicleViewModel.cs" />
+    <Compile Include="Models\Master\VendorViewModel.cs" />
+    <Compile Include="Models\PaginationViewModel.cs" />
+    <Compile Include="Models\Quotation\QuotationViewModel.cs" />
+    <Compile Include="Models\SightSeeingTariff\SightSeeingTariffViewModel.cs" />
+    <Compile Include="Models\Tariff\HotelTariffTaxUpdation\HotelTariffTaxUpdationViewModel.cs" />
+    <Compile Include="Models\Tariff\HotelTariff\HotelTariffViewModel.cs" />
+    <Compile Include="Models\Tariff\LohanaPackageTariffSearch\LohanaPackageTariffSearchViewModel.cs" />
+    <Compile Include="Models\Tariff\LohanaPackageTariff\LohanaPackageTariffViewModel.cs" />
+    <Compile Include="Models\Tariff\SupplierHotelTariff\SupplierHotelTariffViewModel.cs" />
+    <Compile Include="Models\TaskManagement\TaskViewModel.cs" />
+    <Compile Include="Models\TaxFormulaCalDemo\TaxFormulaCalDemoViewModel.cs" />
+    <Compile Include="Models\Tariff\VehicleTariff\VehicleTariffViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\core.css" />
+    <Content Include="Content\img\1.html" />
+    <Content Include="Content\img\avatars\1.jpg" />
+    <Content Include="Content\img\avatars\10.jpg" />
+    <Content Include="Content\img\avatars\2.jpg" />
+    <Content Include="Content\img\avatars\3.jpg" />
+    <Content Include="Content\img\avatars\4.jpg" />
+    <Content Include="Content\img\avatars\5.jpg" />
+    <Content Include="Content\img\avatars\6.jpg" />
+    <Content Include="Content\img\avatars\7.jpg" />
+    <Content Include="Content\img\avatars\8.jpg" />
+    <Content Include="Content\img\avatars\9.jpg" />
+    <Content Include="Content\img\brands\dribbble.png" />
+    <Content Include="Content\img\brands\drive.png" />
+    <Content Include="Content\img\brands\dropbox.png" />
+    <Content Include="Content\img\brands\github.png" />
+    <Content Include="Content\img\brands\gmail.png" />
+    <Content Include="Content\img\brands\wordpress.png" />
+    <Content Include="Content\img\download.jpg" />
+    <Content Include="Content\img\layouts\boxed-wrapper.png" />
+    <Content Include="Content\img\layouts\compact-sidebar.png" />
+    <Content Include="Content\img\layouts\default.png" />
+    <Content Include="Content\img\layouts\fixed-footer.png" />
+    <Content Include="Content\img\layouts\fixed-header.png" />
+    <Content Include="Content\img\layouts\rtl.png" />
+    <Content Include="Content\img\layouts\static.png" />
+    <Content Include="Content\img\layouts\sticky-sidebar.png" />
+    <Content Include="Content\img\logo-second.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\photos-1\1.jpg" />
+    <Content Include="Content\img\photos-1\10.jpg" />
+    <Content Include="Content\img\photos-1\2.jpg" />
+    <Content Include="Content\img\photos-1\3.jpg" />
+    <Content Include="Content\img\photos-1\4.jpg" />
+    <Content Include="Content\img\photos-1\5.jpg" />
+    <Content Include="Content\img\photos-1\6.jpg" />
+    <Content Include="Content\img\photos-1\7.jpg" />
+    <Content Include="Content\img\photos-1\8.jpg" />
+    <Content Include="Content\img\photos-1\9.jpg" />
+    <Content Include="Content\img\photos-2\1.jpg" />
+    <Content Include="Content\img\photos-2\10.jpg" />
+    <Content Include="Content\img\photos-2\11.jpg" />
+    <Content Include="Content\img\photos-2\12.jpg" />
+    <Content Include="Content\img\photos-2\2.jpg" />
+    <Content Include="Content\img\photos-2\3.jpg" />
+    <Content Include="Content\img\photos-2\4.jpg" />
+    <Content Include="Content\img\photos-2\5.jpg" />
+    <Content Include="Content\img\photos-2\6.jpg" />
+    <Content Include="Content\img\photos-2\7.jpg" />
+    <Content Include="Content\img\photos-2\8.jpg" />
+    <Content Include="Content\img\photos-2\9.jpg" />
+    <Content Include="Content\img\skins\1.png" />
+    <Content Include="Content\img\skins\2.png" />
+    <Content Include="Content\img\skins\3.png" />
+    <Content Include="Content\img\skins\4.png" />
+    <Content Include="Content\img\skins\5.png" />
+    <Content Include="Content\img\skins\6.png" />
+    <Content Include="Content\img\skins\default.png" />
+    <Content Include="Content\img\skins\material.png" />
+    <Content Include="Content\js\app.js" />
+    <Content Include="Content\js\calendar.js" />
+    <Content Include="Content\js\charts-chartist.js" />
+    <Content Include="Content\js\charts-chartjs.js" />
+    <Content Include="Content\js\charts-easy.js" />
+    <Content Include="Content\js\charts-flot.js" />
+    <Content Include="Content\js\charts-morris.js" />
+    <Content Include="Content\js\charts-peity.js" />
+    <Content Include="Content\js\charts-sparkline.js" />
+    <Content Include="Content\js\demo.js" />
+    <Content Include="Content\js\extra-crop.js" />
+    <Content Include="Content\js\extra-lightbox.js" />
+    <Content Include="Content\js\forms-editors.js" />
+    <Content Include="Content\js\forms-masks.js" />
+    <Content Include="Content\js\forms-pickers.js" />
+    <Content Include="Content\js\forms-plugins.js" />
+    <Content Include="Content\js\forms-range-slider.js" />
+    <Content Include="Content\js\forms-typeahead.js" />
+    <Content Include="Content\js\forms-upload.js" />
+    <Content Include="Content\js\forms-wizard.js" />
+    <Content Include="Content\js\forms-xeditable.js" />
+    <Content Include="Content\js\frontend.js" />
+    <Content Include="Content\js\frontend2.js" />
+    <Content Include="Content\js\index.js" />
+    <Content Include="Content\js\index2.js" />
+    <Content Include="Content\js\index3.js" />
+    <Content Include="Content\js\jquery.multi-select.js" />
+    <Content Include="Content\js\maps-google.js" />
+    <Content Include="Content\js\maps-vector.js" />
+    <Content Include="Content\js\pages-animations.js" />
+    <Content Include="Content\js\pages-contactform.js" />
+    <Content Include="Content\js\tables-datatable.js" />
+    <Content Include="Content\js\tables-editable.js" />
+    <Content Include="Content\js\tables-jsgrid.js" />
+    <Content Include="Content\js\tables-responsive.js" />
+    <Content Include="Content\js\ui-carousel.js" />
+    <Content Include="Content\js\ui-modal.js" />
+    <Content Include="Content\js\ui-nestable.js" />
+    <Content Include="Content\js\ui-notifications.js" />
+    <Content Include="Content\js\ui-other.js" />
+    <Content Include="Content\js\ui-scrollbar.js" />
+    <Content Include="Content\plugin\animate.css\animate.min.css" />
+    <Content Include="Content\plugin\autoNumeric\autoNumeric-min.js" />
+    <Content Include="Content\plugin\blockui\jquery.blockUI.js" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Content\plugin\bootstrap-colorpicker\dist\js\bootstrap-colorpicker.min.js" />
+    <Content Include="Content\plugin\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
+    <Content Include="Content\plugin\bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js" />
+    <Content Include="Content\plugin\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Content\plugin\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Content\plugin\bootstrap-inputmask\bootstrap-inputmask.min.js" />
+    <Content Include="Content\plugin\bootstrap-maxlength\src\bootstrap-maxlength.js" />
+    <Content Include="Content\plugin\bootstrap-tagsinput\dist\bootstrap-tagsinput.css" />
+    <Content Include="Content\plugin\bootstrap-tagsinput\dist\bootstrap-tagsinput.min.js" />
+    <Content Include="Content\plugin\bootstrap-touchspin\dist\jquery.bootstrap-touchspin.min.css" />
+    <Content Include="Content\plugin\bootstrap-touchspin\dist\jquery.bootstrap-touchspin.min.js" />
+    <Content Include="Content\plugin\bootstrap-year-calender\bootstrap-year-calender.min.css" />
+    <Content Include="Content\plugin\bootstrap-year-calender\bootstrap-year-calender.min.js" />
+    <Content Include="Content\plugin\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\plugin\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\plugin\chartist\chartist.min.css" />
+    <Content Include="Content\plugin\chartist\chartist.min.js" />
+    <Content Include="Content\plugin\chartjs\Chart.bundle.min.js" />
+    <Content Include="Content\plugin\clockpicker\dist\bootstrap-clockpicker.min.css" />
+    <Content Include="Content\plugin\clockpicker\dist\jquery-clockpicker.min.js" />
+    <Content Include="Content\plugin\CurvedLines\curvedLines.js" />
+    <Content Include="Content\plugin\DataTables\Buttons\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\plugin\DataTables\Buttons\css\buttons.dataTables.min.css" />
+    <Content Include="Content\plugin\DataTables\Buttons\js\buttons.bootstrap4.min.js" />
+    <Content Include="Content\plugin\DataTables\Buttons\js\buttons.colVis.min.js" />
+    <Content Include="Content\plugin\DataTables\Buttons\js\buttons.html5.min.js" />
+    <Content Include="Content\plugin\DataTables\Buttons\js\buttons.print.min.js" />
+    <Content Include="Content\plugin\DataTables\Buttons\js\dataTables.buttons.min.js" />
+    <Content Include="Content\plugin\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\plugin\DataTables\JSZip\jszip.min.js" />
+    <Content Include="Content\plugin\DataTables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\plugin\DataTables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\plugin\DataTables\pdfmake\build\pdfmake.min.js" />
+    <Content Include="Content\plugin\DataTables\pdfmake\build\vfs_fonts.js" />
+    <Content Include="Content\plugin\DataTables\Responsive\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\plugin\DataTables\Responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Content\plugin\DataTables\Responsive\js\responsive.bootstrap4.min.js" />
+    <Content Include="Content\plugin\detectmobilebrowser\detectmobilebrowser.js" />
+    <Content Include="Content\plugin\dropify\dist\css\dropify.min.css" />
+    <Content Include="Content\plugin\dropify\dist\js\dropify.min.js" />
+    <Content Include="Content\plugin\easy-pie\jquery.easypiechart.min.js" />
+    <Content Include="Content\plugin\editable-table\mindmup-editabletable.js" />
+    <Content Include="Content\plugin\editable-table\numeric-input-example.js" />
+    <Content Include="Content\plugin\flag-icon\css\flag-icon.min.css" />
+    <Content Include="Content\plugin\flot.tooltip\js\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\plugin\flot\jquery.flot.min.js" />
+    <Content Include="Content\plugin\flot\jquery.flot.pie.js" />
+    <Content Include="Content\plugin\flot\jquery.flot.resize.min.js" />
+    <Content Include="Content\plugin\flot\jquery.flot.stack.js" />
+    <Content Include="Content\plugin\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\plugin\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Content\plugin\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Content\plugin\gmaps\gmaps.min.js" />
+    <Content Include="Content\plugin\ion.rangeSlider\css\ion.rangeSlider.css" />
+    <Content Include="Content\plugin\ion.rangeSlider\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Content\plugin\ion.rangeSlider\img\sprite-skin-flat.png" />
+    <Content Include="Content\plugin\ion.rangeSlider\js\ion-rangeSlider\ion.rangeSlider.min.js" />
+    <Content Include="Content\plugin\ionicons\css\ionicons.min.css" />
+    <Content Include="Content\plugin\jcrop\css\Jcrop.gif" />
+    <Content Include="Content\plugin\jcrop\css\jquery.Jcrop.min.css" />
+    <Content Include="Content\plugin\jcrop\js\jquery.Jcrop.min.js" />
+    <Content Include="Content\plugin\jquery-fullscreen-plugin\jquery.fullscreen-min.js" />
+    <Content Include="Content\plugin\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Content\plugin\jquery-wizard\dist\css\wizard.min.css" />
+    <Content Include="Content\plugin\jquery-wizard\dist\jquery-wizard.min.js" />
+    <Content Include="Content\plugin\jquery-wizard\libs\formvalidation\bootstrap.min.js" />
+    <Content Include="Content\plugin\jquery-wizard\libs\formvalidation\formValidation.min.css" />
+    <Content Include="Content\plugin\jquery-wizard\libs\formvalidation\formValidation.min.js" />
+    <Content Include="Content\plugin\jquery\jquery-1.12.3.min.js" />
+    <Content Include="Content\plugin\jscrollpane\jquery.jscrollpane.css" />
+    <Content Include="Content\plugin\jscrollpane\jquery.jscrollpane.min.js" />
+    <Content Include="Content\plugin\jscrollpane\jquery.mousewheel.js" />
+    <Content Include="Content\plugin\jscrollpane\mwheelIntent.js" />
+    <Content Include="Content\plugin\jsgrid\demos\db.js" />
+    <Content Include="Content\plugin\jsgrid\dist\jsgrid-theme.min.css" />
+    <Content Include="Content\plugin\jsgrid\dist\jsgrid.css" />
+    <Content Include="Content\plugin\jsgrid\dist\jsgrid.min.js" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-2.0.3.css" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-2.0.3.min.js" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-europe-mill.js" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-fr_regions_2016-mill.js" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-us-aea.js" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-us-ny-newyork-mill.js" />
+    <Content Include="Content\plugin\jvectormap\jquery-jvectormap-world-mill.js" />
+    <Content Include="Content\plugin\magicsuggest\magicsuggest-min.js" />
+    <Content Include="Content\plugin\magicsuggest\magicsuggest.css" />
+    <Content Include="Content\plugin\Magnific-Popup\dist\jquery.magnific-popup.min.js" />
+    <Content Include="Content\plugin\Magnific-Popup\dist\magnific-popup.css" />
+    <Content Include="Content\plugin\material-design-iconic-font\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\plugin\moment\moment.js" />
+    <Content Include="Content\plugin\morris\morris.css" />
+    <Content Include="Content\plugin\morris\morris.min.js" />
+    <Content Include="Content\plugin\multi-select\css\multi-select.css" />
+    <Content Include="Content\plugin\multi-select\img\switch.png" />
+    <Content Include="Content\plugin\multi-select\js\jquery.multi-select.js" />
+    <Content Include="Content\plugin\nestable\jquery.nestable.js" />
+    <Content Include="Content\plugin\nestable\nestable.css" />
+    <Content Include="Content\plugin\nprogress\nprogress.css" />
+    <Content Include="Content\plugin\nprogress\nprogress.js" />
+    <Content Include="Content\plugin\owl.carousel\assets\owl.carousel.css" />
+    <Content Include="Content\plugin\owl.carousel\assets\owl.theme.default.min.css" />
+    <Content Include="Content\plugin\owl.carousel\assets\owl.video.play.html" />
+    <Content Include="Content\plugin\owl.carousel\owl.carousel.min.js" />
+    <Content Include="Content\plugin\pe7-icons\assets\fonts\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="Content\plugin\pe7-icons\assets\Pe-icon-7-stroke.css" />
+    <Content Include="Content\plugin\peity\jquery.peity.js" />
+    <Content Include="Content\plugin\pignose-calendar\css\pignose.calendar.css" />
+    <Content Include="Content\plugin\pignose-calendar\css\pignose.calendar.min.css" />
+    <Content Include="Content\plugin\pignose-calendar\fonts\icon_navs.svg" />
+    <Content Include="Content\plugin\pignose-calendar\js\pignose.calendar.full.js" />
+    <Content Include="Content\plugin\pignose-calendar\js\pignose.calendar.full.min.js" />
+    <Content Include="Content\plugin\pignose-calendar\js\pignose.calendar.js" />
+    <Content Include="Content\plugin\pignose-calendar\js\pignose.calendar.min.js" />
+    <Content Include="Content\plugin\raphael\raphael.min.js" />
+    <Content Include="Content\plugin\RWD-Table-Patterns\dist\css\rwd-table.min.css" />
+    <Content Include="Content\plugin\RWD-Table-Patterns\dist\js\rwd-table.min.js" />
+    <Content Include="Content\plugin\RWD-Table-Patterns\select2\dist\css\select2.min.css" />
+    <Content Include="Content\plugin\RWD-Table-Patterns\select2\dist\js\select2.min.js" />
+    <Content Include="Content\plugin\select2\dist\css\select2.css" />
+    <Content Include="Content\plugin\select2\dist\css\select2.min.css" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ar.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\az.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\bg.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ca.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\cs.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\da.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\de.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\el.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\en.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\es.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\et.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\eu.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\fa.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\fi.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\fr.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\gl.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\he.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\hi.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\hr.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\hu.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\id.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\is.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\it.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ja.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\km.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ko.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\lt.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\lv.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\mk.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ms.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\nb.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\nl.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\pl.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\pt-BR.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\pt.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ro.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\ru.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\sk.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\sr-Cyrl.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\sr.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\sv.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\th.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\tr.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\uk.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\vi.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\zh-CN.js" />
+    <Content Include="Content\plugin\select2\dist\js\i18n\zh-TW.js" />
+    <Content Include="Content\plugin\select2\dist\js\select2.full.js" />
+    <Content Include="Content\plugin\select2\dist\js\select2.full.min.js" />
+    <Content Include="Content\plugin\select2\dist\js\select2.js" />
+    <Content Include="Content\plugin\select2\dist\js\select2.min.js" />
+    <Content Include="Content\plugin\selectize\selectize.css" />
+    <Content Include="Content\plugin\selectize\selectize.js" />
+    <Content Include="Content\plugin\selectize\selectize.min.js" />
+    <Content Include="Content\plugin\sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\plugin\spinkit\css\spinkit.html" />
+    <Content Include="Content\plugin\summernote\summernote.css" />
+    <Content Include="Content\plugin\summernote\summernote.min.js" />
+    <Content Include="Content\plugin\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Content\plugin\sweetalert2\sweetalert2.min.js" />
+    <Content Include="Content\plugin\switchery\dist\switchery.min.css" />
+    <Content Include="Content\plugin\switchery\dist\switchery.min.js" />
+    <Content Include="Content\plugin\tether\js\tether.min.js" />
+    <Content Include="Content\plugin\themify-icons\fonts\themify9f24.svg" />
+    <Content Include="Content\plugin\themify-icons\themify-icons.css" />
+    <Content Include="Content\plugin\TinyColor\tinycolor.js" />
+    <Content Include="Content\plugin\toastr\toastr.min.css" />
+    <Content Include="Content\plugin\toastr\toastr.min.js" />
+    <Content Include="Content\plugin\typeahead\dist\bloodhound.min.js" />
+    <Content Include="Content\plugin\typeahead\dist\typeahead-min.css" />
+    <Content Include="Content\plugin\typeahead\dist\typeahead.jquery.min.js" />
+    <Content Include="Content\plugin\typicons\src\font\typicons.min.css" />
+    <Content Include="Content\plugin\typicons\src\font\typicons.svg" />
+    <Content Include="Content\plugin\uploadify\Change Log.txt" />
+    <Content Include="Content\plugin\uploadify\jquery.uploadify.js" />
+    <Content Include="Content\plugin\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Content\plugin\uploadify\license.txt" />
+    <Content Include="Content\plugin\uploadify\uploadify-cancel.png" />
+    <Content Include="Content\plugin\uploadify\uploadify.css" />
+    <Content Include="Content\plugin\uploadify\uploadify.swf" />
+    <Content Include="Content\plugin\uploadify\__MACOSX\._Change Log.txt" />
+    <Content Include="Content\plugin\uploadify\__MACOSX\._uploadify.swf" />
+    <Content Include="Content\plugin\waves\waves.min.css" />
+    <Content Include="Content\plugin\waves\waves.min.js" />
+    <Content Include="Content\plugin\waypoints\lib\jquery.waypoints.min.js" />
+    <Content Include="Content\plugin\weather-icons\css\weather-icons.min.css" />
+    <Content Include="Content\plugin\x-editable\bootstrap3-editable\css\bootstrap-editable.css" />
+    <Content Include="Content\plugin\x-editable\bootstrap3-editable\img\clear.png" />
+    <Content Include="Content\plugin\x-editable\bootstrap3-editable\img\loading.gif" />
+    <Content Include="Content\plugin\x-editable\bootstrap3-editable\js\bootstrap-editable.min.js" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\uploadify.swf" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\plugin\pe7-icons\assets\fonts\Pe-icon-7-strokebb1d.eot" />
+    <Content Include="Content\plugin\pe7-icons\assets\fonts\Pe-icon-7-strokebb1d.ttf" />
+    <Content Include="Content\plugin\pe7-icons\assets\fonts\Pe-icon-7-strokebb1d.woff" />
+    <Content Include="Content\plugin\pe7-icons\assets\fonts\Pe-icon-7-stroked41d.eot" />
+    <Content Include="Content\plugin\summernote\font\summernoted41d.eot" />
+    <Content Include="Content\plugin\summernote\font\summernotef534.eot" />
+    <Content Include="Content\plugin\summernote\font\summernotef534.ttf" />
+    <Content Include="Content\plugin\summernote\font\summernotef534.woff" />
+    <Content Include="Content\plugin\themify-icons\fonts\themify9f24.eot" />
+    <Content Include="Content\plugin\themify-icons\fonts\themify9f24.ttf" />
+    <Content Include="Content\plugin\themify-icons\fonts\themify9f24.woff" />
+    <Content Include="Content\plugin\themify-icons\fonts\themifyd41d.eot" />
+    <Content Include="Content\plugin\typicons\src\font\typicons.eot" />
+    <Content Include="Content\plugin\typicons\src\font\typicons.ttf" />
+    <Content Include="Content\plugin\typicons\src\font\typicons.woff" />
+    <Content Include="Content\plugin\typicons\src\font\typiconsd41d.eot" />
+    <Content Include="Content\plugin\font-awesome\font\fontawesome-webfont.woff2" />
+    <Content Include="Content\plugin\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\plugin\font-awesome\font\fontawesome-webfont%281%29.woff2" />
+    <Content Include="Images\neptune\1.jpg" />
+    <Content Include="Images\neptune\10.jpg" />
+    <Content Include="Images\neptune\2.jpg" />
+    <Content Include="Images\neptune\3.jpg" />
+    <Content Include="Images\neptune\4.jpg" />
+    <Content Include="Images\neptune\5.jpg" />
+    <Content Include="Images\neptune\6.jpg" />
+    <Content Include="Images\neptune\7.jpg" />
+    <Content Include="Images\neptune\8.jpg" />
+    <Content Include="Images\neptune\9.jpg" />
+    <Content Include="ImpQueries.txt" />
+    <Content Include="Log4Net.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\plugin\uploadify\check-exists.php" />
+    <Content Include="Content\plugin\uploadify\index.php" />
+    <Content Include="Content\plugin\uploadify\uploadify.php" />
+    <Content Include="Content\plugin\pignose-calendar\fonts\icon_navs.eot" />
+    <Content Include="Content\plugin\pignose-calendar\fonts\icon_navs.ttf" />
+    <Content Include="Content\plugin\pignose-calendar\fonts\icon_navs.woff" />
+    <None Include="Properties\PublishProfiles\Lohana.pubxml" />
+    <Content Include="Scripts\Booking\booking-events.js" />
+    <Content Include="Scripts\Booking\booking-method.js" />
+    <Content Include="Scripts\Booking\booking-validation.js" />
+    <Content Include="Scripts\Booking\Invoice_event.js" />
+    <Content Include="Scripts\Booking\Invoice_method.js" />
+    <Content Include="Scripts\Common\generic.ajax.js" />
+    <Content Include="Scripts\Common\generic.common.events.js" />
+    <Content Include="Scripts\Common\generic.common.methods.js" />
+    <Content Include="Scripts\Common\generic.pagination-ajax.js" />
+    <Content Include="Scripts\Dashboard\dashboard-task-events.js" />
+    <Content Include="Scripts\Dashboard\dashboard-task-method.js" />
+    <Content Include="Scripts\Enquiry\enquiry-events.js" />
+    <Content Include="Scripts\Enquiry\enquiry-methods.js" />
+    <Content Include="Scripts\Enquiry\enquiry-search-events.js" />
+    <Content Include="Scripts\Enquiry\enquiry-search-methods.js" />
+    <Content Include="Scripts\Enquiry\enquiry-validations.js" />
+    <Content Include="Scripts\Enquiry\fit-enquiry-item-events.js" />
+    <Content Include="Scripts\Enquiry\fit-enquiry-item-methods.js" />
+    <Content Include="Scripts\Enquiry\fit-enquiry-item-validations.js" />
+    <Content Include="Scripts\Enquiry\flight-enquiry-item-events.js" />
+    <Content Include="Scripts\Enquiry\flight-enquiry-item-methods.js" />
+    <Content Include="Scripts\Enquiry\flight-enquiry-item-validations.js" />
+    <Content Include="Scripts\Enquiry\git-enquiryitem-events.js" />
+    <Content Include="Scripts\Enquiry\git-enquiryitem-methods.js" />
+    <Content Include="Scripts\Enquiry\git-enquiryitem-validations.js" />
+    <Content Include="Scripts\Enquiry\hotel-enquiry-item-events.js" />
+    <Content Include="Scripts\Enquiry\hotel-enquiry-item-methods.js" />
+    <Content Include="Scripts\Enquiry\hotel-enquiry-item-validations.js" />
+    <Content Include="Scripts\Enquiry\sightseeing-enquiry-item-events.js" />
+    <Content Include="Scripts\Enquiry\sightseeing-enquiry-item-methods.js" />
+    <Content Include="Scripts\Enquiry\sightseeing-enquiry-item-validations.js" />
+    <Content Include="Scripts\Enquiry\train-enquiry-item-events.js" />
+    <Content Include="Scripts\Enquiry\train-enquiry-item-methods.js" />
+    <Content Include="Scripts\Enquiry\train-enquiry-item-validations.js" />
+    <Content Include="Scripts\Enquiry\transfer-enquiry-item-events.js" />
+    <Content Include="Scripts\Enquiry\transfer-enquiry-item-methods.js" />
+    <Content Include="Scripts\Enquiry\transfer-enquiry-item-validations.js" />
+    <Content Include="Scripts\Enquiry\view-enquiry-item-methods.js" />
+    <Content Include="Scripts\generic.autocomplete.js" />
+    <Content Include="Scripts\generic.custom.validation.js" />
+    <Content Include="Scripts\generic.lookup.js" />
+    <Content Include="Scripts\generic.message.js" />
+    <Content Include="Scripts\generic.popup.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.printElement.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.uploadify.js" />
+    <Content Include="Scripts\jquery.uploadify.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\Master\Attachment\attachment-events.js" />
+    <Content Include="Scripts\Master\Attachment\attachment-methods.js" />
+    <Content Include="Scripts\Master\Business\business-events.js" />
+    <Content Include="Scripts\Master\Business\business-methods.js" />
+    <Content Include="Scripts\Master\Business\business-validations.js" />
+    <Content Include="Scripts\Master\Charges\charges-events.js" />
+    <Content Include="Scripts\Master\Charges\charges-methods.js" />
+    <Content Include="Scripts\Master\Charges\charges-validations.js" />
+    <Content Include="Scripts\Master\City\city-events.js" />
+    <Content Include="Scripts\Master\City\city-methods.js" />
+    <Content Include="Scripts\Master\City\city-validations.js" />
+    <Content Include="Scripts\Master\common_methods.js" />
+    <Content Include="Scripts\Master\Country\country-events.js" />
+    <Content Include="Scripts\Master\Country\country-methods.js" />
+    <Content Include="Scripts\Master\Country\country-validations.js" />
+    <Content Include="Scripts\Master\CustomerCategory\customer-category-event.js" />
+    <Content Include="Scripts\Master\CustomerCategory\customer-category-methods.js" />
+    <Content Include="Scripts\Master\CustomerCategory\customer-category-validation.js" />
+    <Content Include="Scripts\Master\Customer\customer-events.js" />
+    <Content Include="Scripts\Master\Customer\customer-methods.js" />
+    <Content Include="Scripts\Master\Customer\customer-search-events.js" />
+    <Content Include="Scripts\Master\Customer\customer-search-methods.js" />
+    <Content Include="Scripts\Master\Customer\customer-validations.js" />
+    <Content Include="Scripts\Master\Designation\designation-events.js" />
+    <Content Include="Scripts\Master\Designation\designation-methods.js" />
+    <Content Include="Scripts\Master\Designation\designation-validations.js" />
+    <Content Include="Scripts\Master\FacilityType\facilitytype-events.js" />
+    <Content Include="Scripts\Master\FacilityType\facilitytype-methods.js" />
+    <Content Include="Scripts\Master\FacilityType\facilitytype-validations.js" />
+    <Content Include="Scripts\Master\Facility\facility-events.js" />
+    <Content Include="Scripts\Master\Facility\facility-methods.js" />
+    <Content Include="Scripts\Master\Facility\facility-validations.js" />
+    <Content Include="Scripts\Master\HotelSearch\hotelsearchdetails-events.js" />
+    <Content Include="Scripts\Master\HotelSearch\hotelsearchdetails-methods.js" />
+    <Content Include="Scripts\Master\HotelType\hoteltype-events.js" />
+    <Content Include="Scripts\Master\HotelType\hoteltype-methods.js" />
+    <Content Include="Scripts\Master\HotelType\hoteltype-Validations.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-bank-events.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-bank-methods.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-bank-validations.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-contact-person-events.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-contact-person-methods.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-contact-person-validations.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-events.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-facility-events.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-facility-methods.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-methods.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-room-type-events.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-room-type-methods.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-room-type-validations.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-search-events.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-search-methods.js" />
+    <Content Include="Scripts\Master\Hotel\hotel-validations.js" />
+    <Content Include="Scripts\Master\Meal\meal-events.js" />
+    <Content Include="Scripts\Master\Meal\meal-methods.js" />
+    <Content Include="Scripts\Master\Meal\meal-validations.js" />
+    <Content Include="Scripts\Master\Occupancy\occupancy-events.js" />
+    <Content Include="Scripts\Master\Occupancy\occupancy-methods.js" />
+    <Content Include="Scripts\Master\Occupancy\occupancy-validations.js" />
+    <Content Include="Scripts\Master\Package\package-date-events.js" />
+    <Content Include="Scripts\Master\Package\package-date-methods.js" />
+    <Content Include="Scripts\Master\Package\package-date-validations.js" />
+    <Content Include="Scripts\Master\Package\package-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-bus-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-bus-methods.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-bus-validations.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-flight-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-flight-methods.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-flight-validations.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-hotel-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-hotel-methods.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-hotel-validations.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-methods.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-train-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-train-methods.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-train-validations.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-validations.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-vehicle-events.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-vehicle-methods.js" />
+    <Content Include="Scripts\Master\Package\package-itinerary-vehicle-validations.js" />
+    <Content Include="Scripts\Master\Package\package-methods.js" />
+    <Content Include="Scripts\Master\Package\package-otherdetails-event.js" />
+    <Content Include="Scripts\Master\Package\package-otherdetails-method.js" />
+    <Content Include="Scripts\Master\Package\package-search-events.js" />
+    <Content Include="Scripts\Master\Package\package-search-methods.js" />
+    <Content Include="Scripts\Master\Package\package-validations.js" />
+    <Content Include="Scripts\Master\Package\search-package-event.js" />
+    <Content Include="Scripts\Master\Package\search-package-method.js" />
+    <Content Include="Scripts\Master\Package\_Itinarary-Package-.js" />
+    <Content Include="Scripts\Master\Package\_Package-Itinarary-model-method.js" />
+    <Content Include="Scripts\Master\Package\_package-Itinarary-model.js" />
+    <Content Include="Scripts\Master\Package\_Package_Duration _Price_Method.js" />
+    <Content Include="Scripts\Master\Package\_Package_Duration_Price.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\search-package-method.js" />
+    <Content Include="Scripts\Master\Payable\payable-search-event.js" />
+    <Content Include="Scripts\Master\Payable\Payable-Validation.js" />
+    <Content Include="Scripts\Master\Payable\payble-event.js" />
+    <Content Include="Scripts\Master\Payable\payble-method.js" />
+    <Content Include="Scripts\Master\Payable\payble-search-methods.js" />
+    <Content Include="Scripts\Master\Role\role-event.js" />
+    <Content Include="Scripts\Master\Role\role-method.js" />
+    <Content Include="Scripts\Master\Role\role-search-event.js" />
+    <Content Include="Scripts\Master\Role\role-search-method.js" />
+    <Content Include="Scripts\Master\Role\role-validation.js" />
+    <Content Include="Scripts\Master\RoomType\roomtype-events.js" />
+    <Content Include="Scripts\Master\RoomType\roomtype-methods.js" />
+    <Content Include="Scripts\Master\RoomType\roomtype-validations.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-details-events.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-details-methods.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-tariff-duration-events.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-tariff-duration-methods.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-tariff-events.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-tariff-methods.js" />
+    <Content Include="Scripts\Master\SightSeeingTariff\sightseeing-tariff-validation.js" />
+    <Content Include="Scripts\Master\SightSeeing\SearchSightSeeingevent.js" />
+    <Content Include="Scripts\Master\SightSeeing\SearchSightSeeingMethod.js" />
+    <Content Include="Scripts\Master\SightSeeing\sightseeing-events.js" />
+    <Content Include="Scripts\Master\SightSeeing\sightseeing-methods.js" />
+    <Content Include="Scripts\Master\SightSeeing\sightseeing-search-events.js" />
+    <Content Include="Scripts\Master\SightSeeing\sightseeing-search-methods.js" />
+    <Content Include="Scripts\Master\SightSeeing\sightseeing-validation.js" />
+    <Content Include="Scripts\Master\State\state-events.js" />
+    <Content Include="Scripts\Master\State\state-methods.js" />
+    <Content Include="Scripts\Master\State\state-validations.js" />
+    <Content Include="Scripts\Master\SupplierSearch\suppliersearchevent.js" />
+    <Content Include="Scripts\Master\SupplierSearch\suppliersearchmethod.js" />
+    <Content Include="Scripts\Master\TaxFormula\taxformula-events.js" />
+    <Content Include="Scripts\Master\TaxFormula\taxformula-methods.js" />
+    <Content Include="Scripts\Master\TaxFormula\taxformula-search-events.js" />
+    <Content Include="Scripts\Master\TaxFormula\taxformula-search-methods.js" />
+    <Content Include="Scripts\Master\TaxFormula\taxformula-validations.js" />
+    <Content Include="Scripts\Master\Tax\tax-event.js" />
+    <Content Include="Scripts\Master\Tax\tax-method.js" />
+    <Content Include="Scripts\Master\Tax\tax-search-event.js" />
+    <Content Include="Scripts\Master\Tax\tax-search-method.js" />
+    <Content Include="Scripts\Master\Tax\tax-validation.js" />
+    <Content Include="Scripts\Master\User\user-events.js" />
+    <Content Include="Scripts\Master\User\user-methods.js" />
+    <Content Include="Scripts\Master\User\user-search-events.js" />
+    <Content Include="Scripts\Master\User\user-search-methods.js" />
+    <Content Include="Scripts\Master\User\user-validation.js" />
+    <Content Include="Scripts\Master\VehicleBrand\vehicle-brand-event.js" />
+    <Content Include="Scripts\Master\VehicleBrand\vehicle-brand-method.js" />
+    <Content Include="Scripts\Master\VehicleBrand\vehicle-brand-validation.js" />
+    <Content Include="Scripts\Master\VehicleType\vehicle-type-event.js" />
+    <Content Include="Scripts\Master\VehicleType\vehicle-type-method.js" />
+    <Content Include="Scripts\Master\VehicleType\vehicle-type-validation.js" />
+    <Content Include="Scripts\Master\Vehicle\vehicle-event.js" />
+    <Content Include="Scripts\Master\Vehicle\vehicle-method.js" />
+    <Content Include="Scripts\Master\Vehicle\vehicle-search-event.js" />
+    <Content Include="Scripts\Master\Vehicle\vehicle-search-method.js" />
+    <Content Include="Scripts\Master\Vehicle\vehicle-validation.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-bank-events.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-bank-methods.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-bank-validations.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-contact-person-events.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-contact-person-methods.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-contact-person-validations.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-events.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-methods.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-search-events.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-search-methods.js" />
+    <Content Include="Scripts\Master\Vendor\vendor-validations.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\PackageYear\Event-Methods.js" />
+    <Content Include="Scripts\Quotation\fit-quotation-events.js" />
+    <Content Include="Scripts\Quotation\fit-quotation-methods.js" />
+    <Content Include="Scripts\Quotation\flight-quotation-events.js" />
+    <Content Include="Scripts\Quotation\flight-quotation-methods.js" />
+    <Content Include="Scripts\Quotation\flight-quotation-validations.js" />
+    <Content Include="Scripts\Quotation\Git-quotation-event.js" />
+    <Content Include="Scripts\Quotation\Git-Quotation.js" />
+    <Content Include="Scripts\Quotation\hotel-quotation-events.js" />
+    <Content Include="Scripts\Quotation\hotel-quotation-methods.js" />
+    <Content Include="Scripts\Quotation\hotel-quotation-validations.js" />
+    <Content Include="Scripts\Quotation\SightSeeing-quotation-event.js" />
+    <Content Include="Scripts\Quotation\spt-quotation-methods.js" />
+    <Content Include="Scripts\Quotation\train-quotation-events.js" />
+    <Content Include="Scripts\Quotation\train-quotation-methods.js" />
+    <Content Include="Scripts\Quotation\train-quotation-validations.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-customer-category-event.js" />
+    <Content Include="Scripts\Quotation\quotation-events.js" />
+    <Content Include="Scripts\Quotation\quotation-methods.js" />
+    <Content Include="Scripts\Quotation\quotation-search-events.js" />
+    <Content Include="Scripts\Quotation\quotation-search-methods.js" />
+    <Content Include="Scripts\Quotation\view-quotation-enquiry-item-methods.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-day-title-event.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-day-title-methods.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-price-events.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-price-methods.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-price-taxformula-events.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-price-taxformula-methods.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-price-taxformula-validations.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-detail-event.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-detail-method.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-detail-validations.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-event.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-method.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-hotel-tariff-validations.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-itinerary-event.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-itinerary-method.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-occupancy-detail-event.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-occupancy-detail-method.js" />
+    <Content Include="Scripts\SupplierHotelTariff\supplier-occupancy-detail-validation.js" />
+    <Content Include="Scripts\SupplierHotelTariff\SupplierHotelTariffDurationevent.js" />
+    <Content Include="Scripts\SupplierHotelTariff\SupplierHotelTariffDurationmethod.js" />
+    <Content Include="Scripts\SupplierHotelTariff\SupplierHotelTariffdurationValidation.js" />
+    <Content Include="Scripts\Tariff\HotelTariffTaxUpdation\hotel-tariff-tax-updation-search-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariffTaxUpdation\hotel-tariff-tax-updation-search-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-customer-category-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-customer-category-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-customer-category-validations.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-duration-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-duration-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-duration-validations.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-price-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-price-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-price-taxformula-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-price-taxformula-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-price-taxformula-validations.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\Hotel-Tariff-Room-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-room-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-room-occupancy-events.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-room-occupancy-methods.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-room-occupancy-validations.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-room-validations.js" />
+    <Content Include="Scripts\Tariff\HotelTariff\hotel-tariff-validations.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariffSearch\lohana-package-tariff-search-events.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariffSearch\lohana-package-tariff-search-methods.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-events.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-hotel-events.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-hotel-methods.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-hotel-validations.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-methods.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-root-events.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-root-methords.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-root-validations.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-validations.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-vehicle-events.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-vehicle-methods.js" />
+    <Content Include="Scripts\Tariff\LohanaPackageTariff\lohana-package-tariff-vehicle-validations.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-customer-category-events.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-customer-category-validations.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-duration-events.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-duration-methods.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-duration-validations.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-events.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-methods.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-occupancy-events.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-occupancy-methods.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-occupancy-validations.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-price-events.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-price-methods.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-price-taxformula-events.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-price-taxformula-methods.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-price-taxformula-validations.js" />
+    <Content Include="Scripts\Tariff\SightSeeingTariff\sight-seeing-tariff-validations.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-customer-category-events.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-customer-category-methods.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-customer-category-validations.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-events.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-methods.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-price-events.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-price-methods.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-price-validations.js" />
+    <Content Include="Scripts\Tariff\VehicleTariff\vehicle-tariff-validations.js" />
+    <Content Include="Scripts\TaskManagement\search-task-management-event.js" />
+    <Content Include="Scripts\TaskManagement\task-management-events.js" />
+    <Content Include="Scripts\TaskManagement\task-management-methods.js" />
+    <Content Include="Scripts\TaxFormulaCalDemo\tax-formula-cal-demo-event.js" />
+    <Content Include="Scripts\TaxFormulaCalDemo\tax-formula-cal-demo-method.js" />
+    <Content Include="Scripts\TaxFormulaCalDemo\tax-formula-cal-demo-validation.js" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Database Table Changes.txt" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_BasicDetails.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Models\Upload\Chrysanthemum - Copy.jpg" />
+    <Content Include="Models\Upload\Chrysanthemum.jpg" />
+    <Content Include="Models\Upload\Desert.jpg" />
+    <Content Include="Models\Upload\Hydrangeas.jpg" />
+    <Content Include="Models\Upload\Jellyfish.jpg" />
+    <Content Include="Models\Upload\Koala.jpg" />
+    <Content Include="Models\Upload\Tulips.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\_Preloader.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\PreLogin\Login\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Country\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Country\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\State\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\State\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\City\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\City\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Meal\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Meal\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Occupancy\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Occupancy\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\RoomType\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\RoomType\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Currency\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Currency\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Charges\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Charges\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\Search.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\Index.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\Search.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\Index.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\Search.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\Index.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\Search.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_HotelDetails.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_AirPlaneDetails.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_TransferDetails.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_SightseeingDetails.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_TrainDetails.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_EnquiryItem.cshtml" />
+    <Content Include="Views\PostLogin\Master\Designation\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Designation\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Offer\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Offer\Search.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_ViewTrainDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_ViewHotelDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_EnquiryItem.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_ViewCarDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_ViewBusDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_ViewAirPlaneDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_CustomisePackage.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_ExistingPackages.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AirPlaneDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_BusDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_CarDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_TrainDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_HotelDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_PreplannedViewDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\User\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\User\Search.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\VehicleTariff\Index.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\VehicleTariff\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vehicle\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Role\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Role\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Bed\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Bed\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Customer\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Customer\Search.cshtml" />
+    <Content Include="Views\PreLogin\Home\Dashboard.cshtml" />
+    <Content Include="Views\PostLogin\Master\Group\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Group\Search.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_AirPlaneDetailsDay.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_BusDetailsDay.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_CarDetailsDay.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_HotelDetailsDay.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_TrainDetailsDay.cshtml" />
+    <Content Include="Views\PostLogin\Master\Tax\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Tax\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\CustomerCategory\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\CustomerCategory\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Business\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Business\Search.cshtml" />
+    <Content Include="Views\Shared\_Message.cshtml" />
+    <Content Include="Views\PostLogin\Master\FacilityType\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Facility\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\TaxFormula\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\TaxFormula\Search.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariffTaxUpdation\Index.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\Index.cshtml" />
+    <Content Include="Views\PostLogin\Accessories\Accessories.cshtml" />
+    <Content Include="Views\PostLogin\Master\Designation\_designation.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_designationDropDown.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_contactPersonListing.cshtml" />
+    <Content Include="Views\PostLogin\AutocompleteLookUp\_Lookup.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
+    <Content Include="Views\PostLogin\Master\TaxFormula\_ChargesRateBehaviour.cshtml" />
+    <Content Include="Views\PostLogin\Master\TaxFormula\_ChargesTypeCalculatedOn.cshtml" />
+    <Content Include="Views\PostLogin\Master\SightSeeing\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\SightSeeing\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vehicle\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\TaxFormula\_FormulaCharges.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_BasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_Facilities.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_RoomType.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_Photos.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_ContactPerson.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\_Bank.cshtml" />
+    <Content Include="Views\PostLogin\TaxFormulaCalDemo\Index.cshtml" />
+    <Content Include="Views\PostLogin\TaxFormulaCalDemo\_TaxFormulaChargesGrid.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\_ContactPerson.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\_VendorBankDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\_VendorBasicDetails.cshtml" />
+    <Content Include="Views\Shared\ErrorMessage.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\VehicleTariff\_BasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\VehicleTariff\_PriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\VehicleTariff\_CustomerCategoryPriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageBasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageDatesViewDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageItineraryDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageOtherDetails.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_BasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_RoomDetails.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_PriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_PriceTaxFormulaCharges.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackagePhoto.cshtml" />
+    <Content Include="Views\PostLogin\Master\VehicleBrand\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\VehicleType\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelSearch\Search.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_DurationDetails.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariffTaxUpdation\_PriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariffTaxUpdation\_PriceTaxFormulaCharges.cshtml" />
+    <Content Include="Views\PostLogin\VehicleTariff\_BasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\VehicleTariff\_CustomerCategoryPriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\VehicleTariff\_PriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\VehicleTariff\Index.cshtml" />
+    <Content Include="Views\PostLogin\VehicleTariff\Search.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_CustomerCategory.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\Index.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_ViewSummary.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariffTaxUpdation\_UpdatePriceTaxFormulaCharges.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariffTaxUpdation\_UpdatePriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\_BasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\_HotelDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\_VehicleDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\_SightSeeingDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_Packages.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelSearch\_RoomMealOccupancy.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_PrePlannedHoliday.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddPriceQuotation.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddPriceQuotation2.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddPriceQuotation3.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_QuotationEnquiryItem.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_GetHotelsCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_GetVehicleCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddFlightCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddTrainCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_GetSightSeeingCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_EditFlightCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_EditTrainCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddFlightPP.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_AddTrainPP.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_EditFlightPP.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_EditTrainPP.cshtml" />
+    <Content Include="Views\PostLogin\Booking\Index.cshtml" />
+    <Content Include="Views\PostLogin\Booking\Search.cshtml" />
+    <Content Include="Views\PostLogin\TaskManagement\Index.cshtml" />
+    <Content Include="Views\PostLogin\Timeline\Index.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_CreateTask.cshtml" />
+    <Content Include="Views\PostLogin\History\Index.cshtml" />
+    <Content Include="Views\PostLogin\Bookings\Index.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_FitDetails.cshtml" />
+    <Content Include="Views\PostLogin\Enquiry\_GitDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_GetGitCTS.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_GetFitCTS.cshtml" />
+    <Content Include="Views\PreLogin\Home\ApprovedQuotationBookingDashboard.cshtml" />
+    <Content Include="Views\PostLogin\Bookings\_Invoice.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\ApproveQuotation.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_CustomizeTravelServicesApproval.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_PriceList.cshtml" />
+    <Content Include="Views\PostLogin\Common\_ConformationPopup.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelSearch\_HotelRoomDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelType\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelType\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageItineraryHotel.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageItineraryFlight.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageItineraryTrain.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageItineraryBus.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_PackageItineraryVehicle.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_HotelDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_Duration.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_CustomerCategory.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_PriceDetails_Old.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_DurationDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_PriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_PriceList.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_PriceTaxFormulaCharges.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\PackageView.cshtml" />
+    <Content Include="Views\PostLogin\HotelTariff\_OccupancyDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Hotel\HotelView.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelSearch12\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\HotelSearch12\_RoomMealOccupancy.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_OccupancyDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_CustomerCategoryPopup.cshtml" />
+    <Content Include="Views\PostLogin\TaskManagement\_EditTask.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\Index.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_BasicDetails.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_OccupancyDetails.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_PriceDetails.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_PriceTaxFormulaCharges.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_PriceList.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_DurationDetails.cshtml" />
+    <Content Include="Views\PostLogin\SightSeeingTariff\_CustomerCategory.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\SearchPackage.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_SearchPackageDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\supplierSearch\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\supplierSearch\_RoomMealOccupancy.cshtml" />
+    <Content Include="Views\PostLogin\Master\supplierSearch\_GetHotel.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\Demo.cshtml" />
+    <Content Include="Views\PostLogin\Master\SightSeeing\SightSeeingSearch.cshtml" />
+    <Content Include="Views\PostLogin\Master\SightSeeing\_SearchSightSeeingDetails.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariffSearch\LohanaPackageTariffSearch.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariffSearch\_LohanaPackageTariffSearchDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_Itinerary.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_DayTitle.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_HotelRoomDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_SightseeingDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_VehicleDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_MealDetails.cshtml" />
+    <Content Include="Views\PostLogin\SupplierHotelTariff\_Itinerary_Days.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\ApproveBooking.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\CreateBooking.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_AddFlightCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_AddTrainCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_CustomizeTravelServices.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_EditFlightCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_EditTrainCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_EnquiryItem.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetAirFlightBooking.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetFitCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetGitCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetHotelBooking.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetHotelsCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetSightSeeingCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_GetVehicleCTS.cshtml" />
+    <Content Include="Views\PostLogin\Booking\New folder\_Packages.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_TravellerDocumentDetails.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_GitDetails.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_FitDetails.cshtml" />
+    <Content Include="Views\PostLogin\Quotation\_GetSightSeeing.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariffSearch\_LohanaPackageItienary.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\_RootDetails.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_FlightDetails.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_package_triff_Day.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_package-Day-title.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_Package-Hotel-room.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_Package-SightSeeing.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_Package-Meal.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_Package-Vehicals.cshtml" />
+    <Content Include="Views\PostLogin\Master\Package\_packahge_Duration.cshtml" />
+    <Content Include="Views\PostLogin\Booking\GenerateInvoice.cshtml" />
+    <Content Include="Views\PostLogin\Booking\SearchReceivablePayment.cshtml" />
+    <Content Include="Views\PostLogin\LohanaPackageTariff\_RootDetails.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_AddPayment.cshtml" />
+    <Content Include="Views\PostLogin\Booking\PaymentReceipt.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\AddPayable.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Search.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_AddTravellersFlightDetails.cshtml" />
+    <Content Include="Views\PostLogin\Booking\_TrainDetails.cshtml" />
+    <Content Include="Views\PostLogin\PackageYear\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LohanaBusinessEntities\LohanaBusinessEntities.csproj">
+      <Project>{d7f467d4-15e6-4d92-82c7-92e89b507a2f}</Project>
+      <Name>LohanaBusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LohanaHelper\LohanaHelper.csproj">
+      <Project>{c241578c-963b-43e8-85b6-934acc8e267d}</Project>
+      <Name>LohanaHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LohanaRepo\LohanaRepo.csproj">
+      <Project>{3af02b76-923e-413c-94e3-0a10f0dc8731}</Project>
+      <Name>LohanaRepo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49620</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61629/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,3 @@
+DEBUG     2017-10-27 07:57:11 – Authentication Controller AuthenticateUser
+DEBUG     2017-10-27 07:57:13 – Authentication Controller SetUserSession
+DEBUG     2017-10-27 07:58:48 – Payable Controller GetCustomer

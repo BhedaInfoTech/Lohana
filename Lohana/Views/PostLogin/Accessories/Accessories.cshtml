@@ -1,0 +1,146 @@
+﻿@model Lohana.Models.Accessories.AccessoriesViewModel
+@using LohanaBusinessEntities.Common;
+
+<link href="/Content/plugin/uploadify/uploadify.css" rel="stylesheet" />
+
+<link href="~/Content/plugin/owl.carousel/assets/owl.carousel.css" rel="stylesheet" />
+
+<link href="~/Content/plugin/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" />
+
+<script src="/Content/plugin/uploadify/jquery.uploadify.min.js"></script>
+
+<script src="~/Content/plugin/owl.carousel/owl.carousel.min.js"></script>
+
+
+
+<div class="col-md-4">
+    <label for="">Image Upload</label>
+
+    <input type="file" id="imageUploadForm" name="image" multiple />
+
+    <input type="hidden" name="Accessories.AttachmentName" />
+
+    <input type="hidden" name="Accessories.RefId" />
+
+    <input type="text" name="Accessories.RefCategory">
+
+</div>
+<br />
+
+
+
+        <div class="col-md-12">                     
+                <div class="owl-carousel">
+
+                </div>
+                 
+        </div>
+   
+
+
+        <script>
+            $(document).ready(function () {
+
+
+                    $('.owl-carousel').owlCarousel({
+                        loop: true,
+                        margin: 10,
+                        nav: true,
+                        responsive: {
+                            0: {
+                                items: 1
+                            },
+                            600: {
+                                items: 3
+                            },
+                            1000: {
+                                items: 5
+                            }
+                        }
+                    });
+                   
+                $("#imageUploadForm").uploadify(
+                    {
+                        height: 30,
+                        buttonText: 'BROWSE...',
+                        swf: '/Content/plugin/uploadify/uploadify.swf',
+                        uploader: '/Accessories/Upload',
+                        width: 120,
+                        onUploadSuccess: function () { },
+                        cancelImg: '/Content/plugin/uploadify/uploadify-cancel.png',
+                        removeCompleted: false,
+                        onUploadSuccess: function (file, data, response, count) {
+                         
+                            $("[name='Accessories.AttachmentName']").val(file.name);
+
+                            Save();
+
+                        }
+
+                    });
+
+                function Save()
+                {
+                    var aViewModel = {
+
+                        Accessories: {
+
+                            AttachmentName: $("[name='Accessories.AttachmentName']").val(),
+                        }
+                    }
+                    PostAjaxJson("/Accessories/Insert", aViewModel, AfterSave);
+                }
+            
+                function AfterSave(data)
+                {
+                    var obj = $.parseJSON(data);
+
+                    $("[name='Accessories.RefId']").val(obj.Accessories.RefId);
+                   
+                    GetImages();
+                }
+                function GetImages()
+                {
+                   
+                    var aViewModel = {
+
+                        Accessories: {
+
+                            RefId: $("[name='Accessories.RefId']").val(),                        
+
+                        }
+                    }
+                    PostAjaxJson("/Accessories/GetImages", aViewModel, BindImages);
+                }
+
+                function BindImages(data)
+                {
+                    var htmlText = "";
+
+                    if (data.Images.length > 0) {
+
+                        for (i = 0; i < data.Images.length; i++) {
+
+                            htmlText += "<div class='item'>";                                          
+
+                            htmlText += "<img src='../Upload/" + data.Images[i].AttachmentName + "' width='50'>";
+                         
+                            htmlText += "</div>";                          
+                        }
+                    }
+                    else {
+                        htmlText += "<div>";                       
+
+                        htmlText += "No Images Found.";
+
+                        htmlText += "</div>";
+
+                    }
+                    $('.owl-carousel').html(htmlText);
+
+                   
+                }
+
+            });
+
+        </script>

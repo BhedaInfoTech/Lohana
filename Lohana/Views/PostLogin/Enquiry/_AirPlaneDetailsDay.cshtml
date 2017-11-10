@@ -1,0 +1,92 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Flight Name</label><input type="text" id="txtflightName" class="form-control input-sm" name="Package.flightName" placeholder="Flight Name">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Ticket Type</label><select id="drpticketType" class="form-control input-sm" name="Package.ticketType">
+                <option>Select Ticket Type</option>
+                <option>Business</option>
+                <option>First</option>
+                <option>Economy</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Source </label>
+            <input type="text" id="txtsource" class="form-control input-sm" name="Package.leavingFrom" placeholder="Source ">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Destination</label><input type="text" id="txtgoingTo" class="form-control input-sm" name="Package.goingTo" placeholder="Destination">
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <label>Departure Date and Time - Arrival Date and Time</label>
+        <input class="form-control" type="text" name="daterange-with-time" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" />
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Is Round Trip</label><select id="drpticketType" class="form-control input-sm" name="Package.ticketType">
+                <option>Select Round Trip</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Budget</label>
+            <input type="text" id="txtbudget" class="form-control input-sm" name="Package.budget" placeholder="Enter Budget">
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+</script>
+

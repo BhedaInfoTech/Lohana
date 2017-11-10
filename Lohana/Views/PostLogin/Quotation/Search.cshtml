@@ -1,0 +1,539 @@
+﻿@model Lohana.Models.Quotation.QuotationViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Quotation/quotation-search-methods.js"></script>
+<script src="~/Scripts/Quotation/quotation-search-events.js"></script>
+
+
+<!-- Content -->
+
+<div class="content-area p-y-1">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4>Quotation</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Quotation</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <form role="form" id="frmSearchQuotation">
+
+            <input type="hidden" id="hdnSearchEnquiryId" value="@Model.Quotation.QuotationId" name="QuotationFilter.QuotationId" />
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Enquiry/Quotation Search
+                </h5>
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Customer Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Enter Customer Name to search">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Enquiry Status</label>
+                                <select id="drpsubCategory" class="form-control input-sm" name="Hotel.subCategory">
+                                    <option value="">Select Enquiry Status</option>
+                                    <option value="">Arrived</option>
+                                    <option value="">In-Progress</option>
+                                    <option value="">Converted</option>
+                                    <option value="">Close</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Enquiry Start Date</label><input type="text" id="dtpenquiryStartDate" class="form-control input-sm datepicker" name="Hotel.enquiryStartDate" placeholder="Enter Enquiry Start Date">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Enquiry End Date</label><input type="text" id="dtpenquiryEndDate" class="form-control input-sm datepicker" name="Hotel.enquiryEndDate" placeholder="Enter Enquiry End Date">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                <button type="button" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-block bg-white">
+                <ul class="nav nav-tabs nav-tabs-2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" role="tab" href="#enquiry"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Enquiry</h5></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" role="tab" href="#quotation"><h5><span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Quotation</h5></a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="enquiry" role="tabpanel">
+                        <div class="card">
+                            <h5 class="card-header">
+                                <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; Enquiry Details
+                            </h5>
+                            <div class="card-block p-a-0">
+                                <div class="row m-a-0">
+                                    <div class="col-md-12 p-a-0">
+
+                                        <div class="btn-group" style="float: right; padding: 2px 6px;">
+                                            <a style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" href="Index" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Create</a>
+                                            @*<a style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" href="#" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Edit</a>*@
+                                            <button type="button" id="btnEditQuotation" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Edit</button>
+                                        
+                                        </div>
+
+                                        <table class="table m-b-0">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Enquiry No</th>
+                                                    <th>Customer Name</th>
+                                                    <th>Enquiry Status</th>
+                                                    <th>Enquerier Name</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                        </label>
+                                                    </th>
+                                                    <td>1</td>
+                                                    <td>Sushant Maragaje</td>
+                                                    <td>Arrived</td>
+                                                    <td>Shahrukh Khan</td>
+                                                    <td>
+                                                        <div class="share share-2">
+                                                            <div class="row no-gutter">
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-hotel"></i>
+                                                                        <span>2</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-plane"></i>
+                                                                        <span>3</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-train"></i>
+                                                                        <span>4</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-bus"></i>
+                                                                        <span>5</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-car"></i>
+                                                                        <span>6</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                        </label>
+                                                    </th>
+                                                    <td>2</td>
+                                                    <td>Sachin Maragaje</td>
+                                                    <td>In Progress</td>
+                                                    <td>Akshay Kumar</td>
+                                                    <td>
+                                                        <div class="share share-2">
+                                                            <div class="row no-gutter">
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-hotel"></i>
+                                                                        <span>6</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-plane"></i>
+                                                                        <span>5</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-train"></i>
+                                                                        <span>4</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-bus"></i>
+                                                                        <span>3</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-car"></i>
+                                                                        <span>2</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                        </label>
+                                                    </th>
+                                                    <td>3</td>
+                                                    <td>Sanket Maragaje</td>
+                                                    <td>Closed</td>
+                                                    <td>Salman Khan</td>
+                                                    <td>
+                                                        <div class="share share-2">
+                                                            <div class="row no-gutter">
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-hotel"></i>
+                                                                        <span>11</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-plane"></i>
+                                                                        <span>12</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-train"></i>
+                                                                        <span>8</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-bus"></i>
+                                                                        <span>7</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-car"></i>
+                                                                        <span>6</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                        <nav style="float: right; padding: 5px 10px">
+                                            <ul class="pagination-sm m-a-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="quotation" role="tabpanel">
+                        <div class="card">
+                            <h5 class="card-header">
+                                <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; Quotation Details
+                            </h5>
+                            <div class="card-block p-a-0">
+                                <div class="row m-a-0">
+                                    <div class="col-md-12 p-a-0">
+
+                                        <div class="btn-group" style="float: right; padding: 2px 6px;">
+                                            <a style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" href="Index" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Create</a>
+                                            <a style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" href="#" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Edit</a>
+                                        </div>
+
+                                        <table class="table m-b-0">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Enquiry No</th>
+                                                    <th>Budget</th>
+                                                    <th>Enquiry Status</th>
+                                                    <th>Total Quotation</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                        </label>
+                                                    </th>
+                                                    <td>1</td>
+                                                    <td>50000</td>
+                                                    <td>Arrived</td>
+                                                    <td>48000</td>
+                                                    <td>
+                                                        <div class="share share-2">
+                                                            <div class="row no-gutter">
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-hotel"></i>
+                                                                        <span>2</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-plane"></i>
+                                                                        <span>3</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-train"></i>
+                                                                        <span>4</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-bus"></i>
+                                                                        <span>5</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-car"></i>
+                                                                        <span>6</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                        </label>
+                                                    </th>
+                                                    <td>2</td>
+                                                    <td>75000</td>
+                                                    <td>In Progress</td>
+                                                    <td>65000</td>
+                                                    <td>
+                                                        <div class="share share-2">
+                                                            <div class="row no-gutter">
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-hotel"></i>
+                                                                        <span>6</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-plane"></i>
+                                                                        <span>5</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-train"></i>
+                                                                        <span>4</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-bus"></i>
+                                                                        <span>3</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-car"></i>
+                                                                        <span>2</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                        </label>
+                                                    </th>
+                                                    <td>3</td>
+                                                    <td>100000</td>
+                                                    <td>Closed</td>
+                                                    <td>105000</td>
+                                                    <td>
+                                                        <div class="share share-2">
+                                                            <div class="row no-gutter">
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-hotel"></i>
+                                                                        <span>11</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-plane"></i>
+                                                                        <span>12</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-train"></i>
+                                                                        <span>8</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-bus"></i>
+                                                                        <span>7</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-xs-2 s-item">
+                                                                    <a href="#">
+                                                                        <i class="fa fa-car"></i>
+                                                                        <span>6</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                        <nav style="float: right; padding: 5px 10px">
+                                            <ul class="pagination-sm m-a-0">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">»</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

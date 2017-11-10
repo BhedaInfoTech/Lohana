@@ -1,0 +1,94 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Master/Package/package-date-validations.js"></script>
+
+<script src="~/Scripts/Master/Package/package-date-methods.js"></script>
+
+<script src="~/Scripts/Master/Package/package-date-events.js"></script>
+
+
+<div class="block">
+
+    <form id="frmPackageDateDetails">
+
+        <input type="hidden" id="hdnPackageDateId" name="PackageDate.PackageId" value="@Model.Package.PackageId" />
+
+        <div class="block">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                        <label>Package Start Date</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" id="datepicker-autoclose" class="form-control input-sm" name="Package.packageStartDate" placeholder="Enter tour start date">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Package End Date</label>
+                        <div class="input-group">
+                            <input type="text" id="datepicker1-autoclose" class="form-control input-sm" name="Package.packageEndDate" placeholder="Enter tour end date">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+            <label>Package Cost</label>
+            <div class="input-group">
+                <input type="text" id="txtpackageCost" placeholder="Enter package cost" class="form-control input-sm" name="Package.PackageCost" value="@(Model.Package.PackageCost==0 ?"" : Model.Package.PackageCost.ToString())" maxlength="50">
+                <span class="input-group-addon">
+                    <i class="fa fa-money"></i>
+                </span>
+            </div>
+        </div>
+
+
+
+                <div class="col-md-3">
+                    <br />
+                    <div class="form-group">
+                        <button type="button" id="btnAddPackageDate" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="reset" id="btnDeletePackageDate" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<div class="card" id="divPackageDateList">
+
+    <h5 class="card-header">
+        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Package Date Listing
+    </h5>
+
+    <form role="form" id="frmSearchPackageDate">
+
+        <input type="hidden" id="hdnSearchPackageDateId" value="@Model.PackageDate.PackageDateId" name="PackageDateFilter.PackageDateId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageDate" data-current-page=""></table>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

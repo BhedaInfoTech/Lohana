@@ -1,0 +1,32 @@
+﻿@model Lohana.Models.Master.TaxFormulaViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table m-b-0">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Charges Name</th>
+                    <th>Charge Formula</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.TaxFormulaCharges != null && Model.TaxFormulaCharges.Count > 0)
+                {
+                    foreach (var item in Model.TaxFormulaCharges)
+                    {
+                        <tr>
+                            <td>@item.ChargesName</td>
+                            <td>@item.ChargeFormulaText</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="2">No Records Found</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

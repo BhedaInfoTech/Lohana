@@ -1,0 +1,100 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariff.LohanaPackageTariffViewModel
+@using LohanaBusinessEntities.Common;
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-validations.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-methods.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-events.js"></script>
+
+<form id="frmLohanaPackageTariffBasic">
+    <div class="row">
+
+        <div class="col-md-3">
+            <label>Package Type </label>
+            <div class="input-group">
+                <select id="drpPackageType" class="form-control input-sm" name="Package.PackageType">
+                    <option value="0">Select package type</option>
+                    @foreach (var item in Model.PackageTypes)
+                    {
+                        if (Model.LohanaPackageTariff.PackageTypeId == item.PackageTypeId)
+                        {
+                            <option value="@item.PackageTypeId" selected="selected">@item.PackageTypeName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.PackageTypeId">@item.PackageTypeName</option>
+                        }
+                    }
+                </select>
+                <span class="input-group-addon">
+                    <a href="" target="_blank"> <i class="fa fa-globe"></i></a>
+                </span>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="">Package Name</label>
+                <input type="text" id="txtPackageName" class="form-control" placeholder="Enter package name" name="LohanaPackageTariff.PackageName">
+            </div>
+        </div>
+
+       
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Duration</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" id="txtDayduration" class="form-control" name="LohanaPackageTariff.DayDuration" placeholder="Days" maxlength="2" disabled="disabled"> 
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="txtNightduration" class="form-control" name="LohanaPackageTariff.NightDuration" placeholder="Nights" maxlength="2"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+        <div class="col-md-3">
+            <div class="form-group">
+
+                <label for="">Set Active</label>
+                <div class="input-group">
+                    <input class="js-switch" data-color="#1bc044" checked="" data-switchery="true" value="true" name="LohanaPackageTariff.IsActive" type="checkbox" id="Flag">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+
+        <button type="button" id="btnAddBasic" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        <button type="button" id="btnResetBasic" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        <button type="button" id="btnSearchBasic" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+
+    </div>
+    
+       
+        <div class="card">
+
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Lohana Package Basic Listing
+            </h5>
+
+            <div class="row">
+                <input type="hidden" id="hdnLohanaPackageTariffId" value="" name="LohanaPackageTariff.LohanaPackageTariffId" />
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="overflow-x-auto">
+                        <table class="table m-b-0" id="tblLohanaPackageTariff"></table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+   
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+</form>
+

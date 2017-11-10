@@ -1,0 +1,79 @@
+﻿@using LohanaBusinessEntities.Common;
+@model Lohana.Models.Master.TaxFormulaChargesModel
+
+
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <label for="drpChargesType" style="color: #333" class="">ChargesType</label>
+            <div class="input-group">
+                <select class="form-control input-sm charges-type" id="drpChargesType" name="TaxFormula.ChargesType" data-level="0">
+
+                    <option value="0">Select Charges</option>
+
+                    @foreach (var item in Model.Charges)
+                {
+                    if (Model.TaxFormula.ChargesId == item.ChargesId)
+                    {
+                        <option value="@item.ChargesId" selected="selected">@item.ChargesName</option>
+                    }
+                    else
+                    {
+                        <option value="@item.ChargesId">@item.ChargesName</option>
+                    }
+                }
+
+                </select>
+
+                <span class="input-group-addon">
+                    <i class="fa fa-money"></i>
+                </span>
+                <input type="hidden" id="hiddenChargeInput" value="" />
+            </div>
+        </div>
+
+        <div class="col-md-3">
+
+            <label for="drpCalculatedOn" style="color: #333" class="">Calculated On</label>
+            <div class="input-group">
+                <select class="form-control input-sm calcon" id="drpCalculatedOn" name="TaxFormula.CalculatedOn" data-behaviour="0">
+
+                    <option value="0">Select Calculated On</option>
+
+                    @foreach (var item in LookupInfo.GetChargesRateTypes())
+                {
+                    if (Model.TaxFormula.TaxFixPrice == item.Key)
+                    {
+                        <option value="@item.Key" data-is-fixed="1" selected="selected">@item.Value</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Key" data-is-fixed="1">@item.Value</option>
+                    }
+                }
+
+                @foreach (var item in LookupInfo.GetChargesRateTypes())
+                {
+
+                </select>
+
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <br>
+                <button type="button" id="btnAddMore" class="btn btn-success  label-left m-b-0-25 waves-effect waves-light add-more-cal-on"><span class="btn-label"><i class="ti-check"></i></span>Add More</button>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="form-group">
+                <br>
+                <button type="button" id="btnRemoveCalOn" class="btn btn-danger  label-left m-b-0-25 waves-effect waves-light remove-cal-on"><span class="btn-label"><i class="ti-check"></i></span>Remove</button>
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,2435 @@
+﻿@model Lohana.Models.Quotation.QuotationViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script src="~/Scripts/Quotation/view-quotation-enquiry-item-methods.js"></script>
+
+
+@{
+    int Count = 0;
+    int counter = 1;
+
+}
+ 
+<div class="row mb-1">
+
+    <div class="col-sm-12">
+
+        <div class="card card-block">
+
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-4">
+                    <a href="#" class="btn btn-secondary label-left m-b-0-25 waves-effect waves-light" data-toggle="modal" data-target=".view_details"><span class="btn-label"><i class="ti-list"></i></span>View Cart Details</a>
+                    @*<a href="/Bookings/Index" id="btnBookQuotation" type="submit" class="btn btn-danger">Book</a>*@
+                </div>
+
+            </div>
+
+            <h3 class="card-title"></h3>
+
+            <div class="management m-b-1">
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Git)))
+                {
+
+                    <div class="m-item">
+
+
+                        <div class="mi-checkbox">
+                            <i class="fa fa-git"></i>
+                        </div>
+
+                        <div>
+                            @*@{Html.RenderPartial("_SearchPackageDetails.cshtml");}*@
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+                                <input type="hidden" id=@("hdnEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+                                <input type="hidden" id=@("hdnFromDate" + Count) value="@itm.FromDate" />
+                                <input type="hidden" id=@("hdnLocation" + Count) value="@itm.Location" />
+                                <input type="hidden" id=@("hdnBudget" + Count) value="@itm.Budget" />
+                                <input type="hidden" id=@("hdnPackageType" + Count) value="@itm.PackageType" />
+                                <input type="hidden" id=@("hdnadult" + Count) value="@itm.AdultCount" />
+                                <input type="hidden" id=@("hdnchild" + Count) value="@itm.ChildCount" />
+                                <input type="hidden" id=@("hdncity" + Count) value="@itm.CityId" />
+                                <input type="hidden" id=@("hdnstate" + Count) value="@itm.StateId" />
+                                <input type="hidden" id=@("hdncountry" + Count) value="@itm.CountryId" />
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Category:<a class="text-black">@itm.CategoryName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Package Type:<a class="text-black">@itm.PackageTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Traveler of Date:<a class="text-black">@itm.FromDate</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>No Of Nights:<a class="text-black">@itm.NoOfNights</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget :<a class="text-black">@itm.Budget</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Children Count:<a class="text-black">@itm.ChildCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigned Type :<a class="text-black">@itm.EnquiryAssignedTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assignee Name :<a class="text-black">@itm.UserName</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success active btnGetGit" id="@("btnGetGit_"+Count)" onclick=" javascript: GetEnquiryGitDetailsById(this)">Get git</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <br />
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblGitDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Category</th>
+                                            <th>Packagetype</th>
+                                            <th>Package Name</th>
+                                            <th>Duration</th>
+                                            <th>Net Rate</th>
+                                            <th>Status</th>
+                                            <th>Remark</th>
+                                            <th>Traveler Date</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                    </thead>
+
+                                        @foreach (var itm4 in Model.GitQuotation.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+
+                                            foreach (var items in Model.GitQuotation.Where(a => a.QuotationItemId == itm4.QuotationItemId))
+                                            {
+                                        <tr>
+                                            <td>
+                                                <input type="hidden" id=@("hdnQuotationGItId_" + counter) value="@items.QuotationItemId" />
+                                            </td>
+
+
+                                            <td>
+                                                <span id="trCategory"> @items.CategoryName</span>
+                                            </td>
+
+                                            <td>
+                                                <span id="trCategory"> @items.PackageTypeName</span>
+                                            </td>
+
+                                            <td>
+                                                <span id="trCategory"> @items.PackageName</span>
+                                            </td>
+
+                                            <td>
+                                                <span id="trCategory"> @items.PackageDuration</span>
+                                            </td>
+
+                                            <td>
+                                                <span id="trCategory"> @items.Cost  </span>
+                                            </td>
+                                                    @if (Model.IsApproval && items.QuotationStatus == (int)QuotationStatus.Send_for_Approval)
+                                                    {
+                                            <td>
+                                                            @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                            <select id="drpQuotationGItStatus_@counter" class="form-control QuotationStatus">
+                                                                <option value="">Select Customer Type</option>
+                                                                @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                                {
+                                                                    if (items.QuotationStatus == itemQS.Key)
+                                                                    {
+                                                                        <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id=@("txtGitRemark_" + counter) class="form-control input-sm remark" value="@items.Remark" />
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+                                                        </td>
+                                                        <td>
+                                                            <span id="trCategory"> @items.Remark </span>
+                                                        </td>
+                                                    }
+                                                    
+                                                    <td>
+                                                <span id="trCategory"> @items.FromDate  </span>
+                                            </td>
+                                            <td>
+                                                @*<button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>*@
+                                                <button type="button" id="@("btnDeleteGitDetails_" + counter)" onclick="javascript: DeleteGitById(this)" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            </td>
+
+                                        </tr>
+
+                                            }
+                                            counter = counter + 1;
+                                        }
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                                        Count++;
+
+                }
+
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Fit)))
+                {
+
+                    <div class="m-item">
+
+                        <div class="mi-checkbox">
+                            <b>fit</b>
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+                                <input type="hidden" id="@("hdnFitEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+                                <input type="hidden" id=@("hdnPackageType" + Count) value="@itm.PackageType" />
+                                <input type="hidden" id=@("hdnCountryId" + Count) value="@itm.CountryId" />
+                                <input type="hidden" id=@("hdnStateId" + Count) value="@itm.StateId" />
+                                <input type="hidden" id=@("hdnCityId" + Count) value="@itm.CityId" />
+                                <input type="hidden" id=@("hdnNoOfNights" + Count) value="@itm.NoOfNights" />
+                                <input type="hidden" id=@("hdnCheckInDate" + Count) value="@itm.CheckInDate" />
+                                <input type="hidden" id=@("hdnCheckOutDate" + Count) value="@itm.CheckOutDate" />
+                                <input type="hidden" id=@("hdnOccupancyId" + Count) value="@itm.OccupancyId" />
+                                <input type="hidden" id=@("hdnAdultCount" + Count) value="@itm.AdultCount" />
+                                <input type="hidden" id=@("hdnChildCount" + Count) value="@itm.ChildCount" />
+                                <input type="hidden" id=@("hdnBudget" + Count) value="@itm.Budget" />
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Package Type:<a class="text-black">@itm.PackageTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>No Of Nights:<a class="text-black">@itm.NoOfNights</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check In Date:<a class="text-black">@itm.CheckInDate</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check Out Date:<a class="text-black">@itm.CheckOutDate</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Occupancy:<a class="text-black">@itm.OccupancyName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>    
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success active btnGetFit" id="@("btnGetFit_" + Count)" onclick=" javascript: GetEnquiryFitDetailsById(this)">Get Fit</button>
+                                    @*<button type="button" class="btn btn-success active btnGetFit" id="btnGetFit">Get fit</button>*@
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <br />
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblFitDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Package Name</th>
+                                            <th>Package Type</th>
+                                            <th>RoomType</th>
+                                            <th>Duration</th>
+                                            <th>Cost</th>
+                                            <th>Quotation Status</th>
+                                            <th>Check In Date</th>
+                                            <th>Check Out Date</th>
+                                            <th>Remark</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                    </thead>
+                                        @foreach (var itm4 in Model.QuotaionItems.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+
+                                            foreach (var items in Model.QuotaionItems.Where(a => a.QuotationItemId == itm4.QuotationItemId))
+                                            {
+                                        <tr>
+                                            <td>
+                                                        <input type="hidden" id=@("hdnQuotationFitId_" + counter) value="@items.QuotationItemId" />
+                                            </td>
+
+
+                                            <td>
+                                                        <span id="trPackageName"> @items.PackageName</span>
+                                            </td>
+
+                                            <td>
+                                                        <span id="trPackageTypeName"> @items.PackageTypeName</span>
+                                            </td>
+
+                                            <td>
+                                                        <span id="trRoomTypeName"> @items.RoomTypeName</span>
+                                            </td>
+
+                                            <td>
+                                                        <span id="trPackageDuration"> @items.PackageDuration</span>
+                                            </td>
+
+                                            <td>
+                                                        <span id="trCost"> @items.Cost  </span>
+                                            </td>
+                                          
+                                            @if (Model.IsApproval && items.QuotationStatus == (int)QuotationStatus.Send_for_Approval)
+                                            {
+                                                <td>
+                                                    @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                    <select id="drpQuotationGItStatus_@counter" class="form-control QuotationStatus">
+                                                        <option value="">Select Customer Type</option>
+                                                        @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                        {
+                                                            if (items.QuotationStatus == itemQS.Key)
+                                                            {
+                                                                <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                            </td>
+                                            <td>
+                                                    <input type="text" id=@("txtFitRemark_" + counter) class="form-control input-sm remark" value="@items.Remark" />
+                                            </td>
+                                            }
+                                            else
+                                            {
+                                            <td>
+                                                    <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+
+                                            </td>
+                                            <td>
+                                                    <span id="trCategory"> @items.Remark </span>
+                                            </td>
+                                            }
+                                            <td>
+                                                <span id="trCheckInDate"> @items.CheckInDate  </span>
+                                            </td>
+                                            <td>
+                                                        <span id="trCheckOutDate"> @items.CheckOutDate  </span>
+                                            </td>
+                                            <td>
+                                                        @*<button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>*@
+                                                        <button type="button" id="@("btnDeleteFitDetails_" + counter)" onclick="javascript: DeleteFitById(this)" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            </td>
+
+                                        </tr>
+
+                                            }
+                                            counter = counter + 1;
+                                        }
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    Count++;
+                }
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Fit)))
+                {
+
+                    <div class="m-item">
+
+                        <div class="mi-checkbox">
+                            <b>Spt</b>
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+                                <input type="hidden" id="@("hdnSptEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+                                <input type="hidden" id=@("hdnSptPackageType" + Count) value="@itm.PackageType" />
+                                <input type="hidden" id=@("hdnSptCountryId" + Count) value="@itm.CountryId" />
+                                <input type="hidden" id=@("hdnSptStateId" + Count) value="@itm.StateId" />
+                                <input type="hidden" id=@("hdnSptCityId" + Count) value="@itm.CityId" />
+                                <input type="hidden" id=@("hdnSptNoOfNights" + Count) value="@itm.NoOfNights" />
+                                <input type="hidden" id=@("hdnSptCheckInDate" + Count) value="@itm.CheckInDate" />
+                                <input type="hidden" id=@("hdnSptCheckOutDate" + Count) value="@itm.CheckOutDate" />
+                                <input type="hidden" id=@("hdnSptRoomType" + Count) value="@itm.RoomType" />
+                                <input type="hidden" id=@("hdnSptAdultCount" + Count) value="@itm.AdultCount" />
+                                <input type="hidden" id=@("hdnSptChildCount" + Count) value="@itm.ChildCount" />
+                                <input type="hidden" id=@("hdnSptBudget" + Count) value="@itm.Budget" />
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Package Type:<a class="text-black">@itm.PackageTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>No Of Nights:<a class="text-black">@itm.NoOfNights</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check In Date:<a class="text-black">@itm.CheckInDate</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check Out Date:<a class="text-black">@itm.CheckOutDate</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>RoomType:<a class="text-black">@itm.RoomTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success active btnGetFit" id="@("btnGetSpt_" + Count)" onclick=" javascript: GetEnquirySptDetailsById(this)">Get Spt</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <br />
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblSptDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            @*<th>Category</th>
+                                            <th>Packagetype</th>
+                                            <th>Destination</th>*@
+                                            <th>Package Name</th>
+                                            <th>Duration</th>
+                                            <th>Cost</th>
+                                            <th>Check In Date</th>
+                                            @*<th>Net Rate</th>*@
+                                            <th>Status</th>
+                                            <th>Remark</th>
+                                            <th>Check Out Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                        @foreach (var itm4 in Model.QuotaionItems.Where(a => a.EnquiryItemId == itm.EnquiryItemId && a.EnquiryType == ((int)EnquiryType.Spt)))
+                                        {
+                                            foreach (var items in Model.QuotaionItems.Where(a => a.QuotationItemId == itm4.QuotationItemId))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input type="hidden" id=@("hdnQuotationSptId_" + counter) value="@items.QuotationItemId" />
+                                                    </td>
+
+
+                                                    <td>
+                                                        <span id="trPackageName"> @items.PackageName</span>
+                                                    </td>
+
+                                                    @*<td>
+                                                        <span id="trPackageTypeName"> @items.PackageTypeName</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trRoomTypeName"> @items.RoomTypeName</span>
+                                                    </td>*@
+
+                                                    <td>
+                                                        <span id="trPackageDuration"> @items.PackageDuration</span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trCost"> @items.Cost  </span>
+                                                    </td>
+                                                    <td>
+                                                        <span id="trCheckInDate"> @items.CheckInDate  </span>
+                                                    </td>
+                                                    @if (Model.IsApproval && items.QuotationStatus == (int)QuotationStatus.Send_for_Approval)
+                                                    {
+                                                        <td>
+                                                            @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                            <select id="drpQuotationGItStatus_@counter" class="form-control QuotationStatus">
+                                                                <option value="">Select Customer Type</option>
+                                                                @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                                {
+                                                                    if (items.QuotationStatus == itemQS.Key)
+                                                                    {
+                                                                        <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id=@("txtFitRemark_" + counter) class="form-control input-sm remark" value="@items.Remark" />
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+                                                        </td>
+                                                        <td>
+                                                            <span id="trCategory"> @items.Remark </span>
+                                                        </td>
+                                                    }
+                                                    <td>
+                                                        <span id="trCheckOutDate"> @items.CheckOutDate  </span>
+                                                    </td>
+                                                    <td>
+                                                        @*<button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>*@
+                                                        <button type="button" id="@("btnDeleteSptDetails_" + counter)" onclick="javascript: DeleteSptById(this)" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                                    </td>
+
+                                                </tr>
+
+                                            }
+                                            counter = counter + 1;
+                                        }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                                        Count++;
+                }
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Hotel)))
+                {
+
+                    <div class="m-item">
+
+                        <div class="mi-checkbox">
+                            <i class="fa fa-hotel"></i>
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+
+                                <input type="hidden" id="@("hdnHotelEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+                                <input type="hidden" id="@("hdnCheckInDate_" + Count)" value="@itm.CheckInDate" />
+                                <input type="hidden" id="@("hdnCheckOutDate_" + Count)" value="@itm.CheckOutDate" />
+                                <input type="hidden" id="@("hdnAdultCount_" + Count)" value="@itm.AdultCount" />
+                                <input type="hidden" id="@("hdnChildCount_" + Count)" value="@itm.ChildCount" />
+                                <input type="hidden" id="@("hdnHotelTypeId_" + Count)" value="@itm.HotelTypeId" />
+                                <input type="hidden" id="@("hdnRoomType_" + Count)" value="@itm.RoomType" />
+                                <input type="hidden" id="@("hdnStarCategory_" + Count)" value="@itm.StarCategory" />
+                                <input type="hidden" id=@("hdnCity_" + Count) value="@itm.CityId" />
+                                <input type="hidden" id=@("hdnState_" + Count) value="@itm.StateId" />
+                                <input type="hidden" id=@("hdnCountry_" + Count) value="@itm.CountryId" />
+
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Location:<a class="text-black">@itm.City</a></li>
+                                        @*<li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>*@
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Type:<a class="text-black">@itm.HotelTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Name:<a class="text-black">@itm.HotelName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Room Count:<a class="text-black">@itm.RoomCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>CheckIn Date:<a class="text-black">@itm.CheckInDate</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Checkout Date:<a class="text-black">@itm.CheckOutDate</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        @*<li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigned Type :<a class="text-black">@itm.EnquiryAssignedTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigne Name :<a class="text-black">@itm.UserName</a></li>*@
+                                    </ul>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+
+                                <div class="col-md-4">
+
+                                    @*<button type="button" class="btn btn-success active btnGetHotels" id="btnGetHotels">Get Hotels</button>*@
+
+                                    <button type="button" class="btn btn-success active" id="@("btnGetHotels_" + Count)" onclick="javascript: GetEnquiryHotelDetailsById(this)">Get Hotels</button>
+
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <br />
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblHotelDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Hotel Name</th>
+                                            <th>Star Category</th>
+                                            <th>Hotel Type</th>
+                                            @*<th>MealPlan</th>
+                                            <th>Occupancy</th>*@
+                                            <th>Net Rate</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var htm in Model.QuotaionItems.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+                                            foreach (var hitems in Model.QuotaionItems.Where(h => h.QuotationItemId == htm.QuotationItemId))
+                                            {
+                                        <tr> 
+                                            <td>
+                                                <input type="hidden" id=@("hdnQuotationHotelId_" + counter) value="@hitems.QuotationItemId" />
+                                            </td>
+                                            <td>
+                                                <span id="trHotelName"> @hitems.HotelName</span> 
+                                            </td>
+
+                                            <td>
+                                                <span id="trStarCategory"> @hitems.StarCategoryStr</span>
+                                            </td>
+
+                                            <td>
+                                                <span id="trHotelTypeName"> @hitems.HotelTypeName</span>
+                                            </td> 
+
+                                            <td>
+                                                <span id="trCost"> @hitems.Cost  </span>
+                                            </td> 
+                                            <td>
+                                                        @*<button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>*@
+                                                        <button type="button" id="@("btnDeleteHotelDetails_" + counter)" onclick="javascript: DeleteHotelById(this)" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            </td>
+                                        </tr>
+                                            }
+                                            counter = counter + 1;
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    Count++;
+
+                }
+
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Flight)))
+                {
+
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-plane"></i>
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+                                <input type="hidden" id=@("hdnFlightEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Flight Type:<a class="text-black">@itm.EnquiryFlightType</a></li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Infant Count:<a class="text-black">@itm.InfantCount</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigned Type :<a class="text-black">@itm.EnquiryAssignedTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigne Name :<a class="text-black">@itm.UserName</a></li>
+
+                                    </ul>
+                                </div>
+
+                                @foreach (var item in itm.EnquiryItemTypeDetails)
+                                {
+
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 5px 0;">
+                                        <input type="hidden" id="hdnIsEditFlightDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+
+                                        <table class="table table-bordered" id="tblFlightDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Ticket Class</th>
+                                                    <th>PickUpFrom</th>
+                                                    <th>DropTo</th>
+                                                    <th>Departure On</th>
+                                                    <th>Return On</th>
+                                                </tr>
+
+                                                @*@for (var i = 0; i < Model.Enquiries.Count; i++)
+                                                    {*@
+
+
+                                                <tr>
+                                                    <td>
+                                                        <span id="trticketClass"> @item.TicketClassName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trpickUpFrom"> @item.PickUpFromName</span>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trdropTo"> @item.DropToName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trdepartureDate"> @item.DepartureDate</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trreturnDate"> @item.ReturnDate</span>
+
+                                                    </td>
+                                                </tr>
+
+
+                                            </thead>
+
+                                            <tbody></tbody>
+                                        </table>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                }
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success active" id="@("btnAddFlight_" + Count)" onclick="javascript: GetEnquiryFlightDetailsById(this)">Add Flight</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <br />
+
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblFlightDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Ticket Class</th>
+                                            <th>PickUp From</th>
+                                            <th>Drop To</th>
+                                            <th>Quote Rate</th>
+                                            <th>Status</th>
+                                            <th>Departure On</th>
+                                            <th>Return On</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                    </thead>
+
+
+                                        @foreach (var itm4 in Model.FlightQuotations.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+
+                                            foreach (var items in Model.FlightQuotationItemTypeDetails.Where(a => a.QuotationItemId == itm4.QuotationItemId))
+                                            {
+
+                                        <tr>
+                                            <td>
+                                                        <input type="hidden" id=@("hdnQuotationFlightItemId_" + counter) name="FlightQuotationItemTypeDetails[@(counter - 1)].QuotationItemId" value="@items.QuotationItemId" />
+                                            </td>
+
+
+                                            <td>
+                                                <span id="trticketClass"> @items.TicketClassName</span>
+
+                                            </td>
+                                            <td>
+                                                <span id="trpickUpFrom"> @items.PickUpFromName</span>
+
+                                            </td>
+
+                                            <td>
+                                                <span id="trdropTo"> @items.DropToName</span>
+
+                                            </td>
+
+                                            <td>
+                                                <span id="trquoteRate"> @items.QuoteRate</span>
+
+                                            </td>
+                                                    @if (Model.IsApproval)
+                                                    {
+                                                        <td>
+                                                            @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                            <select id="drpFlightQuotationsStatus_@counter" class="form-control" name="FlightQuotations[@(counter - 1)].QuotationStatus">
+                                                                <option value="">Select Customer Type</option>
+                                                                @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                                {
+                                                                    if (items.QuotationStatus == itemQS.Key)
+                                                                    {
+                                                                        <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </td>
+                                                        @*<td>
+                                                            <input type="text" id=@("txtFitRemark_" + counter) class="form-control input-sm remark" value="@items.Remark" />
+                                                        </td>*@
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+
+                                                        </td>
+                                                        @*<td>
+                                                            <span id="trCategory"> @items.Remark </span>
+                                                        </td>*@
+                                                    }
+                                            <td>
+                                                <span id="trdepartureDate"> @items.DepartureDate</span>
+
+                                            </td>
+                                            <td>
+                                                <span id="trreturnDate"> @items.ReturnDate</span>
+
+                                            </td>
+                                            <td>
+                                                <button id="@("btnEditQuotationFlightDetails_" + counter)" type="button" onclick="javascript: GetQuotationFlightDetailsById(this)" class=" btn btn-success btn-rounded waves-effect waves-light btn-model-pencil editflight" style="font-size: 15px;"><i class="fa fa-pencil"></i></button>
+                                                <button id="@("btnDeleteQuotationFlightDetails_" + counter)" onclick="javascript: DeleteQuotationFlightDetailsById(this)" type="button" class="btn btn-danger btn-rounded  waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                                <button id="@("btnCloneQuotationFlightDetails_" + counter)" onclick="javascript: CloneQuotationFlightDetailsById(this)" type="button" class="btn btn-outline-warning btn-rounded  waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                            </td>
+                                        </tr>
+
+
+                                            }
+
+                                            counter = counter + 1;
+                                        }
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                                        Count++;
+
+                }
+
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Train)))
+                {
+
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-train"></i>
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+                                <input type="hidden" id=@("hdnTrainEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Train Type:<a class="text-black">@itm.EnquiryTrainType</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Infant Count:<a class="text-black">@itm.InfantCount</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigned Type :<a class="text-black">@itm.EnquiryAssignedTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigne Name :<a class="text-black">@itm.UserName</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 5px 0;">
+                                        <input type="hidden" id="hdnIsEditTrainTypeDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblTrainTypeDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Ticket Class</th>
+                                                    <th>PickUpFrom</th>
+                                                    <th>DropTo</th>
+                                                    <th>Departure On</th>
+                                                    <th>Return On</th>
+                                                </tr>
+                                                @foreach (var item in itm.EnquiryItemTypeDetails)
+                                                {
+                                                <tr>
+
+
+                                                    <td>
+                                                        <span id="trticketClass"> @item.TicketClassName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trpickUpFrom"> @item.PickUpFromName</span>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trdropTo"> @item.DropToName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trdepartureDate"> @item.DepartureDate</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trreturnDate"> @item.ReturnDate</span>
+
+                                                    </td>
+                                                </tr>
+                                                }
+
+                                            </thead>
+
+                                            <tbody></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 5px 0;">
+                                        <input type="hidden" id="hdnIsEditTrainPassDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblTrainPassDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Region</th>
+                                                    <th>PassType</th>
+                                                    <th>RailPass</th>
+                                                    <th>RailClass</th>
+                                                    <th>NoOfDays</th>
+                                                </tr>
+
+                                                @foreach (var item1 in itm.EnquiryItemPassDetails)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <span id="trregion"> @item1.RegionName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trpassType"> @item1.PassTypeName</span>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trrailPass"> @item1.RailPassName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trrailClass"> @item1.RailClassName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trnoOfDays"> @item1.NoOfDays</span>
+
+                                                    </td>
+                                                </tr>
+                                                }
+
+
+                                            </thead>
+
+                                            <tbody></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    @*<button type="button" class="btn btn-success active" id="btnAddTrain">Add Train</button>*@
+
+                                    <button type="button" class="btn btn-success active" id="@("btnAddTrain_" + Count)" onclick="javascript: GetEnquiryTrainDetailsById(this)">Add Train</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <br />
+
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblTrainDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Ticket Class</th>
+                                            <th>PickUp From</th>
+                                            <th>Drop To</th>
+                                            <th>Quote Rate</th>
+                                            <th>Status</th>
+                                            <th>Departure On</th>
+                                            <th>Return On</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                    </thead>
+                                        @foreach (var itm4 in Model.TrainQuotations.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+
+                                            foreach (var items in Model.TrainQuotationItemTypeDetails.Where(a => a.QuotationItemId == itm4.QuotationItemId))
+                                            {
+
+                                        <tr>
+                                            <td>
+                                                        <input type="hidden" id=@("hdnQuotationTrainItemId_" + counter) name="TrainQuotationItemTypeDetails[@(counter - 1)].QuotationItemId" value="@items.QuotationItemId" />
+                                            </td>
+
+
+                                            <td>
+                                                <span id="trticketClass"> @items.TicketClassName</span>
+
+                                            </td>
+                                            <td>
+                                                <span id="trpickUpFrom"> @items.PickUpFromName</span>
+
+                                            </td>
+
+                                            <td>
+                                                <span id="trdropTo"> @items.DropToName</span>
+
+                                            </td>
+
+                                            <td>
+                                                <span id="trquoteRate"> @items.QuoteRate</span>
+
+                                            </td>
+                                                    @if (Model.IsApproval)
+                                                    {
+                                                    <td>
+                                                            @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                            <select id="drpTrainQuotationStatus_@counter" class="form-control" name="TrainQuotationItemTypeDetails[@(counter - 1)].QuotationStatus">
+                                                                <option value="">Select Customer Type</option>
+                                                                @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                                {
+                                                                    if (items.QuotationStatus == itemQS.Key)
+                                                                    {
+                                                                        <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </td>
+                                                        @*<td>
+                                                            <input type="text" id=@("txtFitRemark_" + counter) class="form-control input-sm remark" value="@items.Remark" />
+                                                        </td>*@
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+
+                                                        </td>
+                                                        @*<td>
+                                                            <span id="trCategory"> @items.Remark </span>
+                                                        </td>*@
+                                                    }
+                                            <td>
+                                                <span id="trdepartureDate"> @items.DepartureDate</span>
+
+                                            </td>
+                                            <td>
+                                                <span id="trreturnDate"> @items.ReturnDate</span>
+
+                                            </td>
+                                            <td>
+                                                <button id="@("btnEditQuotationTrainDetails_" + counter)" type="button" onclick="javascript: GetQuotationTrainTypeDetailsById(this)" class=" btn btn-success btn-rounded waves-effect waves-light btn-model-pencil editflight" style="font-size: 15px;"><i class="fa fa-pencil"></i></button>
+                                                <button id="@("btnDeleteQuotationTrainDetails_" + counter)" onclick="javascript: DeleteQuotationTrainTypeDetailsById(this)" type="button" class="btn btn-danger btn-rounded  waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                                <button id="@("btnCloneQuotationTrainDetails_" + counter)" onclick="javascript: CloneQuotationTrainTypeDetailsById(this)" type="button" class="btn btn-outline-warning btn-rounded  waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                            </td>
+                                        </tr>
+
+
+                                            }
+
+                                            counter = counter + 1;
+                                        }
+
+
+
+                                </table>
+                            </div>
+
+                            <br />
+
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblTrainDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Region</th>
+                                            <th>PassType</th>
+                                            <th>RailPass</th>
+                                            <th>RailClass</th>
+                                            <th>Status</th>
+                                            <th>NoOfDays</th>
+                                            <th>Quote Rate</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                    </thead>
+                                        @foreach (var itm4 in Model.TrainQuotations.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+
+                                            foreach (var items in Model.TrainQuotationItemPassDetails.Where(a => a.QuotationItemId == itm4.QuotationItemId))
+                                            {
+
+                                        <tr>
+                                            <td>
+                                                        <input type="hidden" id=@("hdnQuotationTrainItemId_" + counter) name="TrainQuotationItemPassDetails[@(counter - 1)].QuotationItemId" value="@items.QuotationItemId" />
+                                            </td>
+
+
+                                            <td>
+                                                <span id="trticketClass"> @items.RegionName</span>
+
+                                            </td>
+                                            <td>
+                                                <span id="trpickUpFrom"> @items.PassTypeName</span>
+
+                                            </td>
+
+                                            <td>
+                                                <span id="trdropTo"> @items.RailPassName</span>
+
+                                            </td>
+
+                                            <td>
+                                                <span id="trquoteRate"> @items.RailClassName</span>
+
+                                            </td>
+                                                    @if (Model.IsApproval)
+                                                    {
+                                                        <td>
+                                                            @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                            <select id="drpCustomerType" class="form-control" name="TrainQuotationItemPassDetails[@(counter - 1)].QuotationStatus">
+                                                                <option value="">Select Customer Type</option>
+                                                                @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                                {
+                                                                    if (items.QuotationStatus == itemQS.Key)
+                                                                    {
+                                                                        <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+
+                                                        </td>
+                                                    }
+                                            <td>
+                                                <span id="trdepartureDate"> @items.NoOfDays</span>
+
+                                            </td>
+                                            <td>
+                                                <span id="trreturnDate"> @items.QuoteRate</span>
+
+                                            </td>
+                                            <td>
+                                                <button id="@("btnEditQuotationTrainPassDetails_" + counter)" type="button" onclick="javascript: GetQuotationTrainPassDetailsById(this)" class=" btn btn-success btn-rounded waves-effect waves-light btn-model-pencil editflight" style="font-size: 15px;"><i class="fa fa-pencil"></i></button>
+                                                <button id="@("btnDeleteQuotationTrainPassDetails_" + counter)" onclick="javascript: DeleteQuotationTrainPassDetailsById(this)" type="button" class="btn btn-danger btn-rounded  waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                                <button id="@("btnCloneQuotationTrainPassDetails_" + counter)" onclick="javascript: CloneQuotationTrainPassDetailsById(this)" type="button" class="btn btn-outline-warning btn-rounded  waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                            </td>
+                                        </tr>
+
+
+                                            }
+
+                                            counter = counter + 1;
+                                        }
+
+
+
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                                        Count++;
+
+                }
+
+
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Transfer)))
+                {
+
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-car"></i>
+                        </div>
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+
+
+                                <input type="hidden" id=@("hdnTransferEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City Name:<a class="text-black">@itm.CityName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Currency:<a class="text-black">@itm.CurrencyName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>VehicleType:<a class="text-black">@itm.VehicleTypeName</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigned Type :<a class="text-black">@itm.EnquiryAssignedTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigne Name :<a class="text-black">@itm.UserName</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 5px 0;">
+                                        <input type="hidden" id="hdnIsEditTransferDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblTransferDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Transfer Date</th>
+                                                    <th>PickUpType</th>
+                                                    <th>PickUpFrom</th>
+                                                    <th>PickUpTime</th>
+                                                    <th>DropOfType</th>
+                                                    <th>DropOfTo</th>
+                                                    <th>DropOfTime</th>
+                                                </tr>
+
+
+                                                @foreach (var item in itm.EnquiryItemTransferDetails)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <span id="trtransferDate"> @item.TransferDate</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trpickUpType"> @item.PickUpTypeName</span>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trpickUpFrom"> @item.PickUpName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trpickUpTime"> @item.PickUpTime</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trdropOfType"> @item.DropOffTypeName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trdropOfTo"> @item.DropOffName</span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span id="trdropOfTime"> @item.DropOffTime</span>
+
+                                                    </td>
+                                                </tr>
+                                                }
+
+                                            </thead>
+
+                                            <tbody></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success active btnGetVehicles" id="btnGetVehicles">Get Vehicles</button>
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                            </div>
+                            <br />
+                            <div class="table-responsive">
+                                <table class="table m-md-b-0" id="tblVehicleDetails">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th></th>
+                                            <th>Vehicle Package Name</th>
+                                            <th>Vehicle Name</th>
+                                            <th>Vehicle Type</th>
+                                            <th>Seating Capacity</th>
+                                            <th>Net Rate</th>
+                                            <th>Quote Rate</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                        <tr>
+                                            <td scope="row">
+                                                <label class="custom-control custom-radio">
+                                                    <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>Audi Car Show</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>Cruize</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>Coupe</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>4</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label class="text-danger">11000</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <input placeholder="Enter Price" class="form-control input-sm" type="text" value="10000">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>
+                                                <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row">
+                                                <label class="custom-control custom-radio">
+                                                    <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>BMW Car Works    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>Camry</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>Green Driving</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label>4</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <label class="text-success">8000</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>
+                                                <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                            </td>
+                                        </tr>
+                                    
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                                                Count++;
+
+                }
+
+
+                @foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Sightseeing)))
+                {
+
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-tree"></i>
+                        </div>
+
+                        <div class="mi-text">
+                            <div class="row">
+                                <input type="hidden" id="@("hdnSightseeingEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+                                <input type="hidden" id="@("hdnSightSeeingName" + Count)" value="@itm.SightseeingName" />
+                                <input type="hidden" id=@("hdnSightseeingEnquiryFromDate" + Count) value="@itm.TravelDate" />                                
+                                <input type="hidden" id=@("hdnSightseeingEnquiryBudget" + Count) value="@itm.Budget" />
+                                <input type="hidden" id=@("hdnSightseeingEnquiryAdult" + Count) value="@itm.AdultCount" />
+                                <input type="hidden" id=@("hdnSightseeingEnquirychild" + Count) value="@itm.ChildCount" />
+                                <input type="hidden" id=@("hdnSightseeingEnquiryCity" + Count) value="@itm.CityId" />
+                                <input type="hidden" id=@("hdnSightseeingEnquiryState" + Count) value="@itm.StateId" />
+                                <input type="hidden" id=@("hdnSightseeingEnquiryCountry" + Count) value="@itm.CountryId" />                                
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Sightseeing Name:<a class="text-black">@itm.SightseeingName</a></li>
+                                        <li><i class="fa fa-angle-right  text-warning m-r-0-5"></i>Vehicle Type:<a class="text-black">@itm.VehicleTypeName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Travel Date:<a class="text-black">@itm.TravelDate</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigned Type :<a class="text-black">@itm.EnquiryAssignedTypeName</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Assigne Name :<a class="text-black">@itm.UserName</a></li>
+                                    </ul>
+                                </div>                                
+
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active btnGetSightSeeing" @*id="btnGetSightSeeing"*@ id="@("btnGetSightSeeing_" + Count)" onclick=" javascript: GetEnquirySightSeeingDetailsById(this)">Get SightSeeing</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <br />
+
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblSightSeeingDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>SightSeeing Name</th>
+                                        <th>Location</th>
+                                        <th>Duration</th>
+                                        <th>Net Rate</th>
+                                        <th>TravelDate</th>
+                                        @*<th>Quote Rate</th>*@
+                                        <th>Action</th>
+                                    </tr>
+
+                                </thead>
+                                        @foreach (var itm5 in Model.SightSeeingQuatation.Where(a => a.EnquiryItemId == itm.EnquiryItemId))
+                                        {
+                                            foreach (var items in Model.SightSeeingQuatation.Where(a => a.QuotationItemId == itm5.QuotationItemId))
+                                            {                                            
+
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" id=@("hdnQuotationSightSeeingId_" + counter) value="@items.QuotationItemId" />
+                                        </td>                                       
+                                        <td>
+                                            <span id="trCategory"> @items.SightseeingName</span>
+                                        </td>
+                                        <td>
+                                            <span id="trCategory"> @items.CityName, @items.StateName, @items.CountryName</span>
+                                        </td>                                        
+                                        <td>
+                                            <span id="trCategory"> @items.PackageDuration</span>
+                                        </td>
+                                        <td>
+                                            <span id="trCategory"> @items.Cost</span>
+                                        </td>
+                                        @if (Model.IsApproval && items.QuotationStatus == (int)QuotationStatus.Send_for_Approval)
+                                        {
+                                            <td>
+                                                @*<span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>*@
+                                                <select id="drpQuotationGItStatus_@counter" class="form-control QuotationStatus">
+                                                    <option value="">Select Customer Type</option>
+                                                    @foreach (var itemQS in LookupInfo.GetQuotationStatus())
+                                                    {
+                                                        if (items.QuotationStatus == itemQS.Key)
+                                                        {
+                                                            <option value="@itemQS.Key" selected="selected">@itemQS.Value.Replace('_', ' ')</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@itemQS.Key">@itemQS.Value.Replace('_', ' ')</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="text" id=@("txtSightseeingRemark_" + counter) class="form-control input-sm remark" value="@items.Remark" />
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <span id="trCategory"> @LookupInfo.GetQuotationStatus()[items.QuotationStatus].ToString().Replace('_', ' ') </span>
+                                            </td>
+                                            <td>
+                                                <span id="trCategory"> @items.Remark </span>
+                                            </td>
+                                        }
+                                        <td>
+                                            <span id="trCategory"> @items.TravelDate</span>
+                                        </td>   
+                                        <td>                                            
+                                            @*<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>*@
+                                            <button type="button" id="@("btnDeleteSightSeeingDetails_" + counter)" onclick="javascript: DeleteSightSeeingById(this)" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                        </td>                                   
+                                    </tr>
+                                    @*<tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <label>Stories of Basel's Old Town</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <label>Basel, Switzerland</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <label>5 Star</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <label> 2 hours</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <label class="text-warning">1000</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i> </button>
+                                            <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+
+                                    </tr>*@
+                                        }
+                                            counter = counter + 1;
+                                        }
+                                        
+                            </table>
+                        </div>
+
+                    </div>
+
+                    Count++;
+
+                }
+
+                @*<div class="m-item">
+                    <div class="mi-checkbox">
+
+                    </div>
+
+                    <div class="mi-text">
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <b>Total Net Rate : 50000</b>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <b>Total Quote Rate : 58000</b>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <b>Service Tax : 13%</b>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>*@
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* Add Enquiry Items*@
+
+
+<div class="modal fade view_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; View  Details
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-4">
+                        <a href="/Bookings/Index" id="btnBookQuotation" type="submit" class="btn btn-danger">Proceed for Booking</a>
+                    </div>
+
+                </div>
+
+
+                <b>git</b>
+                <br />
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblGitDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Category</th>
+                                <th>Packagetype</th>
+                                <th>Package Name</th>
+                                <th>Duration</th>
+                                <th>Net Rate</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Domestic </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Honeymoon</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Mumbai-Pune</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>5D/6N</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">12000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">12000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+                                </td>
+
+                            </tr>
+                        
+                    </table>
+                </div>
+
+                <br />
+                <b>fit</b>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblFitDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th></th>
+                                <th>Category</th>
+                                <th>Packagetype</th>
+                                <th>Destination</th>
+                                <th>Duration</th>
+                                <th>Hoteltype</th>
+                                <th>Star Category</th>
+                                <th>Net Rate</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                                <td scope="row">
+                                    <label class="custom-control custom-radio">
+                                        <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Domestic </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Honeymoon</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Ooty-Manali</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>5D/6N</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Heritage Hotels</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>5 star</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">12000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">12000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+
+                                </td>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <br />
+                <i class="fa fa-hotel"></i>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblHotelDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+
+                                <th>Hotel Name</th>
+                                <th>Star Category</th>
+                                <th>Roomtype</th>
+                                <th>MealPlan</th>
+                                <th>Occupancy</th>
+                                <th>Net Rate</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+
+                                <td>
+                                    <div class="">
+                                        <label>Taj Hotel</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>5 star</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Deluxe</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Continental Plan</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Double</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">12000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">12000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <div class="">
+                                        <label>Sofitel</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>4 star</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>King</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>American Plan</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Twin</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-danger">11000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-danger">10000/-</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+
+
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <br />
+                <i class="fa fa-plane"></i>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblFlightDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Flight Name</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Ticket Type</th>
+                                <th>Adult Count</th>
+                                <th>Child Count</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Air India</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Mumbai</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Delhi</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Business</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>25000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Indigo Nation</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Chennai</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Banglore</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Economy</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>8000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <br />
+                <i class="fa fa-train"></i>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblTrainDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Train Name</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Ticket Type</th>
+                                <th>Adult Count</th>
+                                <th>Child Count</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Garib Express</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Bandra</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Bengal</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>3 tier AC</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2500</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-plus"></i></button>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Rajdhani Express</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Agra</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Panji</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Sleeper</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>2000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i></button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+                <br />
+                <i class="fa fa-car"></i>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblVehicleDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Vehicle Package Name</th>
+                                <th>Vehicle Name</th>
+                                <th>Vehicle Type</th>
+                                <th>Seating Capacity</th>
+                                <th>Net Rate</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Audi Car Show</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Cruize</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Coupe</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>4</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-danger">11000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">11000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>BMW Car Works    </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Camry</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Green Driving</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>4</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">8000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">8000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i> </button>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <br />
+                <i class="fa fa-tree"></i>
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblSightSeeingDetails">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>SightSeeing Name</th>
+                                <th>Location</th>
+                                <th>Star Category</th>
+                                <th>Duration</th>
+                                <th>Net Rate</th>
+                                <th>Quote Rate</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Mount Titlis and Lucerne Day Tour</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Basel, Switzerland</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>4 Star</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>8 hours</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">6000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-success">6000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger  btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i></button>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="">
+                                        <label>Stories of Basel's Old Town</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>Basel, Switzerland</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label>5 Star</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label> 2 hours</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-warning">1000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <label class="text-warning">2000</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger btn-rounded waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-close"></i></button>
+                                </td>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+                <br />
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

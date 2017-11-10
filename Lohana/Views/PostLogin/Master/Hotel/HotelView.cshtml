@@ -1,0 +1,201 @@
+﻿@model Lohana.Models.Master.HotelViewModel
+    
+
+    <link href="~/Content/plugin/owl.carousel/assets/owl.carousel.css" rel="stylesheet" />
+
+
+    <link href="~/Content/plugin/owl.carousel/assets/owl.theme.default.min.css" rel="stylesheet" />
+
+
+<style>
+    th, td {
+        padding: 10px;
+    }
+</style>
+
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h1>HotelView</h1>
+        <h3 style="text-align:center">@Model.Hotel.HotelName Hotel</h3>
+        <h6 style="text-align:center">@Model.Hotel.HotelName Hotel, @Model.Hotel.Address</h6>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="carousel-example" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+@for (int i = 0; i < Model.Images.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <li data-target="#carousel-example" data-slide-to="@i" class="active"></li>
+                        }
+                        else
+                        {
+                            <li data-target="#carousel-example" data-slide-to="@i" class=""></li>
+                        }
+                    }
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                    @for (int i = 0; i < Model.Images.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                        <div class="carousel-item active">
+                            <img src="~/Upload/@Model.Images[i].UniqueAttachmentId" style="width:1500px;height:400px" alt="@Model.Images[i].AttachmentName" />
+                        </div>
+}
+     else
+                        {
+                        <div class="carousel-item">
+                            <img src="~/Upload/@Model.Images[i].UniqueAttachmentId" style="width:1500px;height:400px" alt="@Model.Images[i].AttachmentName">
+                        </div>
+}
+}
+                        
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example" role="button" data-slide="prev">
+                        <span class="icon-prev" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example" role="button" data-slide="next">
+                        <span class="icon-next" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+           
+        </div>
+        <br>
+        <div class="box box-block bg-white">
+
+            <ul class="nav nav-tabs nav-tabs-2" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" role="tab" href="#basicdetails"><h5><span class="ti-hand-point-down"></span>&nbsp; Basic Details</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="link1" data-toggle="tab" role="tab" href="#facilities"><h5><span class="ti-hand-point-down"></span>&nbsp; Facilities</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="link2" data-toggle="tab" role="tab" href="#rooms"><h5><span class="ti-hand-point-down"></span>&nbsp; Room Types</h5></a>
+                </li>
+
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="tab-pane active p-a-0-75" id="basicdetails" role="tabpanel">
+
+
+                    <table style="width:100%;">
+                        <tr style="text-align:center">
+                            <th>Primary Details</th>
+                            <th>Address Details</th>
+                            <th>Commumnication Details</th>
+                            <th>Additional Details</th>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-hotel"></i>&nbsp;&nbsp;<strong>Hotel Type</strong> : @Model.Hotel.HotelType</td>
+                            <td><i class="fa fa-globe"></i>&nbsp;&nbsp;<strong>Location</strong> : @Model.Hotel.CityId</td>
+                            <td><span class="ti-mobile"></span>&nbsp;&nbsp;<strong>Mobile No.</strong> : @Model.Hotel.MobileNo</td>
+                            <td><i class="fa fa-star-o"></i>&nbsp;&nbsp;<strong>Lohana Ratings</strong> : @Model.Hotel.LohanaRatings</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-hotel"></i>&nbsp;&nbsp;<strong>Hotel Name</strong> : @Model.Hotel.HotelName</td>
+                            <td><i class="fa fa-map-pin"></i>&nbsp;&nbsp;<strong>Pincode</strong> : @Model.Hotel.Pincode</td>
+                            <td><i class="fa fa-phone"></i>&nbsp;&nbsp;<strong> TelephoneCode</strong> : @Model.Hotel.TelephoneCode</td>
+                            <td><strong>Hotel Description</strong> : @Model.Hotel.HotelDescription</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-object-group"></i>&nbsp;&nbsp;<strong>Hotel Group</strong> : @Model.Hotel.HotelGroup</td>
+                            <td><i class="typcn typcn-location"></i>&nbsp;&nbsp;<strong>Address</strong> : @Model.Hotel.Address</td>
+                            <td><i class="fa fa-phone"></i>&nbsp;&nbsp;<strong>Telephone No</strong> : @Model.Hotel.TelephoneNo</td>
+                            <td><strong>Top Attractions Near By</strong> : @Model.Hotel.TopAttractionsNearBy</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-star-o"></i>&nbsp;&nbsp;<strong>Star Category</strong> : @Model.Hotel.StarCategory</td>
+                            <td></td>
+                            <td><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<strong>Email Id</strong> : @Model.Hotel.EmailId</td>
+                            <td><strong>Useful Hotel Stats</strong> : @Model.Hotel.UsefulHotelStats</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-plane"></i>&nbsp;&nbsp;<strong>Nearest Airport (Km)</strong> : @Model.Hotel.NearestAirport</td>
+                            <td></td>
+                            <td><i class="fa fa-fax"></i>&nbsp;&nbsp;<strong>Fax No</strong> : @Model.Hotel.FaxNo</td>
+                            <td><i class="typcn typcn-pen"></i>&nbsp;&nbsp;<strong>Notes</strong> : @Model.Hotel.Notes</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-train"></i>&nbsp;&nbsp;<strong>Nearest Railway Station (Km)</strong> : @Model.Hotel.NearestRailwayStation</td>
+                            <td></td>
+                            <td><i class="fa fa-google-wallet"></i>&nbsp;&nbsp;<strong>Website</strong> : @Model.Hotel.Website</td>
+                            <td><i class="typcn typcn-edit"></i>&nbsp;&nbsp;<strong>Comments</strong> : @Model.Hotel.Comments</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nearest Landmark</strong> : @Model.Hotel.NearestLandMark</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+                    
+                </div>
+
+
+                <div class="tab-pane p-a-0-75" id="facilities" role="tabpanel">
+    @if (Model.HotelFacilityDetails.Count > 0)
+{
+        <div class="row">
+            
+                @foreach (var item in Model.HotelFacilityDetails.Where(a => a.FacilityStatus == true).Select(a => a.FacilityTypeName).Distinct())
+                {
+                    <div class="col-md-2">
+                        <h6>@item</h6>
+                        @foreach (var itm in Model.HotelFacilityDetails.Where(a => a.FacilityTypeName == item))
+                        {
+                            if (itm.FacilityStatus == true)
+                            {
+                                <ul style="list-style-type:square">
+                                    <li>@itm.FacilityName</li>
+                                </ul>
+                            }
+                        }
+
+                    </div>
+                }
+                    
+            </div>
+            }
+
+        </div>
+
+        <div class="tab-pane p-a-0-75" id="rooms" role="tabpanel">
+
+            @if (Model.HotelRoomTypes.Count > 0)
+                   {
+                <table style="width:100%">
+                    <tr>
+                        <th>RoomType</th>
+                        <th>No. of Rooms</th>
+                        <th>Occupancy</th>
+                    </tr>
+                    @foreach (var item in Model.HotelRoomTypes)
+                       {
+
+                        <tr>
+                            <td>@item.RoomTypeName</td>
+                            <td>@item.NoOfRooms</td>
+                            <td>@item.OccupancyCapacity</td>
+                        </tr>
+                        }
+                </table>
+                    }
+
+        </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

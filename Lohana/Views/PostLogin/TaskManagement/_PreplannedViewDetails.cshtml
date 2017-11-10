@@ -1,0 +1,1840 @@
+﻿<div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Quotations</label><select id="drpenquiryAssignedType" class="form-control input-sm" name="Package.enquiryAssignedType">
+                <option>Select quotation</option>
+                <option>Quotation 1</option>
+                <option>Quotation 2</option>
+                <option>Quotation 3</option>
+                <option>Quotation 4</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <br />
+        <button id="btnBookQuotation" type="submit" class="btn btn-danger">Book</button>
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Adults Count</label>
+            <input type="text" id="txtAdultCount" readonly class="form-control input-sm" name="Hotel.adultCount" placeholder="2">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Children Count</label>
+            <input type="text" id="txtChildrenCount" readonly class="form-control input-sm" name="Hotel.ChildrenCount" placeholder="2">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Total Price</label>
+            <input type="text" id="txtprice" readonly class="form-control input-sm" name="Hotel.price" placeholder="Enter Price" value="">
+        </div>
+    </div>
+
+</div>
+
+@*Start 12th May to 15th May*@
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <h3><label>Mumbai</label> <i class="fa fa-arrow-right"></i> <label>Delhi</label></h3>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <h3><label>12th May</label> <i class="fa fa-arrow-right"></i> <label>15th May</label></h3>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Select Type of Package</label>
+            <select id="drppackageType" class="form-control input-sm drppackageType" name="Quotation.packageType">
+                <option value="0">-Select Package Type-</option>
+                <option value="1">Individual Packages </option>
+                <option value="2">Existing Package </option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mb-1" id="dvindividualpackage">
+
+    <div class="col-sm-12">
+
+        <div class="card card-block">
+
+            <h3 class="card-title"></h3>
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnGetHotels" id="btnGetHotels">Get Hotels</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnAddFlightPP" id="btnAddFlightPP">Add Flight</button>
+                </div>
+              
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnAddTrainPP" id="btnAddTrainPP">Add Train</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnGetVehicles" id="btnGetVehicles">Get Vehicles</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnGetSightSeeing" id="btnGetSightSeeing">Get SightSeeing</button>
+                </div>
+
+            </div>
+
+            <br />
+
+            <div class="management m-b-1">
+
+                <div class="m-item">
+
+                    <div class="mi-checkbox">
+                        <i class="fa fa-hotel"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+                        <br />
+                        
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblHotelDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Hotel Name</th>
+                                        <th>Star Category</th>
+                                        <th>Roomtype</th>
+                                        <th>MealPlan</th>
+                                        <th>Occupancy</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio1" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Taj Hotel</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>5 star</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Deluxe</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Continental Plan</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Double</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="12000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio1" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Sofitel</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>4 star</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>King</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>American Plan</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Twin</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="10000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-plane"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblFlightDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Flight Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio2" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Air India</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Business</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="25000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio2" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Indigo Nation</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Economy</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-train"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblTrainDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Train Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio3" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Garib Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>3 tier AC</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2500">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio3" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Rajdhani Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Sleeper</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-car"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblVehicleDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Vehicle Package Name</th>
+                                        <th>Vehicle Name</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Seating Capacity</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio4" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Audi Car Show</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Cruize</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Coupe</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>4</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="10000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio4" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>BMW Car Works    </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Camry</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Green Driving</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>4</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-tree"></i>
+                    </div>
+
+                    <div class="mi-text">
+                        
+                    </div>
+                   
+                    <br />
+
+                    <div class="table-responsive">
+                        <table class="table m-md-b-0" id="tblSightSeeingDetails">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th></th>
+                                    <th>SightSeeing Name</th>
+                                    <th>Location</th>
+                                    <th>Star Category</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+
+                                <tr>
+                                    <td scope="row">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio1" name="radio5" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Mount Titlis and Lucerne Day Tour</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Basel, Switzerland</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>4 Star</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>8 hours</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input placeholder="Enter Price" class="form-control input-sm" type="text" value="6000">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio1" name="radio5" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Stories of Basel's Old Town</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Basel, Switzerland</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>5 Star</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label> 2 hours</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                    </td>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row mb-1" id="dvexistingpackage" style="display:none">
+
+    <div class="col-sm-12">
+
+        <div class="card card-block">
+
+            <h3 class="card-title"></h3>
+
+            <div class="management m-b-1">
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active" id="btnGetPackage">Get Packages</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <br />
+                        <div class="posts-list posts-list-1">
+                            <div class="pl-item">
+                                <div class="media">
+
+                                    <div class="media-left">
+
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-fluid" src="/Images/neptune/1.jpg">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="p-content">
+                                            <div class="clearfix">
+                                                <h5 class="pull-xs-left"><a class="text-black" href="#">Mumbai, Bangalore Holiday</a></h5>
+                                            </div>
+                                            <div class="p-info">
+                                                Dolor sit amet consectetur adipiscing
+                                            </div>
+                                            <a class="text-primary" href="#"><span class="underline">read more</span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-right">
+                                        <div class="pv-form">
+                                            <h2 class="h-underline h-underline-50 h-underline-success">25099/-</h2>
+                                            <button type="submit" class="btn btn-purple">Select</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="pl-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-fluid" src="/Images/neptune/2.jpg">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="p-content">
+                                            <div class="clearfix">
+                                                <h5 class="pull-xs-left"><a class="text-black" href="#">Kashmir, Manali Holiday</a></h5>
+                                            </div>
+                                            <div class="p-info">
+                                                Dolor sit amet consectetur adipiscing
+                                            </div>
+                                            <a class="text-primary" href="#"><span class="underline">read more</span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-right">
+                                        <div class="pv-form">
+                                            <h2 class="h-underline h-underline-50 h-underline-success">00000/-</h2>
+                                            <button type="submit" class="btn btn-purple">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pl-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-fluid" src="/Images/neptune/3.jpg">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="p-content">
+                                            <div class="clearfix">
+                                                <h5 class="pull-xs-left"><a class="text-black" href="#">Ladakh Holiday</a></h5>
+                                            </div>
+                                            <div class="p-info">
+                                                Dolor sit amet consectetur adipiscing
+                                            </div>
+                                            <a class="text-primary" href="#"><span class="underline">read more</span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-right">
+                                        <div class="pv-form">
+                                            <h2 class="h-underline h-underline-50 h-underline-success">25099/-</h2>
+                                            <button type="submit" class="btn btn-purple">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-plane"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active btnAddFlightPP" id="btnAddFlightPP">Add Flight</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblFlightDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Flight Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Air India</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Business</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="25000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Indigo Nation</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Economy</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-train"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active btnAddTrainPP" id="btnAddTrainPP">Add Train</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblTrainDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Train Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Garib Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>3 tier AC</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2500">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Rajdhani Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Sleeper</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@*End 12th May to 15th May*@
+
+
+
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <h3><label>Delhi</label> <i class="fa fa-arrow-right"></i> <label>Banglore</label></h3>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <h3><label>15th May</label> <i class="fa fa-arrow-right"></i> <label>18th May</label></h3>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Select Type of Package</label>
+            <select id="drppackageType" class="form-control input-sm drppackageTypes" name="Quotation.packageType">
+                <option value="0">-Select Package Type-</option>
+                <option value="1">Individual Packages </option>
+                <option value="2">Existing Package </option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mb-1" id="dvindividualpackages">
+
+    <div class="col-sm-12">
+
+        <div class="card card-block">
+
+            <h3 class="card-title"></h3>
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnGetHotels" id="btnGetHotels">Get Hotels</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnAddFlightPP" id="btnAddFlightPP">Add Flight</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnAddTrainPP" id="btnAddTrainPP">Add Train</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnGetVehicles" id="btnGetVehicles">Get Vehicles</button>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-success active btnGetSightSeeing" id="btnGetSightSeeing">Get SightSeeing</button>
+                </div>
+
+            </div>
+
+            <br />
+
+            <div class="management m-b-1">
+
+                <div class="m-item">
+
+                    <div class="mi-checkbox">
+                        <i class="fa fa-hotel"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblHotelDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Hotel Name</th>
+                                        <th>Star Category</th>
+                                        <th>Roomtype</th>
+                                        <th>MealPlan</th>
+                                        <th>Occupancy</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio14" name="radio6" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Taj Hotel</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>5 star</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Deluxe</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Continental Plan</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Double</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="12000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio13" name="radio6" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Sofitel</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>4 star</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>King</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>American Plan</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Twin</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="10000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-plane"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblFlightDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Flight Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio12" name="radio7" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Air India</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Business</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="25000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio11" name="radio" type="radio7" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Indigo Nation</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Economy</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-train"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblTrainDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Train Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio10" name="radio8" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Garib Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>3 tier AC</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2500">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio9" name="radio8" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Rajdhani Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Sleeper</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-car"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblVehicleDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Vehicle Package Name</th>
+                                        <th>Vehicle Name</th>
+                                        <th>Vehicle Type</th>
+                                        <th>Seating Capacity</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio8" name="radio9" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Audi Car Show</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Cruize</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Coupe</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>4</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="10000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio7" name="radio9" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>BMW Car Works    </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Camry</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Green Driving</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>4</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-tree"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                    
+                    </div>
+                   
+                    <br />
+
+                    <div class="table-responsive">
+                        <table class="table m-md-b-0" id="tblSightSeeingDetails">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th></th>
+                                    <th>SightSeeing Name</th>
+                                    <th>Location</th>
+                                    <th>Star Category</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+
+                                <tr>
+                                    <td scope="row">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio6" name="radio10" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Mount Titlis and Lucerne Day Tour</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Basel, Switzerland</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>4 Star</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>8 hours</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input placeholder="Enter Price" class="form-control input-sm" type="text" value="6000">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio5" name="radio10" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Stories of Basel's Old Town</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>Basel, Switzerland</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label>5 Star</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label> 2 hours</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+
+                                    </td>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row mb-1" id="dvexistingpackages" style="display:none">
+
+    <div class="col-sm-12">
+
+        <div class="card card-block">
+
+            <h3 class="card-title"></h3>
+
+            <div class="management m-b-1">
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active" id="btnGetPackage">Get Packages</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <br />
+                        <div class="posts-list posts-list-1">
+                            <div class="pl-item">
+                                <div class="media">
+
+                                    <div class="media-left">
+
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-fluid" src="/Images/neptune/1.jpg">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="p-content">
+                                            <div class="clearfix">
+                                                <h5 class="pull-xs-left"><a class="text-black" href="#">Mumbai, Bangalore Holiday</a></h5>
+                                            </div>
+                                            <div class="p-info">
+                                                Dolor sit amet consectetur adipiscing
+                                            </div>
+                                            <a class="text-primary" href="#"><span class="underline">read more</span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-right">
+                                        <div class="pv-form">
+                                            <h2 class="h-underline h-underline-50 h-underline-success">25099/-</h2>
+                                            <button type="submit" class="btn btn-purple">Select</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="pl-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-fluid" src="/Images/neptune/2.jpg">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="p-content">
+                                            <div class="clearfix">
+                                                <h5 class="pull-xs-left"><a class="text-black" href="#">Kashmir, Manali Holiday</a></h5>
+                                            </div>
+                                            <div class="p-info">
+                                                Dolor sit amet consectetur adipiscing
+                                            </div>
+                                            <a class="text-primary" href="#"><span class="underline">read more</span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-right">
+                                        <div class="pv-form">
+                                            <h2 class="h-underline h-underline-50 h-underline-success">00000/-</h2>
+                                            <button type="submit" class="btn btn-purple">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pl-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <div class="pli-img">
+                                                <img class="img-fluid" src="/Images/neptune/3.jpg">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="p-content">
+                                            <div class="clearfix">
+                                                <h5 class="pull-xs-left"><a class="text-black" href="#">Ladakh Holiday</a></h5>
+                                            </div>
+                                            <div class="p-info">
+                                                Dolor sit amet consectetur adipiscing
+                                            </div>
+                                            <a class="text-primary" href="#"><span class="underline">read more</span></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="media-right">
+                                        <div class="pv-form">
+                                            <h2 class="h-underline h-underline-50 h-underline-success">25099/-</h2>
+                                            <button type="submit" class="btn btn-purple">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-plane"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active btnAddFlightPP" id="btnAddFlightPP">Add Flight</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblFlightDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Flight Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio4" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Air India</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Business</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="25000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio3" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Indigo Nation</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Economy</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="8000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button id="btnEditFlightPP" type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil editflightPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="m-item">
+                    <div class="mi-checkbox">
+                        <i class="fa fa-train"></i>
+                    </div>
+
+                    <div class="mi-text">
+
+                        
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success active btnAddTrainPP" id="btnAddTrainPP">Add Train</button>
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                        </div>
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table m-md-b-0" id="tblTrainDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Train Name</th>
+                                        <th>Ticket Type</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Garib Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>3 tier AC</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2500">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">
+                                            <label class="custom-control custom-radio">
+                                                <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                                <span class="custom-control-indicator"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Rajdhani Express</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <label>Sleeper</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input placeholder="Enter Price" class="form-control input-sm" type="text" value="2000">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-times" style="font-size: 15px;" value="1"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-success btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-pencil edittrainPP" style="font-size: 15px;" value="1"><i class="fa fa-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

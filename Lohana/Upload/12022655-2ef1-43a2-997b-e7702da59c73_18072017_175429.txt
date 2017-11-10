@@ -1,0 +1,578 @@
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Booking</h4>
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Booking</a></li>
+            <li class="breadcrumb-item"><a href="#">Index</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <div class="box box-block bg-white">
+
+                    <h5 class="m-b-2">Who's Travelling</h5>
+                    <h5></h5>
+                    <h5>Flight</h5>
+
+                    <h6>Traveler names must match government-issued photo ID exactly.</h6>
+                    <br />
+
+
+                    <h5>Traveller 1 : Adult, Primary Contact</h5>
+                    <br />
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label>Name</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Guest Name" class="form-control input-sm" type="text" value="Sushant Maragaje">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Document Type</label>
+                                <select id="drproomType" class="form-control input-sm" name="Hotel.roomType">
+                                    <option value="">Select document</option>
+                                    <option value="">Passport No </option>
+                                    <option value="">Aadhar Card No</option>
+                                    <option value="">Pan No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Document Name</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Document No" class="form-control input-sm" type="text" value="3456789">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Age</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Age" class="form-control input-sm" type="text" value="26">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label>Mobile No</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Mobile No" class="form-control input-sm" type="text" value="987654321">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <h5>Traveller 2 : Adult</h5>
+                    <br />
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label>Name</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Guest Name" class="form-control input-sm" type="text" value="Kaustubh Chaudhary">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Document Type</label>
+                                <select id="drproomType" class="form-control input-sm" name="Hotel.roomType">
+                                    <option value="">Select document</option>
+                                    <option value="">Passport No </option>
+                                    <option value="">Aadhar Card No</option>
+                                    <option value="">Pan No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Document Name</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Document No" class="form-control input-sm" type="text" value="3456789">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Age</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Age" class="form-control input-sm" type="text" value="25">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <h5>Traveller 3 : Adult</h5>
+                    <br />
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label>Name</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Guest Name" class="form-control input-sm" type="text" value="Omkar Kulkarni">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Document Type</label>
+                                <select id="drproomType" class="form-control input-sm" name="Hotel.roomType">
+                                    <option value="">Select document</option>
+                                    <option value="">Passport No </option>
+                                    <option value="">Aadhar Card No</option>
+                                    <option value="">Pan No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Document Name</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Document No" class="form-control input-sm" type="text" value="3456789">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Age</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Age" class="form-control input-sm" type="text" value="25">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <h5 class="m-b-2">Payment   </h5>
+                    <br />
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Payment Mode</label>
+                                <select id="drppaymentmode" class="form-control input-sm" name="Hotel.roomType">
+                                    <option value="">Select Payment Mode</option>
+                                    <option value="1">Cash </option>
+                                    <option value="2">Check</option>
+                                    <option value="3">Card</option>
+                                    <option value="4">NEFT</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="divchkno" class="col-md-2">
+                            <label>Check No</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Check No" class="form-control input-sm" type="text" value="474677">
+                            </div>
+                        </div>
+
+                        <div id="divcamount" class="col-md-2">
+                            <label>Amount</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Amount" class="form-control input-sm" type="text" value="50000">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Payment Type</label>
+                                <select id="drproomType" class="form-control input-sm" name="Hotel.roomType">
+                                    <option value="">Select Payment Type</option>
+                                    <option value="">Paid </option>
+                                    <option value="">Partial Paid</option>
+                                    <option value="">Unpaid</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <br />
+
+                            <a href="#" class="btn btn-info waves-effect waves-light" id="btnViewEnquiryHistory">Add</a>
+
+                        </div>
+
+
+                    </div>
+					<hr />
+					 <h5 class="m-b-2">Payment History   </h5>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-bordered table-striped m-b-2">
+									<thead>
+										<tr>
+											<th>
+												Payment Mode
+											</th>
+											<th>
+												Check No.
+											</th>
+											
+											<th>
+												Amount
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Cash</td>
+											<td></td>
+											<td>5000</td>
+										</tr>
+										<tr>
+											<td>Check</td>
+											<td>ICICI00001</td>
+											<td>5000</td>
+										</tr>
+									</tbody>
+								</table>
+						</div>
+					</div>
+					<div class="row">
+									<div class="col-lg-6">
+
+									</div>
+									<div class="col-lg-6">
+										<div class="text-xs-right">
+											<div class="m-b-0-5">Paid Amount: <b>10000</b></div>
+											Unpaid Amount: <strong>5000</strong>
+										</div>
+									</div>
+								</div>
+                    
+                        <hr />
+
+
+                    <h5 class="m-b-2">Billing Details   </h5>
+
+                    <br />
+
+                    <div class="row">
+
+                       
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Country </label>
+                                <select id="drpCountry" class="form-control input-sm" name="Booking.country">
+                                    <option value="">Select Country</option>
+                                    <option value="">India </option>
+                                    <option value="">Pakistan</option>
+                                    <option value="">Australia</option>
+                                    <option value="">USA</option>
+                                    <option value="">UK</option>
+                                    <option value="">New Zealand</option>
+                                    <option value="">Japan</option>
+                                    <option value="">Spain</option>
+                                    <option value="">Germany</option>
+                                    <option value="">Austria</option>
+                                    <option value="">Singapore</option>
+                                    <option value="">China</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>City</label>
+                            <div class="form-group">
+                                <input placeholder="Enter City" class="form-control input-sm" type="text" value="Mumbai">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+
+
+                            <label>Postal Code</label>
+                            <div class="form-group">
+                                <input placeholder="Enter Postal Code" class="form-control input-sm" type="text" value="400055">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <label>Billing Address 1 </label>
+                            <div class="form-group">
+                                <textarea class="form-control input-sm" name="Booking.billingaddress1" placeholder="Enter Billing Address 1" maxlength="250"></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label>Billing Address 2 </label>
+                            <div class="form-group">
+                                <textarea class="form-control input-sm" name="Booking.billingaddress2" placeholder="Enter Billing Address 2" maxlength="250"></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <h5 class="m-b-2">Other Details   </h5>
+
+                    <br />
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Followup Date</label>
+                                <input type="text" id="dtpenquiryFollowupDate" class="form-control input-sm datepicker-autoclose" name="Package.enquiryFollowupDate" placeholder="Enter Followup Date">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+					<hr />
+
+
+                   
+                    <br />
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2" style="color:gray;">Booking Summary</h5>
+
+                    <div class="row" id="divFlightDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header" style="color:blueviolet;">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-rocket"></i></span>&nbsp; Flights Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <h5>Flights from Mumbai to Benglaru </h5>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>6 Tickets : Roundtrip </b></label>
+                                            <label id="lblHotel"></label>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <h5>Fri, Apr 14 </h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h5>BOM 3:25pm <i class="fa fa-arrow-right"></i> BLR 5:05pm</h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>1h 40m , 1 hours 40 minutes , Nonstop</b></label>
+                                            <label id="lblSupplier"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Jet Airways 415</b></label>
+                                            <label id="lblHotel"></label>
+                                        </div>
+
+                                        <br />
+
+                                        <div class="col-md-12">
+                                            <h5>Sat, Apr 14 </h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <h5>BOM 5:00pm  <i class="fa fa-arrow-right"></i> BLR 6:35pm</h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>1h 35m , Nonstop</b></label>
+                                            <label id="lblSupplier"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Jet Airways 416</b></label>
+                                            <label id="lblHotel"></label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" id="divHotelDetails">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header" style="color:blueviolet;">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-home"></i></span>&nbsp; Hotel Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5><b>Taj Hotel </b></h5>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>2 Rooms: Suite, 1 Double Bed, Balcony (Balcony)</b></label>
+                                            <label id="lblFromDate"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Fri, Apr 14 - Sat, Apr 15 </b></label>
+                                            <label id="lblOperationalDays"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="divRoomDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header" style="color:blueviolet;">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-car"></i></span>&nbsp; Vehicle Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5><b>Audi Car Show </b></h5>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label><b>Cruize Coupe </b></label>
+                                            <label id="lblCheckInTime"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Fri, Apr 14 - Sat, Apr 15 </b></label>
+                                            <label id="lblOperationalDays"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="divPrice">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header" style="color:blueviolet;">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-money"></i></span>&nbsp; Price Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b>Flight + Hotel + Car : $7,248.48</b></label>
+                                            <label id="lblcategory"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Total:  $7,236.06</b></label>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>(Average per person: $1,206.01)</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+<script>
+
+    $("#drppaymentmode").change(function () {
+
+        if ($(this).val() == 1) {
+            $("#dvCustomer").show();
+
+            $("#dvAgent").hide();
+
+            $("#dvGuest").hide();
+        }
+        else if ($(this).val() == 2) {
+            $("#dvAgent").show();
+
+            $("#dvCustomer").hide();
+
+            $("#dvGuest").hide();
+        }
+        else {
+            $("#dvGuest").show();
+
+            $("#dvCustomer").hide();
+
+            $("#dvAgent").hide();
+        }
+
+        var book = {
+        	bookName :"Lohana"
+        }
+
+        $.cookie("Booking", JSON.stringify());
+
+    });
+
+    function GetBooking()
+    {
+    	GetAjax("/Booking/GetBookingItem", null, null);
+    }
+
+
+</script>

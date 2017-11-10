@@ -1,0 +1,105 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Package/package-itinerary-flight-validations.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-flight-methods.js?V=@DateTime.Now"></script>
+<script src="~/Scripts/Master/Package/package-itinerary-flight-events.js?V=@DateTime.Now"></script> 
+
+<div id="dvItineraryFlight">
+    <div class="row">
+
+        <form id="frmPackageItineraryFlights">
+          
+            <input type="hidden" id="hdnPackageFlightItineraryId" name="PackageItinerary.PackageItineraryFlight.PackageItineraryId" value="@Model.PackageItinerary.PackageItineraryFlight.PackageItineraryId" />
+
+            <div class="card-block p-t-0 p-b-0">
+
+                <div class="row" id="divFlight">
+
+                    @*<div class="col-md-3">
+                        <div class="form-group">
+                            <label>Flight Name</label>
+                            <div class="input-group">
+                                <input type="text" id="txtflight" class="form-control input-sm" name="PackageItinerary.PackageItineraryFlight.FlightName" placeholder="Enter flight name" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-plane"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Flight From </label>
+                            <div class="input-group">
+                                <select id="drpflightFrom" class="form-control input-sm" name="PackageItinerary.PackageItineraryFlight.FlightFrom">
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-plane"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Flight To </label>
+                            <div class="input-group">
+                                <select id="drpflightTo" class="form-control input-sm" name="PackageItinerary.PackageItineraryFlight.FlightTo"></select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-plane"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-3">
+                        <div class="form-group">
+                            <label>Flight Time</label>
+                            <div class="input-group">
+                                <input type="time" id="txtflightTime" class="form-control input-sm" name="PackageItinerary.PackageItineraryFlight.FlightTime" placeholder="Enter flight Time" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-plane"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                </div>
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="btnAddPackageItineraryFlights" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="reset" id="btnDeletePackageItineraryFlights" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="card" id="divPackageItineraryFlightList">
+
+    <h5 class="card-header">
+        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Package Itinerary Flight Listing
+    </h5>
+    <form role="form" id="frmSearchPackageItineraryFlight">
+
+        <input type="hidden" id="hdnSearchPackageItineraryFlightId" value="@Model.PackageItinerary.PackageItineraryFlight.PackageItineraryFlightId" name="PackageItinerary.PackageItineraryFlight.PackageItineraryFlightId" />
+
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageItineraryFlights"></table>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

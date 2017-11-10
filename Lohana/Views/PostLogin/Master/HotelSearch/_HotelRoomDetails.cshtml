@@ -1,0 +1,40 @@
+﻿@model Lohana.Models.Master.HotelSearchViewModel
+@using LohanaBusinessEntities.Common;
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="management m-b-1">
+            <div class="m-item">
+
+                <div class="mi-text">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table m-md-b-0">
+                                <thead>
+                                    One day details of room charges
+                                    <tr>
+                                        <th>Room Type</th>
+                                        <th>Meal Type</th>
+                                       
+                                        <th>Rate Per Night</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var itm in Model.HotelSearchRoomMealOccupancyPriceList)
+                                    {
+                                        <tr>
+                                            <td><a class="text-black">@itm.RoomTypeName</a></td>
+                                            <td><a class="text-black">@itm.MealName</a></td>
+                                            
+                                            <td><a class="text-black">@itm.NetRatePerNight</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,650 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+
+<script src="~/Scripts/Enquiry/flight-enquiry-item-validations.js"></script>
+<script src="~/Scripts/Enquiry/flight-enquiry-item-methods.js"></script>
+<script src="~/Scripts/Enquiry/flight-enquiry-item-events.js"></script>
+
+
+
+<div class="tab-pane active p-a-0-75" id="flightdetails" role="tabpanel">
+
+    <form id="frmflightdetails">
+
+        @*<input type="hidden" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnFlightId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        <input type="hidden" id="hdnEnquiryType" name="Enquiry.EnquiryType" value="@((int)EnquiryType.Flight)" />
+
+        <div id="divflightdetails">
+
+            <div class="row">
+
+                <div class="col-md-3"></div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+                            @foreach (var item in LookupInfo.GetFlightType())
+                            {
+                                if (Model.Enquiry.EnquiryFlightType == item.Key)
+                                {
+                                    <label class="custom-control custom-radio">
+                                        <input name="Enquiry.FlightType" type="radio" class="custom-control-input" id="radioFlightType" checked="checked" value="@item.Key">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">&nbsp;@item.Value</span>
+                                    </label>
+
+                                    <input type="hidden" id="hdnradioFlightType" value="@item.Key" />
+                                }
+                                else
+                                {
+                                    <label class="custom-control custom-radio">
+                                        <input name="Enquiry.FlightType" type="radio" class="custom-control-input" id="radioFlightType" value="@item.Key">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">&nbsp;@item.Value</span>
+                                    </label>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3"></div>
+
+            </div>
+
+            <div class="row">
+                @{
+
+                    if (Model.Enquiry.EnquiryItemTypeDetails.Count == 0)
+                    {
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Ticket Class</label><select id="drpticketClass" class="form-control input-sm" name="EnquiryItemTypeDetails[0].TicketClass">
+                                    <option>Select Ticket Class</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                                    {
+                                <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drppickupfrom" name="EnquiryItemTypeDetails[0].PickUpFrom">
+
+                                        <option value="0">Select pickup from</option>
+
+                                        @foreach (var item in Model.Cities)
+                                {
+
+                                <option value="@item.CityId">@item.CityName</option>
+
+                                }
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drpdropTo" style="color: #333">Drop To</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drpdropTo" name="EnquiryItemTypeDetails[0].DropTo">
+
+                                        <option value="0">Select drop to</option>
+
+                                        @foreach (var item in Model.Cities)
+
+                                    {
+                                <option value="@item.CityId">@item.CityName</option>
+                                    }
+
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Depart On</label>
+                                <input type="text" id="dtpdepartOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].DepartureDate" placeholder="Enter Departure" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divreturnOn">
+                            <div class="form-group">
+                                <label>Return On</label>
+                                <input type="text" id="dtpreturnOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].ReturnDate" placeholder="Enter Return" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divbuttonGroup">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="btn btn-purple" id="btnAdd" value="2"> + </button>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Ticket Class</label><select id="drpticketClass" class="form-control input-sm" name="EnquiryItemTypeDetails[0].TicketClass">
+                                    <option>Select Ticket Class</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                                    {
+                                        if (Model.Enquiry.EnquiryItemTypeDetails[0].TicketClass == item.Key)
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drppickupfrom" name="EnquiryItemTypeDetails[0].PickUpFrom">
+
+                                        <option value="0">Select pickup from</option>
+
+                                        @foreach (var item in Model.Cities)
+                                        {
+                                            if (Model.Enquiry.EnquiryItemTypeDetails[0].PickUpFrom == item.CityId)
+                                            {
+                                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.CityId">@item.CityName</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drpdropTo" style="color: #333">Drop To</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drpdropTo" name="EnquiryItemTypeDetails[0].DropTo">
+
+                                        <option value="0">Select drop to</option>
+
+                                        @foreach (var item in Model.Cities)
+                                {
+                                    if (Model.Enquiry.EnquiryItemTypeDetails[0].DropTo == item.CityId)
+                                    {
+                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                    }
+                                    else
+                                    {
+                                <option value="@item.CityId">@item.CityName</option>
+                                    }
+                                }
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Depart On</label>
+                                <input type="text" id="dtpdepartOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].DepartureDate" placeholder="Enter Departure" value="@(Model.Enquiry.EnquiryItemTypeDetails[0].DepartureDate != DateTime.MinValue ? Model.Enquiry.EnquiryItemTypeDetails[0].DepartureDate.ToString("MM/dd/yyyy") : "")">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divreturnOn">
+                            <div class="form-group">
+                                <label>Return On</label>
+                                <input type="text" id="dtpreturnOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].ReturnDate" placeholder="Enter Return" value="@(Model.Enquiry.EnquiryItemTypeDetails[0].ReturnDate != DateTime.MinValue ? Model.Enquiry.EnquiryItemTypeDetails[0].ReturnDate.ToString("MM/dd/yyyy") : "")">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divbuttonGroup">
+                            <div class="form-group">
+                                <br />
+
+                                <button type="button" class="btn btn-purple" id="btnAdd" value="2"> + </button>
+
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+            <div id="divflightType">
+                @{
+                    if (Model.Enquiry.EnquiryItemTypeDetails.Count > 1)
+                    {
+                        for (int i = 1; i < Model.Enquiry.EnquiryItemTypeDetails.Count; i++)
+                        {
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Ticket Class</label>
+                                        <select class="form-control input-sm flight-ticket-class" name="EnquiryItemTypeDetails[@i].TicketClass">
+                                            <option>Select Ticket Class</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                                            {
+                                                if (Model.Enquiry.EnquiryItemTypeDetails[i].TicketClass == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                                        <div class="input-group">
+                                            <select class="form-control input-sm flight-from" id="drppickupfrom" name="EnquiryItemTypeDetails[@i].PickUpFrom">
+
+                                                <option value="0">Select pickup from</option>
+
+                                                @foreach (var item in Model.Cities)
+                                                {
+                                                    if (Model.Enquiry.EnquiryItemTypeDetails[i].PickUpFrom == item.CityId)
+                                                    {
+                                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.CityId">@item.CityName</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>From </label>
+                                            <input type="text" class="form-control input-sm flight-from" name="EnquiryItemTypeDetails[@i].PickUpFrom" placeholder="From" value="@Model.Enquiry.EnquiryItemTypeDetails[i].PickUpFrom">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>To</label><input type="text" class="form-control input-sm flight-to" name="EnquiryItemTypeDetails[@i].DropTo" placeholder="To" value="@Model.Enquiry.EnquiryItemTypeDetails[i].DropTo">
+                                        </div>
+                                    </div>*@
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="drpdropTo" style="color: #333">Drop To</label>
+                                        <div class="input-group">
+                                            <select class="form-control input-sm flight-to" id="drpdropTo" name="EnquiryItemTypeDetails[@i].DropTo">
+
+                                                <option value="0">Select drop to</option>
+
+                                                @foreach (var item in Model.Cities)
+                                                {
+                                                    if (Model.Enquiry.EnquiryItemTypeDetails[i].DropTo == item.CityId)
+                                                    {
+                                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.CityId">@item.CityName</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Depart On</label>
+                                        <input type="text" class="form-control input-sm datepicker-autoclose flight-depart-on" name="EnquiryItemTypeDetails[@i].DepartureDate" placeholder="Enter Departure" value="@(Model.Enquiry.EnquiryItemTypeDetails[i].DepartureDate != DateTime.MinValue ? Model.Enquiry.EnquiryItemTypeDetails[i].DepartureDate.ToString("MM/dd/yyyy") : "")">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger btn-flight-remove">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Adult (12 + Years)</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Enquiry.adultCount" value="@Model.Enquiry.AdultCount">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Child (2 - 12 Years)</label><input type="text" id="txtChildCount" class="form-control adult-children" name="Enquiry.childCount" value="@Model.Enquiry.ChildCount">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Infant (0 - 2 Years)</label><input type="text" id="txtInfantCount" class="form-control adult-children" name="Enquiry.infantCount" value="@Model.Enquiry.InfantCount">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Budget</label>
+                        <input type="text" id="txtbudget" class="form-control input-sm" name="Enquiry.budget" placeholder="Enter Budget" value="@Model.Enquiry.Budget">
+                    </div>
+                </div>
+
+            </div>
+
+          
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveFlightDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetFlightDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+
+<div id="dvTempFlight" style="display:none">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Ticket Class</label>
+                <select class="form-control input-sm flight-ticket-class" name="">
+                    <option>Select Ticket Class</option>
+                    @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                    {
+                        if (Model.EnquiryItemTypeDetail.TicketClass == item.Key)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+                </select>
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                <div class="input-group">
+                    <select class="form-control input-sm flight-from" id="drppickupfrom" name="">
+
+                        <option value="0">Select pickup from</option>
+
+                        @foreach (var item in Model.Cities)
+                        {
+                            if (Model.EnquiryItemTypeDetail.PickUpFrom == item.CityId)
+                            {
+                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CityId">@item.CityName</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="drpdropTo" style="color: #333">Drop To</label>
+                <div class="input-group">
+                    <select class="form-control input-sm flight-to" id="drpdropTo" name="">
+
+                        <option value="0">Select drop to</option>
+
+                        @foreach (var item in Model.Cities)
+                        {
+                            if (Model.EnquiryItemTypeDetail.DropTo == item.CityId)
+                            {
+                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CityId">@item.CityName</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Depart On</label>
+                <input type="text" class="form-control input-sm datepicker-autoclose flight-depart-on" name="" placeholder="Enter Departure" value="">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-flight-remove">
+                <i class="fa fa-remove"></i>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    //$('.datepicker-autoclose').datepicker({
+    //    autoclose: true,
+    //    todayHighlight: true
+    //});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+@*<div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;" id="divenquiryFlightDetails">
+
+    @if (Model.Enquiry.EnquiryItemTypeDetails.Count() == 0)
+                {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive" style="margin: 50px 0;">
+                    <input type="hidden" id="hdnIsEditFlightDetails" value="false" />
+                    <input type="hidden" id="hdnRowIdspecific" value="0" />
+                    <table class="table table-bordered" id="tblFlightDetails">
+                        <thead>
+                            <tr id="subhead">
+                                <th>Ticket Class</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Departure On</th>
+                                <th>Return On</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+                }
+                else
+                {
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive" style="margin: 50px 0;">
+                    <input type="hidden" id="hdnIsEditFlightDetails" value="false" />
+                    <input type="hidden" id="hdnRowIdspecific" value="0" />
+                    <table class="table table-bordered" id="tblFlightDetails">
+                        <thead>
+                            <tr id="subhead">
+                                <th>Ticket Class</th>
+                                <th>PickUpFrom</th>
+                                <th>DropTo</th>
+                                <th>Departure On</th>
+                                <th>Return On</th>
+                                <th>Action</th>
+
+                            </tr>
+
+                            @if (Model.Enquiry.EnquiryItemTypeDetails != null && Model.Enquiry.EnquiryItemTypeDetails.Count() > 0)
+                                        {
+                                            int i = 1;
+
+                                            foreach (var itm in Model.Enquiry.EnquiryItemTypeDetails)
+                                            {
+                                                <tr id="tr@(i)">
+                                                    <td>
+                                                        <span id="trticketClass@(i)"> @itm.TicketClass</span>
+                                                        <input type="hidden" id="hdnticketClass@(i)" name="Enquiry.EnquiryItemTypeDetails[@(i-1)].ticketClass" value="@itm.TicketClass">
+                                                    </td>
+                                                    <td>
+                                                        <span id="trpickUpFrom@(i)"> @itm.PickUpFrom</span>
+                                                        <input type="hidden" id="hdnpickUpFrom@(i)" name="Enquiry.EnquiryItemTypeDetails[@(i-1)].pickUpFrom" value="@itm.PickUpFrom">
+                                                    </td>
+
+                                                    <td>
+                                                        <span id="trdropTo@(i)"> @itm.DropTo</span>
+                                                        <input type="hidden" id="hdndropTo@(i)" name="Enquiry.EnquiryItemTypeDetails[@(i-1)].dropTo" value="@itm.DropTo">
+                                                    </td>
+                                                    <td>
+                                                        <span id="trdepartureDate@(i)"> @itm.DepartureDate</span>
+                                                        <input type="hidden" id="hdndepartOn@(i)" name="Enquiry.EnquiryItemTypeDetails[@(i-1)].departureDate" value="@itm.DepartureDate">
+                                                    </td>
+                                                    <td>
+                                                        <span id="trreturnDate@(i)"> @itm.ReturnDate</span>
+                                                        <input type="hidden" id="hdnreturnOn@(i)" name="Enquiry.EnquiryItemTypeDetails[@(i-1)].returnDate" value="@itm.ReturnDate">
+                                                    </td>
+
+                                                    <td class='edit'>
+                                                        <button type='button' id='edit-flight-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditFlightDetailsData(@(i))'><i class='fa fa-pencil'></i></button> (" + trrow + ") Change by vinod mane on 19/09/2016
+                                                        <button type='button' id='delete-flight-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteFlightDetailsData(@(i))'><i class='fa fa-times'></i></button> @*(" + trrow + ")
+
+                                                                                                </tr>
+
+                                                                                                i = i + 1;
+                                                                                            }
+                                                                                        }
+
+                                                                                    </thead>
+
+                                                                                    <tbody></tbody>
+                                                                                </table>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                }
+
+                                                            </div>*@
+
+

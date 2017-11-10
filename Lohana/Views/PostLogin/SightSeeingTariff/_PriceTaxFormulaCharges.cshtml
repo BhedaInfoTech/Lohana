@@ -1,0 +1,52 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-price-taxformula-methods.js"></script>
+
+<table class="table m-b-0" id="tblFormulaDetails">
+    <thead class="thead-inverse">
+        <tr>
+            <th width="10%">Charge Type</th>
+            <th width="10%">Cal On</th>
+            <th width="10%">Percentage</th>
+            <th width="10%">Calculated Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.LstTaxFormulaCharges != null && Model.LstTaxFormulaCharges.Count > 0)
+        {
+
+            foreach (var item in Model.LstTaxFormulaCharges)
+            {
+                <tr>
+
+                    <td data-isstandard="false" data-chargeid="@item.ChargesId">
+                        @item.ChargesName
+                        <input type="hidden" id="hdnSightSeeingTariffChargesId" name="" class="sightseeingtariffchargesid" value="@item.SightSeeingTariffCharge.SightSeeingTariffChargesId" />
+
+                    </td>
+                    <td data-chargeformula="@item.ChargeFormula">@item.ChargeFormulaText</td>
+                    <td>
+                        <input type="text" id="txtpercentage" class="percentage" name="SightSeeingTariffCharge.Percentage" value="@(@item.SightSeeingTariffCharge.Percentage == 0 ? "" : @item.SightSeeingTariffCharge.Percentage.ToString())" />
+                    </td>
+                    <td>
+                        @*<span class="calculatedprice">@(item.SightSeeingTariffCharge.CalculatedPrice == 0 ? "" : item.SightSeeingTariffCharge.CalculatedPrice.ToString())</span>*@
+                        <input type="text" id="txtcalculatedprice" class="calculatedprice" name="SightSeeingTariffCharge.CalculatedPrice" value="@(item.SightSeeingTariffCharge.CalculatedPrice == 0 ? "" : item.SightSeeingTariffCharge.CalculatedPrice.ToString())">
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total Tax Price:</td>
+            <td>
+                <span class="totaltax">@Model.SightSeeingTariffPrice.TotalTaxPrice</span>
+
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>

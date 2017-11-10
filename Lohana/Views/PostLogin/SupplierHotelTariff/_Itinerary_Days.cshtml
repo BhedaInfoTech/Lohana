@@ -1,0 +1,175 @@
+﻿@model Lohana.Models.Tariff.SupplierHotelTariff.SupplierHotelTariffViewModel
+<script src="~/Scripts/SupplierHotelTariff/supplier-itinerary-method.js"></script>
+
+<div class="row">
+    @{
+        int count = 1;
+    }
+
+    @if (Model.SupplierHotelTariffDays.Count > 0)
+    {
+        foreach (var item in Model.SupplierHotelTariffDays)
+        {
+
+
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="custom-control custom-radio">
+                                @*<input type="hidden" id="supplierhotedaylid">*@
+                                <input name="SupplierHotelTariffDayInfo.SupplierHotelDayId" id="supplierhotedaylid" value="@item.SupplierHotelDayId" type="radio" class="custom-control-input" id="@count" data-supplierhotelid="@item.SupplierHotelId" data-supplierhotedaylid="@item.SupplierHotelDayId">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">&nbsp;Day @count</span>
+                                <input type="hidden" id="hdnSupplierHotelId" name="SupplierHotelTariffDayInfo.SupplierHotelId" value="@item.SupplierHotelId">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">@item.Title</div>
+                <div class="col-md-9">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="box bg-white">
+                            @if (item.supplierHotelDayItems.Count > 0)
+                            {
+                     
+                                foreach (var itm in item.supplierHotelDayItems.Where(a => a.SupplierHotelDayId == item.SupplierHotelDayId))
+                                {
+
+                                    if (itm.HotelName != "" && itm.RoomTypeName != "")
+                                    {
+                                        <ul class="nav nav-4">
+                                            <li class="nav-item nav-link">
+                                                <i class="fa fa-hotel"></i>@itm.HotelName &nbsp; &nbsp;<i class="ti-home"></i>@itm.RoomTypeName Room&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-remove" onclick="ConfirmDeleteRoot(@itm.SupplierHotelDayItemId);" style="float: right;"></i>
+                                            </li>
+                                        </ul>
+                                    }
+                                    if (itm.SightSeeingName != "")
+                                    {
+                                        <ul class="nav nav-4">
+                                            <li class="nav-item nav-link">
+                                                <i class="fa fa-tree"></i>@itm.SightSeeingName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-remove" onclick="ConfirmDeleteRoot(@itm.SupplierHotelDayItemId);" style="float: right;"></i>
+                                            </li>
+                                        </ul>
+                                    }
+                                    if (itm.VehicleName != "")
+                                    {
+                                        <ul class="nav nav-4">
+                                            <li class="nav-item nav-link">
+                                                <i class="fa fa-car"></i>@itm.VehicleName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-remove" onclick="ConfirmDeleteRoot(@itm.SupplierHotelDayItemId);" style="float: right;"></i>
+                                            </li>
+                                        </ul>
+                                    }
+                                    if (itm.MealName != "")
+                                    {
+                                        <ul class="nav nav-4">
+                                            <li class="nav-item nav-link">
+                                                <i class="fa fa-cutlery"></i>@itm.MealName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-remove" onclick="ConfirmDeleteRoot(@itm.SupplierHotelDayItemId);" style="float: right;"></i>
+                                            </li>
+                                        </ul>
+                                    }
+
+
+
+                                }
+                            }
+
+                            else
+                            {
+                                
+                                <input type="hidden" id="hdnFlag" value="True" class="flagValue" name="SupplierHotelTariffDayInfo.ValueFlag">
+                              <ul class="nav nav-4">
+                               <li class="nav-item nav-link">
+                               <label style="color:red">Please set itinenary details for this day</label>
+                                 </li>
+                            </ul>
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <hr />
+
+
+           count++;
+           
+        }
+        
+    }
+
+
+   
+</div>
+
+<div class="modal fade addhotel" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <input type="hidden" id="hdnSupplierHotelDayItemId">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Confirm
+                </h4>
+            </div>
+            <div class="modal-body">
+              
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Are you sure, you want to delete the record?</label>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="btnYes" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Yes</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>No</button>
+                    </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function ConfirmDeleteRoot(id) {
+     
+        $("#modalConfirmDelete").modal("show");
+        $("#hdnSupplierHotelDayItemId").val(id);
+    }
+
+    $("#btnYes").click(function (event) {
+        DeleteItems();
+
+        $("#modalConfirmDelete").modal("hide");
+
+        GetSupplierHotelTariffDays($("#hdnSupplierHotelId").val());
+      
+    });
+    
+    function DeleteItems() {
+        var sViewModel =
+           {
+               SupplierHotelDayItem: {
+                   SupplierHotelDayItemId: $("#hdnSupplierHotelDayItemId").val(),
+                  
+               },
+
+               SupplierHotelDayInfo:
+                   {
+                       SupplierHotelId:$("#hdnSupplierHotelId").val(),
+                   }
+           }
+        PostAjaxJson("/SupplierHotelTariff/DeleteDayItem", sViewModel,AfterDelete);
+    }
+  
+    function AfterDelete(data)
+    {
+        FriendlyMessage(data);
+    }
+    </script>

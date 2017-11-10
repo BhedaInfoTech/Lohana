@@ -1,0 +1,84 @@
+﻿
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-event.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-methods.js"></script>
+
+<div class="tab-pane active p-a-0-75" id="" role="tabpanel">
+
+   
+
+
+    <div class="modal-body">
+        <form id="frmSearchVehicle">
+           
+            <input type="hidden" id="hdnVehicleId">
+        
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="drpVehicle" style="color: #333" class="">Vehicle</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpVehicle" name="SupplierHotelDayItem.VehicleId">
+                            <option value="0">Select vehicle</option>
+                        </select>
+                        <span class="input-group-addon">
+                           <i class="fa fa-globe"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="drpVehicleBrand">Vehicle Brand</label>
+                    <div class="input-group">
+                        <select class="form-control" name="LohanaPackageTariffVehicle.VehicleBrandId" id="drpVehicleBrand">
+                            <option value="0">Select vehicle brand</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/VehicleBrand/Index" target="_blank"> <i class="fa fa-bold"></i></a>
+                        </span>
+                    </div>
+                </div>
+      
+                <div class="col-md-4">
+                    <label for="drpVehicleType">Vehicle Type</label>
+                    <div class="input-group">
+                        <select class="form-control" name="LohanaPackageTariffVehicle.VehicleTypeId" id="drpVehicleType">
+                            <option value="0">Select vehicle type</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/VehicleType/Index" target="_blank"> <i class="fa fa-medium"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                &nbsp;&nbsp;&nbsp;
+                <br />
+                <button type="button" id="btnSearchVehicle" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                <button type="button" id="btnResetVehicle" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light ResetBtn"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+            </div>
+
+            <div class="card">
+                <div class="row">
+                    <div class="card-block p-t-0 p-b-0">
+                        <div class="overflow-x-auto">
+                            <table class="table m-b-0" id="tblVehicle"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="CheckSelectedVehicle" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSaveVehicle" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+
+            </div>
+        </form>
+    </div>
+
+</div>
+<script>
+    GetAutocompleteScript("LohanaPackageTariffVehicle");
+
+</script>

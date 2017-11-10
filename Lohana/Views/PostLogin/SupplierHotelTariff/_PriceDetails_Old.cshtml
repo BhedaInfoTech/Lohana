@@ -1,0 +1,175 @@
+﻿ <form id="frmGeneralCharges">
+	 <div class="parenttaxformula generalcharges" data-identifier="generalcharges" data-formname="frmGeneralCharges">
+		 <input type="hidden" class="isgeneralprice" value="true" />
+		 <div class="row">
+			 <div class="col-md-4">
+				 <div class="form-group">
+					 <label for="">Publish Price</label>
+					 <input type="text" class="form-control publishprice" placeholder="Enter Publish Price" name="Hotel.GeneralPublishprice" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "PP").ChargesId" data-isstandard="true">
+				 </div>
+			 </div>
+			 <div class="col-md-4">
+				 <div class="form-group">
+					 <label>Special Price</label>
+					 <input type="text" id="txtspecialprice" class="form-control specialprice" name="Hotel.Generalspecialprice" placeholder="Enter Special Price" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "SP").ChargesId" data-isstandard="true">
+				 </div>
+			 </div>
+			 <div class="col-md-4">
+				 <div class="form-group">
+					 <label>Commission Price</label>
+					 <input type="text" id="txtcommissionprice" class="form-control commissionprice" name="Hotel.commissionprice" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "CP").ChargesId" data-isstandard="true" readonly="readonly">
+				 </div>
+			 </div>
+		 </div>
+
+		 <div class="row">
+			 <div class="col-md-4">
+				 <div class="form-group">
+					 <label>Select Formula</label>
+					 <select class="form-control ddlformula" id="drpFormula" name="SupplierHotelTariff.GeneralTaxFormula">
+						 <option value="0" selected>Select Charges</option>
+						 @foreach(var item in Model.LstTaxFormula)
+	   {
+							 <option value="@item.TaxFormulaId">@item.TaxFormulaName</option>
+															}
+					 </select>
+				 </div>
+			 </div>
+		 </div>
+
+		 <div class="card">
+
+			 <h5 class="card-header">
+				 <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Supplier Price Listing
+			 </h5>
+
+			 <div class="row">
+				 <div class="col-md-12">
+					 <div class="overflow-x-auto">
+						 <table class="table m-b-0 formuladetailgrid" id="tblFormulaDetails"></table>
+					 </div>
+				 </div>
+			 </div>
+
+		 </div>
+
+		 <br />
+
+		 <div class="row">
+			 <div class="col-md-4">
+				 <div class="form-group">
+					 <label for="">Net Rate (SP + TT)</label>
+					 <input type="text" class="form-control netrate" name="Hotel.netRate" disabled="disabled">
+				 </div>
+			 </div>
+
+		 </div>
+
+	 </div>
+                                        <div>
+                                            <label id="lblMessage"></label>
+                                        </div>
+                                    </form>
+
+
+
+<form id="frmChildrenCharges">
+	<div class="parenttaxformula childrencharges" data-identifier="childrencharges" data-formname="frmChildrenCharges">
+		<input type="hidden" class="isgeneralprice" value="false" />
+		<div class="row">
+			<div class="col-md-4">
+				<label>Is Different Price For Child</label>
+				<div class="form-group">
+
+					<label class="custom-control custom-checkbox">
+						<input id="ChkAgeSelected" type="checkbox" class="custom-control-input">
+						<span class="custom-control-indicator"></span>
+						<span class="custom-control-description"></span>
+					</label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="">Age From</label>
+					<input type="text" class="form-control agefrom" placeholder="Enter Child Age From" name="SupplierHotel.AgeFrom" maxlength="2">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Age To</label><input type="text" id="txtdestination" class="form-control ageto" name="SupplierHotel.AgeTo" placeholder="Enter Chid Age To" maxlength="2">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="">Publish Price</label>
+					<input type="text" class="form-control publishprice" placeholder="Enter Publish Price" name="Hotel.ChildrenPublishprice" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "PP").ChargesId" data-isstandard="true">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Special Price</label>
+					@*<input type="text" id="txtspecialprice" class="form-control specialprice" name="Hotel.ChildrenSpecialprice" placeholder="Enter Special Price" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "SP").ChargesId" data-isstandard="true">*@
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Commission Price</label>
+					@*<input type="text" id="txtcommissionprice" class="form-control commissionprice" name="Hotel.commissionprice" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "CP").ChargesId" data-isstandard="true" readonly="readonly">*@
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Select Formula</label>
+					<select class="form-control ddlformula" id="drpFormula" name="SupplierHotelTariff.ChildrenTaxFormula">
+						<option value="0" selected>Select Charges</option>
+						@foreach(var item in Model.LstTaxFormula)
+	  {
+							<option value="@item.TaxFormulaId">@item.TaxFormulaName</option>
+														}
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+
+			<h5 class="card-header">
+				<span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Supplier Price Listing - Child
+			</h5>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="overflow-x-auto">
+						<table class="table m-b-0 formuladetailgrid" id="tblFormulaDetails"></table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="">Net Rate (SP + TT)</label>
+					<input type="text" class="form-control netrate" name="Hotel.netRate" disabled="disabled">
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+
+<div class="row" style="text-align: center;">
+	<div class="col-md-12">
+		<div class="form-group">
+			<button type="button" id="btnAddSupplierHotelPrice" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+		</div>
+	</div>
+</div>

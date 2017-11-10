@@ -1,0 +1,342 @@
+﻿@model Lohana.Models.Master.PayableViewModel
+@using LohanaBusinessEntities.Common;
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Content/js/forms-pickers.js"></script>
+<script src="~/Scripts/Master/Payable/payble-event.js"></script>
+<script src="~/Scripts/Master/Payable/payble-method.js"></script>
+<script src="~/Scripts/Master/Payable/Payable-Validation.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h4>Customer</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Payble</a></li>
+                        <li class="breadcrumb-item"><a href="#">Search</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="box box-block bg-white">
+            <form id="frmpayble" role="form">
+                <input type="hidden" id="hdnPaybleId" name="PayableInfo.PayableId" value="@Model.PayableInfo.PayableId" />
+                <div class="card">
+                    <h5 class="card-header">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Payable
+                    </h5>
+
+                    <div class="card-block p-t-0 p-b-0">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Booking NO</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtfirstName" class="form-control input-sm" name="PayableInfo.BookingNo" placeholder="Enter first name" value="@Model.PayableInfo.BookingNo" readonly>
+                                    <input type="hidden" id="hdnBookingId1" name="PayableInfo.BookingId" value="@Model.PayableInfo.BookingId" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Product Name</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtmiddleName" class="form-control input-sm" name="PayableInfo.ProductName" placeholder="Enter middle name" value="@Model.PayableInfo.ProductName" readonly>
+                                    <input type="hidden" id="hdnProductId" name="PayableInfo.ProductId" value="@Model.PayableInfo.ProductId" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Vendor Name</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtlastName" value="@Model.PayableInfo.VendorName" readonly class="form-control input-sm" name="PayableInfo.VendorName" placeholder="Enter last name" maxlength="50">
+                                    <input type="hidden" id="hdnVendorId" name="PayableInfo.VendorId" value="@Model.PayableInfo.VendorId" />
+
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Total Amount</label>
+                                <div class="input-group">
+                                    <input type="text" id="txttotalamt" value="@Model.PayableInfo.TotalAmount" readonly class="form-control input-sm" name="PayableInfo.TotalAmount">
+                                    <input type="hidden" id="hdnEmailId" class="form-control input-sm">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Balance Amount</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm" id="txtbalamt" name="PayableInfo.BalanceAmount" placeholder="BalanceAmount" readonly>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-mobile"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Total Payment Paid </label>
+                                <div class="input-group">
+                                    <input type="text" id="txtTotalAmtPaid" readonly class="form-control input-sm" name="PayableInfo.TotalAmountPaid" value="@Model.PayableInfo.TotalAmountPaid" placeholder="Enter Receipt No">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblPaidPriceError">Please enter amount less than final amount.</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Payment Date</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="datepicker-autoclose" placeholder="select date of birth" name="PayableInfo.PayableHistoryInfo.PayableDate">
+                                    <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>ReciptNo</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtReceiptNo" class="form-control input-sm" name="PayableInfo.PayableHistoryInfo.ReceiptNo" placeholder="Enter Receipt No">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="drpPaymentOption" style="color: #333">Payment Option</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select class="form-control" name="PayableInfo.PayableHistoryInfo.ModeOfPayment" id="drpPaymentMode">
+
+                                            <option value="">Select payment option</option>
+
+                                            @foreach (var item in LookupInfo.Get_Payment_Mode())
+                                            {
+                                                if (Model.PayableHistoryInfo.ModeOfPayment == item.Key)
+                                                {
+                                                <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+
+                                        </select>
+
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-plus"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="divPaidAmount" style="display:none">
+                                <label>Amount Paid</label>
+                                <div class=" form-group input-group">
+                                    <input type="text" class="form-control input-sm" id="txtamtpaid" name="PayableInfo.PayableHistoryInfo.AmountPaid" maxlength="5">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="divNIFT" style="display:none">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Transaction No</span>
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control input-sm" name="PayableInfo.PayableHistoryInfo.Transaction_No" id="txtTransaction_No" value="@Model.PayableHistoryInfo.Transaction_No" maxlength="19" placeholder="Enter Transaction_No" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="divCreditcardno" style="display:none">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit card no</span>
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control input-sm" name="PayableInfo.PayableHistoryInfo.Credit_Card_No" id="txtCredit_card_no" value="@Model.PayableHistoryInfo.Credit_Card_No" maxlength="19" placeholder="Enter Credit card no" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="divDebitcardno" style="display:none">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit card no</span>
+                                <div class="form-group input-group">
+
+                                    <input type="text" class="form-control input-sm" name="PayableInfo.PayableHistoryInfo.Debit_Card_No" id="txtDebit_card_no" value="@Model.PayableHistoryInfo.Debit_Card_No" maxlength="19" placeholder="Enter Debit card no" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="divChequedate" style="display:none">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque date</span>
+                                <div class="form-group input-group">                                  
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="datepicker1-autoclose" placeholder="select Cheque Date" name="PayableInfo.PayableHistoryInfo.Cheque_Date" value="@((Model.PayableHistoryInfo.Cheque_Date == DateTime.MinValue ? "" : Model.PayableInfo.PayableHistoryInfo.Cheque_Date.ToString("MM-dd-yyyy")))"  @*value="@(Model.PayableHistoryInfo.Cheque_Date == null ? null : Convert.ToDateTime(Model.PayableHistoryInfo.Cheque_Date).ToString("MM-dd-yyyy"))"*@>
+                                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" id="divChequeno" style="display:none">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque no</span>
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control input-sm" name="PayableInfo.PayableHistoryInfo.Cheque_No" id="txtCheque_no" maxlength="20" placeholder="Enter Cheque no" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" id="divBankName" style="display:none">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
+                                <div class="form-group input-group">
+
+                                    <input type="text" class="form-control input-sm" name="PayableInfo.PayableHistoryInfo.BankName" id="txtBank_Name" value="@Model.PayableHistoryInfo.BankName" placeholder="Enter Bank Name" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                </div>                 
+
+                <div class="overflow-x-auto">
+
+                        <table class="table m-b-0">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>##</th>
+                                    <th>
+                                        Payable Date
+                                    </th>
+                                    <th>
+                                        Payable Amount
+                                    </th>
+                                    <th>
+                                        ReciptNo
+                                    </th>
+                                    <th>
+                                        Mode Of Payment
+                                    </th>
+                                    <th>
+                                        Transaction No
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model.PayableHistoryList.Count > 0)
+                                {
+                                    int i = 1;
+
+                                    foreach (var item in @Model.PayableHistoryList)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.PayableDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.AmountPaid</td>
+                                            <td>@item.ReceiptNo</td>
+                                            <td>@item.PaymentModeName</td>
+                                            <td>@item.Transaction_No</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="btnSavePayble" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetPayble" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                            <a href="Search" class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <table class="table table-hover" id="tblattachfile">
+                    <tbody></tbody>
+                </table>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp; Help / Info
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-unstyled" style="padding-left: 5px;">
+                            <li><i class="fa fa-circle-o text-info mr-0-5"></i> Customer create page is used to Create a Customer or Update Customer.</li>
+                            <li>
+                                <i class="fa fa-circle-o text-info mr-0-5"></i> Customer create page contains following functionality.
+                                <ul class="list-unstyled mb-1" style="padding-left: 15px;">
+                                    <li> <button type="button" class="btn btn-success label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button> - On click of Save button, It Saves the Customer Data if all the required fields inputted.</li>
+                                    <li> <a class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</a> - On click of Reset button, It resets the data to its Original values.</li>
+                                    <li> <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a> - On click of Cancel button,  It Redirects to the Customer Listing Page.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

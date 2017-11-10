@@ -1,0 +1,61 @@
+﻿@using LohanaBusinessEntities.Common;
+
+<div class="calonbehaviour">
+
+    <div class="col-md-3 partialview">
+
+    </div>
+
+    <div class="col-md-3 partialview">
+
+        <label for="drpChargesBehaviour" style="color: #333">Behaviour</label>
+
+        <div class="input-group">
+
+            <select class="form-control" name="TaxFormula.Behaviour" id="drpChargeBehaviour">
+
+                <option value="0">Select Behaviour</option>
+
+                @foreach (var item in LookupInfo.GetChargesBehaviour())
+            {
+                    <option value="@item.Key">@item.Value</option>
+            }
+            </select>
+
+            <span class="input-group-addon">
+                <i class="fa fa-plus"></i>
+
+            </span>
+            <span class="input-group-addon">
+                <i class="fa fa-minus"></i>
+            </span>
+
+
+        </div>
+    </div>
+
+    <div class="col-md-3 partialview">
+        <label for="drpCalculatedOn" style="color: #333" class="">Calculated On</label>
+        <div class="input-group">
+            <select class="form-control input-sm calcon" id="drpCalculatedOn" name="TaxFormula.CalculatedOn" data-behaviour="1">
+
+                <option value="0">Select Calculated On</option>
+
+                @foreach (var item in LookupInfo.GetChargesRateTypes())
+            {
+                    <option value="@item.Key" data-is-fixed="1">@item.Value</option>
+            }
+
+            </select>
+
+            <span class="input-group-addon">
+                <i class="fa fa-money"></i>
+            </span>
+            <input type="hidden" id="hiddenChargeInput" value="" />
+        </div>
+    </div>
+
+
+</div>
+
+

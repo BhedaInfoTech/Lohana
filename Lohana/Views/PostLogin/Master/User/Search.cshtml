@@ -1,0 +1,246 @@
+﻿@model Lohana.Models.Master.UserViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Master/User/user-search-events.js"></script>
+<script src="~/Scripts/Master/User/user-search-methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4>User</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <form role="form" id="frmSearchUser">
+
+            <input type="hidden" id="hdnSearchUserId" value="@Model.User.UserId" name="Filter.UserId" />
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; User Search
+                </h5>
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">User Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Enter user name to search" name="User.UserName">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="drpUserRole">User Role</label>
+                            <div class="input-group">
+                                <select id="drpUserRole" class="form-control" name="User.RoleId">
+                                    <option value="0">Select user role</option>
+
+                                    @foreach(var item in Model.Role)
+                                    {
+                                        if(Model.User.RoleId == item.RoleId)
+                                        {
+                                            <option value="@item.RoleId" selected="selected">@item.RoleName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.RoleId">@item.RoleName</option>
+                                        }
+                                    }
+
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-star-o"></i>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" id="btnSearchUser" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                <button type="reset" id="btnResetUser" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="btn-group" style="float: right; padding: 2px 6px;">
+                            <a style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" href="Index" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Create</a>
+                            <button type="button"  class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" id="btnEditUser">Edit</button>
+                            <a style="border-top-right-radius: 20px; border-bottom-right-radius: 20px; " href="Index" data-toggle="modal" data-target=".viewteamlead" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">View Teamlead</a>
+                          
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+            <div class="card">
+
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; User Listing
+                </h5>
+
+                <div class="card-block p-t-0 p-b-0">
+
+                    <div class="overflow-x-auto">
+                        <table class="table m-b-0" id="tblUser">
+                           
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+  
+</div>
+</div>
+
+<div class="modal fade help_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-info-alt"></i></span> &nbsp; Help / Info
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-unstyled" style="padding-left: 5px;">
+                            <li><i class="fa fa-circle-o text-info mr-0-5"></i> User Search page is used to Search a User based on the filters selected. eg. User Name.</li>
+                            <li>
+                                <i class="fa fa-circle-o text-info mr-0-5"></i> User Search page contains following functionality.
+                                <ul class="list-unstyled mb-1" style="padding-left: 15px;">
+                                    <li> <button type="button" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button> - On click of Search button, It displays the Users listing based on the filters selected.</li>
+                                    <li> <a class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</a> - On click of Reset button, It resets the data to its Original values.</li>
+                                    <li><a style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" href="Index" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Create</a> - On click of Create button, It Redirects to the User Creation Page.</li>
+                                    <li>
+                                        <b>RadioButton</b>
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                        </label>          - On Click Of Radio Button of User Listing, Edit Button gets Enabled.
+                                    </li>
+                                    <li><a style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" href="#" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">Edit</a> - On click of Edit button, It Redirect to the Edit Page of User with all User Data of specefic Radio Button selected. </li>
+                                    <li><a href="#" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light">View</a> - On click of View button, It dispalys a Popup with all Users Data in it. </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade viewteamlead" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Teamlead Details
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="table-responsive">
+                    <table class="table m-md-b-0" id="tblSightseeingDetails">
+                        <thead>
+
+                            <tr class="table-danger">
+                                <th></th>
+                                <th>Teamlead Name</th>
+                              
+                            </tr>
+
+                            <tr class="table-success">
+                                <td></td>
+                                <td>
+                                    <div class="form-group">
+                                        <label>Sushant</label>
+                                    </div>
+                                </td>
+       
+                            </tr>
+
+                            <tr class="table-success">
+                                <td></td>
+
+                                <td>
+                                    <div class="form-group">
+                                        <label>Omkar</label>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-success">
+                                <td></td>
+                                <td>
+                                    <div class="form-group">
+                                        <label>Kaustubh</label>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr class="table-success">
+                                <td></td>
+                                <td>
+                                    <div class="form-group">
+                                        <label>Shakti Sir</label>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

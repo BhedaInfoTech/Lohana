@@ -1,0 +1,66 @@
+﻿
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-event.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-methods.js"></script>
+
+
+
+    <form id="frmSearchSightSeeing">
+     
+    <input type="hidden" id="hdnSightSeeingId">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="drpSiteSeeing" style="color: #333" class="">Sight Seeing</label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <select class="form-control" id="drpSiteSeeing" name="SupplierHotelDayItem.SightSeeingId">
+                         
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="drpCity" style="color: #333" class="">City</label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <select class="form-control" id="drpcity" name="SupplierHotelTariffDayInfo.CityId">
+       
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            &nbsp;&nbsp;&nbsp;
+            <br />
+            <button type="button" id="btnSearchSightSeeing" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+            <button type="button" id="btnResetSightSeeing" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light ResetBtn"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="overflow-x-auto">
+                        <table class="table m-b-0" id="tblSightSeeing"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="CheckSelectedSightSeeing" />
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnSaveSiteSeeing" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+          
+        </div>
+    </form>
+

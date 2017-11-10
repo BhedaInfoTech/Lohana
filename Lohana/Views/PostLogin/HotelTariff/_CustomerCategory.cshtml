@@ -1,0 +1,65 @@
+﻿@model Lohana.Models.Tariff.HotelTariff.HotelTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+
+<form id="frmHotelTariffCustomerCategory">
+    <div class="box box-block bg-white">
+        <div class="row">
+        <div class="col-md-12">
+            <table class="table m-md-b-0">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>CustomerCategoryName</th>
+                        <th>Margin</th>
+                    </tr>
+                </thead>
+                <tbody>
+@if (Model.HotelTariffCustomerCategories.Count > 0)
+        {
+    foreach (var item in Model.HotelTariffCustomerCategories)
+                    {
+                    <tr>
+                        <th>@item.CustomerCategoryId</th>
+                        <td>@item.CustomerCategoryName</td>
+                        <td>@item.TariffMargin</td>
+                    </tr>
+}
+}
+                </tbody>
+
+            </table>
+        </div>
+            </div>
+        </div>
+
+
+
+
+
+        @*@if (Model.HotelTariffCustomerCategories.Count > 0)
+        {
+            <div class="row">
+                <table style="width:100%">
+                    <tr>
+                        <th>CustomerCategoryName</th>
+                        <th>Margin</th>
+                    </tr>
+                    @foreach (var item in Model.HotelTariffCustomerCategories)
+                    {
+                        <tr>
+                            <td>@item.CustomerCategoryName</td>
+                            <td>@item.TariffMargin</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }*@
+
+</form>
+
+
+
+
+

@@ -1,0 +1,310 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+
+<script src="~/Scripts/Enquiry/sightseeing-enquiry-item-validations.js"></script>
+<script src="~/Scripts/Enquiry/sightseeing-enquiry-item-methods.js"></script>
+<script src="~/Scripts/Enquiry/sightseeing-enquiry-item-events.js"></script>
+
+
+<div class="tab-pane active p-a-0-75" id="sightseeingdetails" role="tabpanel">
+
+    <form id="frmSightseeingdetails">
+
+        @*<input type="hidden" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnSightseeingId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        <input type="hidden" id="hdnEnquiryType" name="Enquiry.EnquiryType" value="@((int)EnquiryType.Sightseeing)" />
+
+        <div id="divsightseeingdetails">
+
+            <div class="row">
+
+                @*<div class="col-md-3">
+                    <div class="form-group">
+                        <label for="drpdestination" style="color: #333">Location</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpdestination" name="Enquiry.location">
+                                <option value="0">Select location</option>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    if (Model.Enquiry.Location == item.CityId)
+                                    {
+                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.CityId">@item.CityName</option>
+                                    }
+                                }
+                            </select>
+
+                            <span class="input-group-addon">
+                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>SightSeeing Name</label>
+                        <input type="text" id="txtsightseeingName" class="form-control input-sm" name="Enquiry.sightseeingName" placeholder="Enter Sightseeing" value="@Model.Enquiry.SightseeingName">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="drpCountry" style="color: #333" class="">Country</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpCountry" name="Enquiry.CountryId">
+                            <option value="0">Select country</option>
+                            @foreach (var item in Model.Countries)
+                            {
+                                if (Model.Enquiry.CategoryId == item.CountryId)
+                                {
+                                    <option value="@item.CountryId" selected="selected">@item.CountryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CountryId">@item.CountryName</option>
+                                }
+                            }
+
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                        </span>
+
+                    </div>
+                </div> 
+
+                <div class="col-md-3">
+                    <label for="drpState" style="color: #333" class="">State</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpState" name="Enquiry.StateId">
+                            <option value="0">Select state</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/State/Index" target="_blank">  <i class="fa fa-globe"></i></a>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="drpCity" style="color: #333" class="">City</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpCity" name="Enquiry.Cityid">
+                            <option value="0">Select City</option>
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/City/Index" target="_blank">  <i class="fa fa-globe"></i></a>
+                        </span>
+
+                    </div>
+                </div>
+
+               </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Travel Date</label>
+                        <input type="text" class="form-control input-sm datepicker-autoclose" name="Enquiry.travelDate" placeholder="Travel Date" value="@Model.Enquiry.TravelDate">
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Vehicle Type</label>
+                        <select id="drpvehicleType" class="form-control input-sm" name="Enquiry.vehicleType">
+                            <option>Select Vehicle Type</option>
+                            @foreach (var item in LookupInfo.GetEnquiryVehicleType())
+                            {
+                                if (Model.Enquiry.VehicleType == item.Key)
+                                {
+                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            }
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Adult</label>
+                    <div class="form-group">
+                        <input type="text" id="txtAdultCount" class="form-control count" placeholder="Enter no of adults" name="Enquiry.AdultCount" value="1" maxlength="2">
+                        <span style="color:red;">( Aged 18+ )</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Children</label>
+                    <div class="form-group">                                           
+                        <input type="text" id="txtChildCount" class="form-control count" placeholder="Enter no of children" name="Enquiry.ChildCount" value="1" maxlength="2">
+                        <span style="color:red;">( Aged between 0 to 17 )</span>
+                    </div>
+                </div>     
+                              
+            </div>    
+            
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Budget</label>
+                        <input type="text" id="txtvehiclePrice" class="form-control input-sm" name="Enquiry.budget" placeholder="Enter Budget" value="@Model.Enquiry.Budget">
+                    </div>
+                </div>
+
+            </div>    
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveSightseeingDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetSightseeingDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    $(".count").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<script>
+
+
+        $('.from-to-date').datepicker({
+            toggleActive: true
+        });
+
+        $(".adult-children").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 1,
+            decimals: 0,
+            boostat: 5,
+            maxboostedstep: 10,
+            //postfix: '%',
+            buttondown_class: "btn btn-secondary",
+            buttonup_class: "btn btn-secondary"
+        });
+
+
+        $('input[name="daterange-with-time"]').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY h:mm A'
+            },
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-success',
+            cancelClass: 'btn-inverse',
+        });
+
+
+        $('.datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+
+
+    </script>*@
+

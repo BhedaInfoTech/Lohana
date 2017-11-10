@@ -1,0 +1,135 @@
+﻿
+@model Lohana.Models.Tariff.SupplierHotelTariff.SupplierHotelTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<link href="~/Content/plugin/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
+<script src="~/Content/plugin/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-price-taxformula-validations.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-price-taxformula-methods.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-price-taxformula-events.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-price-events.js"></script>
+
+<script src="~/Scripts/SupplierHotelTariff/supplier-hotel-tariff-price-methods.js"></script>
+
+
+@*<script>
+    $(function () {
+        $("#dvcalendar").pignoseCalendar({
+            scheduleOptions: {
+                colors: {
+                    offer: '#2fabb7',
+                    ad: '#5c6270'
+                }
+            },
+            schedules: [{
+                name: 'offer',
+                date: '2017-04-27'
+            }, {
+                name: 'ad',
+                date: '2017-02-08'
+            }, {
+                name: 'offer',
+                date: '2017-02-05',
+            }],
+            select: function (date, context) {
+                for (var idx in context.storage.schedules) {
+                    var schedule = context.storage.schedules[idx];
+
+                    alert(schedule.name);
+                }
+
+                //alert(date);
+                //alert(context.storage.schedules.name);
+                //alert('events for this date', context.storage.schedules.name);
+            }
+        });
+    });
+</script>*@
+
+<form id="frmSupplierHotelTariffPrice">
+    <div class="row">
+        <div class="calsection">
+            <input type="hidden" id="hdnPriceSupplierOccupancyDetailId" value="0" name="SupplierHotelPrice.OccupancyDetailId" />
+            <input type="hidden" id="hdnSupplierHotelPriceId" value="0" name="SupplierHotelPrice.SupplierHotelPriceId" />
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Publish Price</label>
+                        <input type="text" class="form-control publishprice" placeholder="Enter publish price" id="txtPublishPrice" name="SupplierHotelPrice.PublishPrice" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "PP").ChargesId" data-isstandard="true">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Special Price</label>
+                        <input type="text" id="txtSpecialPrice" class="form-control specialprice" name="SupplierHotelPrice.SpecialPrice" placeholder="Enter special price" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "SP").ChargesId" data-isstandard="true">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Commission Price</label>
+                        <input type="text" id="txtCommissionPrice" class="form-control commissionprice" name="SupplierHotelPrice.CommissionPrice" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "CP").ChargesId" data-isstandard="true" readonly="readonly">
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+					<div class="col-md-4">
+						 <label>Select Color</label>
+						<div class="input-group" id="dvColorPicker">
+							<input type="text" value="#f44236" class="form-control" name="SupplierHotelPrice.Color">
+							<span class="input-group-addon"><i></i></span>
+						</div>
+					</div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Select Formula</label>
+                            <select class="form-control" id="drpFormula" >
+                                <option value="0" selected>Select Charges</option>
+                                @foreach (var item in Model.LstTaxFormula)
+                                {
+                                    <option value="@item.TaxFormulaId">@item.TaxFormulaName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overflow-x-auto taxFormulaChargesGrid">
+
+                        </div>
+                    </div>
+                </div>    
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Net Rate (SP + TT)</label>
+                        <input type="text" id="txtNetRate" class="form-control netrate" placeholder="Enter net rate" name="SupplierHotelPrice.NetRate" readonly="readonly">
+                    </div>
+                </div>
+            </div>  
+            
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" id="btnSaveHotelTariffPrice" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+
+						<button type="button" id="btnHotelTariffPriceDuration" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><span class="ti-timer"></span></span>Duration</button>
+                    </div>
+                </div>
+            </div>       
+        </div>
+        </div>
+</form>
+
+<div class="row">
+	<div class="col-md-12"  id="dvPriceListing">
+		</div>
+</div>

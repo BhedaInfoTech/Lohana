@@ -1,0 +1,168 @@
+﻿@model Lohana.Models.Tariff.SupplierHotelTariff.SupplierHotelTariffViewModel
+
+<div class="col-md-4">
+    <div class="box box-block bg-white">
+        <h5 class="m-b-2">View</h5>
+
+        <form role="form" id="frmSupplierHotelTariff">
+
+            <div class="row" id="divBasicDetails">
+
+                <div class="col-md-12">
+
+                    <div class="card">
+
+                        <h5 class="card-header">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-star"></i></span>&nbsp; Basic Details
+                        </h5>
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <br />
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <label><b>Supplier : </b></label>
+                                    <label>@Model.SupplierHotelTariff.SupplierName</label>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label><b>Package Name : </b></label>
+                                    <label>@Model.SupplierHotelTariff.PackageName</label>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label><b>Duration : </b></label>
+                                    <label>@Model.SupplierHotelTariff.Duration</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row" id="divPackageDetails">
+
+                <div class="col-md-12">
+
+                    <div class="card">
+
+                        <h5 class="card-header">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-home"></i></span>&nbsp; Hotel Details
+                        </h5>
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <br />
+
+                                @foreach (var item in Model.SupplierHotelTariff.LstHotelName)
+                                {
+                                     <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b> @item.HotelName </b></label>                                    
+                                        </div>
+                                    </div>
+                                }
+                                                     
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @*<div class="row" id="divRoomDetails">
+
+                <div class="col-md-12">
+
+                    <div class="card">
+
+                        <h5 class="card-header">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-home"></i></span>&nbsp; Duration Details
+                        </h5>
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <br />
+
+                            <div class="row">
+
+
+                                <div class="col-md-12">
+                                    <label><b>From - To Date : </b></label>
+                                    <label>01/ 25/ 2017 - 01/31/2017</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <label><b>Select Days : </b></label>
+                                    <label>Mon, Tues, Wed, THURS</label>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row" id="divPriceDetails">
+
+                <div class="col-md-12">
+
+                    <div class="card">
+
+                        <h5 class="card-header">
+                            <span style="vertical-align: middle;" class="s-icon"><i class="ti-money"></i></span>&nbsp; Price Details
+                        </h5>
+
+                        <div class="card-block p-t-0 p-b-0">
+                            <br />
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <label><b>Publish Price</b></label>
+                                    <label>30000</label>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <label><b>Special Price</b></label>
+                                    <label>27000</label>
+
+                                </div>
+                                <div class="col-md-12">
+
+                                    <label><b>Commission Price</b></label>
+                                    <label>2000</label>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <label><b>Net Rate</b></label>
+                                    <label>35000</label>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </form>
+    </div>
+</div>

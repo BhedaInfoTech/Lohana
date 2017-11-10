@@ -1,0 +1,529 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariff.LohanaPackageTariffViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-root-methords.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-root-validations.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-root-events.js"></script>
+
+@*<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-hotel-validations.js"></script>*@
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-hotel-methods.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-hotel-events.js"></script>
+
+<form id="frmLohanaPackageTariffRootDetails">
+    <input type="hidden" name="LohanaPackageTariffHotel.LohanaPackageTariffId" id="txtLohanaPackageTariffId">
+    <input type="hidden" id="hdnLohanaPackageTariffRootId" name="LohanaPackageTariffRoot.LohanaPackageTariffRootId" />
+    <input type="hidden" id="hdnLohanaPackageTariffRootDetailsId" name="LohanaPackageTariffRoot.LohanaPackageTariffRootDetailsId" />
+    <input type="hidden" id="hdnLohanaPackageTariffRefId" name="LohanaPackageTariffRoot.LohanaPackageTariffRefId" />
+    <input type="hidden" id="hdnLohanaPackageTariffTypeId" name="LohanaPackageTariffRoot.LohanaPackageTariffTypeId" />
+    <input type="hidden" id="hdnDay" name="LohanaPackageTariffRoot.Day" />
+    @*<div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style="color: #333" class="">Sequence</label>
+                <div class="input-group">
+                    <input type="text" id="txtSequence" class="form-control input-sm" name="LohanaPackageTariffRoot.Sequence" placeholder="Enter Sequence">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="drpVehicle" style="color: #333" class="">City</label>
+                <div class="input-group">
+                    <select class="form-control input-sm" id="drpCityId" name="LohanaPackageTariffRoot.CityId">
+                        <option value="0">Select City</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/City/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">No Of Nights</label>
+                <input type="text" id="txtNoOfNight" class="form-control" placeholder="Enter no of nights" name="LohanaPackageTariffRoot.NoOfNight">
+            </div>
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        <button type="button" id="btnAddTitle" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Title</button>
+        <button type="button" id="btnAddHotel" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Hotel</button>
+        <button type="button" id="btnAddSightSeeing" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Sight Seeing</button>
+        <button type="button" id="btnAddVehicle" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add 
+        </button>
+        <button type="button" id="btnAddMeal" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Meal</button>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Root Details Listing
+        </h5>
+        @*<div class="row">
+            <div class="col-md-12">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblLohanaPackageTariffRootDetails" data-current-page=""></table>
+                </div>
+            </div>
+        </div>*@
+        <div id="divDays">
+            
+        </div>
+    </div>
+
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+
+</form>
+
+<div class="modal fade addhotel" id="modalHotel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Hotel Details
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmRoomDetails">
+                    @*<input type="hidden" name="LohanaPackageTariffHotel.LohanaPackageTariffId" id="txtLohanaPackageTariffId">
+                    <input type="hidden" id="hdnLohanaPackageTariffRootId" value="" name="LohanaPackageTariffRoot.LohanaPackageTariffRootId" />*@
+                    <input type="hidden" name="LohanaPackageTariffHotel.LohanaPackageTariffRefId" id="hdnLohanaPackageTariffTypeId" value="@((int)LohanaBusinessEntities.Common.EnumCollection.LohanaPackageTariffType.LohanaPackageTariffHotel)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="drpCity" style="color: #333" class="">Location</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpCity" name="LohanaPackageTariffHotel.CityId">
+                                    <option value="0">Select location</option>
+                                    @foreach (var item in Model.Cities)
+                                    {
+                                        if (Model.LohanaPackageTariffHotel.CityId == item.CityId)
+                                        {
+                                            <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.CityId">@item.CityName</option>
+                                        }
+                                    }
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="drpHotel" style="color: #333" class="">Hotel</label>
+                            <div class="input-group">
+                                <select class="form-control" id="drpHotel" name="LohanaPackageTariffHotel.HotelId">
+                                    <option value="0">Select Hotel</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-building"></i>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="drpRoom" style="color: #333" class="">Room Type</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drpRoom" name="LohanaPackageTariffHotel.RoomTypeId">
+                                        <option value="0">Select Room Type</option>
+                                        @foreach (var item in Model.RoomTypes)
+                                        {
+                                            if (Model.LohanaPackageTariffHotel.RoomTypeId == item.RoomTypeId)
+                                            {
+                                                <option value="@item.RoomTypeId" selected="selected">@item.RoomTypeName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.RoomTypeId">@item.RoomTypeName</option>
+                                            }
+                                        }
+
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-building"></i>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="drpMeal" style="color: #333" class="">Meal Type</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drpMeal" name="LohanaPackageTariffHotel.MealId">
+                                        <option value="0">Select Meal Type</option>
+                                        @foreach (var item in Model.Meals)
+                                        {
+                                            if (Model.LohanaPackageTariffHotel.MealId == item.MealId)
+                                            {
+                                                <option value="@item.MealId" selected="selected">@item.MealName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.MealId">@item.MealName</option>
+                                            }
+                                        }
+
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-cutlery"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" id="btnSearchLohanaPackageHotel" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                        <button type="reset" id="btnResetLohanaPackageTariffHotel" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="row">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblHotelTariffRoomDetails"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="CheckSelectedHotel" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnAddLohanaPackageTariffHotel" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addhotel" id="modalSightSeeing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Sight Seeing List
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmSearchSightSeeing">
+                    @*<input type="hidden" name="LohanaPackageTariffSightSeeing.LohanaPackageTariffId" id="txtLohanaPackageTariffId">
+                    <input type="hidden" id="hdnLohanaPackageTariffRootId" value="" name="LohanaPackageTariffSightSeeing.LohanaPackageTariffRootId" />
+                    <input type="hidden" name="LohanaPackageTariffSightSeeing.LohanaPackageTariffRefId" id="hdnSightSeeingId">*@
+                    <input type="hidden" name="LohanaPackageTariffSightSeeing.LohanaPackageTariffTypeId" id="hdnLohanaPackageTariffTypeId" value="@((int)LohanaBusinessEntities.Common.EnumCollection.LohanaPackageTariffType.LohanaPackageTariffSight)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Sight Seeing Name </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter Sight Seeing name" name="LohanaPackageTariffSightSeeing.SightSeeingName" id="txtSightSeeingName">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-sort-alpha-asc"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="drpSightSeeingCity" style="color: #333" class="">Location</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpSightSeeingCity" name="LohanaPackageTariffSightSeeing.CityId">
+                                    <option value="0">Select Location</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        &nbsp;&nbsp;&nbsp;
+                        <br />
+                        <button type="button" id="btnSearchSightSeeing" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                        <button type="reset" id="btnResetSightSeeing" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="row">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblSightSeeing"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="CheckSelectedSightSeeing" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSaveSightSeeing" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addhotel" id="modalVehicle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Vehicle List
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmSearchVehicle">
+                    @*<input type="hidden" name="LohanaPackageTariffVehicle.LohanaPackageTariffId" id="txtLohanaPackageTariffId">
+                    <input type="hidden" id="hdnLohanaPackageTariffRootId" value="" name="LohanaPackageTariffVehicle.LohanaPackageTariffRootId" />
+                    <input type="hidden" name="LohanaPackageTariffVehicle.LohanaPackageTariffRefId" id="hdnSightSeeingId">*@
+                    <input type="hidden" name="LohanaPackageTariffVehicle.LohanaPackageTariffTypeId" id="hdnLohanaPackageTariffTypeId" value="@((int)LohanaBusinessEntities.Common.EnumCollection.LohanaPackageTariffType.LohanaPackageTariffVehicle)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Vehicle Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="LohanaPackageTariffVehicle.VehicleName" placeholder="Enter vehicle name" maxlength="50">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="drpVehicleBrand">Vehicle Brand</label>
+                            <div class="input-group">
+                                <select class="form-control" name="LohanaPackageTariffVehicle.VehicleBrandId" id="drpVehicleBrand">
+                                    <option value="0">Select vehicle brand</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="/VehicleBrand/Index" target="_blank"> <i class="fa fa-bold"></i></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="drpVehicleType">Vehicle Type</label>
+                            <div class="input-group">
+                                <select class="form-control" name="LohanaPackageTariffVehicle.VehicleTypeId" id="drpVehicleType">
+                                    <option value="0">Select vehicle type</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="/VehicleType/Index" target="_blank"> <i class="fa fa-medium"></i></a>
+                                </span>
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <div class="form-group">
+                        &nbsp;&nbsp;&nbsp;
+                        <br />
+                        <button type="button" id="btnSearchVehicle" disabled class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                        <button type="reset" id="btnResetVehicle" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="row">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblVehicle"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="CheckSelectedVehicle" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSaveVehicle" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addhotel" id="modalMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Meal List
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmSearchMeal">
+                    @*<input type="hidden" name="LohanaPackageTariffVehicle.LohanaPackageTariffId" id="txtLohanaPackageTariffId">
+                    <input type="hidden" id="hdnLohanaPackageTariffRootId" value="" name="LohanaPackageTariffVehicle.LohanaPackageTariffRootId" />
+                    <input type="hidden" name="LohanaPackageTariffVehicle.LohanaPackageTariffRefId" id="hdnSightSeeingId">*@
+                    <input type="hidden" name="LohanaPackageTariffVehicle.LohanaPackageTariffTypeId" id="hdnLohanaPackageTariffTypeId" value="@((int)LohanaBusinessEntities.Common.EnumCollection.LohanaPackageTariffType.LohanaPackageTariffMeal)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Meal Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter meal name" name="Meal.MealName" id="txtMealName" maxlength="50">
+                                <input type="hidden" name="Meal.MealName" id="hdnMealName" value="">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-cutlery"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="">Meal Description</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter meal description" name="Meal.MealDescription" id="txtMealDescription" maxlength="100">
+                                <input type="hidden" name="Meal.MealDescription" id="hdnMealDescription" value="">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-cutlery"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        &nbsp;&nbsp;&nbsp;
+                        <br />
+                        <button type="button" id="btnSearchMeal" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                        <button type="reset" id="btnResetMeal" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    </div>
+
+                    <div class="card">
+                        <div class="row">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblMeal"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="CheckSelectedMeal" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSaveMeal" disabled class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addhotel" id="modalTitle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Title
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmTitle">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Title</label>
+                            <div class="input-group form-group">
+                                <input type="text" class="form-control" placeholder="Enter Title" name="Title" id="txtTitle" maxlength="40">
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <input type="hidden" name="CheckSelectedMeal" />
+                    </div>*@
+                    <div class="modal-footer">
+                        <button type="button" id="btnSaveTitle" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addhotel" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Confirm
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmConfirm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Are you sure, you want to delete the record?</label>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" id="btnYes" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Yes</button>
+                        <button type="button" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>No</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="myCancelOrderModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cancel Order</h4>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <h5>Are you sure, you want to cancel the order ?</h5>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="button" class="btn btn-sm" id="btnCancelYes">Yes</button>
+                <button type="button" class="btn btn-sm" id="btnCancelNo" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>*@

@@ -1,0 +1,1001 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+
+<script src="~/Scripts/Enquiry/train-enquiry-item-validations.js"></script>
+<script src="~/Scripts/Enquiry/train-enquiry-item-methods.js"></script>
+<script src="~/Scripts/Enquiry/train-enquiry-item-events.js"></script>
+
+
+<div class="tab-pane active p-a-0-75" id="traindetails" role="tabpanel">
+
+    <form id="frmtraindetails">
+
+        @*<input type="hidden" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnTrainId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        <input type="hidden" id="hdnEnquiryType" name="Enquiry.EnquiryType" value="@((int)EnquiryType.Train)" />
+
+        <div id="divtraindetails">
+
+            <div class="row">
+
+                <div class="col-md-3"></div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+                            @foreach (var item in LookupInfo.GetTrainType())
+                            {
+                                if (Model.Enquiry.EnquiryTrainType == item.Key)
+                                {
+                                    <label class="custom-control custom-radio">
+                                        <input name="Enquiry.TrainType" type="radio" class="custom-control-input" id="radioTrainType" checked="checked" value="@item.Key">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">&nbsp;@item.Value</span>
+                                    </label>
+
+                                    <input type="hidden" id="hdnradioTrainType" value="@item.Key" />
+                                }
+                                else
+                                {
+                                    <label class="custom-control custom-radio">
+                                        <input name="Enquiry.TrainType" type="radio" class="custom-control-input" id="radioTrainType" value="@item.Key">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">&nbsp;@item.Value</span>
+                                    </label>
+                                }
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3"></div>
+
+            </div>
+
+            @*Rail Type*@
+
+            <div class="row">
+                @{
+
+                    if (Model.Enquiry.EnquiryItemTypeDetails.Count == 0)
+                    {
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Ticket Class</label><select id="drpticketClass" class="form-control input-sm" name="EnquiryItemTypeDetails[0].TicketClass">
+                                    <option>Select Ticket Class</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drppickupfrom" name="EnquiryItemTypeDetails[0].PickUpFrom">
+
+                                        <option value="0">Select pickup from</option>
+
+                                        @foreach (var item in Model.Cities)
+                                        {
+
+                                            <option value="@item.CityId">@item.CityName</option>
+
+                                        }
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drpdropTo" style="color: #333">Drop To</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drpdropTo" name="EnquiryItemTypeDetails[0].DropTo">
+
+                                        <option value="0">Select drop to</option>
+
+                                        @foreach (var item in Model.Cities)
+                                        {
+                                            <option value="@item.CityId">@item.CityName</option>
+                                        }
+
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Depart On</label>
+                                <input type="text" id="dtpdepartOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].DepartureDate" placeholder="Enter Departure" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divtrainreturnOn">
+                            <div class="form-group">
+                                <label>Return On</label>
+                                <input type="text" id="dtpreturnOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].ReturnDate" placeholder="Enter Return" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divtrainTypeButtonGroup">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="btn btn-purple" id="btnAddTrainType" value="2"> + </button>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Ticket Class</label><select id="drpticketClass" class="form-control input-sm" name="EnquiryItemTypeDetails[0].TicketClass">
+                                    <option>Select Ticket Class</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                                    {
+                                        if (Model.Enquiry.EnquiryItemTypeDetails[0].TicketClass == item.Key)
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drppickupfrom" name="EnquiryItemTypeDetails[0].PickUpFrom">
+
+                                        <option value="0">Select pickup from</option>
+
+                                        @foreach (var item in Model.Cities)
+                                        {
+                                            if (Model.Enquiry.EnquiryItemTypeDetails[0].PickUpFrom == item.CityId)
+                                            {
+                                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.CityId">@item.CityName</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="drpdropTo" style="color: #333">Drop To</label>
+                                <div class="input-group">
+                                    <select class="form-control input-sm" id="drpdropTo" name="EnquiryItemTypeDetails[0].DropTo">
+
+                                        <option value="0">Select drop to</option>
+
+                                        @foreach (var item in Model.Cities)
+                                        {
+                                            if (Model.Enquiry.EnquiryItemTypeDetails[0].DropTo == item.CityId)
+                                            {
+                                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.CityId">@item.CityName</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span class="input-group-addon">
+                                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Depart On</label>
+                                <input type="text" id="dtpdepartOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].DepartureDate" placeholder="Enter Departure" value="@Model.Enquiry.EnquiryItemTypeDetails[0].DepartureDate">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divtrainreturnOn">
+                            <div class="form-group">
+                                <label>Return On</label>
+                                <input type="text" id="dtpreturnOn" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTypeDetails[0].ReturnDate" placeholder="Enter Return" value="@Model.Enquiry.EnquiryItemTypeDetails[0].ReturnDate">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divtrainTypeButtonGroup">
+                            <div class="form-group">
+                                <br />
+
+                                <button type="button" class="btn btn-purple" id="btnAddTrainType" value="2"> + </button>
+
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+            <div id="divtrainType">
+                @{
+                    if (Model.Enquiry.EnquiryItemTypeDetails.Count > 1)
+                    {
+                        for (int i = 1; i < Model.Enquiry.EnquiryItemTypeDetails.Count; i++)
+                        {
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Ticket Class</label>
+                                        <select class="form-control input-sm train-ticket-class" name="EnquiryItemTypeDetails[@i].TicketClass">
+                                            <option>Select Ticket Class</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                                            {
+                                                if (Model.Enquiry.EnquiryItemTypeDetails[i].TicketClass == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                                        <div class="input-group">
+                                            <select class="form-control input-sm train-from" id="drppickupfrom" name="EnquiryItemTypeDetails[@i].PickUpFrom">
+
+                                                <option value="0">Select pickup from</option>
+
+                                                @foreach (var item in Model.Cities)
+                                                {
+                                                    if (Model.Enquiry.EnquiryItemTypeDetails[i].PickUpFrom == item.CityId)
+                                                    {
+                                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.CityId">@item.CityName</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="drpdropTo" style="color: #333">Drop To</label>
+                                        <div class="input-group">
+                                            <select class="form-control input-sm train-to" id="drpdropTo" name="EnquiryItemTypeDetails[@i].DropTo">
+
+                                                <option value="0">Select drop to</option>
+
+                                                @foreach (var item in Model.Cities)
+                                                {
+                                                    if (Model.Enquiry.EnquiryItemTypeDetails[i].DropTo == item.CityId)
+                                                    {
+                                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.CityId">@item.CityName</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <span class="input-group-addon">
+                                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Depart On</label>
+                                        <input type="text" class="form-control input-sm datepicker-autoclose train-depart-on" name="EnquiryItemTypeDetails[@i].DepartureDate" placeholder="Enter Departure" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger btn-train-remove">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+
+            @* Rail Pass*@
+
+
+            <div class="row">
+                @{
+
+                    if (Model.Enquiry.EnquiryItemPassDetails.Count == 0)
+                    {
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Region</label>
+                                <select id="drpregion" class="form-control input-sm" name="EnquiryItemPassDetails[0].Region">
+                                    <option value="">Select Region</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPassRegion())
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Passes Type</label>
+                                <select id="drppassType" class="form-control input-sm" name="EnquiryItemPassDetails[0].PassType">
+                                    <option value="">Select Rail Pass Type</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPassType())
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Railpass</label>
+                                <select id="drprailPass" class="form-control input-sm" name="EnquiryItemPassDetails[0].RailPass">
+                                    <option value="">Select Railpass</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPass())
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Rail Class</label>
+                                <select id="drprailClass" class="form-control input-sm" name="EnquiryItemPassDetails[0].RailClass">
+                                    <option value="">Select Class</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPassClass())
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Number of Days</label><input type="text" id="txtNoOfDays" class="form-control adult-children" name="EnquiryItemPassDetails[0].NoOfDays" value="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divTrainPassButtonGroup">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="btn btn-purple" id="btnAddTrainPass" value="2"> + </button>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Region</label>
+                                <select id="drpregion" class="form-control input-sm" name="EnquiryItemPassDetails[0].Region">
+                                    <option value="">Select Region</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPassRegion())
+                                    {
+                                        if (Model.Enquiry.EnquiryItemPassDetails[0].Region == item.Key)
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Passes Type</label>
+                                <select id="drppassType" class="form-control input-sm" name="EnquiryItemPassDetails[0].PassType">
+                                    <option value="">Select Rail Pass Type</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPassType())
+                                    {
+                                        if (Model.Enquiry.EnquiryItemPassDetails[0].PassType == item.Key)
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Railpass</label>
+                                <select id="drprailPass" class="form-control input-sm" name="EnquiryItemPassDetails[0].RailPass">
+                                    <option value="">Select Railpass</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPass())
+                                    {
+                                        if (Model.Enquiry.EnquiryItemPassDetails[0].RailPass == item.Key)
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                        }
+                                        else
+                                        {
+
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Rail Class</label>
+                                <select id="drprailClass" class="form-control input-sm" name="EnquiryItemPassDetails[0].RailClass">
+                                    <option value="">Select Class</option>
+                                    @foreach (var item in LookupInfo.GetEnquiryRailPassClass())
+                                    {
+                                        if (Model.Enquiry.EnquiryItemPassDetails[0].RailClass == item.Key)
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                        }
+                                        else
+                                        {
+
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Number of Days</label><input type="text" id="txtNoOfDays" class="form-control adult-children" name="EnquiryItemPassDetails[0].NoOfDays" value="@Model.Enquiry.EnquiryItemPassDetails[0].NoOfDays">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2" id="divTrainPassButtonGroup">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" class="btn btn-purple" id="btnAddTrainPass" value="2"> + </button>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+            <div id="divtrainPass">
+                @{
+                    if (Model.Enquiry.EnquiryItemPassDetails.Count > 1)
+                    {
+                        for (int i = 1; i < Model.Enquiry.EnquiryItemPassDetails.Count; i++)
+                        {
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Region</label>
+                                        <select id="drpregion" class="form-control input-sm" name="EnquiryItemPassDetails[@i].Region">
+                                            <option value="">Select Region</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryRailPassRegion())
+                                            {
+                                                if (Model.Enquiry.EnquiryItemPassDetails[i].Region == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Passes Type</label>
+                                        <select id="drppassType" class="form-control input-sm" name="EnquiryItemPassDetails[@i].PassType">
+                                            <option value="">Select Rail Pass Type</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryRailPassType())
+                                            {
+                                                if (Model.Enquiry.EnquiryItemPassDetails[i].PassType == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Railpass</label>
+                                        <select id="drprailPass" class="form-control input-sm" name="EnquiryItemPassDetails[@i].RailPass">
+                                            <option value="">Select Railpass</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryRailPass())
+                                            {
+                                                if (Model.Enquiry.EnquiryItemPassDetails[i].RailPass == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Rail Class</label>
+                                        <select id="drprailClass" class="form-control input-sm" name="EnquiryItemPassDetails[@i].RailClass">
+                                            <option value="">Select Class</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryRailPassClass())
+                                            {
+                                                if (Model.Enquiry.EnquiryItemPassDetails[i].RailClass == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Number of Days</label><input type="text" id="txtNoOfDays" class="form-control adult-children" name="EnquiryItemPassDetails[@i].NoOfDays" value="@Model.Enquiry.EnquiryItemPassDetails[i].NoOfDays">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger btn-train-pass-remove">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Adult (12 + Years)</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Enquiry.adultCount" value="@Model.Enquiry.AdultCount">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Child (2 - 12 Years)</label><input type="text" id="txtChildCount" class="form-control adult-children" name="Enquiry.childCount" value="@Model.Enquiry.ChildCount">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Infant (0 - 2 Years)</label><input type="text" id="txtInfantCount" class="form-control adult-children" name="Enquiry.infantCount" value="@Model.Enquiry.InfantCount">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Budget</label>
+                        <input type="text" id="txtbudget" class="form-control input-sm" name="Enquiry.budget" placeholder="Budget" value="@Model.Enquiry.Budget">
+                    </div>
+                </div>
+
+
+            </div>
+
+       
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveTrainDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetTrainDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<div id="dvTempTrainType" style="display:none">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Ticket Class</label>
+                <select class="form-control input-sm train-ticket-class" name="">
+                    <option>Select Ticket Class</option>
+                    @foreach (var item in LookupInfo.GetEnquiryAirplaneTicketClass())
+                    {
+                        if (Model.EnquiryItemTypeDetail.TicketClass == item.Key)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+                </select>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="drppickupfrom" style="color: #333">Pickup From</label>
+                <div class="input-group">
+                    <select class="form-control input-sm train-from" id="drppickupfrom" name="">
+
+                        <option value="0">Select pickup from</option>
+
+                        @foreach (var item in Model.Cities)
+                        {
+                            if (Model.EnquiryItemTypeDetail.PickUpFrom == item.CityId)
+                            {
+                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CityId">@item.CityName</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="drpdropTo" style="color: #333">Drop To</label>
+                <div class="input-group">
+                    <select class="form-control input-sm train-to" id="drpdropTo" name="">
+
+                        <option value="0">Select drop to</option>
+
+                        @foreach (var item in Model.Cities)
+                        {
+                            if (Model.EnquiryItemTypeDetail.DropTo == item.CityId)
+                            {
+                                <option value="@item.CityId" selected="selected">@item.CityName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CityId">@item.CityName</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Depart On</label>
+                <input type="text" class="form-control input-sm datepicker-autoclose train-depart-on" name="" placeholder="Enter Departure" value="@Model.EnquiryItemTypeDetail.DepartureDate">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-train-remove">
+                <i class="fa fa-remove"></i>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="dvTempTrainPass" style="display:none">
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Region</label>
+                <select id="drpregion" class="form-control input-sm train-region" name="">
+                    <option value="">Select Region</option>
+                    @foreach (var item in LookupInfo.GetEnquiryRailPassRegion())
+                    {
+                        if (Model.EnquiryItemPassDetail.Region == item.Key)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Passes Type</label>
+                <select id="drppassType" class="form-control input-sm train-pass-type" name="">
+                    <option value="">Select Rail Pass Type</option>
+                    @foreach (var item in LookupInfo.GetEnquiryRailPassType())
+                    {
+                        if (Model.EnquiryItemPassDetail.PassType == item.Key)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Railpass</label>
+                <select id="drprailPass" class="form-control input-sm train-rail-pass" name="">
+                    <option value="">Select Railpass</option>
+                    @foreach (var item in LookupInfo.GetEnquiryRailPass())
+                    {
+                        if (Model.EnquiryItemPassDetail.RailPass == item.Key)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+
+                </select>
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Rail Class</label>
+                <select id="drprailClass" class="form-control input-sm train-rail-class" name="">
+                    <option value="">Select Class</option>
+                    @foreach (var item in LookupInfo.GetEnquiryRailPassClass())
+                    {
+                        if (Model.EnquiryItemPassDetail.RailClass == item.Key)
+                        {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                        }
+                        else
+                        {
+
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    }
+                </select>
+
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Number of Days</label><input type="text" id="txtNoOfDays" class="form-control adult-children train-no-of-days" name="" value="@Model.EnquiryItemPassDetail.NoOfDays">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-train-pass-remove">
+                <i class="fa fa-remove"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+
+</script>
+
+
+
+
+@*<script>
+
+
+        $('.from-to-date').datepicker({
+            toggleActive: true
+        });
+
+        $(".adult-children").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 1,
+            decimals: 0,
+            boostat: 5,
+            maxboostedstep: 10,
+            //postfix: '%',
+            buttondown_class: "btn btn-secondary",
+            buttonup_class: "btn btn-secondary"
+        });
+
+
+        $('input[name="daterange-with-time"]').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY h:mm A'
+            },
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-success',
+            cancelClass: 'btn-inverse',
+        });
+
+
+    </script>*@

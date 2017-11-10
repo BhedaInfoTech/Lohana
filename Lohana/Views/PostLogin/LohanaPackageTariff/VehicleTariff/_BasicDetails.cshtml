@@ -1,0 +1,123 @@
+﻿@model Lohana.Models.Tariff.VehicleTariff.VehicleTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-validations.js"></script>
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-methods.js"></script>
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-events.js"></script>
+
+
+<form id="frmVehicleTariffBasicDetails">
+
+    <input type="hidden" id="hdnVehicleTariffId" name="VehcileTariff.VehicleTariffId" />
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="drpVendor" style="color: #333" class="">Vendor Name</label>
+                <div class="input-group">
+                    <select class="form-control input-sm" id="drpVendorId" name="VehicleTariff.VendorId">
+                        <option value="0">Select vendor</option>
+                        @foreach (var item in Model.Vendors)
+                        {
+                            if (Model.VehicleTariff.VendorId == item.VendorId)
+                            {
+                                <option value="@item.VendorId" selected="selected">@item.VendorName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.VendorId">@item.VendorName</option>
+                            }
+                        }
+                    </select>
+                    <span class="input-group-addon">
+                        <i class="fa fa-globe"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+       
+         <div class="col-md-6">
+            <div class="form-group">
+                <label for="drpVehicle" style="color: #333" class="">Package Name</label>
+                <div class="input-group">
+                    <input type="text" id="txtPackageName" class="form-control input-sm" name="VehicleTariff.PackageName" placeholder="Enter package name">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Inclusions</label>
+                <textarea id="txtInclusions" class="form-control input-sm" name="VehicleTariff.Inclusions" placeholder="Inclusions"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Exclusions</label>
+                <textarea id="txtExclusions" class="form-control input-sm" name="VehicleTariff.Exclusions" placeholder="Exclusions"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Cancellation Policy</label>
+                <textarea id="txtCancellationPolicy" class="form-control input-sm" placeholder="Cancellation policy" name="VehicleTariff.CancellationPolicy" maxlength="250"></textarea>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">Set Active</label>
+                <div class="input-group">
+                    <input class="js-switch" data-color="#1bc044" checked="" data-switchery="true" value="true" name="VehicleTariff.Status" type="checkbox" id="Flag">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+      
+        <button type="button" id="btnAddVehicleTariffBasicDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        <button type="button" id="btnResetVehicleTariffBasicDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        <button type="button" id="btnSearchVehicleTariffBasicDetails" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+
+    </div>
+
+    <div class="card">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Basic Details Listing
+        </h5>
+
+        <input type="hidden" id="hdnSearchVehicleTariffId" value="" name="VehicleFilter.VehicleTariffId" />
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblVehicleTariffBasicDetails" data-current-page=""></table>
+                </div>
+            </div>
+        </div>
+
+
+       
+    </div>
+
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+
+</form>

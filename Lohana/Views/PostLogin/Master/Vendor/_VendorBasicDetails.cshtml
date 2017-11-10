@@ -1,0 +1,401 @@
+﻿@model Lohana.Models.Master.VendorViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+<script src="~/Scripts/Master/Vendor/vendor-validations.js"></script>
+<script src="~/Scripts/Master/Vendor/vendor-methods.js"></script>
+<script src="~/Scripts/Master/Vendor/vendor-events.js"></script>
+
+
+<form role="form" id="frmVendor">
+
+    <input type="hidden" id="hdnSearchVendorId" value="" name="Filter.VendorId" />
+    <input type="hidden" id="hdnVendorId" value="@Model.Vendor.VendorId" name="Vendor.VendorId" />
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <label for="">Vendor Type</label>
+
+            <div class="form-group">
+
+                <div class="input-group">
+
+                    @foreach (var item in LookupInfo.Get_Vendor_Type())
+                    {
+                        if (Model.Vendor.VendorType == item.Key)
+                        {
+                            <label class="custom-control custom-radio">
+                                <input name="Vendor.VendorType" type="radio" class="custom-control-input" id="radioVendorType" checked="checked" value="@item.Key">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">&nbsp;@item.Value</span>
+                            </label>
+
+                            <input type="hidden" id="hdnradioVendorType" value="@item.Key" />
+                        }
+                        else
+                        {
+                            <label class="custom-control custom-radio">
+                                <input name="Vendor.VendorType" type="radio" class="custom-control-input" id="radioVendorType" value="@item.Key">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">&nbsp;@item.Value</span>
+                            </label>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="" id="lblCompanyName">Company Name</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter company name" name="Vendor.CompanyName" id="txtCompanyName" maxlength="50" value="@Model.Vendor.CompanyName">
+                    <input type="hidden" id="hdnCompanyName" value="@Model.Vendor.CompanyName">
+                    @*<span class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </span>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="">Set Active</label>
+            <div class="form-group">
+                <div class="input-group">
+                    @if (Model.Vendor.IsActive)
+                    {
+                        <input class="js-switch" data-color="#1bc044" data-switchery="true" checked="checked" value="@Model.Vendor.IsActive.ToString()" name="Vendor.IsActive" type="checkbox" id="Flag">
+                    }
+                    else
+                    {
+                        <input class="js-switch" data-color="#1bc044" data-switchery="true" value="@Model.Vendor.IsActive.ToString()" name="Vendor.IsActive" type="checkbox" id="Flag">
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label for="">Vendor Name</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter vendor name" name="Vendor.VendorName" id="txtVendorName" maxlength="50" value="@Model.Vendor.VendorName">
+                            <input type="hidden" id="hdnVendorName" value="@Model.Vendor.VendorName">
+                            <span class="input-group-addon">
+                                <i class="fa fa-sort-alpha-asc"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-md-4">
+                    <label for="drpBusinessType" style="color: #333" class="">Service Type</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-control" id="drpBusinessType" name="Vendor.BusinessType" multiple>
+                                <option value="0">Select service type </option>
+
+                                @foreach (var item in Model.Business)
+                                {
+                                    if (Model.Vendor.BusinessId == item.BusinessId)
+                                    {
+                                        <option value="@item.BusinessId" selected="selected">@item.BusinessName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.BusinessId">@item.BusinessName</option>
+                                    }
+                                }
+
+                            </select>
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+
+                        </div>
+                        </div>
+                    </div>*@
+
+                <div class="col-md-8">
+
+                    <div class="form-group">
+
+                        <label>Service Type</label>
+
+                        <select id="drpBusinessType" multiple="multiple" class="form-control input-sm BusinessType" name="Vendor.BusinessType" onchange="Set_BusinessType();">
+
+                            @if (Model.BusinessList.Count > 0)
+                            {
+                                int i = (Model.BusinessList.Count) - 1;
+
+                                foreach (var item in Model.Business)
+                                {
+                                    if (i >= 0)
+                                    {
+                                        if (Model.BusinessList[i].BusinessId == item.BusinessId)
+                                        {
+                                            <option value="@item.BusinessId" selected="selected">@item.BusinessName</option>
+                                            i--;
+                                        }
+
+                                        else
+                                        {
+                                            <option value="@item.BusinessId">@item.BusinessName</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.BusinessId">@item.BusinessName</option>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in Model.Business)
+                                {
+                                    <option value="@item.BusinessId">@item.BusinessName</option>
+                                }
+                            }
+                        </select>
+
+                        <input type="hidden" id="hdnBusinessType" name="Vendor.businessType" value="@Model.Vendor.BusinessId" />
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label for="">Phone No</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter phone no" name="Vendor.PhoneNo" id="txtPhoneNo" value="@Model.Vendor.PhoneNo" maxlength="20">
+                            <span class="input-group-addon">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="">Mobile No</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter mobile no" name="Vendor.MobileNo" id="txtMobileNo" value="@Model.Vendor.MobileNo" maxlength="15">
+                            <span class="input-group-addon">
+                                <i class="fa fa-mobile"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="">Fax No.</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter fax no." name="Vendor.FaxNo" id="txtFaxNo" value="@Model.Vendor.FaxNo" maxlength="25">
+                            <span class="input-group-addon">
+                                <i class="fa fa-fax"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Email ID</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter email id" name="Vendor.EmailId" id="txtEmailId" value="@Model.Vendor.EmailId" maxlength="100">
+                            <input type="hidden" id="hdnEmailId" value="@Model.Vendor.EmailId">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="">Website Address</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter website add" id="txtWebsiteURL" name="Vendor.WebsiteURL" value="@Model.Vendor.WebsiteURL" maxlength="100">
+                            <span class="input-group-addon">
+                                <i class="fa fa-google-wallet"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-md-4">
+
+                    <label for="drpPaymentOption" style="color: #333">Payment Option</label>
+
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+                            <select class="form-control" name="Vendor.PaymentOption" id="drpPaymentOption">
+
+                                <option value="0">Select payment option</option>
+
+                                @foreach (var item in LookupInfo.Get_Payment_Option())
+                                {
+                                    if (Model.Vendor.PaymentOption == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+
+                            </select>
+
+                            <span class="input-group-addon">
+                                <i class="fa fa-plus"></i>
+                            </span>
+
+                        </div>
+                    </div>
+
+                </div>*@
+                <div class="col-md-4">
+                    <label for="">Pincode</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter pincode" id="txtPINCode" maxlength="25" name="Vendor.PINCode" value="@Model.Vendor.PINCode">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-pin"></i>
+                        </span>
+                    </div>
+                </div>
+               
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter address." id="txtAddress" name="Vendor.Address" maxlength="250">@Model.Vendor.Address</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="drpCity" style="color: #333" class="">Location</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpCity" name="Vendor.City">
+
+                            @*<option value="0">Select city </option>*@
+
+                            @foreach (var item in Model.Cities)
+                            {
+                                if (Model.Vendor.CityId == item.CityId)
+                                {
+                                    <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CityId">@item.CityName</option>
+                                }
+                            }
+
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            @*<i class="fa fa-globe"></i>*@
+                        </span>
+
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="form-group">
+
+                        <label>Payment Option</label>
+
+                        <select id="drpPaymentOption" multiple="multiple" class="form-control input-sm PaymentOption" name="Vendor.PaymentOption" onchange="Set_PaymentOption();">
+
+                            @if (Model.PaymentOptionList.Count > 0)
+                            {
+                                int i = (Model.PaymentOptionList.Count) - 1;
+
+                                 foreach (var item in LookupInfo.Get_Payment_Option())                               
+                                {
+                                    if (i >= 0)
+                                    {
+                                        if (Model.PaymentOptionList[i].PaymentOptionId == item.Key.ToString())
+                                        {
+                                            <option value="@item.Key" selected="selected">@item.Value</option>
+                                            i--;
+                                        }
+
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Value</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item in LookupInfo.Get_Payment_Option())
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            }                            
+                        </select>
+
+                        <input type="hidden" id="hdnPaymentOption" name="Vendor.PaymentOptionId" value="@Model.Vendor.PaymentOptionId" />
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+
+                <button type="button" id="btnSaveVendor" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                <button type="button" id="btnResetVendor" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                <a href="Search" class="btn btn-info btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>
+
+
+                @*<button type="button" class="btn btn-success label-left m-b-0-25 waves-effect waves-light" id="btnSaveVendor"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                    <button type="reset" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light" id="btnResetVendor"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    <a href="Search" class="btn btn-info label-left m-b-0-25 waves-effect waves-light" id="btnBackVendor"><span class="btn-label"><i class="ti-angle-double-left"></i></span>Back</a>*@
+
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,1427 @@
+﻿
+<script src="~/Scripts/TaskManagement/task-management-methods.js"></script>
+<script src="~/Scripts/TaskManagement/search-task-management-event.js"></script>
+
+
+<div class="content-area p-y-1" >
+
+    <div class="container-fluid">
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4>Task Management</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Task Management</a></li>
+                    <li class="breadcrumb-item active">Index</li>
+                </ol>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <form id="frmTaskSearch">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Task Management Search
+                </h5>
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Customer Name</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Enter Customer Name to search" name="Task.CustomerName">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Enquiry Type</label>
+                                    <select id="drpsubCategory" class="form-control input-sm" name="Package.subCategory">
+                                        <option value="">Select Enquiry Type</option>
+                                        <option value="">Package</option>
+                                        <option value="">Customised</option>
+                                        <option value="">Preplanned</option>
+                                    </select>
+                                </div>
+                            </div>*@
+
+                        @*<div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Enquiry Start Date</label>
+                                    <input type="text" id="dtpenquiryStartDate" class="form-control input-sm datepicker-autoclose" name="Package.enquiryStartDate" placeholder="Enter Enquiry Start Date">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Enquiry End Date</label>
+                                    <input type="text" id="dtpenquiryEndDate" class="form-control input-sm datepicker-autoclose" name="Package.enquiryEndDate" placeholder="Enter Enquiry End Date">
+                                </div>
+                            </div>*@
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <br />
+                                <button type="button" id="SearchCustomerTask" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                <button type="button" id="ResetTask" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+        <div class="content-area p-y-1" id="divTaskListDetails">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box bg-white">
+                            <table class="table table-grey-head m-md-b-0">
+                                <thead>
+                                    <tr>
+                                        <th>Task No.</th>
+                                        <th>Customer Name</th>
+                                        <th>Status</th>
+                                        <th>Last Update</th>
+                                        <th>Follow Date</th>
+                                        <th>Follow Up</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Tasks)
+                                    {
+
+                                        int Count = 0;
+                                        <tr>
+                                            @*<th scope="row">1</th>*@
+                                            <td>
+                                                <a class="text-primary" href="">@item.TaskNo</a>
+                                                <input type="hidden" id=@("hdnTaskId_" + Count) value="@item.TaskNo" />
+                                            </td>
+                                            <td>
+                                                <a class="text-primary" data-toggle="modal" data-target=".view_details">@item.CustomerName</a>
+                                            </td>
+                                            <td>
+                                                <span class="text-primary">@item.Status</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted">@(item.LastUpdatedDate == DateTime.MinValue ? "" : Convert.ToString(item.LastUpdatedDate))</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted">@(item.FollowUpDate == DateTime.MinValue ? "" : Convert.ToString(item.FollowUpDate))</span>
+                                            </td>
+                                            @if (item.IsFollowed.ToString() == "True")
+                                            {
+                                                <td>
+                                                    <span class="ti-check text-success" style="font-weight: 800; font-size: 14px;">@item.IsFollowed</span>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <span class="ti-check text-warning" style="font-weight: 800; font-size: 14px;">@item.IsFollowed</span>
+                                                </td>
+                                            }
+                                            <td>
+                                                <a class="text-primary" href="/TaskManagement/GetTaskByTaskId?TaskNo= + @item.TaskNo + ">Edit</a>
+                                            </td>
+                                        </tr>
+                                            Count++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    @*Modal Popup*@
+
+    @*Customer Details*@
+
+    <div class="modal fade viewcustomer_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Customer Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>First Name</b> : </label>
+                                Sushant
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Middle Name</b> : </label>
+                                Harish
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Last Name</b> : </label>
+                                Maragaje
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Gender</b> : </label>
+                                Male
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Date Of Birth</b> : </label>
+                                10-07-1991
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Email Address</b> : </label>
+                                sushant.maragaje4@gmail
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Phone Number</b> : </label>
+                                02234454545
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Mobile Number</b> : </label>
+                                9167529506
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Address</b> : </label>
+                                Om Apt, Vakola Bridge, Santacruz(East), Mumbai 400055
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Package Enquiry*@
+
+    <div class="modal fade viewpackageenquiry_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Package Enquiry Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Package Type</b> : </label>
+                                Individual
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Category</b> : </label>
+                                Domestic
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Sub Category</b> : </label>
+                                Family
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Destination</b> : </label>
+                                Banglore
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Budget</b> : </label>
+                                10000
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Duration (days)</b> : </label>
+                                3
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Tour Start Date</b> : </label>
+                                11/21/2016
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Best Time to Reach You</b> : </label>
+                                6:00 pm
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Adults Count</b> : </label>
+                                2
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Children Count</b> : </label>
+                                2
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade viewcustomisetravelenquiry_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Customise Travel Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-hotel"></i>
+                        </div>
+
+                        <div class="mi-text">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Location:<a class="text-black">Mumbai</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Type:<a class="text-black">5 Star</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Room Type:<a class="text-black">Double Bed Ac</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Name:<a class="text-black">JW Mariott</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">65000</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Room Count:<a class="text-black">2</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adults Count:<a class="text-black">4</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Children Count:<a class="text-black">2</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>CheckIn Date:<a class="text-black">6-12-2016</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>CheckIn Date:<a class="text-black">12-12-2016</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-train"></i>
+                        </div>
+
+                        <div class="mi-text">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Source:<a class="text-black">Mumbai</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Destination:<a class="text-black">Delhi</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Ticket Type:<a class="text-black">General</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Departure Date:<a class="text-black">20-11-2016</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adults Count:<a class="text-black">2</a></li>
+                                        <li><i class="fa fa-angle-right  text-warning m-r-0-5"></i>Children Count:<a class="text-black">2</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Ticket Delivery:<a class="text-black">Email</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">4000</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="m-item">
+                        <div class="mi-checkbox">
+                            <i class="fa fa-plane"></i>
+                        </div>
+
+                        <div class="mi-text">
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Flight Name:<a class="text-black">Air India</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Ticket Type:<a class="text-black">Business</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Source:<a class="text-black">Mumbai</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled m-b-1">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Destination:<a class="text-black">Delhi</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Round Trip:<a class="text-black">Yes</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Departure Date Time:<a class="text-black">20-11-2016</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Arrival Date Time:<a class="text-black">20-11-2016</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adults Count:<a class="text-black">2</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Children Count:<a class="text-black">3</a></li>
+                                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">50000</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade viewpreplannedenquiry_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Preplanned Enquiry Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="m-item">
+
+                        <div class="mi-text">
+
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <label>Starting City</label>
+                                    <div class="form-group">
+                                        <label><b>Mumbai</b></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label>Starting Date</label>
+                                    <div class="form-group">
+                                        <label><b>23/04/2017</b></label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="management m-b-1">
+                                        <div class="m-item">
+
+                                            <div class="">
+                                                <div class="row">
+
+                                                    <div class="col-md-2">
+                                                        <label>City to travel</label>
+                                                        <div class="form-group">
+                                                            <label>City to travel</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>No of nights</label>
+                                                            <select id="drppackageType" class="form-control input-sm" name="Package.packageType">
+                                                                <option value="">5 Night</option>
+                                                                <option value="">1</option>
+                                                                <option value="">2</option>
+                                                                <option value="">3</option>
+                                                                <option value="">4</option>
+                                                                <option value="">5</option>
+                                                                <option value="">6</option>
+                                                                <option value="">7</option>
+                                                                <option value="">8</option>
+                                                                <option value="">9</option>
+                                                                <option value="">10</option>
+                                                                <option value="">11</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Checkin Date</label><input type="text" id="txtcheckinDate" class="form-control input-sm" name="Package.checkinDate" placeholder="10 May" readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Checkout Date</label><input type="text" id="txtcheckoutDate" class="form-control input-sm" name="Package.checkoutDate" placeholder="15th May" readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="drpTravel">Travel using :</label>
+                                                            <select id="drpTravel" class="form-control" name="Travel">
+                                                                <option value="">-Select Travel using-</option>
+                                                                <option value="1">Flight</option>
+                                                                <option value="2">Train</option>
+                                                                <option value="3">Vehicle</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="drpTicketType">Ticket Type :</label>
+                                                            <select id="drpTicketType" class="form-control" name="TicketType">
+                                                                <option value="">-Select Ticket Type-</option>
+                                                                <option value="1">Economy</option>
+                                                                <option value="2">First Class</option>
+                                                                <option value="3">Business</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Include Transfer</label>
+                                                            <div class="input-group" id="">
+                                                                <label class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Transfer note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter transfer note" maxlength="250"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Include Sightseeing</label>
+                                                            <div class="input-group" id="">
+                                                                <label class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Sightseeing note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter sightseeing note" maxlength="250"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix">
+                                                <div class="pull-md-left">
+                                                    <a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="management m-b-1">
+                                        <div class="m-item">
+
+
+                                            <div class="">
+                                                <div class="row">
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>City to travel</label><input type="text" id="txtcityToTravel" class="form-control input-sm" name="Package.cityToTravel" placeholder="Add city you wish to travel">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>No of nights</label>
+                                                            <select id="drppackageType" class="form-control input-sm" name="Package.packageType">
+                                                                <option value="">3 Night</option>
+                                                                <option value="">1</option>
+                                                                <option value="">2</option>
+                                                                <option value="">3</option>
+                                                                <option value="">4</option>
+                                                                <option value="">5</option>
+                                                                <option value="">6</option>
+                                                                <option value="">7</option>
+                                                                <option value="">8</option>
+                                                                <option value="">9</option>
+                                                                <option value="">10</option>
+                                                                <option value="">11</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Checkin Date</label><input type="text" id="txtcheckinDate" class="form-control input-sm" name="Package.checkinDate" placeholder="15 May" readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Checkout Date</label><input type="text" id="txtcheckoutDate" class="form-control input-sm" name="Package.checkoutDate" placeholder="18th May" readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="drpTravel">Travel using :</label>
+                                                            <select id="drpTravel" class="form-control" name="Travel">
+                                                                <option value="">-Select Travel using-</option>
+                                                                <option value="1">Flight</option>
+                                                                <option value="2">Train</option>
+                                                                <option value="3">Vehicle</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="drpTicketType">Ticket Type :</label>
+                                                            <select id="drpTicketType" class="form-control" name="TicketType">
+                                                                <option value="">-Select Ticket Type-</option>
+                                                                <option value="1">Economy</option>
+                                                                <option value="2">First Class</option>
+                                                                <option value="3">Business</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Include Transfer</label>
+                                                            <div class="input-group" id="">
+                                                                <label class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Transfer note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter transfer note" maxlength="250"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Include Sightseeing</label>
+                                                            <div class="input-group" id="">
+                                                                <label class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" name="HotelTariffDuration.OperationalDays" id="chkIsFollowupDone" value="">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Sightseeing note</label><textarea class="form-control input-sm" name="Package.additionalInfo" placeholder="Enter sightseeing note" maxlength="250"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix">
+                                                <div class="pull-md-left">
+                                                    <a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpdrpRoomCount">Room Count :</label>
+                                        <select id="drpdrpRoomCount" class="form-control" name="RoomCount">
+                                            <option value="">-Select Room Count-</option>
+                                            <option value="1">1</option>
+                                            <option value="2" selected>2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <br />
+                                        <h5>Room 1</h5>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <br />
+                                            <h5>Room 2</h5>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Child Count</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Age 1</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="4">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Age 2</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="5">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Booking*@
+
+    <div class="modal fade viewbooking_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Booking Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="content-area p-y-1">
+                        <div class="container-fluid">
+                            <h4>Booking</h4>
+                            <ol class="breadcrumb no-bg m-b-1">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Booking</a></li>
+                                <li class="breadcrumb-item"><a href="#">Index</a></li>
+                                <li class="breadcrumb-item active">Create</li>
+                            </ol>
+
+                            <div class="row">
+
+                                <div class="col-md-8">
+
+                                    <div class="box box-block bg-white">
+
+                                        <h5 class="m-b-2">Who's Travelling</h5>
+                                        <h5></h5>
+                                        <h5>Flight</h5>
+
+                                        <h6>Traveler names must match government-issued photo ID exactly.</h6>
+                                        <br />
+
+
+                                        <h5>Traveller 1 : Adult, Primary Contact</h5>
+                                        <br />
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label>Name</label>
+                                                <div class="form-group">
+                                                    <label><b>Sushant</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>Document Type</label>
+                                                <div class="form-group">
+                                                    <label><b>Pan No</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>Document Number</label>
+                                                <div class="form-group">
+                                                    <label><b>3456789</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label>Age</label>
+                                                <div class="form-group">
+                                                    <label><b>26</b></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label>Mobile No</label>
+                                                <div class="form-group">
+                                                    <label><b>987654321</b></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <br />
+                                        <h5>Traveller 2 : Adult</h5>
+                                        <br />
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label>Name</label>
+                                                <div class="form-group">
+                                                    <label><b>Kaustubh</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>Document Type</label>
+                                                <div class="form-group">
+                                                    <label><b>Passport No</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>Document Number</label>
+                                                <div class="form-group">
+                                                    <label><b>3456789</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label>Age</label>
+                                                <div class="form-group">
+                                                    <label><b>25</b></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <br />
+                                        <h5>Traveller 3 : Adult</h5>
+                                        <br />
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label>Name</label>
+                                                <div class="form-group">
+                                                    <label><b>Omkar</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>Document Type</label>
+                                                <div class="form-group">
+                                                    <label><b>Aadhar Card No</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label>Document Number</label>
+                                                <div class="form-group">
+                                                    <label><b>3456789</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <label>Age</label>
+                                                <div class="form-group">
+                                                    <label><b>25</b></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr />
+
+                                        <h5 class="m-b-2">Payment   </h5>
+                                        <br />
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+
+                                                <label>Cardholder Name </label>
+                                                <div class="form-group">
+                                                    <label><b>Sachin Tendulkar</b></label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-3">
+
+                                                <label>Debit/Credit card number </label>
+                                                <div class="form-group">
+                                                    <label><b>4345</b></label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>Expiration Month </label>
+                                                <div class="form-group">
+                                                    <label><b>Feb</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>Expiration Year </label>
+                                                <div class="form-group">
+                                                    <label><b>2027</b></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+
+                                                <label>Security Code </label>
+                                                <div class="form-group">
+                                                    <label><b>4345</b></label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>Payment Type</label>
+                                                <div class="form-group">
+                                                    <label><b>Paid</b></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <hr />
+
+                                        <h5 class="m-b-2">Billing Details   </h5>
+
+                                        <br />
+
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                <label>Country </label>
+                                                <div class="form-group">
+                                                    <label><b>India</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label>City</label>
+                                                <div class="form-group">
+                                                    <label><b>Mumbai</b></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+
+
+                                                <label>Postal Code</label>
+                                                <div class="form-group">
+                                                    <label><b>400055</b></label>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+
+                                                <label>Billing Address 1 </label>
+                                                <div class="form-group">
+                                                    <label><b>Santacruz East</b></label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+
+                                                <label>Billing Address 2 </label>
+                                                <div class="form-group">
+                                                    <label><b>Andheri East</b></label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="box box-block bg-white">
+                                        <h5 class="m-b-2" style="color:gray;">Booking Summary</h5>
+
+                                        <div class="row" id="divFlightDetails">
+
+                                            <div class="col-md-12">
+
+                                                <div class="card">
+
+                                                    <h5 class="card-header" style="color:blueviolet;">
+                                                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-rocket"></i></span>&nbsp; Flights Details
+                                                    </h5>
+
+                                                    <div class="card-block p-t-0 p-b-0">
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-12">
+                                                                <h5>Flights from Mumbai to Benglaru </h5>
+
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>6 Tickets : Roundtrip </b></label>
+                                                                <label id="lblHotel"></label>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <h5>Fri, Apr 14 </h5>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <h5>BOM 3:25pm <i class="fa fa-arrow-right"></i> BLR 5:05pm</h5>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>1h 40m , 1 hours 40 minutes , Nonstop</b></label>
+                                                                <label id="lblSupplier"></label>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>Jet Airways 415</b></label>
+                                                                <label id="lblHotel"></label>
+                                                            </div>
+
+                                                            <br />
+
+                                                            <div class="col-md-12">
+                                                                <h5>Sat, Apr 14 </h5>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <h5>BOM 5:00pm  <i class="fa fa-arrow-right"></i> BLR 6:35pm</h5>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>1h 35m , Nonstop</b></label>
+                                                                <label id="lblSupplier"></label>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>Jet Airways 416</b></label>
+                                                                <label id="lblHotel"></label>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row" id="divHotelDetails">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <h5 class="card-header" style="color:blueviolet;">
+                                                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-home"></i></span>&nbsp; Hotel Details
+                                                    </h5>
+
+                                                    <div class="card-block p-t-0 p-b-0">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h5><b>Taj Hotel </b></h5>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>2 Rooms: Suite, 1 Double Bed, Balcony (Balcony)</b></label>
+                                                                <label id="lblFromDate"></label>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>Fri, Apr 14 - Sat, Apr 15 </b></label>
+                                                                <label id="lblOperationalDays"></label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" id="divRoomDetails">
+
+                                            <div class="col-md-12">
+
+                                                <div class="card">
+
+                                                    <h5 class="card-header" style="color:blueviolet;">
+                                                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-car"></i></span>&nbsp; Vehicle Details
+                                                    </h5>
+
+                                                    <div class="card-block p-t-0 p-b-0">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h5><b>Audi Car Show </b></h5>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <label><b>Cruize Coupe </b></label>
+                                                                <label id="lblCheckInTime"></label>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>Fri, Apr 14 - Sat, Apr 15 </b></label>
+                                                                <label id="lblOperationalDays"></label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" id="divPrice">
+
+                                            <div class="col-md-12">
+
+                                                <div class="card">
+
+                                                    <h5 class="card-header" style="color:blueviolet;">
+                                                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-money"></i></span>&nbsp; Price Details
+                                                    </h5>
+
+                                                    <div class="card-block p-t-0 p-b-0">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label><b>Flight + Hotel + Car : $7,248.48</b></label>
+                                                                <label id="lblcategory"></label>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label><b>Total:  $7,236.06</b></label>
+
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <label>(Average per person: $1,206.01)</label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade view_details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; View Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>First Name</b> : </label>
+                                Sushant
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Middle Name</b> : </label>
+                                Harish
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Last Name</b> : </label>
+                                Maragaje
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Gender</b> : </label>
+                                Male
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Date Of Birth</b> : </label>
+                                10-07-1991
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Email Address</b> : </label>
+                                sushant.maragaje4@gmail
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Phone Number</b> : </label>
+                                02234454545
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Mobile Number</b> : </label>
+                                9167529506
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Address</b> : </label>
+                                Om Apt, Vakola Bridge, Santacruz(East), Mumbai 400055
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

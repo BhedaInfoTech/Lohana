@@ -1,0 +1,449 @@
+﻿@model Lohana.Models.Tariff.VehicleTariff.VehicleTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-price-validations.js"></script>
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-price-methods.js"></script>
+
+<script src="~/Scripts/Tariff/VehicleTariff/vehicle-tariff-price-events.js"></script>
+
+
+
+<form id="frmVehicleTariffPriceDetails">
+
+    <input type="hidden" id="hdnVehicleTariffBasicDetailsId" name="VehicleTariff.VehicleTariffBasicDetailsId" />
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Vehicle Name </label>
+                <div class="input-group">
+                    <select class="form-control" id="drpVehicle" name="VehicleTariff.VehicleId">
+                        <option value="0">Select vehicle</option>
+                        @*@foreach (var item in Model.Vehicles)
+                        {
+                            if (Model.VehicleTariffPriceDetail.VehicleId == item.VehicleId)
+                            {
+                                <option value="@item.VehicleId" selected="selected">@item.VehicleName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.VehicleId">@item.VehicleName</option>
+                            }
+                        }*@
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Vehicle/Index" target="_blank"><i class="fa fa-car"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Vehicle Type </label>
+                <input type="text" id="txtVehicleType" class="form-control input-sm" name="VehicleTariff.VehicleType" readonly>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Seating Capacity </label>
+                <input type="text" id="txtSeatingCapacity" class="form-control input-sm" name="VehicleTariff.SeatingCapacity" readonly>
+            </div>
+        </div>
+
+    </div>
+
+<br />
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <div class="form-group">
+                <div id="divVehicleServices1" class="btn-group" style="align-content:center">
+
+                    <span class="button-checkbox">
+                        <button type="button" id="btnVehicleKm" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car active" data-color="primary"><i class="fa fa-car glyphicon glyphicon-check"></i>&nbsp;Km</button>
+                        <input type="checkbox" class="hidden">
+                    </span>
+                    <span class="button-checkbox">
+                        <button type="button" id="btnVehicleHour" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car active" data-color="primary"><i class="fa fa-car glyphicon glyphicon-check"></i>&nbsp;Hour</button>
+                        <input type="checkbox" class="hidden">
+                    </span>
+                    <span class="button-checkbox">
+                        <button type="button" id="btnVehiclePackage" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car active" data-color="primary"><i class="fa fa-car glyphicon glyphicon-check"></i>&nbsp;Package</button>
+                        <input type="checkbox" class="hidden">
+                    </span>
+                    <span class="button-checkbox">
+                        <button type="button" id="btnVehicleTransfer" class="btn btn-outline btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car active" data-color="primary"><i class="fa fa-car glyphicon glyphicon-check"></i>&nbsp;Transfer</button>
+                        <input type="checkbox" class="hidden">
+                    </span>
+
+
+                    @*<button type="button" id="btnVehicleKm" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car" style="font-size: 15px;"><i class="fa fa-car"></i> Km</button>
+                    <button type="button" id="btnVehicleHour" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car" style="font-size: 15px;"><i class="fa fa-car"></i> Hour</button>
+                    <button type="button" id="btnVehiclePackage" class="btn btn-outline-primary btn-rounded w-min-sm m-b-0-25 waves-effect waves-light btn-model-car" style="font-size: 15px;"><i class="fa fa-car"></i> Package</button>*@
+                
+                
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row" id="divKm">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Free Kms</label>
+                <div class="input-group">
+                    <input type="text" id="txtFreeKms" class="form-control input-sm" name="VehicleTariff.FreeKm" placeholder="Enter FreeKm">
+                    <span class="input-group-addon">
+                        <i class="fa fa-road"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Km Amount</label>
+                <div class="input-group">
+                    <input type="text" id="txtFreeKmAmount" class="form-control input-sm" name="VehicleTariff.KmAmount" placeholder="Enter Km Amt">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Rupees Per Extra Km</label>
+                <div class="input-group">
+                    <input type="text" id="txtRsPerExtraKm" class="form-control input-sm" name="VehicleTariff.RupeesPerExtraKm" placeholder="Enter Rs/Km">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" id="divHour">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Duration (Hours)</label>
+                <div class="input-group">
+                    <input type="text" id="txtDuration" class="form-control input-sm" name="VehicleTariff.Duration" placeholder="Enter Duration">
+                    <span class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Hours Amount</label>
+                <div class="input-group">
+                    <input type="text" id="txtAmount" class="form-control input-sm" name="VehicleTariff.HoursAmount" placeholder="Enter Hour Amt">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Rupees Per Extra Hours</label>
+                <div class="input-group">
+                    <input type="text" id="txtRsPerExtraHours" class="form-control input-sm" name="VehicleTariff.RupeesPerExtraHours" placeholder="Enter Rs/Hour">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" id="divPackage">
+        <hr />
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Source</label>
+                @*<div class="input-group">
+                    <input type="text" id="txtSource" class="form-control input-sm" name="VehicleTariff.Source" placeholder="Enter Source">
+                    <span class="input-group-addon">
+                        <i class="fa fa-road"></i>
+                    </span>
+                </div>*@
+                <div class="input-group">
+                    <select class="form-control" id="drpSource" name="VehicleTariff.Source">
+                        <option value="">Select City</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Destination</label>
+                @*<div class="input-group">
+                    <input type="text" id="txtDestination" class="form-control input-sm" name="VehicleTariff.Destination" placeholder="Enter Destination">
+                    <span class="input-group-addon">
+                        <i class="fa fa-road"></i>
+                    </span>
+                </div>*@
+                <div class="input-group">
+                    <select class="form-control" id="drpDestination" name="VehicleTariff.Destination">
+                        <option value="">Select City</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Package Amount</label>
+                <div class="input-group">
+                    <input type="text" id="txtPackageAmount" class="form-control input-sm" name="VehicleTariff.PackageAmount" placeholder="Enter Pkg Amt">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row" id="divTransfer">
+        <hr />
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Transfer Type</label>
+                <div class="input-group">
+                    <select class="form-control" id="drpTransferType" name="VehicleTariff.TransferType">
+                        <option value="">Select Type</option>
+                        @foreach (var item in LookupInfo.GetEnquiryVehicleType())
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Source</label>
+                <div class="input-group">
+                    <select class="form-control" id="drpTransferSource" name="VehicleTariff.TransferSource">
+                        <option value="">Select City</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Destination</label>
+                <div class="input-group">
+                    <select class="form-control" id="drpTransferDestination" name="VehicleTariff.TransferDestination">
+                        <option value="">Select City</option>
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Package Amount</label>
+                <div class="input-group">
+                    <input type="text" id="txtTransferPackageAmount" class="form-control input-sm" name="VehicleTariff.TransferPackageAmount" placeholder="Enter Pkg Amt">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @*<div class="row" id="divTranfer">
+        <hr />
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Source</label>
+                <div class="input-group">
+                    <input type="text" id="txtSource" class="form-control input-sm" name="VehicleTariff.Source" placeholder="Enter Source">
+                    <span class="input-group-addon">
+                        <i class="fa fa-road"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Destination</label>
+                <div class="input-group">
+                    <input type="text" id="txtDestination" class="form-control input-sm" name="VehicleTariff.Destination" placeholder="Enter Destination">
+                    <span class="input-group-addon">
+                        <i class="fa fa-road"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Package Amount</label>
+                <div class="input-group">
+                    <input type="text" id="txtPackageAmount" class="form-control input-sm" name="VehicleTariff.PackageAmount" placeholder="Enter Pkg Amt">
+                    <span class="input-group-addon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>*@
+
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="button" id="btnAddVehicleTariffPriceDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                <button type="button" id="btnResetVehicleTariffPriceDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                <button type="button" id="btnDeleteVehicleTariffPriceDetails" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+             
+            </div>
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        <button type="button" id="btnAddVehicleTariffPriceDetails" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+        <button type="button" id="btnResetVehicleTariffPriceDetails" class="btn btn-warning   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+    </div>*@
+
+    <div class="card">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Price Details Listing
+        </h5>
+
+        <div class="row">
+
+            <input type="hidden" id="hdnSearchVehicleTariffPriceId" value="" name="VehicleTariffPriceFilter.VehicleTariffPriceDetailsId" />
+
+            <div class="col-md-12">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblVehicleTariffPriceDetails">
+                      
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+
+</form>
+
+
+
+
+
+
+<script>
+
+    $(function () {
+        $('.button-checkbox').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $button = $widget.find('button'),
+                $checkbox = $widget.find('input:checkbox'),
+                color = $button.data('color'),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+            // Event Handlers
+            $button.on('click', function () {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+            });
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $button.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $button.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $button
+                        .removeClass('btn-default')
+                        .addClass('btn-' + color + ' active');
+                }
+                else {
+                    $button
+                        .removeClass('btn-' + color + ' active')
+                        .addClass('btn-default');
+                }
+            }
+
+            // Initialization
+            function init() {
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($button.find('.state-icon').length == 0) {
+                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                }
+            }
+            init();
+        });
+    });
+
+
+</script>

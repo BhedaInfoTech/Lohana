@@ -1,0 +1,40 @@
+﻿@model Lohana.Models.Tariff.HotelTariffTaxUpdation.HotelTariffTaxUpdationViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<table class="table m-b-0" id="tblFormulaDetails">
+    <thead class="thead-inverse">
+        <tr>
+            <th width="10%">Charge Type</th>
+            <th width="10%">Cal On</th>
+            <th width="10%">Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.LstTaxFormulaCharges != null && Model.LstTaxFormulaCharges.Count > 0)
+        {
+
+            foreach (var item in Model.LstTaxFormulaCharges)
+            {
+                <tr>
+
+                    <td data-isstandard="false" data-chargeid="@item.ChargesId">
+                        @item.ChargesName
+                        <input type="hidden" id="hdnHotelTariffChargesDetailsId" name="HotelTariffPrice.HotelTariffChargesDetailsId" value="@item.HotelTariffCharge.HotelTariffChargesDetailsId" />
+                    </td>
+                    <td data-chargeformula="@item.ChargeFormula">@item.ChargeFormulaText</td>
+                    
+                    <td><input type="text" id="txtpercentage" class="percentage" name="demo2" value="" />   </td>
+                   
+                </tr>
+            }
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </tbody>
+</table>

@@ -1,0 +1,294 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+@using LohanaBusinessEntities.Common;
+
+
+@{
+    ViewBag.Title = "SearchReceivablePayment";
+}
+
+<script src="~/Scripts/Booking/Invoice_method.js"></script>
+<script src="~/Scripts/Booking/Invoice_event.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4> Search Receivable Payment</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Receivable Payment</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <form role="form" id="frmSearchReceivablePayment">
+            <input type="hidden" id="hdnBookingId" value="@Model.BookingCartDetailsInfo.BookingId" name="BookingCartDetailsInfo.BookingId" />
+            <input type="hidden" id="hdnPaymentReceivableId" value="@Model.PaymentDetailsInfo.PaymentReceivableId" name="PaymentDetailsInfo.PaymentReceivableId" />
+            <input type="hidden" id="hdnChkFlag" value="" name="BookingCartDetailsInfo.ChkFlag" />
+            <input type="hidden" id="hdnbookingNo" value="">
+            <input type="hidden" id="hdnunpaidAmount">
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Receivable Payment Search
+                </h5>
+
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="">Customer Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter first name" name="BookingCartDetailsInfo.CustomerName" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-sort-alpha-asc"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="">Booking No</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter booking no" name="BookingCartDetailsInfo.BookingNo" maxlength="50">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-sort-alpha-asc"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="text-align: center;">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <br />
+                                    <button type="button" id="btnSearchReceivablePaymentCustomer" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                                    <button type="reset" id="btnResetReceivablePaymentCustomer" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Customer Booking Listing
+                </h5>
+                <div class="btn-group" style="float: right; padding: 2px 6px;">
+                    <button type="button" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" id="btnAddPayment" onclick="javascript: AddPayment();" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" data-toggle="modal" data-target=".addPayment" disabled>Add Payment</button>
+                    @*<button type="button" id="btnPaymentHistory" onclick="javascript: ViewPaymentHistoryDetails();" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" data-toggle="modal" data-target=".paymentHistory" disabled>Payment History</button>*@
+                    <button style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" id="btnViewInvoice"class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" disabled>View Invoice Details</button>                   
+                </div>
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row m-a-0">
+                        <div class="col-md-12 p-a-0">
+
+                            <div class="overflow-x-auto">
+                                <table class="table m-b-0" id="tblCustomerBookingList"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@*<div class="modal fade parent-modal in addPayment" id="modalAddPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Add Payment Details
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmAddCustomerPayment">
+                    <input type="hidden" id="hdnBookingForAddPaymentId" value="@Model.PaymentDetailsInfo.BookingId" name="PaymentDetailsInfo.BookingId" />
+                    @*    <input type="hidden" id="hdnBookingNo" value="@Model.BookingCartDetailsInfo.BookingNo" name="BookingCartDetailsInfo.BookingNo" />
+                        <input type="hidden" id="hdnUnpaidAmount" value="@Model.BookingCartDetailsInfo.UnpaidAmount" name="BookingCartDetailsInfo.UnpaidAmount" />
+                    <div class="card-block p-t-0 p-b-0">
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label>Booking No</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtbookingNo" class="form-control input-sm" name="PaymentDetailsInfo.BookingNo" value="@Model.PaymentDetailsInfo.BookingNo" readonly maxlength="50">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="drpPaymentOption" style="color: #333">Payment Option</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select class="form-control" name="PaymentDetailsInfo.PaymentMode" id="drpPaymentMode">
+
+                                            <option value="0">Select payment option</option>
+
+                                            @foreach (var item in LookupInfo.Get_Payment_Option())
+                                            {
+                                                if (Model.PaymentDetailsInfo.PaymentMode == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>                                            }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+                                            }
+
+                                        </select>
+
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-plus"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Instrument Date</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtPaymentDate" placeholder="select date" class="form-control" name="PaymentDetailsInfo.InstrumentDate" value="@((Model.PaymentDetailsInfo.InstrumentDate == DateTime.MinValue ? "" : Model.PaymentDetailsInfo.InstrumentDate.ToString("MM-dd-yyyy")))">
+                                    <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label>Instrument No</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtInstrumentNo" placeholder="Enter InstrumentNo" class="form-control input-sm" name="PaymentDetailsInfo.InstrumentNo" value="@Model.PaymentDetailsInfo.InstrumentNo" maxlength="50">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Bank Name</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtBankName" class="form-control input-sm" placeholder="Enter Bank Name" name="PaymentDetailsInfo.BankName" value="@Model.PaymentDetailsInfo.BankName" maxlength="200">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="drpPaymentOption" style="color: #333">Payment Type</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select class="form-control" name="PaymentDetailsInfo.PaymentType" id="drpPaymentType">
+                                            <option value="0">Select payment Type</option>
+                                            <option value="1">Fully Paid</option>
+                                            <option value="1">Partially Paid</option>
+                                        </select>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-plus"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <label>Paid Amount</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtpaidAmount" class="form-control input-sm" placeholder="Enter Paid Amount" name="PaymentDetailsInfo.PaidAmount" value="@Model.PaymentDetailsInfo.PaidAmount" onchange="ChangeUnpaidAmount();" maxlength="50">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Unpaid Amount</label>
+                                <div class="input-group">
+                                    <input type="text" id="txtunpaidAmount" class="form-control input-sm" name="PaymentDetailsInfo.UnpaidAmount" value="@Model.PaymentDetailsInfo.UnpaidAmount" maxlength="50" readonly>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-alpha-asc"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <br />
+                            <button type="button" id="BtnAdd" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Payment</button>
+                            <button type="button" id="btnResetPayment" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+
+@*<div class="modal fade parent-modal in paymentHistory" id="modalPaymentHistory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="modalChildTitle">Payment History Listing</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="frmPaymentHistory">
+                    <input type="hidden" id="hdnBookingForPaymentHistory" value="@Model.PaymentDetailsInfo.BookingId" name="PaymentDetailsInfo.BookingId" />
+                    <div class="card">
+                        <div class="card-block p-t-0 p-b-0">
+                            <div class="row m-a-0">
+                                <div class="col-md-12 p-a-0">
+                                    @*aaaaa
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+

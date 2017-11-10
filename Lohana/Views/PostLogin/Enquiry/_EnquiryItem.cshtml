@@ -1,0 +1,717 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+
+<script src="~/Scripts/Enquiry/view-enquiry-item-methods.js"></script>
+
+
+@{
+    int Count = 0;
+
+}
+
+
+<input type="hidden" id="hdnEnquiryTypeId" name="Model.EnquiryTypeId" value="@Model.EnquiryTypeId" />
+
+@*<input type="hidden" id="hdnenumEnqtypeGitId" name="Model.EnquiryTypeId" value="@((int)EnquiryType.Git)" />
+
+    <input type="hidden" id="hdnenumEnqtypeFitId" name="Model.EnquiryTypeId" value="@((int)EnquiryType.Fit)" />*@
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Git)))
+{
+
+    <div class="m-item" id="">
+
+        <div class="mi-checkbox">
+            <i class="fa fa-git"></i>
+        </div>
+
+        <div class="mi-text" id="">
+
+            <div class="row">
+
+                <input type="hidden" id=@("hdnGitEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Category:<a class="text-black">@itm.CategoryName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Package Type:<a class="text-black">@itm.PackageTypeName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+                        @*<li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Location:<a class="text-black">@itm.Location</a></li>*@
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>From Date:<a class="text-black">@itm.FromDate</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>No Of Nights:<a class="text-black">@itm.NoOfNights</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget :<a class="text-black">@itm.Budget</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Children Count:<a class="text-black">@itm.ChildCount</a></li>
+                      
+                    </ul>
+                </div>
+
+            </div>
+
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm edit" id="@("btnEditGitDetails_" + Count)" disabled="disabled" onclick="javascript: GetGitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm delete" id="@("btnDeleteGitDetails_" + Count)" disabled="disabled" onclick="javascript: DeleteGitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm edit" id="@("btnEditGitDetails_" + Count)" onclick="javascript: GetGitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm delete" id="@("btnDeleteGitDetails_" + Count)" onclick="javascript: DeleteGitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+            Count++;
+
+}
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Fit)))
+{
+    <div class="m-item" id="">
+
+        <div class="mi-checkbox">
+            <b>fit</b>
+        </div>
+
+        <div class="mi-text">
+
+            <div class="row">
+
+                <input type="hidden" id="@("hdnFitEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        @*<li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Category:<a class="text-black">@itm.CategoryName</a></li>*@
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Package Type:<a class="text-black">@itm.PackageTypeName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>No Of Nights:<a class="text-black">@itm.NoOfNights</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check In Date:<a class="text-black">@itm.CheckInDate</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check Out Date:<a class="text-black">@itm.CheckOutDate</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Occupancy:<a class="text-black">@itm.OccupancyName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Room Count:<a class="text-black">@itm.RoomCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                        @*<li><i class="fa fa-angle-right text-warning m-r-0-5"></i>CXB Count:<a class="text-black">@itm.CXBCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>CNB Count:<a class="text-black">@itm.CNBCount</a></li>*@
+                        
+                    </ul>
+                </div>
+
+            </div>
+
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditFitDetails_" + Count)" disabled="disabled" onclick="javascript: GetFitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteFitDetails_" + Count)" disabled="disabled" onclick="javascript: DeleteFitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditFitDetails_" + Count)" onclick="javascript: GetFitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteFitDetails_" + Count)" onclick="javascript: DeleteFitDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+            Count++;
+
+
+}
+
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Hotel)))
+{
+    <div class="m-item" id="divEnquiryItemHotel">
+
+        <div class="mi-checkbox">
+            <i class="fa fa-hotel"></i>
+        </div>
+
+        <div class="mi-text">
+
+            <div class="row">
+
+                <input type="hidden" id="@("hdnHotelEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Location:<a class="text-black">@itm.City</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Type:<a class="text-black">@itm.HotelTypeName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Hotel Name:<a class="text-black">@itm.HotelName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Room Count:<a class="text-black">@itm.RoomCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>CheckIn Date:<a class="text-black">@itm.CheckInDate.ToShortDateString()</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Check out Date:<a class="text-black">@itm.CheckOutDate.ToShortDateString()</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                      
+                    </ul>
+                </div>
+
+            </div>
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" disabled="disabled" id="@("btnEditHotelDetails_" + Count)" onclick="javascript: GetHotelDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" disabled="disabled" id="@("btnDeleteHotelDetails_" + Count)" onclick="javascript: DeleteHotelDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditHotelDetails_" + Count)" onclick="javascript: GetHotelDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteHotelDetails_" + Count)" onclick="javascript: DeleteHotelDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+            Count++;
+
+}
+
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Flight)))
+{
+    <div class="m-item" id="divEnquiryItemFlight">
+
+        <div class="mi-checkbox">
+            <i class="fa fa-plane"></i>
+        </div>
+
+        <div class="mi-text">
+
+            <div class="row">
+
+                <input type="hidden" id=@("hdnFlightEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Flight Type:<a class="text-black">@itm.EnquiryFlightType</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Infant Count:<a class="text-black">@itm.InfantCount</a></li>
+
+                    </ul>
+                </div>
+
+               
+
+                <div class="col-md-12">
+                    <div class="table-responsive" style="margin: 5px 0;">
+                        <input type="hidden" id="hdnIsEditFlightDetails" value="false" />
+                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                        <table class="table table-bordered" id="tblFlightDetails">
+                            <thead>
+                                <tr id="subhead">
+                                    <th>Ticket Class</th>
+                                    <th>PickUpFrom</th>
+                                    <th>DropTo</th>
+                                    <th>Departure On</th>
+                                    <th>Return On</th>
+                                </tr>
+
+                                @*@for (var i = 0; i < Model.Enquiries.Count; i++)
+                                    {*@
+
+
+                                @foreach (var item in itm.EnquiryItemTypeDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span id="trticketClass"> @item.TicketClassName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trpickUpFrom"> @item.PickUpFromName</span>
+
+                                        </td>
+
+                                        <td>
+                                            <span id="trdropTo"> @item.DropToName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trdepartureDate"> @item.DepartureDate</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trreturnDate"> @item.ReturnDate</span>
+
+                                        </td>
+                                    </tr>
+                                }
+                                @*}*@
+
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" disabled="disabled" id="@("btnEditFlightDetails_" + Count)" onclick="javascript: GetFlightDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" disabled="disabled" id="@("btnDeleteFlightDetails_" + Count)" onclick="javascript: DeleteFlightDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditFlightDetails_" + Count)" onclick="javascript: GetFlightDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteFlightDetails_" + Count)" onclick="javascript: DeleteFlightDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+            Count++;
+
+}
+
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Train)))
+{
+    <div class="m-item" id="divEnquiryItemTrain">
+
+        <div class="mi-checkbox">
+            <i class="fa fa-train"></i>
+        </div>
+
+        <div class="mi-text">
+
+            <div class="row">
+
+                <input type="hidden" id=@("hdnTrainEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Train Type:<a class="text-black">@itm.EnquiryTrainType</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Infant Count:<a class="text-black">@itm.InfantCount</a></li>
+
+                    </ul>
+                </div>
+
+              
+
+                <div class="col-md-12">
+                    <div class="table-responsive" style="margin: 5px 0;">
+                        <input type="hidden" id="hdnIsEditTrainTypeDetails" value="false" />
+                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                        <table class="table table-bordered" id="tblTrainTypeDetails">
+                            <thead>
+                                <tr id="subhead">
+                                    <th>Ticket Class</th>
+                                    <th>PickUpFrom</th>
+                                    <th>DropTo</th>
+                                    <th>Departure On</th>
+                                    <th>Return On</th>
+                                </tr>
+                                @foreach (var item in itm.EnquiryItemTypeDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span id="trticketClass"> @item.TicketClassName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trpickUpFrom"> @item.PickUpFromName</span>
+
+                                        </td>
+
+                                        <td>
+                                            <span id="trdropTo"> @item.DropToName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trdepartureDate"> @item.DepartureDate</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trreturnDate"> @item.ReturnDate</span>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="table-responsive" style="margin: 5px 0;">
+                        <input type="hidden" id="hdnIsEditTrainPassDetails" value="false" />
+                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                        <table class="table table-bordered" id="tblTrainPassDetails">
+                            <thead>
+                                <tr id="subhead">
+                                    <th>Region</th>
+                                    <th>PassType</th>
+                                    <th>RailPass</th>
+                                    <th>RailClass</th>
+                                    <th>NoOfDays</th>
+                                </tr>
+
+                                @foreach (var item1 in itm.EnquiryItemPassDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span id="trregion"> @item1.RegionName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trpassType"> @item1.PassTypeName</span>
+
+                                        </td>
+
+                                        <td>
+                                            <span id="trrailPass"> @item1.RailPassName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trrailClass"> @item1.RailClassName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trnoOfDays"> @item1.NoOfDays</span>
+
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" disabled="disabled" id="@("btnEditTrainDetails_" + Count)" onclick="javascript: GetTrainDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" disabled="disabled" id="@("btnDeleteTrainDetails_" + Count)" onclick="javascript: DeleteTrainDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditTrainDetails_" + Count)" onclick="javascript: GetTrainDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteTrainDetails_" + Count)" onclick="javascript: DeleteTrainDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+            Count++;
+}
+
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Transfer)))
+{
+
+    <div class="m-item" id="divEnquiryItemTransfer">
+
+        <div class="mi-checkbox">
+            <i class="fa fa-car"></i>
+        </div>
+
+        <div class="mi-text">
+
+            <div class="row">
+
+                <input type="hidden" id=@("hdnTransferEnquiryItemId_" + Count) value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City Name:<a class="text-black">@itm.CityName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Currency:<a class="text-black">@itm.CurrencyName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>VehicleType:<a class="text-black">@itm.VehicleTypeName</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Child Count:<a class="text-black">@itm.ChildCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+
+                    </ul>
+                </div>
+
+              
+
+                <div class="col-md-12">
+                    <div class="table-responsive" style="margin: 5px 0;">
+                        <input type="hidden" id="hdnIsEditTransferDetails" value="false" />
+                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                        <table class="table table-bordered" id="tblTransferDetails">
+                            <thead>
+                                <tr id="subhead">
+                                    <th>Transfer Date</th>
+                                    <th>PickUpType</th>
+                                    <th>PickUpFrom</th>
+                                    <th>PickUpTime</th>
+                                    <th>DropOfType</th>
+                                    <th>DropOfTo</th>
+                                    <th>DropOfTime</th>
+                                </tr>
+
+
+                                @foreach (var item in itm.EnquiryItemTransferDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span id="trtransferDate"> @item.TransferDate</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trpickUpType"> @item.PickUpTypeName</span>
+
+                                        </td>
+
+                                        <td>
+                                            <span id="trpickUpFrom"> @item.PickUpName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trpickUpTime"> @item.PickUpTime</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trdropOfType"> @item.DropOffTypeName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trdropOfTo"> @item.DropOffName</span>
+
+                                        </td>
+                                        <td>
+                                            <span id="trdropOfTime"> @item.DropOffTime</span>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </thead>
+
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" disabled="disabled" id="@("btnEditTransferDetails_" + Count)" onclick="javascript: GetTransferDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" disabled="disabled" id="@("btnDeleteTransferDetails_" + Count)" onclick="javascript: DeleteTransferDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditTransferDetails_" + Count)" onclick="javascript: GetTransferDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteTransferDetails_" + Count)" onclick="javascript: DeleteTransferDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+            Count++;
+
+}
+
+
+@foreach (var itm in Model.Enquiries.Where(a => a.EnquiryType == ((int)EnquiryType.Sightseeing)))
+{
+
+    <div class="m-item" id="divEnquiryItemSightseeing">
+
+        <div class="mi-checkbox">
+            <i class="fa fa-tree"></i>
+        </div>
+
+        <div class="mi-text">
+
+            <div class="row">
+
+                <input type="hidden" id="@("hdnSightseeingEnquiryItemId_" + Count)" value="@itm.EnquiryItemId" />
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Sightseeing Name:<a class="text-black">@itm.SightseeingName</a></li>
+                        <li><i class="fa fa-angle-right  text-warning m-r-0-5"></i>Vehicle Type:<a class="text-black">@itm.VehicleTypeName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Travel Date:<a class="text-black">@itm.TravelDate</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Country:<a class="text-black">@itm.CountryName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>State:<a class="text-black">@itm.StateName</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>City:<a class="text-black">@itm.City</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-unstyled m-b-1">
+                        @*<li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Location:<a class="text-black">@itm.CityName</a></li>*@
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Adult Count:<a class="text-black">@itm.AdultCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Children Count:<a class="text-black">@itm.ChildCount</a></li>
+                        <li><i class="fa fa-angle-right text-warning m-r-0-5"></i>Budget:<a class="text-black">@itm.Budget</a></li>
+                    </ul>
+                </div>
+
+              
+
+            </div>
+
+            @if (itm.EnquiryStatus == 1)
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" disabled="disabled" id="@("btnEditSightseeingDetails_" + Count)" onclick="javascript: GetSightseeingDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" disabled="disabled" id="@("btnDeleteSightseeingDetails_" + Count)" onclick="javascript: DeleteSightseeingDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="clearfix">
+                    <div class="pull-md-left">
+                        <button class="btn btn-secondary btn-sm" id="@("btnEditSightseeingDetails_" + Count)" onclick="javascript: GetSightseeingDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Edit</button>
+                        <button class="btn btn-danger btn-sm" id="@("btnDeleteSightseeingDetails_" + Count)" onclick="javascript: DeleteSightseeingDetailsById(this)"><i class="ti-pencil m-r-0-5"></i>Delete</button>
+                        @*<a class="btn btn-danger btn-sm" href="#"><i class="ti-trash m-r-0-5"></i>Delete</a>*@
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+            Count++;
+
+}

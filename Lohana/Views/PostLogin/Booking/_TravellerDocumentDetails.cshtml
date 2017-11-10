@@ -1,0 +1,100 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Booking/booking-events.js"></script>
+<script src="~/Scripts/Booking/booking-method.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var id = $('input[name="c1"]:checked').attr("data-travellersinformationid");
+
+        $("[name='BookingCartDetailsInfo.TravellerId']").val(id);
+
+        $("#lblName").text($('input[name="c1"]:checked').attr("data-travellername"));
+
+        $("#lblAge").text($('input[name="c1"]:checked').attr("data-age"));
+
+        $("#lblMobileNo").text($('input[name="c1"]:checked').attr("data-mobileno"));
+    });
+</script>
+<div class="row">
+
+    <input type="hidden" name="BookingCartDetailsInfo.AttachmentName" />
+
+    @*<input type="hidden" name="Accessories.AttachmentName" />
+
+        <input type="hidden" name="Accessories.AttachmentId" />
+
+        <input type="hidden" name="Accessories.RefId" value="@Model.BookingCartDetailsInfo.TravellerId" />
+
+        <input type="hidden" name="Accessories.RefTypeName" value="SightSeeing">
+
+        <input type="hidden" name="Accessories.RefType" />
+
+        <input type="hidden" name="Accessories.RefCategory" value="SightSeeing" />
+
+        <input type="hidden" name="Accessories.UniqueAttachmentId" />*@
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>  <b>Traveller Name:</b></label>
+            <label id="lblName"></label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+
+            <label> <b> Age:</b></label>
+            <label id="lblAge"></label>
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label> <b> Mobile No:</b></label>
+            <label id="lblMobileNo"></label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            Document Type
+            <select id="drpDocumentType" name="BookingCartDetailsInfo.DocumentTypeId" value="@Model.BookingCartDetailsInfo.DocumentTypeId">
+                @foreach (var item in LohanaBusinessEntities.Common.LookupInfo.GetDocumentType())
+                {
+                    if (Model.BookingCartDetailsInfo.DocumentTypeId == item.Key)
+                    {
+                        <option value="@item.Key" selected="selected">@item.Value</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            Document No
+            <input type="text" id="txtDocumentNo" name="BookingCartDetailsInfo.DocumentNo" value="@Model.BookingCartDetailsInfo.DocumentNo" />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            Attachment
+            <input type="file" data-identifier="photo" data-refcat="Upload Document" class="file" id="imageUpload" multiple />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <button type="button" id="btnSaveDocumentDetails" class="btn btn-success btn-rounded label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        </div>
+    </div>
+</div>

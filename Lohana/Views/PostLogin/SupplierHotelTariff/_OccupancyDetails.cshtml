@@ -1,0 +1,75 @@
+﻿<script src="~/Scripts/SupplierHotelTariff/supplier-occupancy-detail-event.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-occupancy-detail-method.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-occupancy-detail-validation.js"></script>
+
+<form id="frmOccupancyDetail">
+    
+    <input type="hidden" id="hdnSupplierOccupancyDetailSupplierHotelId" value="0" name="SupplierOccupancyDetail.SupplierHotelId" />
+    <input type="hidden" id="hdnOccupancyDetailId" value="0" name="SupplierOccupancyDetail.OccupancyDetailId" />
+
+    <div class="row">
+        <div class="col-md-4">
+
+            <label>Occupancy</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <select class="form-control" id="drpLocation" name="SupplierOccupancyDetail.OccupancyId"></select>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <div class="row" id="divAgeFromTo">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Age From</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter age from" id="txtAgeFrom" name="SupplierOccupancyDetail.AgeFrom">
+                    <span class="input-group-addon">
+                        <i class="ti ti-calendar"></i>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Age To</label>
+                <div class="input-group">
+                    <input type="text" id="txtAgeTo" class="form-control" name="SupplierOccupancyDetail.AgeTo" placeholder="Enter age to">
+                    <span class="input-group-addon">
+                        <i class="ti ti-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <button type="button" id="btnAddSupplierOccupancyDetail" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        <button type="reset" id="btnResetOccupancyDetail" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+    </div>
+
+    <div class="card">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Supplier Occupancy Listing
+        </h5>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblSupplierOccupancyDetails" data-current-page="0"></table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+
+</form>

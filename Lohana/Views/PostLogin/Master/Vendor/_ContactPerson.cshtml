@@ -1,0 +1,157 @@
+﻿@model Lohana.Models.Master.VendorViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/Vendor/vendor-contact-person-validations.js"></script>
+<script src="~/Scripts/Master/Vendor/vendor-contact-person-methods.js"></script>
+<script src="~/Scripts/Master/Vendor/vendor-contact-person-events.js"></script>
+
+
+
+    <div class="row">
+
+        <form role="form" id="frmContactPerson">
+            <input type="hidden" id="hdnContactPersonId" name="Vendor.ContactPerson.ContactPersonId" />
+            <input type="hidden" id="hdnRefId" name="ContactPerson.VendorId" value="@Model.Vendor.VendorId" />
+            <input type="hidden" id="hdnRefType" name="Vendor.ContactPerson.RefType" />
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <label for="">Vendor's Contact Name</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" maxlength="50" placeholder="Enter vendor's contact name" name="Vendor.ContactPerson.ContactPersonName" id="txtContactName" value="@Model.ContactPerson.ContactPersonName">
+                            <span class="input-group-addon">
+                                <i class="fa fa-sort-alpha-asc"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="drpDesignationId" style="color: #333" class="">Designation</label>
+                        <div class="input-group">
+                            <select class="form-control" id="drpDesignationId" name="Vendor.ContactPerson.DesignationId">
+                                <option value="0">Select designation </option>
+                                @foreach (var item in Model.Designations)
+                                {
+                                    if (Model.ContactPerson.DesignationId == item.DesignationId)
+                                    {
+                                        <option value="@item.DesignationId" selected="selected">@item.DesignationName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.DesignationId">@item.DesignationName</option>
+                                    }
+                                }
+
+                            </select>
+                            <span class="input-group-addon">
+                                @*<i class="fa fa-globe"></i>*@
+                                <a href="/Designation/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="">Phone No</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter phone no" name="Vendor.ContactPerson.PhoneNo" id="txtContactPhoneNo" value="@Model.ContactPerson.PhoneNo" maxlength="20">
+                            <span class="input-group-addon">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="">Mobile No</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter mobile no" name="Vendor.ContactPerson.MobileNo" id="txtContactMobileNo" value="@Model.ContactPerson.MobileNo" maxlength="15">
+                            <span class="input-group-addon">
+                                <i class="fa fa-mobile"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Email ID</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter email id" name="Vendor.ContactPerson.EmailId" id="txtContactEmail" value="@Model.ContactPerson.EmailId" maxlength="100">
+                            <span class="input-group-addon">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Fax No.</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter fax no." name="Vendor.ContactPerson.FaxNo" id="txtContactFaxNo" value="@Model.ContactPerson.FaxNo" maxlength="25">
+                            <span class="input-group-addon">
+                                <i class="fa fa-fax"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="btnAdd" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="reset" id="btnDeleteContactPerson" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                            @*<button type="button" id="btnAddDesignation" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Designation</button>*@
+                        </div>
+                    </div>
+                </div>
+
+
+                @*<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <br>
+                            <button type="button" id="btnAdd" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+                        </div>
+                    </div>
+                </div>
+                <br />*@
+            </div>
+            @*<div class="btn-group" style="float: right; padding: 2px 6px;">
+
+                <button type="button" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" id="btnEditContactPerson">Edit</button>
+
+                <button type="button" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" id="btnDeleteContactPerson">Delete</button>
+            </div>
+            <br />*@
+        </form>
+    </div>
+
+    <div class="card" id="divContactPersonList">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Contact Person Listing
+        </h5>
+
+        <form role="form" id="frmSearchContactPerson">
+
+            <input type="hidden" id="hdnSearchContactPersonId" name="ContactFilter.ContactPersonId" />
+
+            <input type="hidden" id="hdnSearchRefType" name="ContactPerson.RefType" />
+
+
+            <div class="card-block p-t-0 p-b-0">
+
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblContactPerson">
+                        <thead class="thead-inverse">
+
+                    </table>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>

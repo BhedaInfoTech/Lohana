@@ -1,0 +1,269 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariffSearchViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+<script src="~/Scripts/Tariff/LohanaPackageTariffSearch/lohana-package-tariff-search-methods.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariffSearch/lohana-package-tariff-search-events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $("#aHotelDetails").click(function () {
+            $("#hoteldetails").show();
+        });
+
+
+        $("#adefault - modal").click(function () {
+            $("#default-modal").show();
+        });
+    });
+
+</script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4>Lohana Package Tariff Search</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Search Lohana Package Tariff</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Lohana Package Tariff Search
+            </h5>
+            <form id="frmLohanaPackageTariffSearch">
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="row">
+
+
+                        @*<div class="col-md-3">
+                            <label>Country</label>
+                            <div class="input-group">
+                                <select class="form-control" id="drpCountry" name="LohanaPackageTariffSearch.CountryId">
+                                    <option value="0">Select country</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                                </span>
+
+                            </div>
+                        </div>*@
+
+
+                        <div class="col-md-3">
+                            <label>Country</label>
+                            <div class="input-group">
+                                <select id="drpCountry" class="form-control input-sm" name="LohanaPackageTariffSearch.CountryId">
+                                    <option value="0">Select Country</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-star-o"></i>
+                                    <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>State</label>
+                            <div class="input-group">
+                                <select class="form-control" id="drpState" name="LohanaPackageTariffSearch.StateId">
+                                    <option value="0">Select state</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <a href="/State/Index" target="_blank">  <i class="fa fa-globe"></i></a>
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>City</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpCity" name="LohanaPackageTariffSearch.CityId">
+                                    <option value="0">Select city</option>
+
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                 
+
+                        <div class="col-md-3">
+                            <label>Package Type</label>
+                            <div class="input-group">
+                                <select id="drpPackageType" class="form-control input-sm" name="LohanaPackageTariffSearch.PackageTypeId">
+                                    <option value="0">Select package type</option> 
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-star-o"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" >
+                        
+                        <div class="col-md-3">
+                            <label>Occupancy</label>
+                            <div class="input-group">
+                                <select id="drpOccupancy" class="form-control input-sm" name="LohanaPackageTariffSearch.OccupancyId">
+                                    <option value="0">Select occupancy</option>
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-star-o"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Check in</label>
+                            <div class="form-group">
+                                <div class="input-daterange input-group from-to-date">
+                                    <input type="text" id="txtCheckInDate" class="form-control input-sm" placeholder="Enter check in date" name="LohanaPackageTariffSearch.CheckinDate" readonly="readonly">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Check Out</label>
+                            <div class="form-group">
+                                <div class="input-daterange input-group from-to-date">
+                                    <input type="text" id="txtCheckOutDate" class="form-control input-sm" placeholder="Enter check out date" name="LohanaPackageTariffSearch.CheckOutDate" readonly="readonly">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <label>Adult</label>
+                            <div class="form-group">
+                                <select class="form-control input-sm" id="drpAdultCount" name="LohanaPackageTariffSearch.AdultCount">
+                                    <option selected="selected">1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                </select>
+                                <span style="color:red;">( Aged 18+ )</span>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label>Children</label>
+                            <div class="form-group">
+                                <select class="form-control input-sm" id="drpChildCount" name="LohanaPackageTariffSearch.ChildCount">
+                                    <option selected="selected">0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                </select>
+                                <span style="color:red;">( Aged between 0 to 17 )</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>No.of Days</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" id="txtNoOfDays" class="form-control input-sm" placeholder="Enter no of days" name="LohanaPackageTariffSearch.NoOfDays">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>No.of Nights</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" id="txtNoOfNights" class="form-control input-sm" placeholder="Enter no of nights" name="LohanaPackageTariffSearch.NoOfNights">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group" style="align-content:center;">
+                            <br />
+                            <button type="button" id="btnSearchLohanaPackageTariff" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                            <button type="button" id="btnResetLohanaPackageTariff" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+
+            <h5 class="card-header">
+
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; LohanaPackageTariffSearch Details
+
+            </h5>
+
+            <input type="hidden" id="hdnCurrentPage" name="Pager.CurrentPage" value="" />
+
+            <div id="divLohanaPackageTariffSearchDetails">
+
+                @{Html.RenderPartial("_LohanaPackageTariffSearchDetails", Model);}
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,60 @@
+﻿<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-event.js"></script>
+<script src="~/Scripts/SupplierHotelTariff/supplier-day-title-methods.js"></script>
+
+<div class="tab-pane active p-a-0-75" id="" role="tabpanel">
+  
+  
+    <form id="frmMealDetails">
+
+   
+        <div class="row">
+       
+            <input type="hidden" id="hdnMealId">
+            <div class="col-md-4">
+                <label for="drpMeal" style="color: #333" class="">Meal</label>
+                <div class="input-group">
+                    <select class="form-control" id="drpMeal" name="SupplierHotelDayItem.MealId">
+                      
+                    </select>
+                    <span class="input-group-addon">
+                        <a href="/Meal/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="">Meal Description</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter meal description" name="Meal.MealDescription" id="txtMealDescription" maxlength="100">
+                    <input type="hidden" name="Meal.MealDescription" id="hdnMealDescription" value="">
+                    <span class="input-group-addon">
+                        <i class="fa fa-cutlery"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            &nbsp;&nbsp;&nbsp;
+            <br />
+            <button type="button" id="btnSearchMeal" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+            <button type="reset" id="btnResetMeal" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light ResetBtn"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        </div>
+
+        <div class="card">
+            <div class="row">
+                <div class="card-block p-t-0 p-b-0">
+                    <div class="overflow-x-auto">
+                        <table class="table m-b-0" id="tblMeal"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="CheckSelectedMeal" />
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="btnSaveMeal" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>          
+        </div>
+    </form>
+
+</div>

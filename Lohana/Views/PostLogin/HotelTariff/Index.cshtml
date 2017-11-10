@@ -1,0 +1,575 @@
+﻿@model Lohana.Models.Tariff.HotelTariff.HotelTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/dist/css/wizard.min.css">
+<link rel="stylesheet" href="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.css">
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/dist/jquery-wizard.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/formValidation.min.js"></script>
+<script type="text/javascript" src="../Content/plugin/jquery-wizard/libs/formvalidation/bootstrap.min.js"></script>
+<link href="~/Content/plugin/pignose-calendar/css/pignose.calendar.css" rel="stylesheet" />
+<script src="~/Content/plugin/pignose-calendar/js/pignose.calendar.js"></script>
+<style>
+    /* Jquery Steps */
+    .wizard-steps {
+        display: table;
+        width: 100%;
+    }
+
+        .wizard-steps > li {
+            display: table-cell;
+            padding: 20px 20px;
+            background: #f5f5f5;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-right: none;
+        }
+
+            .wizard-steps > li > i {
+                float: right;
+                font-size: 1.25rem;
+            }
+
+            .wizard-steps > li:last-child {
+                border: 1px solid rgba(0, 0, 0, 0.125);
+            }
+
+            .wizard-steps > li.current,
+            .wizard-steps > li.done {
+                background: #3e70c9;
+                color: #fff !important;
+            }
+
+            .wizard-steps > li.done {
+                background: #43b968;
+            }
+
+            .wizard-steps > li.error {
+                background: #f44236;
+            }
+
+    .wizard-content {
+        padding: 2rem;
+        border-color: rgba(0, 0, 0, 0.125);
+        border-top: none;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<script>
+    $(function () {
+        $("#dvcalendar").pignoseCalendar({
+            scheduleOptions: {
+                colors: {
+                    offer: '#2fabb7',
+                    ad: '#5c6270'
+                }
+            },
+            schedules: [{
+                name: 'offer',
+                date: '2017-04-27'
+            }, {
+                name: 'ad',
+                date: '2017-02-08'
+            }, {
+                name: 'offer',
+                date: '2017-02-05',
+            }],
+            select: function (date, context) {
+                for (var idx in context.storage.schedules) {
+                    var schedule = context.storage.schedules[idx];
+
+                    alert(schedule.name);
+                }
+
+                //alert(date);
+                //alert(context.storage.schedules.name);
+                //alert('events for this date', context.storage.schedules.name);
+            }
+        });
+    });
+</script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Hotel Tariff</h4>
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Hotel Tariff</a></li>
+            <li class="breadcrumb-item"><a href="#">Search</a></li>
+            <li class="breadcrumb-item active">Create</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">Basic</h5>
+                    <div id="exampleBasic" class="wizard">
+                        <ul class="wizard-steps" role="tablist">
+                            <li class="active" role="tab">
+                                Basic Details <i class="ti-star"></i>
+                            </li>
+                            <li role="tab">
+                                Room Details <i class="ti-home"></i>
+                            </li>
+                            <li role="tab">
+                                Occupancy Details<i class="ti-check-box"></i>
+                            </li>
+                            <li role="tab">
+                                Price Details <i class="ti-money"></i>
+                            </li>
+                            @*<li role="tab">
+                                Customer Category<i class="ti-user"></i>
+                            </li>*@
+
+
+
+                        </ul>
+
+                        <div class="wizard-content">
+
+                            <div class="wizard-pane active" role="tabpanel">
+
+                                @{Html.RenderPartial("_BasicDetails", Model);}
+
+                            </div>
+
+                            <div class="wizard-pane" role="tabpanel">
+
+                                @{Html.RenderPartial("_RoomDetails", Model);}
+                            </div>
+
+                            <div class="wizard-pane" role="tabpanel">
+
+                                @{Html.RenderPartial("_OccupancyDetails", Model);}
+
+                            </div>
+
+                            <div class="wizard-pane not-validate" role="tabpanel">
+
+                                @{Html.RenderPartial("_PriceDetails", Model);}
+
+                            </div>
+
+                            @*<div class="wizard-pane not-validate" role="tabpanel" id="divcustomercategory">
+
+                                @{Html.RenderPartial("_CustomerCategory", Model);}
+
+                            </div>*@
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-block bg-white">
+                    <h5 class="m-b-2">View</h5>
+
+                    <div class="row" id="divBasicDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-star"></i></span>&nbsp; Basic Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <label><b>Supplier : </b></label>
+                                            <label id="lblSupplier"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Hotel : </b></label>
+                                            <label id="lblHotel"></label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" id="divRoomDetails">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-home"></i></span>&nbsp; Room Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b>Room Rate Type : </b></label>
+                                            <label id="lblRoomRateType"></label>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label><b>CheckIn Time : </b></label>
+                                            <label id="lblCheckInTime"></label>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label><b>CheckOut Time : </b></label>
+                                            <label id="lblCheckOutTime"></label>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label><b>Room Type : </b></label>
+                                            <label id="lblRoomTypeName"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Occupancy : </b></label>
+                                            <label id="lblOccupancyName"></label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b>Age From:</b></label>
+                                            <label id="lblAgeFrom"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Age To:</b></label>
+                                            <label id="lblAgeTo"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label><b>Meal Plan:</b></label>
+                                            <label id="lblMealName"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Meal Inclusions:</b></label>
+                                            <label id="lblMealInclusion"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Room Inclusion:</b></label>
+                                            <label id="lblRoomInclusion"></label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label><b>Room Exclusion:</b></label>
+                                            <label id="lblRoomExclusion"></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row" id="divPackageDetails">
+                        <div class="col-md-12">
+                            <div id="dvcalendar">
+
+
+                            </div>
+                            <input type="hidden" id="hdnHotelTariffRoomOccupancyId" name="HotelTariffDates.HotelTariffRoomOccupancyId" />
+
+                            <input type="hidden" id="hdnTariffDate" name="HotelTariffDates.TariffDate" />
+                        </div>
+                    </div>
+
+                    <div class="row" id="divCustomerCategory">
+
+                        <div class="col-md-12">
+
+                            <div class="card">
+
+                                <h5 class="card-header">
+                                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-briefcase"></i></span>&nbsp; Customer Category Details
+                                </h5>
+
+                                <div class="card-block p-t-0 p-b-0">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" id="btnCustomerCategories" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-briefcase"></i></span>CustomerCategories</button>
+
+
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+
+<div class="modal fade modalCharges" id="modalCharges" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Charges Details
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label for="">Charges Type</label>
+                        <div class="input-group">
+                            <select class="form-control" id="">
+                                <option>Select Charges Type</option>
+                                <option>Package Tarrif</option>
+                                <option>Package</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Percent</label>
+                            <input type="text" class="form-control" placeholder="Enter Percent">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <br>
+                            <button type="button" class="btn btn-success  label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table m-b-0">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Charges Type</th>
+                                    <th>Percent</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Package Tariff</td>
+                                    <td>14</td>
+                                    <td>
+                                        <a class="btn btn-default btn-sm" href="#"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-default btn-sm" href="#"><i class="fa fa-remove"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Vehicle Tariff</td>
+                                    <td>7</td>
+                                    <td>
+                                        <a class="btn btn-default btn-sm" href="#"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-default btn-sm" href="#"><i class="fa fa-remove"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade comm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; Commission
+                </h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade addinclusions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Other Inclusions
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+
+                            <label style="color: #333" for="txtContactName">Inclusions</label>
+
+                            <textarea id="editor1" rows="10" cols="80" name="NewsLetter.Inclusions_Description"></textarea>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade viewinclusions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; View Inclusions
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+
+                            <label style="color: #333" for="txtContactName">View Inclusions</label>
+
+                            <textarea id="editor2" rows="10" cols="80" name="NewsLetter.ViewInclusions_Description">
+
+                                Accommodations on double sharing basis.
+                                Welcome Drink on arrival.
+                                Check in time: 1:00 PM and Check out time: 11:00 AM.
+                                Package starts with lunch and ends with breakfast (APAI - includes All Meals, Anytime Dining and Accommodation).
+                                Anytime Dining at the ‘Granary – Multi-cuisine restaurant’ (choose from different Menus available 24 hours a day) excluding Alcoholic Beverages / Room Service.
+                                Daily guest supplies (Fruit Basket, Tea /coffee maker, Mini Bar consisting of soft drinks / soda, Cashew nuts, Cookies, Chocolates) replenished daily.
+                                All applicable rates and taxes.
+
+                            </textarea>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="http://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+
+
+<script>
+
+    $(function () {
+
+        //$('.from-to-date').datepicker({
+        //    toggleActive: true
+        //});
+
+        $('#exampleBasic').wizard({
+            templates: {
+                buttons: function () {
+                    var options = this.options;
+                    return '<div class="clearfix">' +
+                        '<button class="btn btn-secondary" data-target="#' + this.id + '" data-wizard="back">' + options.buttonLabels.back + '</button>' +
+                        '<button class="btn btn-primary pull-right" data-target="#' + this.id + '" data-wizard="next">' + options.buttonLabels.next + '</button>' +
+                        //'<button class="btn btn-primary pull-right" data-target="#' + this.id + '" data-wizard="finish">' + options.buttonLabels.finish + '</button>' +
+                    '</div>';
+                }
+            },
+
+            onInit: function () {
+
+            },
+
+            validator: function () {
+
+                if (!$(".wizard-pane.active").hasClass("not-validate")) {
+
+                    if ($(".wizard-pane.active").find("input[type='radio']").not(":checked")) {
+
+                        $(".wizard-pane.active").find("#lblMessage").text("Please select a radio button");
+
+                        $(".wizard-pane.active").find("#lblMessage").css({ 'color': 'red' });
+
+                    }
+
+                    if ($(".wizard-pane.active").find("input[type='radio']").is(":checked")) {
+
+                        $(".wizard-pane.active").find("#lblMessage").text("");
+
+                    }
+
+                    return $(".wizard-pane.active").find("[name='c1']").is(":checked");
+                }
+                else {
+                    return true;
+                }
+
+            },
+
+            onFinish: function () {
+
+            }
+        });
+
+    });
+
+</script>
+
+

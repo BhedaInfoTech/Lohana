@@ -1,0 +1,82 @@
+﻿<div class="row">
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Source</label>
+            <input type="text" id="txtSource" class="form-control input-sm" name="Package.source" placeholder="Source">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Destination</label>
+            <input type="text" id="txtdestination" class="form-control input-sm" name="Package.destination" placeholder="Destination">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Ticket Type</label>
+            <select id="drppackageType" class="form-control input-sm" name="Package.packageType">
+                <option value="">Select Ticket Type</option>
+                <option value="">General</option>
+                <option value="">1 tier AC </option>
+                <option value="">2 tier Ac</option>
+                <option value="">3 tier AC </option>
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <label>Departure Date/Time - Arrival Date/Time</label>
+        <input class="form-control" type="text" name="daterange-with-time" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" />
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Budget</label>
+            <input type="text" id="txtbudget" class="form-control input-sm" name="Package.budget" placeholder="Budget">
+        </div>
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+</script>

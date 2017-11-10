@@ -1,0 +1,197 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariff.LohanaPackageTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-vehicle-validations.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-vehicle-methods.js"></script>
+<script src="~/Scripts/Tariff/LohanaPackageTariff/lohana-package-tariff-vehicle-events.js"></script>
+
+<form id="frmLohanaPackageTariffVehicle">
+
+    <div class="row">
+        <input type="hidden" id="hdnLohanaPackageTariffId" name="LohanaPackageTariffVehicle.LohanaPackageTariffId">  
+        
+        <input type="hidden" id="hdnVehicleId" name="LohanaPackageTariffVehicle.VehicleId">
+
+        <input type="hidden" id="hdnVehicleTariffId" name="LohanaPackageTariffVehicle.VehicleTariffId">
+
+        <input type="hidden" id="hdnVehicleTariffPriceDetailsId" name="LohanaPackageTariffVehicle.VehicleTariffPriceDetailsId">
+
+
+            
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="">No Of Nights</label>
+                <input type="text" id="txtNoOfNight" class="form-control" placeholder="Enter No Of Nights" name="LohanaPackageTariffVehicle.NoOfNight" >
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <button type="button" id="btnAddVehiclePlan" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-toggle="modal" data-target=".addvehicle"><span class="btn-label"><i class="ti-check"></i></span>Select Vehicle Plan</button>
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+            <div class="form-group">
+                <b>Vendor/Vehicle/Package:</b><label id="lblVehicleDetails"></label>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="button" id="btnAddVehicle" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        <button type="button" id="btnResetVehicle" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        <button type="button" id="btnDeleteVehicle" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+    </div>
+       
+    <div class="card">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Lohana Package Vehicle Listing
+        </h5>
+
+        <div class="row">
+            <input type="hidden" id="hdnLohanaPackageTariffVehicleId" value="" name="LohanaPackageTariffVehicle.LohanaPackageTariffVehicleId" />
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblLohanaPackageTariffVehicle"></table>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    <div>
+        <label id="lblMessage"></label>
+    </div>
+
+</form>
+
+
+<div class="modal fade addvehicle" id="modalCharges" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Vehicle Details
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmVehicleDetails">
+                <div class="row">
+
+                    @*<div class="col-md-6">
+                        <label for="drpCity" style="color: #333" class="">Location</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpCity" name="LohanaPackageTariffHotel.CityId">
+
+                                <option value="0">Select location</option>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    if (Model.LohanaPackageTariffHotel.CityId == item.CityId)
+                                    {
+                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.CityId">@item.CityName</option>
+                                    }
+                                }
+
+                            </select>
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="drpVendor" style="color: #333" class="">Vendor Name</label>
+                            <div class="input-group">
+                                <select class="form-control input-sm" id="drpVendorId" name="LohanaPackageTariffVehicle.VendorId">
+                                    <option value="0">Select vendor</option>
+                                    @foreach (var item in Model.Vendors)
+                                    {
+                                        if (Model.LohanaPackageTariffVehicle.VendorId == item.VendorId)
+                                        {
+                                            <option value="@item.VendorId" selected="selected">@item.VendorName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.VendorId">@item.VendorName</option>
+                                        }
+                                    }
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Vehicle Name </label>
+                            <div class="input-group">
+                                <select class="form-control" id="drpVehicleId" name="LohanaPackageTariffVehicle.Vehicle">
+                                    <option value="0">Select vehicle</option>
+                                    @foreach (var item in Model.Vehicles)
+                                    {
+                                        if (Model.LohanaPackageTariffVehicle.VehicleId == item.VehicleId)
+                                        {
+                                            <option value="@item.VehicleId" selected="selected">@item.VehicleName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.VehicleId">@item.VehicleName</option>
+                                        }
+                                    }
+                                </select>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-car"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                 <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSearchVehicle" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Search</button>
+                        </div>
+                    </div>
+                </div>
+                    <div class="card">
+
+                        <div class="row">
+                            <div class="card-block p-t-0 p-b-0">
+                                <div class="overflow-x-auto">
+                                    <table class="table m-b-0" id="tblVehicleTariffPriceDetails"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+             </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

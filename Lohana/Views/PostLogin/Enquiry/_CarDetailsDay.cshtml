@@ -1,0 +1,64 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Vehicle Type</label>
+            <select id="drppackageType" class="form-control input-sm" name="Package.packageType">
+                <option value="">Select Vehicle Type</option>
+                <option value="">SUV</option>
+                <option value="">Sedan </option>
+                <option value="">Tempo Traveller</option>
+                <option value="">Bus</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Vehicle Name</label>
+            <input type="text" id="txtvehicleName" class="form-control input-sm" name="Package.vehicleName" placeholder="Enter Vehicle Name">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Budget</label>
+            <input type="text" id="txtvehiclePrice" class="form-control input-sm" name="Package.vehiclePrice" placeholder="Enter Budget">
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+</script>

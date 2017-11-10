@@ -1,0 +1,220 @@
+﻿@model Lohana.Models.Master.SupplierSearchViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+<script src="~/Scripts/Master/SupplierSearch/suppliersearchevent.js"></script>
+
+<script src="~/Scripts/Master/SupplierSearch/suppliersearchmethod.js"></script>
+
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+
+<div class="content-area p-y-1">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <h4> Supplier Hotel Search</h4>
+                <ol class="breadcrumb no-bg m-b-1">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Search Hotel</a></li>
+                    <li class="breadcrumb-item active">Search</li>
+                </ol>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group" style="text-align: right; padding-top: 8px;">
+                    <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                        <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                            <i class="ti-info"></i>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-search"></i></span> &nbsp; Supplier Hotel Search
+            </h5>
+            <div class="card-block p-t-0 p-b-0">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="drpCountry" style="color: #333" class="">Country</label>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-control" id="drpCountry" name="SupplierSearch.CountryId">
+                                <option value="0">Select country</option>
+                            </select>
+                            <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                    </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="drpState" style="color: #333" class="">State</label>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-control" id="drpState" name="SupplierSearch.StateId">
+                                <option value="0">Select state</option>
+                            </select>
+                            <span class="input-group-addon">
+                                    <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="drpCity" style="color: #333" class="">City</label>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-control" id="drpCity" name="SupplierSearch.CityId">
+                                <option value="0">Select City</option>
+                            </select>
+                            <span class="input-group-addon">
+                                <i class="fa fa-globe"></i>
+                            </span>
+                        </div>
+                                </div>
+                            </div>
+                            </div>
+
+                </div>
+
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                        <label>Check in</label>
+                        <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" id="txtCheckInDate" class="form-control input-sm" placeholder="Enter check in date" name="SupplierSearch.CheckInDate">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>                 
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                        <label>No.of Days</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                        <input type="text" id="txtNoOfDays" class="form-control input-sm" placeholder="Enter no of days" name="SupplierSearch.NoOfDays" maxlength="2">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>     
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                        <label>No.of Nights</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                        <input type="text" id="txtNoOfNights" class="form-control input-sm" placeholder="Enter no of nights" name="SupplierSearch.NoOfNights" maxlength="2">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>           
+                        </div>
+                </div>
+
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                        <label>Adult</label>
+                        <div class="form-group">
+                                    <input type="text" id="txtAdultCount" class="form-control count" placeholder="Enter no of adults" name="SupplierSearch.AdultCount" value="1" maxlength="2">
+                            <span style="color:red;">( Aged 18+ )</span>
+                        </div>
+                            </div>
+
+                    </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                        <label>Children</label>
+                        <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" id="txtChildCount" class="form-control count" placeholder="Enter no of children" value="0" name="SupplierSearch.ChildCount" maxlength="2">                                       
+                                      </div>
+                            <span style="color:red;">( Aged between 0 to 17 )</span>
+                        </div>
+                    </div>
+                            <div>
+                        </div>
+
+                            </div>
+
+                </div>
+                   
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group" style="align-content:center;">
+                        <button type="button" id="btnSearchSupplierHotel" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-search"></i></span>Search</button>
+                        <button type="button" id="btnResetSupplierHotel" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+
+        <div class="card">
+
+            <h5 class="card-header">
+
+                <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span> &nbsp; Supplier Search Details
+
+            </h5>
+
+            <input type="hidden" id="hdnCurrentPage" name="Pager.CurrentPage" value="" />
+
+            <div id="divRoomMealOccupancy">
+
+                    @{Html.RenderPartial("_RoomMealOccupancy", Model);}
+
+                </div>
+        </div>
+
+    </div>
+</div>
+    </div>
+
+
+<script>
+    $(".count").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+    </script>

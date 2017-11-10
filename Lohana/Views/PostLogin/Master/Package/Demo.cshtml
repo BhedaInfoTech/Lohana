@@ -1,0 +1,228 @@
+﻿@model Lohana.Models.Master.PackageViewModel
+@using LohanaBusinessEntities.Common;
+@using Lohana.Common;
+
+
+@{
+    ViewBag.Title = "Demo";
+    Layout = null;
+}
+
+
+
+
+<html>
+<body>
+
+    <table border='1' style='width:70%; border-collapse:collapse;'>
+
+        <tbody>
+
+            <tr>
+                <td>
+                    <table style='width:70%'>
+                        <tbody>
+                            <tr>                               
+                                <td style="text-align:right"><h2><strong>Quatation</strong></h2></td>
+                            </tr>
+                            <tr>
+                                <td><i style='color:darkcyan'></i><img src='C:/Users/abacus/Pictures/Saved Pictures/hotel.png' style='width:20px;height:20px' /></td>
+                                @*<td @*style='padding-left:30%' style="text-align:right"><h2><strong>Quatation</strong></h2></td>*@
+                            </tr>
+                            <tr>
+                                <td>7680 Universal Blvd - Suite 360 - Orlando, FL 32819</td>
+                                <td style='text-align-last:end'>Id: <b>A00011258 </b></td>
+                            </tr>
+                            <tr>
+                                <td>Phone: 407-248-1481 - Fax: 407-248-1482 - Email: sales@quotewerks.com</td>
+                                <td style='text-align-last:end'> Date: <b>12/07/2017 </b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table style='width:70%'>
+                        <tr>
+                            <td><b>Customer Name:</b> Abc dsgyz </td>
+                            <td><b>Mobile No:</b> +91 8974561300 </td>
+                        </tr>
+                        <tr>
+                            <td><b>Customer Address:</b> 215, B wing, Flat-420, andheri(E) </td>
+                            <td><b>Email Id:</b><a>abc@gmail.com</a>  </td>
+                        </tr>
+                    </table>                   
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <table style='width:100%; border-collapse:collapse' border="1">
+                        <tr>
+                            <th style='background-color:black;color:white;text-align:center'>ID#</th>
+                            <th style='background-color:black;color:white;text-align:center'>Item</th>
+                            <th style='background-color:black;color:white;text-align:center'>Discription</th>
+                            <th style='background-color:black;color:white;text-align:center'>Net Rate</th>
+                            <th style='background-color:black;color:white;text-align:center'>Quote Rate</th>
+                        </tr>
+
+                        <tr>
+                            <td rowspan='4' style='text-align: center'>1</td>
+                            <td rowspan='4' style='text-align: center'>Package </td>
+                            <td>
+                                <table border='1' style='width:70%; border-collapse:collapse'>
+                                    <tr><th style='text-align: left'>Destination</th><td style='text-align: left'>Ooty-Manali</td></tr>
+                                    <tr><th style='text-align: left'>Package Type</th><td style='text-align: left'>Family</td></tr>
+                                    <tr><th style='text-align: left'>Package Category</th><td style='text-align: left'>Domestic</td></tr>
+                                    <tr><th style='text-align: left'>Duration</th><td style='text-align: left'>5D/6N</td></tr>
+                                </table>
+                            </td>
+                            <td rowspan='4' style='text-align: center'>20000/-</td>
+                            <td rowspan='4' style='text-align: center'>20000/-</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td rowspan='5' style='text-align: center'>2</td>
+                            <td rowspan='5' style='text-align: center'>Hotel </td>
+                            <td>
+                                <table border='1' style='width:70%; border-collapse:collapse'>
+                                    <tr><th style='text-align: left'>Hotel Name</th><td style='text-align: left'>Taj</td></tr>
+                                    <tr><th style='text-align: left'>Star Category</th><td style='text-align: left'>5 Star</td></tr>
+                                    <tr><th style='text-align: left'>Room Type</th><td style='text-align: left'>Delux</td></tr>
+                                    <tr><th style='text-align: left'>Meal Plan</th><td style='text-align: left'>Indian</td></tr>
+                                    <tr><th style='text-align: left'>Occupancy</th><td style='text-align: left'>Double</td></tr>
+                                </table>
+                            </td>
+                            <td rowspan='5' style='text-align: center'>12000/-</td>
+                            <td rowspan='5' style='text-align: center'>12000/-</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td rowspan='5' style='text-align: center'>3</td>
+                            <td rowspan='5' style='text-align: center'>Flight </td>
+                            <td>
+                                <table border='1' style='width:70%; border-collapse:collapse'>
+                                    <tr><th style='text-align: left'>Flight Name</th><td style='text-align: left'>Air India</td></tr>
+                                    <tr><th style='text-align: left'>From-To</th><td style='text-align: left'>Mumbai-Delhi</td></tr>
+                                    <tr><th style='text-align: left'>Ticket Type</th><td style='text-align: left'>Business</td></tr>
+                                    <tr><th style='text-align: left'>Adult Count</th><td style='text-align: left'>2</td></tr>
+                                    <tr><th style='text-align: left'>Child Count</th><td style='text-align: left'>2</td></tr>
+                                </table>
+                            </td>
+                            <td rowspan='5' style='text-align: center'>25000/-</td>
+                            <td rowspan='5' style='text-align: center'>25000/-</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td rowspan='5' style='text-align: center'>4</td>
+                            <td rowspan='5' style='text-align: center'>Train </td>
+                            <td>
+                                <table border='1' style='width:70%; border-collapse:collapse'>
+                                    <tr><th style='text-align: left'>Train Name</th><td style='text-align: left'>Rajdhani Express</td></tr>
+                                    <tr><th style='text-align: left'>From-To</th><td style='text-align: left'>Agra-Panji</td></tr>
+                                    <tr><th style='text-align: left'>Ticket Type</th><td style='text-align: left'>Sleeper</td></tr>
+                                    <tr><th style='text-align: left'>Adult Count</th><td style='text-align: left'>2</td></tr>
+                                    <tr><th style='text-align: left'>Child Count</th><td style='text-align: left'>2</td></tr>
+                                </table>
+                            </td>
+                            <td rowspan='5' style='text-align: center'>2000/-</td>
+                            <td rowspan='5' style='text-align: center'>2000/-</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td rowspan='3' style='text-align: center'>5</td>
+                            <td rowspan='3' style='text-align: center'>Vehicle </td>
+                            <td>
+                                <table border='1' style='width:70%; border-collapse:collapse'>
+                                    <tr><th style='text-align: left'>Vehicle Name</th><td style='text-align: left'>Cruize</td></tr>
+                                    <tr><th style='text-align: left'>Vehicle Type</th><td style='text-align: left'>Coupe</td></tr>
+                                    <tr><th style='text-align: left'>Seating Capacity</th><td style='text-align: left'>4</td></tr>
+                                </table>
+                            </td>
+                            <td rowspan='3' style='text-align: center'>8000/-</td>
+                            <td rowspan='3' style='text-align: center'>8000/-</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr>
+                            <td rowspan='4' style='text-align: center'>6</td>
+                            <td rowspan='4' style='text-align: center'>SightSeeing </td>
+                            <td>
+                                <table border='1' style='width:70%; border-collapse:collapse'>
+                                    <tr><th style='text-align: left'>SightSeeing Name</th><td style='text-align: left'>Mount Titlis and Lucerne Day Tour</td></tr>
+                                    <tr><th style='text-align: left'>Location</th><td style='text-align: left'>Basel, Switzerland</td></tr>
+                                    <tr><th style='text-align: left'>Star Category</th><td style='text-align: left'>4 Star</td></tr>
+                                    <tr><th style='text-align: left'>Duration</th><td style='text-align: left'>8 hours</td></tr>
+                                </table>
+                            </td>
+                            <td rowspan='4' style='text-align: center'>6000/-</td>
+                            <td rowspan='4' style='text-align: center'>6000/-</td>
+                        </tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>
+                        <tr></tr>                       
+                        
+                    </table>                                
+                </td>               
+            </tr>
+
+            <tr>
+                <td>
+                    <table style='width:70%'>
+                        <tr><td>Sub Total: 30000/-</td></tr>
+                        <tr> <td >Tax(15%): 250/-</td> </tr>
+                        <tr><td>Discount(0%):--</td></tr>
+                        <tr><td><hr/></td></tr>
+                        <tr><td><b>Total: 30250/-</b></td></tr>
+                    </table>
+               </td>
+            </tr>
+            
+            <tr>
+               <td>
+                   <table>
+                       <tr>
+                           <td>
+                               <b style="background-color:pink"><u><i> Package Inclusion:</i></u></b>
+                           </td>
+                       </tr>
+                       <tr><td>&nbsp;&nbsp;</td><td>* All permit fees & hotel taxes (as per itinerary).</td></tr>
+                       <tr><td>&nbsp;&nbsp;</td><td>* Rates are valid for INDIAN NATIONALS only.</td></tr>
+                       <tr><td>&nbsp;&nbsp;</td><td>* Meal Plan (Please refer Cost sheet).</td></tr>
+                   </table>               
+           </tr>
+            
+            <tr>
+                <td>
+                    <h5>*All information contained within this quote is valid for the next 30 days.  Thereafter, all prices and applicable charges are subject to change.</h5>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,109 @@
+﻿@model Lohana.Models.Tariff.HotelTariffTaxUpdation.HotelTariffTaxUpdationViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<link href="~/Content/plugin/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
+<script src="~/Content/plugin/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+
+<div class="card-block p-t-0 p-b-0">
+
+    <form id="frmHotelTariffPrice">
+
+        <div class="row">
+
+            <div class="calsection">
+
+                <input type="hidden" id="hdnHotelTariffDurationDetailsId" name="HotelTariffPrice.HotelTariffDurationDetailsId" />
+
+                <input type="hidden" id="hdnHotelTariffId" name="HotelTariffPrice.HotelTariffId" />
+
+                <input type="hidden" id="hdnHotelTariffRoomDetailsId" name="HotelTariffPrice.HotelTariffRoomDetailsId" />
+
+                <input type="hidden" id="hdnHotelTariffPriceDetailsId" name="HotelTariffPrice.HotelTariffPriceDetailsId" />
+
+                <input type="hidden" id="hdnHotelTariffFormulaId" name="HotelTariffPrice.FormulaId" />
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Publish Price</label>
+                            <input type="text" class="form-control publishprice" value="" placeholder="Enter publish price" id="txtPublishPrice" name="HotelTariffPrice.PublishPrice" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "PP").ChargesId" data-isstandard="true" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Special Price</label>
+                            <input type="text" id="txtSpecialPrice" class="form-control specialprice" name="HotelTariffPrice.SpecialPrice" value="" placeholder="Enter special price" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "SP").ChargesId" data-isstandard="true" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Commission Price</label>
+                            <input type="text" id="txtCommissionPrice" class="form-control commissionprice" name="HotelTariffPrice.CommissionPrice" value="0" data-chargeid="@Model.LstStandardCharges.Find(c => c.Abbreviation == "CP").ChargesId" data-isstandard="true" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Formula</label>
+                            <select class="form-control" id="drpFormula">
+                                <option value="0" selected>Select Charges</option>
+                                @foreach (var item in Model.LstTaxFormula)
+                            {
+                                <option value="@item.TaxFormulaId">@item.TaxFormulaName</option>
+                            }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overflow-x-auto taxFormulaChargesGrid">
+                            <table class="table m-b-0" id="tblFormulaDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th width="10%">Charge Type</th>
+                                        <th width="10%">Cal On</th>
+                                        <th width="10%">Percentage</th>
+                                        <th width="10%">Calculated Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Net Rate (SP + TT)</label>
+                            <input type="text" id="txtNetRate" class="form-control netrate" placeholder="Enter net rate" name="HotelTariffPrice.NetRate" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Net Rate (As per Night)</label>
+                            <input type="text" id="txtNetRateAsPerNight" class="form-control netratepernight" name="HotelTariffPrice.NetRateAsPerNight" placeholder="Enter net rate per night" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+
+</div>

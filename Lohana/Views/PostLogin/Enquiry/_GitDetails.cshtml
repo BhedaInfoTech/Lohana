@@ -1,0 +1,326 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script src="~/Scripts/Enquiry/git-enquiryitem-validations.js"></script>
+<script src="~/Scripts/Enquiry/git-enquiryitem-methods.js"></script>
+<script src="~/Scripts/Enquiry/git-enquiryitem-events.js"></script>
+
+
+
+<div class="tab-pane active p-a-0-75" id="gitdetails" role="tabpanel">
+
+    <form id="frmgitdetails">
+
+        @*<input type="text" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnGitId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        <input type="hidden" id="hdnEnquiryType" name="Enquiry.EnquiryType" value="@((int)EnquiryType.Git)" />
+
+        <div id="divgitdetails">
+
+            <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Package Type</label>
+                        <div class="input-group">
+                            <select id="drppackageType" class="form-control" name="Enquiry.packageType">
+                                <option value="0">Select package type</option>
+                                @foreach (var item in Model.PackageTypes)
+                                {
+                                    if (Model.Enquiry.PackageType == item.PackageTypeId)
+                                    {
+                                        <option value="@item.PackageTypeId" selected="selected">@item.PackageTypeName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.PackageTypeId">@item.PackageTypeName</option>
+                                    }
+                                }
+                            </select>
+                            <span class="input-group-addon">
+                                <a> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                         
+                    <div class="col-md-3">
+                    <label for="drpCountry" style="color: #333" class="">Country</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpCountry" name="Enquiry.CountryId">
+                            <option value="0">Select country</option>
+                            @foreach (var item in Model.Countries)
+                            {
+                                if (Model.Enquiry.CategoryId == item.CountryId)
+                                {
+                                    <option value="@item.CountryId" selected="selected">@item.CountryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CountryId">@item.CountryName</option>
+                                }
+                            }
+
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/Country/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="drpState" style="color: #333" class="">State</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpState" name="Enquiry.StateId">
+                            <option value="0">Select state</option>
+                            @foreach (var item in Model.States)
+                            {
+                                if (Model.Enquiry.StateId == item.StateId)
+                                {
+                                    <option value="@item.StateId" selected="selected">@item.StateName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.StateId">@item.StateName</option>
+                                }
+                            }
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/State/Index" target="_blank">  <i class="fa fa-globe"></i></a>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="drpCity" style="color: #333" class="">City</label>
+                    <div class="input-group">
+                        <select class="form-control" id="drpCity" name="Enquiry.Cityid">
+                            <option value="0">Select City</option>
+                            @foreach (var item in Model.cityes)
+                            {
+                                if (Model.Enquiry.CityId == item.CityId)
+                                {
+                                    <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CityId">@item.CityName</option>
+                                }
+                            }
+                        </select>
+                        <span class="input-group-addon">
+                            <a href="/City/Index" target="_blank">  <i class="fa fa-globe"></i></a>
+                        </span>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <div class="input-group">
+                            <select id="drpcategory" class="form-control" name="Enquiry.category">
+                                <option value="">Select category</option>
+                                @foreach (var item in LookupInfo.GetPackageCategories())
+                                {
+                                    if (Model.Enquiry.CategoryId == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>No Of Nights</label>
+                        <div class="input-group">
+                            <input type="text" id="txtnoOfNights" class="form-control adult-children" name="Enquiry.noOfNights" placeholder="Enter No Of Nights" value="@Model.Enquiry.NoOfNights">
+                        </div>
+                    </div>
+                </div>
+              
+                @*<div class="col-md-3">
+
+
+
+                    <div class="form-group">
+                        <label>Month</label>
+                        <div class="input-group">
+                            <select id="drpmonth" class="form-control" name="PackaEnquiryge.month">
+                                <option value="">Select month</option>
+                                @foreach (var item in LookupInfo.GetMonths())
+                                {
+                                    if (Model.Enquiry.Month == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Year</label>
+                        <div class="input-group">
+                            <select id="drpyear" class="form-control" name="Enquiry.Year">
+                                @*<option value="0">Select year</option>
+                                    <option value="1">2017 </option>
+                                    <option value="2">2018 </option>
+                                    <option value="3">2019 </option>
+                                    <option value="4">2020 </option>
+                                    <option value="5">2021 </option>
+                                    <option value="6">2022 </option>
+                                    <option value="7">2023 </option>
+                                    <option value="8">2024 </option>
+                                    <option value="9">2025 </option>
+                                    <option value="10">2026 </option>
+                                    <option value="11">2027 </option>
+                                    <option value="12">2028 </option>
+                                    <option value="13">2029 </option>
+                                    <option value="14">2030 </option>
+                                <option value="0">Select year</option>
+
+                                @for (int i = 0; i < 10; i++)
+                                {
+                                    
+                                    if (System.DateTime.Now.AddYears(i).Year == Model.Enquiry.Year)
+                                    {
+                                        <option value="@System.DateTime.Now.AddYears(i).Year" selected="selected">@System.DateTime.Now.AddYears(i).Year</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@System.DateTime.Now.AddYears(i).Year">@System.DateTime.Now.AddYears(i).Year</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Adult </label>
+                        <div class="input-group">
+                            <input type="text" id="txtAdultCount" class="form-control adult-children" name="Enquiry.adultCount" value="@Model.Enquiry.AdultCount">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Child </label>
+                        <div class="input-group">
+                            <input type="text" id="txtChildCount" class="form-control adult-children" name="Enquiry.chidCount" value="@Model.Enquiry.ChildCount">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Start to Travel</label>
+                        <input type="text" id="" class="form-control input-sm datepicker-autoclose" name="Enquiry.FromDate" placeholder="Enter From Date" value="@(Model.Enquiry.FromDate != DateTime.MinValue ? Model.Enquiry.FromDate.ToString("MM/dd/yyyy") : "")">
+                    </div>
+                </div>
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Total Budget</label>
+                        <div class="input-group">
+                            <input type="text" id="txtbudget" class="form-control input-sm" name="Enquiry.budget" placeholder="Enter Budget" value="@Model.Enquiry.Budget">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveGitDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetGitDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+
+</script>
+

@@ -1,0 +1,456 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+<script src="~/Scripts/Enquiry/hotel-enquiry-item-validations.js"></script>
+<script src="~/Scripts/Enquiry/hotel-enquiry-item-methods.js"></script>
+<script src="~/Scripts/Enquiry/hotel-enquiry-item-events.js"></script>
+
+
+
+<div class="tab-pane active p-a-0-75" id="hoteldetails" role="tabpanel">
+
+    <form id="frmHoteldetails">
+
+        @*<input type="hidden" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnHotelId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        <input type="hidden" id="hdnEnquiryType" name="Enquiry.EnquiryType" value="@((int)EnquiryType.Hotel)" />
+
+        <div id="divhoteldetails">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="drpCountry" style="color: #333" class="">Country</label>
+                    <div class="input-group">
+                        <select class="form-control input-sm" id="drpCountry" name="Enquiry.CountryId">
+                            <option value="0">Select country</option>
+                            @foreach (var item in Model.Countries)
+                            {
+                                if (Model.Enquiry.CountryId == item.CountryId)
+                                {
+                                    <option value="@item.CountryId" selected="selected">@item.CountryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CountryId">@item.CountryName</option>
+                                }
+                            }
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="drpState" style="color: #333" class="">State</label>
+                    <div class="input-group">
+                        <select class="form-control input-sm" id="drpState" name="Enquiry.StateId">
+                            <option value="0">Select state</option>
+                            @foreach (var item in Model.States)
+                            {
+                                if (Model.Enquiry.StateId == item.StateId)
+                                {
+                                    <option value="@item.StateId" selected="selected">@item.StateName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.StateId">@item.StateName</option>
+                                }
+                            }
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="drpCity" style="color: #333" class="">City</label>
+                    <div class="input-group">
+                        <select class="form-control input-sm" id="drpCity" name="Enquiry.CityId">
+                            <option value="0">Select City</option>
+                            @foreach (var item in Model.cityes)
+                            {
+                                if (Model.Enquiry.CityId == item.CityId)
+                                {
+                                    <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.CityId">@item.CityName</option>
+                                }
+                            }
+                        </select>
+                        <span class="input-group-addon">
+                            <i class="fa fa-globe"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="row"> 
+
+                @*<div class="col-md-3">
+                    <div class="form-group">
+                        <label for="drpCountry" style="color: #333">Country</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpCountry" name="Enquiry.location">
+
+                                <option value="0">Select Country</option>
+
+                                @foreach (var item in Model.Countries)
+                                {
+                                    if (Model.Enquiry.CountryId == item.CountryId)
+                                    {
+                                        <option value="@item.CountryId" selected="selected">@item.CountryName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.CountryId">@item.CountryName</option>
+                                    }
+                                }
+                            </select>
+                            <span class="input-group-addon">
+                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="drpState" style="color: #333">State</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpState" name="Enquiry.StateId">
+
+                                <option value="0">Select State</option>
+
+                                @foreach (var item in Model.States)
+                                {
+                                    if (Model.Enquiry.StateId == item.StateId)
+                                    {
+                                        <option value="@item.StateId" selected="selected">@item.StateName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.StateId">@item.StateName</option>
+                                    }
+                                }
+                            </select>
+                            <span class="input-group-addon">
+                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="drpCity" style="color: #333">City</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpCity" name="Enquiry.CityId">
+
+                                <option value="0">Select location</option>
+
+                                @foreach (var item in Model.Cities)
+                                {
+                                    if (Model.Enquiry.Cityid == item.CityId)
+                                    {
+                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.CityId">@item.CityName</option>
+                                    }
+                                }
+                            </select>
+                            <span class="input-group-addon">
+                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>*@
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtCheckInDate">Check In :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker-autoclose" id="" value="@(Model.Enquiry.CheckInDate != DateTime.MinValue ? Model.Enquiry.CheckInDate.ToString("MM/dd/yyyy") : "")" placeholder="Enter Check In" name="Enquiry.CheckInDate">
+                        </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtCheckOutDate">Check Out :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker-autoclose" id="" value="@(Model.Enquiry.CheckOutDate != DateTime.MinValue ? Model.Enquiry.CheckOutDate.ToString("MM/dd/yyyy") : "")" placeholder="Enter Check Out" name="Enquiry.CheckOutDate">
+                        </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtBudget">Budget :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control " id="txtBudget" value="@Model.Enquiry.Budget" placeholder="Enter Budget" name="Enquiry.budget">
+                        </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Star Category</label>
+                        <div class="input-group">
+                            <select id="drpstarCategory" class="form-control input-sm" name="Enquiry.starCategory">
+                                <option value="">Select Star category</option>
+                                @foreach (var item in LookupInfo.Get_StarCategory_Type())
+                                {
+                                    if (Model.Enquiry.StarCategory == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Hotel Type</label>
+                        <div class="input-group">
+                            <select id="drphotelType" class="form-control" name="Enquiry.hotelType">
+                                <option value="">Select hotel type</option>
+                                @foreach (var item in Model.HotelTypes)
+                                {
+                                    if (Model.Enquiry.HotelTypeId == item.HotelTypeId)
+                                    {
+                                        <option value="@item.HotelTypeId" selected="selected">@item.HotelType</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.HotelTypeId">@item.HotelType</option>
+                                    }
+                                }
+                            </select>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtHotel">Hotel Name :</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control " id="txtHotel" value="@Model.Enquiry.HotelName" placeholder="Enter Hotel Name" name="Enquiry.HotelName">
+                        </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Room</label>
+                        <div class="input-group">
+                            <select id="drproomType" class="form-control" name="Enquiry.roomType">
+                                <option value="">Select room</option>
+                                @foreach (var item in Model.RoomTypes)
+                                {
+                                if (Model.Enquiry.RoomType == item.RoomTypeId)
+                                {
+                                <option value="@item.RoomTypeId" selected="selected">@item.RoomTypeName</option>
+                                }
+                                else
+                                {
+                                <option value="@item.RoomTypeId">@item.RoomTypeName</option>
+                                }
+                                }
+                            </select>
+                            </div>
+                        </div>
+                </div>
+
+
+            </div>
+
+            @*<div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Enquiry Assigned Type</label>
+                        <div class="input-group">
+                            <select id="drpenquiryAssignedType" class="form-control input-sm assignedtype" name="Enquiry.enquiryAssignedType">
+                                <option value="">Select assigned type</option>
+                                @foreach (var item in LookupInfo.GetAssignedType())
+                                {
+                                    if (Model.Enquiry.EnquiryAssignedType == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3" id="dvHotelAssigneeName">
+                    <div class="form-group">
+                        <label>Assigne Name</label>
+                        <div class="input-group">
+                            <select id="drpassigneName" class="form-control" name="Enquiry.assigneName">
+                                <option value="0">Select assigne name</option>
+                                @foreach (var item in Model.Users)
+                                {
+                                    if (Model.Enquiry.EnquiryAssigneeName == item.UserId)
+                                    {
+                                        <option value="@item.UserId" selected="selected">@item.FirstName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.UserId">@item.FirstName</option>
+                                    }
+                                }
+                            </select>
+                            <span class="input-group-addon">
+                                <a> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>*@
+
+            <div id="divRoomDetails">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="txtRoomCount">Rooms Count :</label>
+                            <div class="input-group">
+                                <input type="text" id="txtroomCount" class="form-control count" name="Enquiry.roomCount" value="@Model.Enquiry.RoomCount">
+                            </div>
+                            </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="txtAdultCount">Adults Count</label>
+                            <div class="input-group">
+                                <input type="text" id="txtAdultCount" class="form-control count" value="@Model.Enquiry.AdultCount">
+                            </div>
+                            </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="txtCXBCount">CXB Count</label>
+                            <div class="input-group">
+                                <input type="text" id="txtcxbCount" class="form-control count" name="Enquiry.cxbCount" value="@Model.Enquiry.CXBCount">
+                            </div>
+                            </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>CXB Age</label>
+                            <div class="input-group">
+                                <input type="text" name="Enquiry.cxbAge" id="txtcxbAge" class="form-control input-sm" data-role="tagsinput" placeholder="Enter cxb age" value="@Model.Enquiry.CXBAge" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="txtCNBCount">CNB Count :</label>
+                            <div class="input-group">
+                                <input type="text" id="txtcnbCount" class="form-control count" name="Enquiry.cnbCount" value="@Model.Enquiry.CNBCount">
+                            </div>
+                            </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>CNB Age</label>
+                            <div class="input-group">
+                                <input type="text" name="Enquiry.CNBAge" id="txtCNBAge" class="form-control input-sm" data-role="tagsinput" placeholder="Enter CNB age" value="@Model.Enquiry.CNBAge" maxlength="50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveHotelDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetHotelDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+
+</script>
+

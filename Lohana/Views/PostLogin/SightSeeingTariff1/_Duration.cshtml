@@ -1,0 +1,75 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Master/SightSeeingTariff/sightseeing-tariff-duration-events.js"></script>
+<script src="~/Scripts/Master/SightSeeingTariff/sightseeing-tariff-duration-methods.js"></script>
+
+
+<form id="frmSightSeeingTariffDuration">
+
+    <input type="hidden" id="hdnDurationId" name="SightSeeingTariff.Duration.DurationId" />
+
+    <input type="hidden" id="hdnDurationTariffId" name="SightSeeingTariff.Duration.SightSeeingTariffId" />
+
+
+    <input type="hidden" id="" value="" name="" />
+
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>From Date - To Date</label>
+                <div class="input-daterange input-group from-to-date" id="date-range">
+                    <input type="text" class="form-control" name="SightSeeingTariff.Duration.FromDate" placeholder="From Date" value="">
+                    <span class="input-group-addon bg-primary b-0 text-white">to</span>
+                    <input type="text" class="form-control" name="SightSeeingTariff.Duration.ToDate" placeholder="To Date" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Operational Days</label>
+                <div class="input-group" id="divDays">
+                    @foreach (var item in LookupInfo.GetDays())
+                    {
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="SightSeeingTariff.Duration.OperationalDays" id="chkDays" value="@item.Value">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">@item.Value</span>
+                        </label>
+                    }
+                </div>
+               
+           </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="button" id="btnAddDuration" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+        <div class="btn-group" style="float: right; padding: 2px 6px;">
+            <button type="reset" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light" id=""><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+
+        </div>
+    </div>
+
+
+    <div class="card">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Basic Details Listing
+        </h5>
+
+        <input type="hidden" id="hdnSearchDurationId" value="" name="DurationFilter.DurationId" />
+        <div class="card-block p-t-0 p-b-0">
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblSightSeeingTariffDurationDetails" data-current-page=""></table>
+            </div>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,106 @@
+﻿@model Lohana.Models.SightSeeingTariff.SightSeeingTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-occupancy-events.js?v=@DateTime.Now"></script>
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-occupancy-methods.js?v=@DateTime.Now"></script>
+<script src="~/Scripts/Tariff/SightSeeingTariff/sight-seeing-tariff-occupancy-validations.js?v=@DateTime.Now"></script>
+
+
+
+<form id="frmSightSeeingTariffOccupancy">
+    <input type="hidden" id="hdnSightSeeingTariffOccupancyId" value="" name="SightSeeingTariffOccupancy.SightSeeingTariffOccupancyId" />
+
+    <input type="hidden" id="hdnSightSeeingTariffId" value="" name="SightSeeingTariffOccupancy.SightSeeingTariffId" />
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <label>Occupancy</label>
+            <div class="form-group">
+                <div class="input-group">
+                    <select class="form-control" id="drpOccupancy" name="SightSeeingTariffOccupancy.OccupancyId"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="drpMeal" style="color: #333" class="">Meal Type</label>
+                <div class="input-group">
+                    <select class="form-control input-sm" id="drpMeal" name="SightSeeingTariffOccupancy.MealId"></select>
+                    <span class="input-group-addon">
+                        <a href="/Meal/Index" target="_blank"><i class="fa fa-globe"></i></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Other Inclusions</label>
+                <textarea id="txtInclusion" class="form-control" name="SightSeeingTariffOccupancy.Inclusion" placeholder="Other Inclusions"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Other Exclusions</label>
+                <textarea id="txtExclusion" class="form-control" name="SightSeeingTariffOccupancy.Exclusion" placeholder="Other Exclusions"></textarea>
+            </div>
+        </div>
+    </div>
+
+        <div class="row" id="divAgeFromTo">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Age From</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter age from" id="txtAgeFrom" name="SightSeeingTariffOccupancy.AgeFrom">
+                        <span class="input-group-addon">
+                            <i class="ti ti-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Age To</label>
+                    <div class="input-group">
+                        <input type="text" id="txtAgeTo" class="form-control" name="SightSeeingTariffOccupancy.AgeTo" placeholder="Enter age to">
+                        <span class="input-group-addon">
+                            <i class="ti ti-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <div class="form-group">
+
+        <button type="button" id="btnAddSightSeeingTariffOccupancy" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+        <button type="reset" id="btnResetSightSeeingTariffOccupancy" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+        <button type="button" id="btnDeleteSightSeeingTariffOccupancy" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+
+    </div>
+
+    <div class="card">
+
+        <h5 class="card-header">
+            <span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span> &nbsp; Sight Seeing Tariff Occupancy Listing
+        </h5>
+
+        <div class="row">
+            <input type="hidden" id="hdnSearchSightSeeingTariffOccupancyId" value="" name="SightSeeingTariffOccupancyFilter.SightSeeingTariffOccupancyId" />
+            <div class="card-block p-t-0 p-b-0">
+                <div class="overflow-x-auto">
+                    <table class="table m-b-0" id="tblSightSeeingTariffOccupancy" data-current-page="0"></table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

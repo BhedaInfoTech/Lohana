@@ -1,0 +1,79 @@
+﻿@model Lohana.Models.TaskManagement.TaskViewModel
+
+<script src="~/Scripts/TaskManagement/task-management-methods.js"></script>
+<script src="~/Scripts/TaskManagement/task-management-events.js"></script>
+
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script> 
+
+<div class="container-fluid">
+
+    <div class="card">
+        <form id="frmTaskEdit">
+            <h5 class="card-header">
+                <span style="vertical-align: middle;" class="s-icon"></span> &nbsp; Task Management
+            </h5>
+            <input type="hidden" id="hdnTaskNo" name="Task.TaskNo" value="@Model.Task.TaskNo"><div class="card-block p-t-0 p-b-0">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Customer Name</label>
+                            <div class="input-group">
+                                <label class="form-control">@Model.Task.CustomerName</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Status</label>
+                            <div class="input-group">
+                                <label class="form-control">@Model.Task.Status</label>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">FollowUp Date</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control datepicker-autoclose" placeholder="enter follow up date" name="Task.FollowUpDate" value="@(Model.Task.FollowUpDate == DateTime.MinValue ? "" : Model.Task.FollowUpDate.ToShortDateString())" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>ReAssign To</label>
+                        <select id="drpReassignUser" class="form-control input-sm" name="Task.UserId" @*onchange="Set_TeamLead();"*@>
+                            <option value="0">-Select User-</option>
+                            @foreach (var item in Model.Users)
+                            {
+                                if (Model.Task.UserId == item.UserId)
+                                {
+                                    <option value="@item.UserId" selected="selected">@item.FirstName @item.LastName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.UserId">@item.FirstName @item.LastName</option>
+                                }
+                            }
+                        </select>
+                        <input type="hidden" id="hdnUserId" name="Task.UserId" value="" />
+                    </div>
+                </div> 
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <br />
+                            <button type="button" id="btnSaveTask" class="btn btn-info label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" class="btn btn-warning label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> 
+    </div>
+</div>
+

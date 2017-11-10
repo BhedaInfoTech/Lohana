@@ -1,0 +1,159 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+@using LohanaBusinessEntities.Common;
+
+
+@{
+    ViewBag.Title = "GenerateInvoice";
+    // Layout = null;
+}
+
+<script src="~/Scripts/jquery.printElement.js"></script>
+<script src="~/Scripts/Booking/Invoice_method.js"></script>
+<script src="~/Scripts/Booking/Invoice_event.js"></script>
+<script src="~/Scripts/Common/generic.common.events.js"></script>
+<script src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<html>
+
+
+<body>
+
+    <div class="content-area p-y-1">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Invoice Details</h4>
+                    <ol class="breadcrumb no-bg m-b-1">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Booking</a></li>
+                        <li class="breadcrumb-item"><a href="#">GenerateInvoice</a></li>
+                    </ol>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" style="text-align: right; padding-top: 8px;">
+                        <span data-toggle="tooltip" data-placement="left" title="" data-color="tooltip-info" data-original-title="Help / Info">
+                            <a href="#" class="btn btn-info btn-circle waves-effect waves-light" data-toggle="modal" data-target=".help_info">
+                                <i class="ti-info"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="frmGenerateInvoice" role="form">
+
+                <input type="hidden" id="hdnBookId" value="@Model.DocumentDetailsList[0].BookingId" name="BookingCartDetailsInfo.BookingId" />
+
+                <table cellpadding="5" style="border-collapse: collapse; width: 100%;background-color:white" border="1" id="paymentTblPrint">
+                    @if (Model.DocumentDetailsList.Count > 0)
+                    {
+                        <thead style="background: #eee;">
+                            <tr>
+                                <th colspan="5" style="text-align: left;">Invoice No: @Model.DocumentDetailsList[0].InvoiceNo<span style="float: right;">Date- @Model.DocumentDetailsList[0].CreatedDate</span></th>
+                                <!--<th colspan="2" style="text-align: right;border-left: none;"></th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" style="text-align: right; width: 70%; border-right: none;">
+                                    <p><b>Travellers Details:</b></p>
+                                </td>
+                                <td style="width: 30%; border-left: none;"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="text-align: right; width: 70%; border-right: none;">
+                                    <p>Customer Name: </p>
+                                    <p>Address: </p>
+                                    <p>Mobile No: </p>
+                                    <p>Email Id: </p>
+                                    @*<p>Destination: </p>
+                                    <p>Travel Dates: </p>
+                                    <p>No. of Travelers:</p>
+                                    <p>Payment Mode:</p>*@
+                                </td>
+                                <td style="text-align: left; width: 30%; border-left: none;">
+                                    <p>@Model.DocumentDetailsList[0].CustomerName</p>
+                                    <p>@Model.DocumentDetailsList[0].Address</p>
+                                    <p>@Model.DocumentDetailsList[0].MobileNo</p>
+                                    <p>@Model.DocumentDetailsList[0].EmailId</p>
+                                    @*<p>@Model.DocumentDetailsList[0].Destination</p>
+                                    <p>@Model.DocumentDetailsList[0].TravelDate</p>
+                                    <p>5</p>
+                                    <p>Cash, Check</p>*@
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td style="width: 10%; text-align: center;"><b>#</b></td>
+                                <td style="width: 30%; text-align: center; "><b>Product Items</b></td>
+                                <td style="width: 10%; text-align: center; "><b>Quantity</b></td>
+                                <td style="width: 20%; text-align: center; "><b>Unit Price</b></td>
+                                <td style="width: 30%; text-align: center; "><b>Total Price</b></td>
+                            </tr>
+                            @if (Model.DocumentDetailsList[0].ProductDetails.Count > 0)
+                            {
+                                int j = 1;
+                                foreach (var item in Model.DocumentDetailsList[0].ProductDetails)
+                                {
+                                    <tr>
+                                        <td style="text-align: center; ">@j</td>
+                                        <td style="text-align: center; ">@item.ItemName</td>
+                                        @if(@item.Quantity==0)
+                                        {
+                                         <td style="text-align: center; "></td>
+                                        }
+                                        else
+                                        {
+                                             <td style="text-align: center; ">@item.Quantity</td>
+                                        }                                       
+                                        <td style="text-align: right; ">@item.Cost</td>
+                                        <td style="text-align: right; ">@item.Cost</td>
+                                    </tr>
+                                    j++;
+                                }
+                            }
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td colspan="3" style="width: 50%; border-right: none;">
+                                    <p><b>Terms and Conditions</b></p>
+                                    <p>Thank you for your business. We do expect payment within 21 days, so please process this invoice within that time. There will be a 1.5% interest charge per month on late invoices.</p>
+                                </td>
+                                <td style="width: 30%; text-align: right; border-right: none; border-left: none; ">
+                                    <p>Sub - Total amount:</p>
+                                    <p>GST:</p>
+                                    <p>Grand Total:</p>
+                                </td>
+                                <td style="width: 20%; border-left: none;">
+                                    <p style="text-align:right"><b>@Model.DocumentDetailsList[0].TotalAmount/-</b></p>
+                                    <p style="text-align:right"><b>15%</b></p>
+                                    <p style="text-align:right"><b>@Model.DocumentDetailsList[0].TotalAmount/-</b></p>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    }
+
+                </table>
+
+                <div class="card-footer clearfix">
+                    <a class="btn btn-secondary" data-target="#exampleBasic" data-wizard="back" href="SearchReceivablePayment">Back</a>
+                    <button type="button" class="btn btn-danger label-left pull-xs-right" id="btnDownload" onclick="javascript: downloadpdf_Invoice();">
+                        <span class="btn-label"><i class="ti-download"></i></span>
+                        Download
+                    </button>
+                    <button type="button" class="btn btn-info label-left pull-xs-right m-r-0-5" id="btnInvoicePrint">
+                        <span class="btn-label"><i class="ti-printer"></i></span>
+                        Print
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

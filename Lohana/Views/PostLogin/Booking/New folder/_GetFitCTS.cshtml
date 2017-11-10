@@ -1,0 +1,199 @@
+﻿<div class="tab-pane active p-a-0-75" id="fitdetails" role="tabpanel">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Category</label>
+                <select id="drpcategory" class="form-control" name="Package.category">
+                    <option value="">Select category</option>
+                    <option value="">Domestic </option>
+                    <option value="">International </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Package Type</label>
+                <select id="drpsubCategory" class="form-control" name="Package.subCategory">
+                    <option value="">Select Packagetype</option>
+                    <option value="">Elders </option>
+                    <option value="">Family </option>
+                    <option value="">Couples </option>
+                    <option value="">Honeymoon </option>
+                    <option value="">Adventure </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Select Destination</label><input type="text" id="txtdestination" class="form-control" name="Package.destination" placeholder="Country, State, City">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Select Duration</label><input type="text" id="txtduration" class="form-control" name="Package.duration" placeholder="Enter Duration">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Hotel Type</label>
+                <select id="drpsubCategory" class="form-control" name="Package.subCategory">
+                    <option value="">Select hoteltype</option>
+                    <option value="">Apartments </option>
+                    <option value="">Business Hotels </option>
+                    <option value="">Heritage Hotels </option>
+                    <option value="">Resort Hotels </option>
+                    <option value="">Timeshare Hotels </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Star Category</label>
+                <select id="drphotelType" class="form-control input-sm" name="Package.hotelType">
+                    <option value="">Select Starcategory</option>
+                    <option value="">1 Start </option>
+                    <option value="">2 Star </option>
+                    <option value="">3 Star </option>
+                    <option value="">4 Star </option>
+                    <option value="">5 Star </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Total Budget</label>
+                <input type="text" id="txtbudget" class="form-control input-sm" name="Package.budget" placeholder="Enter Budget">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="drpdrpRoomCount">Room Count :</label>
+                <select id="drpdrpRoomCount" class="form-control" name="RoomCount">
+                    <option value="">-Select Room Count-</option>
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Room</label>
+                <select id="drpcategory" class="form-control" name="Package.category">
+                    <option value="">Select room</option>
+                    <option value="">Single </option>
+                    <option value="">Double </option>
+                    <option value="">Triple </option>
+                    <option value="">Quadruple </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Adults Count</label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>CXB</label><input type="text" id="txtCXB" class="form-control adult-children" name="Package.CXB" value="2">
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>CNB</label><input type="text" id="txtCNB" class="form-control adult-children" name="Package.CNB" value="3">
+            </div>
+        </div>
+
+    </div>
+
+    
+</div>
+
+
+<button type="submit" class="btn btn-warning btn-rounded">Search</button>
+<hr />
+
+
+<div class="table-responsive">
+    <table class="table m-md-b-0" id="tblGitDetails">
+        <thead>
+            <tr class="table-danger">
+                <th></th>
+                <th>Category</th>
+                <th>Packagetype</th>
+                <th>Destination</th>
+                <th>Duration</th>
+                <th>Hotel Type</th>
+                <th>Star Category</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+
+            <tr class="table-success">
+                <td></td>
+                <td>
+                    <div class="form-group">
+                        <label>Domestic</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Honeymoon</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Ooty-Manali</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>5D/6N</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Heritage Hotels</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>5 Star</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>6000</label>
+                    </div>
+                </td>
+
+                <td><button type="submit" class="btn btn-primary btn-rounded">Select </button></td>
+
+            </tr>
+
+        </thead>
+    </table>
+</div>

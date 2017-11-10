@@ -1,0 +1,21 @@
+﻿@model Lohana.Models.Master.HotelViewModel
+<label for="drpDesignation" style="color: #333" class="">Designation</label>
+<div class="input-group">
+	<select class="form-control input-sm" id="drpDesignation" name="Hotel.ContactPerson.Designation">
+		@*<option value="0">Select designation</option>
+		@foreach(var item in Model.Designations)
+  {
+	  if(Model.Hotel.DesignationId == item.DesignationId)
+	  {
+			<option value="@item.DesignationId" selected="selected">@item.DesignationName</option>
+	  }
+	  else
+	  {
+			<option value="@item.DesignationId">@item.DesignationName</option>
+	  }
+  }*@
+	</select>
+	<span class="input-group-addon">
+        <a href="/Designation/Index" target="_blank"> <i class="fa fa-briefcase"></i></a>
+	</span>
+</div>

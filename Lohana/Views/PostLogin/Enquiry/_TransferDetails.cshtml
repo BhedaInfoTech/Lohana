@@ -1,0 +1,737 @@
+﻿@model Lohana.Models.Enquiry.EnquiryViewModel
+@using LohanaBusinessEntities.Common;
+@using LohanaBusinessEntities;
+
+
+
+
+@*<script src="~/Scripts/Common/generic.common.methods.js"></script>
+
+<script src="~/Scripts/Common/generic.common.events.js"></script>*@
+
+
+
+<script src="~/Scripts/Enquiry/transfer-enquiry-item-validations.js"></script>
+<script src="~/Scripts/Enquiry/transfer-enquiry-item-methods.js"></script>
+<script src="~/Scripts/Enquiry/transfer-enquiry-item-events.js?V=1"></script>
+
+
+
+<div class="tab-pane active p-a-0-75" id="transferdetails" role="tabpanel">
+
+    <form id="frmtransferdetails">
+
+        @*<input type="hidden" id="hdnEnquiryId" value="@Model.Enquiry.EnquiryId" name="Enquiry.EnquiryId" />*@
+
+        <input type="hidden" id="hdnTransferId" value="@Model.Enquiry.EnquiryItemId" name="Enquiry.EnquiryItemId" />
+
+        <input type="hidden" id="hdnEnquiryType" name="Enquiry.EnquiryType" value="@((int)EnquiryType.Transfer)" />
+
+        <div id="divtransferdetails">
+
+
+            <div class="row">
+
+                @*<div class="col-md-3">
+                    <div class="form-group">
+                        <label>Name of the City</label><input type="text" id="txtNameOfCity" class="form-control input-sm" name="Enquiry.nameOfCity" placeholder="Enter City">
+                    </div>
+                </div>*@
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="drpdestination" style="color: #333">Name of the City</label>
+                        <div class="input-group">
+                            <select class="form-control input-sm" id="drpdestination" name="Enquiry.nameOfCity">
+                                <option value="0">Select name of city</option>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    if (Model.Enquiry.Location == item.CityId)
+                                    {
+                                        <option value="@item.CityId" selected="selected">@item.CityName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.CityId">@item.CityName</option>
+                                    }
+                                }
+                            </select>
+
+                            <span class="input-group-addon">
+                                <a href="/City/Index" target="_blank"> <i class="fa fa-globe"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Currency</label>
+                        <div class="input-group">
+                            <select id="drpcurrency" class="form-control input-sm" name="Enquiry.currency">
+                                <option>Select currency</option>
+                                @foreach (var item in LookupInfo.GetCurrency())
+                                {
+                                    if (Model.Enquiry.Currency == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Vehicle Type</label>
+                        <div class="input-group">
+                            <select id="drpvehicleType" class="form-control input-sm" name="Enquiry.vehicleType">
+                                <option>Select Vehicle Type</option>
+                                @foreach (var item in LookupInfo.GetEnquiryVehicleType())
+                                {
+                                    if (Model.Enquiry.EnquiryVehicleType == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Budget</label>
+                        <div class="input-group">
+                            <input type="text" id="txtcost" class="form-control input-sm" name="Enquiry.budget" placeholder="Enter Budget">
+                        </div>
+                        </div>
+                </div>
+            </div>
+
+                  <div class="rowtransfer">
+
+                @{
+
+                    if (Model.Enquiry.EnquiryItemTransferDetails.Count == 0)
+                    {
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Transfer Date</label>
+                                    <div class="input-group">
+                                        <input type="text" id="dtptransferDate" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTransferDetails[0].transferDate" placeholder="Transfer Date">
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Pickup Type</label>
+                                    <div class="input-group">
+                                        <select id="drppickUp" class="form-control input-sm" name="EnquiryItemTransferDetails[0].pickUpType">
+                                            <option>Select pickup type</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                                        {
+                                                <option value="@item.Key">@item.Value</option>
+                                        }
+                                        </select>
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>PickUp From</label>
+                                    <div class="input-group">
+                                        <input type="text" id="txtpickUpFrom" class="form-control input-sm" name="EnquiryItemTransferDetails[0].pickUpFrom" placeholder="Enter Budget">
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>PickUp Time</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" placeholder="Pick Up time" name="EnquiryItemTransferDetails[0].pickUpTime" id="txtPickUpTime">
+                                        <span class="input-group-addon">
+                                            <i class="ti ti-time"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <br />
+                                    <button type="button" class="btn btn-purple" id="btnAddTransfer" value="2"> + </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Dropof Type</label>
+                                    <div class="input-group">
+                                        <select id="drppickUp" class="form-control input-sm" name="EnquiryItemTransferDetails[0].dropOfType">
+                                            <option>Select dropof type</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                                        {
+                                                <option value="@item.Key">@item.Value</option>
+                                        }
+                                        </select>
+                                    </div>
+                            </div>
+                                </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Dropof To</label>
+                                    <div class="input-group">
+                                        <input type="text" id="txtdropOfTo" class="form-control input-sm" name="EnquiryItemTransferDetails[0].dropOfTo" placeholder="Enter Dropof">
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>DropOf Time</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" placeholder="Drop Of time" name="EnquiryItemTransferDetails[0].dropOfTime" id="txtDropOfTime">
+                                        <span class="input-group-addon">
+                                            <i class="ti ti-time"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Transfer Date</label>
+                                    <div class="input-group">
+                                        <input type="text" id="dtptransferDate" class="form-control input-sm datepicker-autoclose" name="EnquiryItemTransferDetails[0].transferDate" placeholder="Transfer Date">
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Pickup Type</label>
+                                    <div class="input-group">
+                                        <select id="drppickUp" class="form-control input-sm" name="EnquiryItemTransferDetails[0].pickUpType">
+                                            <option>Select pickup type</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                                        {
+                                            if (Model.EnquiryItemTransferDetails[0].PickUpId == item.Key)
+                                            {
+                                                <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                                        </select>
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>PickUp From</label>
+                                    <div class="input-group">
+                                        <input type="text" id="txtpickUpFrom" class="form-control input-sm" name="EnquiryItemTransferDetails[0].pickUpFrom" placeholder="Enter Budget">
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>PickUp Time</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" placeholder="Pick Up time" name="EnquiryItemTransferDetails[0].pickUpTime" id="txtPickUpTime">
+                                        <span class="input-group-addon">
+                                            <i class="ti ti-time"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3" id="divbuttonGroup">
+                                <div class="form-group">
+                                    <br />
+                                    <button type="button" class="btn btn-purple" id="btnAddTransfer" value="2"> + </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Dropof Type</label>
+                                    <div class="input-group">
+                                        <select id="drppickUp" class="form-control input-sm" name="EnquiryItemTransferDetails[0].dropOfType">
+                                            <option>Select dropof type</option>
+                                            @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                                        {
+                                            if (Model.EnquiryItemTransferDetails[0].DropOffId == item.Key)
+                                            {
+                                                <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                                        </select>
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Dropof To</label>
+                                    <div class="input-group">
+                                        <input type="text" id="txtdropOfTo" class="form-control input-sm" name="EnquiryItemTransferDetails[0].dropOfTo" placeholder="Enter Dropof">
+                                    </div>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>DropOf Time</label>
+                                    <div class="input-group clockpicker">
+                                        <input type="text" class="form-control" placeholder="Drop Of time" name="EnquiryItemTransferDetails[0].dropOfTime" id="txtDropOfTime">
+                                        <span class="input-group-addon">
+                                            <i class="ti ti-time"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+
+            </div>
+
+
+            <div id="divtransferType">
+                @{
+                    if (Model.Enquiry.EnquiryItemTransferDetails.Count > 1)
+                    {
+                        for (int i = 1; i < Model.Enquiry.EnquiryItemTransferDetails.Count; i++)
+                        {
+                            <div class="rowtransfer">
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Transfer Date</label>
+                                            <div class="input-group">
+                                                <input type="text" id="dtptransferDate" class="form-control input-sm datepicker-autoclose transfer-date" name="EnquiryItemTransferDetails[@i].transferDate" placeholder="Transfer Date">
+                                            </div>
+                                    </div>
+                                        </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Pickup Type</label>
+                                            <div class="input-group">
+                                                <select id="drppickUp" class="form-control input-sm transfer-pickup-type" name="EnquiryItemTransferDetails[@i].pickUpType">
+                                                    <option>Select pickup type</option>
+                                                    @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                                                {
+                                                    if (Model.EnquiryItemTransferDetails[i].PickUpId == item.Key)
+                                                    {
+                                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Key">@item.Value</option>
+                                                    }
+                                                }
+                                                </select>
+
+
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>PickUp From</label>
+                                            <div class="input-group">
+                                                <input type="text" id="txtpickUpFrom" class="form-control input-sm transfer-pickup-from" name="EnquiryItemTransferDetails[@i].pickUpFrom" placeholder="Enter Budget">
+                                            </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>PickUp Time</label>
+                                            <div class="input-group clockpicker">
+                                                <input type="text" class="form-control transfer-pickup-time" placeholder="Pick Up time" name="EnquiryItemTransferDetails[@i].pickUpTime" id="txtPickUpTime">
+                                                <span class="input-group-addon">
+                                                    <i class="ti ti-time"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger btn-transfer-remove">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Dropof Type</label>
+                                            <div class="input-group">
+                                                <select id="drppickUp" class="form-control input-sm transfer-dropof-type" name="EnquiryItemTransferDetails[@i].dropOfType">
+                                                    <option>Select dropof type</option>
+                                                    @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                                                {
+                                                    if (Model.EnquiryItemTransferDetails[i].DropOffId == item.Key)
+                                                    {
+                                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.Key">@item.Value</option>
+                                                    }
+                                                }
+                                                </select>
+                                            </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Dropof To</label>
+                                            <div class="input-group">
+                                                <input type="text" id="txtdropOfTo" class="form-control input-sm transfer-dropof-to" name="EnquiryItemTransferDetails[@i].dropOfTo" placeholder="Enter Dropof">
+                                            </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>DropOf Time</label>
+                                            <div class="input-group clockpicker">
+                                                <input type="text" class="form-control transfer-dropof-time" placeholder="Drop Of time" name="EnquiryItemTransferDetails[@i].dropOfTime" id="txtDropOfTime">
+                                                <span class="input-group-addon">
+                                                    <i class="ti ti-time"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   
+
+                                  
+
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+
+
+            <div class="row">
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Adult (12 + Years)</label>
+                        <div class="input-group">
+                            <input type="text" id="txtAdultCount" class="form-control adult-children" name="Enquiry.adultCount" value="0">
+                        </div>
+                        </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Child (2 - 12 Years)</label>
+                        <div class="input-group">
+                            <input type="text" id="txtChildCount" class="form-control adult-children" name="Enquiry.childCount" value="0">
+                        </div>
+                        </div>
+                    </div>
+              
+
+
+
+                </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnSaveTransferDetails" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                            <button type="button" id="btnResetTransferDetails" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-reload"></i></span>Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+<div id="dvTempTransfer" style="display:none">
+
+    <div class="rowtransfer">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Transfer Date</label>
+                    <div class="input-group">
+                        <input type="text" id="dtptransferDate" class="form-control input-sm datepicker-autoclose transfer-date" name="" placeholder="Transfer Date">
+                    </div>
+                    </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Pickup Type</label>
+                    <div class="input-group">
+                        <select id="drppickUp" class="form-control input-sm transfer-pickup-type" name="">
+                            <option>Select pickup type</option>
+                            @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                            {
+                                if (Model.EnquiryItemTransferDetail.PickUpId == item.Key)
+                                {
+                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>PickUp From</label>
+                    <div class="input-group">
+                        <input type="text" id="txtpickUpFrom" class="form-control input-sm transfer-pickup-from" name="" placeholder="Enter Budget">
+                    </div>
+                    </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>PickUp Time</label>
+                    <div class="input-group clockpicker">
+                        <input type="text" class="form-control transfer-pickup-time" placeholder="Pick Up time" name="" id="txtPickUpTime">
+                        <span class="input-group-addon">
+                            <i class="ti ti-time"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <button type="button" class="btn btn-danger btn-transfer-remove">
+                    <i class="fa fa-remove"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Dropof Type</label>
+                    <div class="input-group">
+                        <select id="drppickUp" class="form-control input-sm transfer-dropof-type" name="">
+                            <option>Select dropof type</option>
+                            @foreach (var item in LookupInfo.GetEnquiryPickUpDropOff())
+                            {
+                            if (Model.EnquiryItemTransferDetail.DropOffId == item.Key)
+                            {
+                            <option value="@item.Key" selected="selected">@item.Value</option>
+                            }
+                            else
+                            {
+                            <option value="@item.Key">@item.Value</option>
+                            }
+                            }
+                        </select>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Dropof To</label>
+                    <div class="input-group">
+                        <input type="text" id="txtdropOfTo" class="form-control input-sm transfer-dropof-to" name="" placeholder="Enter Dropof">
+                    </div>
+                    </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>DropOf Time</label>
+                    <div class="input-group clockpicker">
+                        <input type="text" class="form-control transfer-dropof-time" placeholder="Drop Of time" name="" id="txtDropOfTime">
+                        <span class="input-group-addon">
+                            <i class="ti ti-time"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+    $('.from-to-date').datepicker({
+        toggleActive: true
+    });
+
+    $(".adult-children").TouchSpin({
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        //postfix: '%',
+        buttondown_class: "btn btn-secondary",
+        buttonup_class: "btn btn-secondary"
+    });
+
+
+    $('input[name="daterange-with-time"]').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY h:mm A'
+        },
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-inverse',
+    });
+
+
+    $('.datepicker-autoclose').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+
+</script>
+
+
+@*<script>
+
+
+        $('.from-to-date').datepicker({
+            toggleActive: true
+        });
+
+        $(".adult-children").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 1,
+            decimals: 0,
+            boostat: 5,
+            maxboostedstep: 10,
+            //postfix: '%',
+            buttondown_class: "btn btn-secondary",
+            buttonup_class: "btn btn-secondary"
+        });
+
+
+        $('input[name="daterange-with-time"]').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'MM/DD/YYYY h:mm A'
+            },
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-success',
+            cancelClass: 'btn-inverse',
+        });
+
+
+    </script>*@

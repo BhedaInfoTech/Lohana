@@ -1,0 +1,167 @@
+﻿@model Lohana.Models.Tariff.LohanaPackageTariff.LohanaPackageTariffViewModel
+@using LohanaBusinessEntities.Common;
+
+<form id="frmLohanPackageTariffSightSeeing">
+    <div class="row">
+
+        <div class="col-md-4">
+            <br />
+            <div class="form-group">
+                <button type="button" id="btnAddSightSeeingPlan" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-toggle="modal" data-target=".addsightseeing"><span class="btn-label"><i class="ti-check"></i></span>Select SightSeeing Plan</button>
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+            <br />
+            <b>Supplier/SightSeeing/ContactPerson : </b>Ramesh/Echo Point/Sushant
+
+        </div>
+
+
+    </div>
+
+    <div class="form-group">
+        <button type="button" id="btnAdd" class="btn btn-purple btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPackageDetails">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th></th>
+                            <th>Supplier</th>
+                            <th>Sight Seeing</th>
+                            <th>Contact person</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="radio" /></td>
+                            <td>Ramesh</td>
+                            <td>Monkey point</td>
+                            <td>Sanket</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" /></td>
+                            <td>Mahesh</td>
+                            <td>Echo Point</td>
+                            <td>sushant</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" /></td>
+                            <td>Jayesh</td>
+                            <td>Edward Point</td>
+                            <td>sachin</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<div class="modal fade addsightseeing" id="modalCharges" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <span style="vertical-align: middle;" class="s-icon"><i class="ti-view-list-alt"></i></span>&nbsp; Sight Seeing Details
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <select class="form-control" id="drpCurrency">
+                                <option>Mumbai/Maharashtra/India</option>
+                                <option>Banglore/Karnataka/India</option>
+                                <option>Kolkata/West Bengal/India</option>
+                                <option>SrinagarJammuKashmir/India</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Supplier Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Supplier Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Sight Seeing Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Sight Seeing Name">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" id="btnAddPlan" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="overflow-x-auto">
+                            <table class="table m-b-0" id="tblPackageDetails">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th></th>
+                                        <th>Supplier</th>
+                                        <th>Sight Seeing Name</th>
+                                        <th>Contact Person</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="radio" /></td>
+                                        <td>Ramesh</td>
+                                        <td>Monkey point</td>
+                                        <td>AP</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" /></td>
+                                        <td>Mahesh</td>
+                                        <td>Echo Point</td>
+                                        <td>sushant</td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td><input type="radio" /></td>
+                                        <td>Jayesh</td>
+                                        <td>Edward Point</td>
+                                        <td>sachin</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

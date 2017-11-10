@@ -1,0 +1,242 @@
+﻿@model Lohana.Models.Booking.BookingViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script type="text/javascript" src="/Content/plugin/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+
+<div class="modal-body">
+    <form role="form" id="frmAddCustomerPayment">
+        <input type="hidden" id="hdnBookingForAddPaymentId" value="@Model.PaymentDetailsInfo.BookingId" name="PaymentDetailsInfo.BookingId" />
+        <input type="hidden" id="hdnUnpaidPayment" value="@Model.PaymentDetailsInfo.UnpaidAmount"  name="PaymentDetailsInfo.UnpaidAmount" />
+      
+        <div class="card-block p-t-0 p-b-0">
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label></label>
+                    <div class="input-group">
+                        <h5><label id="txtbookingNo">Booking No: &nbsp;&nbsp;&nbsp; @Model.PaymentDetailsInfo.BookingNo</label></h5>                        
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label></label>
+                    <div class="input-group">                                       
+                        <h5><label>Unpaid Amount:</label> &nbsp;&nbsp;&nbsp;<label id="txtunpaidAmount"> @Model.PaymentDetailsInfo.UnpaidAmount</label></h5>
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <label for="drpPaymentOption" style="color: #333">Payment Option</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-control" name="PaymentDetailsInfo.PaymentMode" id="drpPaymentMode">
+
+                                <option value="0">Select payment option</option>
+
+                                @foreach (var item in LookupInfo.Get_Payment_Option())
+                                {
+                                    if (Model.PaymentDetailsInfo.PaymentMode == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            
+                            </select>
+
+                            <span class="input-group-addon">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3" id="divBankName" style="display: none" >
+                    <label>Bank Name</label>
+                    <div class="input-group">
+                        <input type="text" id="txtBankName" class="form-control input-sm" placeholder="Enter Bank Name" name="PaymentDetailsInfo.BankName" value="@Model.PaymentDetailsInfo.BankName" maxlength="200">
+                        <span class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3" id="divTransactionNo" style="display: none">
+                    <label>Transaction No</label>
+                    <div class="input-group">
+                        <input type="text" id="txtInstrumentNo" placeholder="Enter InstrumentNo" class="form-control input-sm" name="PaymentDetailsInfo.TransactionNo" value="@Model.PaymentDetailsInfo.TransactionNo" maxlength="50">
+                        <span class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-3" id="divChequeDate" style="display: none">
+                    <label>Cheque Date</label>
+                    <div class="input-group">
+                        <input type="text" id="txtChequeDate" placeholder="select date" class="form-control" name="PaymentDetailsInfo.ChequeDate" value="@((Model.PaymentDetailsInfo.ChequeDate == DateTime.MinValue ? "" : Model.PaymentDetailsInfo.ChequeDate.ToString("MM-dd-yyyy")))">
+                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                    </div>
+                </div>          
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <label>Receivable Date</label>
+                    <div class="input-group">
+                        <input type="text" id="txtPaymentDate" placeholder="select date" class="form-control" name="PaymentDetailsInfo.ReceivableDate" value="@((Model.PaymentDetailsInfo.ReceivableDate == DateTime.MinValue ? "" : Model.PaymentDetailsInfo.ReceivableDate.ToString("MM-dd-yyyy")))">
+                        <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Paid Amount</label>
+                    <div class="input-group">
+                        <input type="text" id="txtpaidAmount" class="form-control input-sm" placeholder="Enter Paid Amount" name="PaymentDetailsInfo.PaidAmount" value="@Model.PaymentDetailsInfo.PaidAmount" onchange="ChangeUnpaidAmount();" maxlength="50">
+                        <span class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </span>
+                    </div>
+                </div>            
+
+            </div>
+
+            <div class="modal-footer">
+                <br />                
+                <button type="button" id="BtnViewReceipt" onclick="javascript:ViewPaymentReceipt()" class="btn btn-info btn-rounded w-min-sm m-b-0-25 waves-effect waves-light" disabled>View Receipt</button>
+                <button type="button" onclick="javascript: BtnAdd();" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Add Payment</button>
+                <button type="button" id="btnResetPayment" class="btn btn-warning btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" data-dismiss="modal"><span class="btn-label"><i class="ti-reload"></i></span>Close</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div class="card-block p-t-0 p-b-0">
+    <div class="row m-a-0">
+        <div class="col-md-12 p-a-0">
+            <input type="hidden" id="hdnFlg" value="true"/>
+            <div class="overflow-x-auto">
+                <table class="table m-b-0" id="tblPaymentHistoryList"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="overflow-x-auto">
+
+    <table class="table m-b-0">
+        <thead class="thead-inverse">
+            <tr>
+                <th>##</th>
+                <th>
+                    Bank Name
+                </th>
+                <th>
+                    Payment Mode
+                </th>
+                <th>
+                    Payment Type
+                </th>
+                <th>
+                    Instrument No
+                </th>
+                <th>
+                    Instrument Date
+                </th>
+                <th>
+                    Paid Amount
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.PaymentHistoryList.Count > 0)
+            {
+                int i = 1;
+
+                foreach (var item in @Model.PaymentHistoryList)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.BankName</td>
+                        <td>@item.PaymentModeName</td>
+                        <td>@item.PaymentTypeName</td>
+                        <td>@item.InstrumentNo</td>
+                        <td>@item.InstrumentDate</td>
+                        <td>@item.PaidAmount</td>
+                        <td><button id="" >Generate Receipt</button></td>
+                    </tr>
+                    i++;
+                }
+            }
+
+        </tbody>
+    </table>
+
+</div>*@
+
+<script>
+    $(document).ready(function () {
+            
+        $('#txtPaymentDate').datepicker('setDate', new Date());
+
+        $('#txtChequeDate').datepicker('setDate', new Date());
+        
+            
+        $("#drpPaymentMode").change(function () {
+                      
+            if ($(this).val() == 0) {
+                $("#divBankName").hide();
+                $("#divTransactionNo").hide();
+                $("#divChequeDate").hide();
+            }
+            else if ($(this).val() == 1) {
+                $("#divBankName").show();
+                $("#divTransactionNo").show();
+                $("#divChequeDate").hide();
+            }
+            else if ($(this).val() == 2) {
+                $("#divBankName").show();
+                $("#divTransactionNo").show();
+                $("#divChequeDate").hide();
+            }
+            else if ($(this).val() == 3) {
+                $("#divBankName").hide();
+                $("#divTransactionNo").hide();
+                $("#divChequeDate").hide();
+            }
+            else if ($(this).val() == 4) {
+                $("#divBankName").show();
+                $("#divTransactionNo").show();
+                $("#divChequeDate").hide();
+            }
+            else if ($(this).val() == 5) {
+                $("#divBankName").show();
+                $("#divTransactionNo").show();
+                $("#divChequeDate").show();
+            }
+        });
+
+
+
+    });
+
+</script>

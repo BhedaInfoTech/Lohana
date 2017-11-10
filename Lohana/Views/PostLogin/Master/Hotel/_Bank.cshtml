@@ -1,0 +1,150 @@
+﻿@model Lohana.Models.Master.HotelViewModel
+@using LohanaBusinessEntities.Common;
+
+
+<script src="~/Scripts/Master/Hotel/hotel-bank-validations.js"></script>
+
+<script src="~/Scripts/Master/Hotel/hotel-bank-methods.js"></script>
+
+<script src="~/Scripts/Master/Hotel/hotel-bank-events.js"></script>
+
+
+<form id="frmHotelbank">
+
+	<div class="row">
+
+		<input type="hidden" id="hdnBankHotelId" name="Hotel.Bank.HotelId" value="@Model.Hotel.HotelId" />
+
+		<div class="col-md-12">
+
+			<div class="row">
+				<div class="col-md-3">
+					<label for="">Bank Name</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter bank name" name="Hotel.Bank.BankName" id="txtBankName" maxlength="25">
+						<input type="hidden" id="hdnBankName" value="">
+						<span class="input-group-addon">
+							<i class="fa fa-sort-alpha-asc"></i>
+						</span>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<label for="">Branch Name</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter branch name" name="Hotel.Bank.BranchName" id="txtBranchName" maxlength="25">
+						<input type="hidden" id="hdnBranchName" value="">
+						<span class="input-group-addon">
+							<i class="fa fa-sort-alpha-asc"></i>
+						</span>
+					</div>
+				</div>
+
+                <div class="col-md-3">
+                    <label for="">Account Holder Name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter account holder name" name="Hotel.Bank.AccountHolderName" id="txtAccountHolderName" maxlength="25">
+                        <input type="hidden" id="hdnAccountHolderName" value="">
+                        <span class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </span>
+                    </div>
+                </div>
+
+				<div class="col-md-3">
+					<label for="">Account Number</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter account number" name="Hotel.Bank.AccountNo" id="txtAccountNo" maxlength="25">
+						<input type="hidden" id="hdnAccountNo" value="">
+						<span class="input-group-addon">
+							<i class="fa fa-sort-alpha-asc"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<br />
+
+			<div class="row">
+
+				<div class="col-md-3">
+					<label for="">Bank IFSC Code</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter IFSC code" name="Hotel.Bank.IFSCCode" id="txtIFSCCode" maxlength="25">
+						<input type="hidden" id="hdnIFSCCode" value="">
+						<span class="input-group-addon">
+							<i class="fa fa-sort-alpha-asc"></i>
+						</span>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<label for="">Bank MICR Code</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Enter MICR code" name="Hotel.Bank.MICRCode" id="txtMICRCode" maxlength="25">
+						<input type="hidden" id="hdnMICRCode" value="">
+						<span class="input-group-addon">
+							<i class="fa fa-sort-alpha-asc"></i>
+						</span>
+					</div>
+				</div>
+
+                <div class="col-md-3">
+                    <label for="">Bank SWIFT Code</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter SWIFT code" name="Hotel.Bank.SWIFTCode" id="txtSWIFTCode" maxlength="25">
+                        <input type="hidden" id="hdnSWIFTCode" value="">
+                        <span class="input-group-addon">
+                            <i class="fa fa-sort-alpha-asc"></i>
+                        </span>
+                    </div>
+                </div>
+
+			</div>
+
+			<br />
+
+            <div class="row" style="text-align: center;">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" id="btnAddHotelBank" class="btn btn-success btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light"><span class="btn-label"><i class="ti-save"></i></span>Save</button>
+                        <button type="reset" id="btnDeleteHotelBank" class="btn btn-danger btn-rounded label-left w-min-sm m-b-0-75 waves-effect waves-light" disabled><span class="btn-label"><i class="ti-close"></i></span>Delete</button>
+                    </div>
+                </div>
+            </div>
+
+
+			@*<div class="form-group">
+				<button type="button" id="btnAddHotelBank" class="btn btn-info   label-left m-b-0-25 waves-effect waves-light"><span class="btn-label"><i class="ti-check"></i></span>Add</button>
+			</div>*@
+		</div>
+
+		@*<div class="btn-group" style="float: right; padding: 2px 6px;">
+
+			<button type="button" style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" id="btnEditHotelBank">Edit</button>
+
+			<button type="button" style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;" class="btn btn-outline-info w-min-sm m-b-0-25 waves-effect waves-light" id="btnDeleteHotelBank">Delete</button>
+		</div>*@
+
+		<br />
+	</div>
+</form>
+
+<div class="card" id="divHotelBankList">
+	<h5 class="card-header">
+		<span style="vertical-align: middle;" class="s-icon"><i class="ti-wand"></i></span>&nbsp; Hotels Bank List
+	</h5>
+
+	<form id="frmSearchHotelBank">
+
+		<input type="hidden" id="hdnSearchBankId" value="" name="HotelBankFilter.BankId" />
+
+		<div class="card-block p-t-0 p-b-0">
+
+			<div class="overflow-x-auto">
+				<table class="table m-b-0" id="tblHotelBankDetails">
+				</table>
+			</div>
+		</div>
+	</form>
+</div>

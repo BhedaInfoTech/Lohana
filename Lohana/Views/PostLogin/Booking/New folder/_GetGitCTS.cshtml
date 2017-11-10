@@ -1,0 +1,115 @@
+﻿
+<div class="tab-pane active p-a-0-75" id="gitdetails" role="tabpanel">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Category</label>
+                <select id="drpcategory" class="form-control" name="Package.category">
+                    <option value="">Select category</option>
+                    <option value="">Domestic </option>
+                    <option value="">International </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Package Type</label>
+                <select id="drpsubCategory" class="form-control" name="Package.subCategory">
+                    <option value="">Select Packagetype</option>
+                    <option value="">Elders </option>
+                    <option value="">Family </option>
+                    <option value="">Couples </option>
+                    <option value="">Honeymoon </option>
+                    <option value="">Adventure </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Package Name</label><input type="text" id="txtpackagename" class="form-control" name="Package.packagename" placeholder="Enter Package Name">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Select Duration</label><input type="text" id="txtduration" class="form-control" name="Package.duration" placeholder="Enter Duration">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Adult </label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Child </label><input type="text" id="txtAdultCount" class="form-control adult-children" name="Package.adultCount" value="1">
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<button type="submit" class="btn btn-warning btn-rounded">Search</button>
+<hr />
+
+<div class="table-responsive">
+    <table class="table m-md-b-0" id="tblGitDetails">
+        <thead>
+            <tr class="table-danger">
+                <th></th>
+                <th>Category</th>
+                <th>Packagetype</th>
+                <th>Package Name</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+
+            <tr class="table-success">
+                <td></td>
+                <td>
+                    <div class="form-group">
+                        <label>Domestic</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Honeymoon</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Mumbai-Pune</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>5D/6N</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>6000</label>
+                    </div>
+                </td>
+
+                <td><button type="submit" class="btn btn-primary btn-rounded">Select </button></td>
+
+            </tr>
+
+        </thead>
+    </table>
+</div>

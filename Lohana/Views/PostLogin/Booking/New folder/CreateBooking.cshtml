@@ -1,0 +1,176 @@
+﻿<div class="content-area p-y-1">
+    <div class="container-fluid">
+        <h4>Booking</h4>
+        <ol class="breadcrumb no-bg m-b-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Create Booking</a></li>
+        </ol>
+
+        <div class="col-md-4">
+
+            <div class="box box-block bg-white">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active btnGetGit" id="btnGetGit">Get Git</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active btnGetFit" id="btnGetFit">Get Fit</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active btnGetHotels" id="btnGetHotels">Get Hotels</button>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active btnGetVehicles" id="btnGetVehicles">Get Vehicles</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active" id="btnAddFlight">Add Flight</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active" id="btnAddTrain">Add Train</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-rounded btn-outline-warning active btnGetSightSeeing" id="btnGetSightSeeing">Get SightSeeing</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="box box-block bg-white">
+                <div class="row">
+                    @{Html.RenderPartial("_CustomizeTravelServices");}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        $(".btnGetGit").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/GetGitCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+        $(".btnGetFit").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/GetFitCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+        $(".btnGetHotels").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/GetHotelCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+        $(".btnGetVehicles").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/GetVehiclesCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+        $("#btnAddFlight").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/AddFlightCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+
+        $("#btnAddTrain").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/AddTrainCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+
+
+        $(".btnGetSightSeeing").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/GetSightseeingCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+        $(".editflight").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/EditFlightCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+
+
+        $(".edittrain").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/EditTrainCTS");
+
+            $("#modalParent").modal("show");
+        });
+
+        $("#btnGetPackage").click(function () {
+
+            $("#modalParent .modal-body").load("/Booking/GetPackages");
+
+            $("#modalParent").modal("show");
+        });
+
+        $("#btnAddPriceQuotation").click(function () {
+
+            $("#modalParent .modal-body").load("/Quotation/AddPriceQuotation");
+
+            $("#modalParent").modal("show");
+        });
+
+
+    });
+
+
+
+
+</script>
